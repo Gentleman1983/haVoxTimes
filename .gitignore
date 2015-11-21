@@ -1,0 +1,8 @@
+/haVoxTimes/.nb-gradle/
+/.nb-gradle/
+/application1/nbproject/private/
+/application1/build/
+/.gradle
+/times-model-api/build/
+/contacts-model-api/build/
+/contacts-model-impl/build/

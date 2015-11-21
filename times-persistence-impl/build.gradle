@@ -1,0 +1,4 @@
+dependencies {
+    compile project( ':times-model-impl' )
+    compile project( ':times-persistence-api' )
+}
