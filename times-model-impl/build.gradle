@@ -1,6 +1,6 @@
 dependencies {
     compile project( ':times-model-api' )
     
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.3.2'
-    compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.7.Final'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+    compile group: 'org.hibernate', name: 'hibernate-java8', version: '5.0.5.Final'
 }

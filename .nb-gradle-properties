@@ -4,6 +4,6 @@
   <license-header>
     <name>GNU General Public License Version 3</name>
     <template>GPL30-HEADER</template>
-    <property name="organization">haVox Design</property>
+    <property name="organization">[haVox] Design</property>
   </license-header>
 </gradle-project-properties>
