@@ -40,8 +40,18 @@ public interface WorkUnit extends Serializable {
      */
     long getVersion();
 
+    /**
+     * Gets the type of the work unit.
+     * 
+     * @return the {@link WorkUnitType}
+     */
     WorkUnitType getType();
 
+    /**
+     * Sets the type of the work unit.
+     * 
+     * @param type the {@link WorkUnitType}
+     */
     void setType(WorkUnitType type);
 
     /**

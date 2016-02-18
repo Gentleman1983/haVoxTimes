@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 [haVox] Design
+ * Copyright (C) 2016 [haVox] Design
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,52 +16,51 @@
  */
 package net.havox.times.model.times.impl;
 
-import java.util.HashSet;
-import java.util.Set;
-import net.havox.times.model.times.api.Task;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import net.havox.times.model.times.api.WorkUnit;
 import net.havox.times.model.times.api.WorkUnitDuration;
-import net.havox.times.model.times.api.WorkUnitType;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
+ * The implemantation of the work unit duration.
  *
  * @author Christian Otto
  */
-public class WorkUnitImpl implements WorkUnit {
+public class WorkUnitDurationImpl implements WorkUnitDuration {
 
     /**
      * The SerialVersionUID.
      */
-    private static final long serialVersionUID = 944542180473045373L;
-    
+    private static final long serialVersionUID = 2700239318546499492L;
+
     /**
      * The id.
      */
     private Long id;
-    
+
     /**
      * The version.
      */
     private long version;
-    
+
     /**
-     * The type of work unit.
+     * The duration.
      */
-    private WorkUnitType type;
-    
+    private Duration duration;
+
     /**
-     * The work duration.
+     * The start time.
      */
-    private WorkUnitDuration duration;
-    
+    private LocalDateTime start;
+
     /**
-     * The accomplished tasks during this work unit.
+     * The end time.
      */
-    private Set<Task> tasks = new HashSet<>();
+    private LocalDateTime end;
 
     /**
      * {@inheritDoc}
@@ -83,23 +82,7 @@ public class WorkUnitImpl implements WorkUnit {
      * {@inheritDoc}
      */
     @Override
-    public WorkUnitType getType() {
-        return this.type;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setType(WorkUnitType type) {
-        this.type = type;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public WorkUnitDuration getDuration() {
+    public Duration getDuration() {
         return this.duration;
     }
 
@@ -107,10 +90,48 @@ public class WorkUnitImpl implements WorkUnit {
      * {@inheritDoc}
      */
     @Override
-    public Set<Task> getTasks() {
-        return this.tasks;
+    public void setDuration(LocalDateTime start, LocalDateTime end) throws NullPointerException {
+        if ((start == null) || (end == null)) {
+            String message = "Neigther the parameter 'start'=" + start + " nor the parameter 'end'=" + end + "is allowed to be NULL.";
+            throw new NullPointerException(message);
+        }
+
+        this.start = start;
+        this.end = end;
+        this.duration = Duration.between(start, end);
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDuration(LocalDateTime start, Duration duration) throws NullPointerException {
+        if ((start == null) || (duration == null)) {
+            String message = "Neigther the parameter 'start'=" + start + " nor the parameter 'duration'=" + duration + "is allowed to be NULL.";
+            throw new NullPointerException(message);
+        }
+
+        this.start = start;
+        this.duration = duration;
+        this.end = LocalDateTime.from(start).plus(duration);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LocalDateTime getStart() {
+        return this.start;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LocalDateTime getEnd() {
+        return this.end;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -130,21 +151,21 @@ public class WorkUnitImpl implements WorkUnit {
 
         return hashCode;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof WorkUnit) {
-            WorkUnit workUnit = (WorkUnit) obj;
+        if (obj instanceof WorkUnitDuration) {
+            WorkUnitDuration workUnitDuration = (WorkUnitDuration) obj;
 
             if (this.getId() == null) {
-                return (this == workUnit);
+                return (this == workUnitDuration);
             } else {
                 EqualsBuilder builder = new EqualsBuilder();
 
-                builder.append(this.getId(), workUnit.getId());
+                builder.append(this.getId(), workUnitDuration.getId());
 
                 return builder.isEquals();
             }
@@ -152,19 +173,19 @@ public class WorkUnitImpl implements WorkUnit {
 
         return false;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE);
-        
+
         builder.append(this.id);
-        builder.append(this.type);
+        builder.append(this.start);
+        builder.append(this.end);
         builder.append(this.duration);
-        builder.append(this.tasks);
-        
+
         return builder.toString();
     }
 }

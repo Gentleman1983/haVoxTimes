@@ -21,7 +21,6 @@ import net.havox.times.model.contacts.api.Company;
 import net.havox.times.model.contacts.api.Person;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Collection;
 
@@ -76,22 +75,22 @@ public interface Project extends Serializable {
         return Duration.between(start, end);
     }
 
-    default Duration getDuraration (Month month, int year, WorkUnitType type) throws NullPointerException, IllegalArgumentException {
+    default Duration getDuraration(Month month, int year, WorkUnitType type) throws NullPointerException, IllegalArgumentException {
         if (month == null) {
             throw new NullPointerException("The month has to be set.");
-        }
-        else if (type == null) {
+        } else if (type == null) {
             throw new NullPointerException("The work unit type has to be set.");
         }
 
         LocalDate monthStart = LocalDate.of(year, month, 1);
         LocalDate nextMonthStart = LocalDate.of(year, month.getValue() + 1, 1);
 
-        if ((monthStart.compareTo(this.getEnd()) > 0) && // project end date before regarded month
+        if ((monthStart.compareTo(this.getEnd()) > 0)
+                && // project end date before regarded month
                 (nextMonthStart.compareTo(this.getStart()) <= 0)) { // project start adter regarded month
             throw new IllegalArgumentException("The seleceted month '" + month.toString() + " " + year + "' has to be within project range (" + this.getStart() + " till " + this.getEnd() + ").");
         }
-        
+
         return null;
     }
 
@@ -120,8 +119,17 @@ public interface Project extends Serializable {
             return false;
         }
         boolean isInTheFuture = this.getEnd().isAfter(LocalDate.now());
-        boolean hasStarted = this.getStart().isBefore(LocalDate.now());
         return (this.getEnd() == null) || isInTheFuture;
+    }
+
+    /**
+     * Checks if the employment has started. This means either the start is in
+     * the past.
+     *
+     * @return true, if the employment has started
+     */
+    default boolean hasStarted() {
+        return this.getStart().isBefore(LocalDate.now());
     }
 
     /**

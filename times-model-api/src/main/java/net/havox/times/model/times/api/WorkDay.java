@@ -133,7 +133,7 @@ public interface WorkDay {
 
         for (WorkUnit workUnit : this.getWorkUnits()) {
             if (type == workUnit.getType()) {
-                duration = duration.plus(workUnit.getDuration().getWorkDuration());
+                duration = duration.plus(workUnit.getDuration().getDuration());
             }
         }
 

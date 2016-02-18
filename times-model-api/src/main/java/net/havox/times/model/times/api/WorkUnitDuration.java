@@ -16,6 +16,7 @@
  */
 package net.havox.times.model.times.api;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -23,7 +24,21 @@ import java.time.LocalDateTime;
  *
  * @author Christian Otto
  */
-public interface WorkUnitDuration {
+public interface WorkUnitDuration extends Serializable {
+
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    Long getId();
+
+    /**
+     * Gets the version.
+     *
+     * @return the version
+     */
+    long getVersion();
 
     /**
      * Returns the duration of the work, defined either by the duration or the
@@ -31,7 +46,7 @@ public interface WorkUnitDuration {
      *
      * @return the work duration
      */
-    Duration getWorkDuration();
+    Duration getDuration();
 
     /**
      * Sets the work duration using a start and end time.
@@ -42,23 +57,18 @@ public interface WorkUnitDuration {
      * @throws NullPointerException , if any of the parameters is
      * <code>null</code>.
      */
-    void setWorkDuration(LocalDateTime start, LocalDateTime end) throws NullPointerException;
+    void setDuration(LocalDateTime start, LocalDateTime end) throws NullPointerException;
 
     /**
      * Sets the work duration using a duration value.
      *
+     * @param start the start time
      * @param duration the duration
      *
-     * @throws NullPointerException , if the duration is <code>null</code>.
+     * @throws NullPointerException , if any of the parameters is
+     * <code>null</code>.
      */
-    void setWorkDuration(Duration duration) throws NullPointerException;
-
-    /**
-     * Returns the duration.
-     *
-     * @return the duration.
-     */
-    Duration getDuration();
+    void setDuration(LocalDateTime start, Duration duration) throws NullPointerException;
 
     /**
      * Returns the start date.
