@@ -7,3 +7,8 @@
 /contacts-model-api/build/
 /contacts-model-impl/build/
 /build/
+/times-service-impl/build/
+/times-persistence-impl/build/
+/times-persistence-api/build/
+/times-service-api/build/
+/times-model-impl/build/
