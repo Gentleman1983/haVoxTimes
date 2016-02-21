@@ -28,123 +28,129 @@ import java.util.Collection;
  *
  * @author Christian Otto
  */
-public interface Employment extends Serializable {
+public interface Employment extends Serializable
+{
 
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    Long getId();
+  /**
+   * Gets the id.
+   *
+   * @return the id
+   */
+  Long getId();
 
-    /**
-     * Gets the version.
-     *
-     * @return the version
-     */
-    long getVersion();
+  /**
+   * Gets the version.
+   *
+   * @return the version
+   */
+  long getVersion();
 
-    /**
-     * Calculates the duration of the employment.
-     *
-     * @return the duration
-     */
-    default Duration getDuration() {
-        LocalDate start = this.getStart();
-        LocalDate end = this.getEnd();
+  /**
+   * Calculates the duration of the employment.
+   *
+   * @return the duration
+   */
+  default Duration getDuration()
+  {
+    LocalDate start = this.getStart();
+    LocalDate end = this.getEnd();
 
-        if (end == null) {
-            end = LocalDate.now();
-        }
-
-        return Duration.between(start, end);
+    if ( end == null )
+    {
+      end = LocalDate.now();
     }
 
-    /**
-     * Returns the employment start.
-     *
-     * @return the start
-     */
-    LocalDate getStart();
+    return Duration.between( start, end );
+  }
 
-    /**
-     * Sets the employment start.
-     *
-     * @param start the start
-     */
-    void setStart(LocalDate start);
+  /**
+   * Returns the employment start.
+   *
+   * @return the start
+   */
+  LocalDate getStart();
 
-    /**
-     * Checks if the employment is active. This means either the end is in the
-     * future or the end has not been defined.
-     *
-     * @return true, if the employment is active
-     */
-    default boolean isActive() {
-        boolean isInTheFuture = this.getEnd().isAfter(LocalDate.now());
-        return (this.getEnd() == null) || isInTheFuture;
+  /**
+   * Sets the employment start.
+   *
+   * @param start the start
+   */
+  void setStart( LocalDate start );
+
+  /**
+   * Checks if the employment is active. This means either the end is in the future or the end has not been defined.
+   *
+   * @return true, if the employment is active
+   */
+  default boolean isActive()
+  {
+    boolean isInTheFuture = this.getEnd().isAfter( LocalDate.now() );
+    return ( this.getEnd() == null ) || isInTheFuture;
+  }
+
+  /**
+   * Returns the employment end.
+   *
+   * @return the end
+   */
+  LocalDate getEnd();
+
+  /**
+   * Sets the employment end.
+   *
+   * @param end the end
+   */
+  void setEnd( LocalDate end );
+
+  /**
+   * Returns the employer.
+   *
+   * @return the employer
+   */
+  Company getEmployer();
+
+  /**
+   * Sets the employer.
+   *
+   * @param employer the employer
+   */
+  void setEmployer( Company employer );
+
+  /**
+   * Returns the employee.
+   *
+   * @return the employee
+   */
+  Person getEmployee();
+
+  /**
+   * Sets the employee.
+   *
+   * @param employee the employee
+   */
+  void setEmployee( Person employee );
+
+  /**
+   * Checks if this employment contains sub projects.
+   *
+   * @return true, if the employment contains sub projects
+   * 
+   * @throws IllegalStateException if the projects propery is not initialized
+   */
+  default boolean hasProjects()
+  {
+    if ( this.getProjects() == null )
+    {
+      throw new IllegalStateException( "Projects property not yet initialized." );
     }
 
-    /**
-     * Returns the employment end.
-     * 
-     * @return the end 
-     */
-    LocalDate getEnd();
+    return !this.getProjects().isEmpty();
+  }
 
-    /**
-     * Sets the employment end.
-     * 
-     * @param end the end
-     */
-    void setEnd(LocalDate end);
-
-    /**
-     * Returns the employer.
-     * 
-     * @return the employer
-     */
-    Company getEmployer();
-
-    /**
-     * Sets the employer.
-     * 
-     * @param employer the employer 
-     */
-    void setEmployer(Company employer);
-
-    /**
-     * Returns the employee.
-     * 
-     * @return the employee
-     */
-    Person getEmployee();
-
-    /**
-     * Sets the employee.
-     * 
-     * @param employee the employee 
-     */
-    void setEmployee(Person employee);
-
-    /**
-     * Checks if this employment contains sub projects.
-     * 
-     * @return true, if the employment contains sub projects
-     * @throws IllegalStateException if the projects propery is not initialized
-     */
-    default boolean hasProjects() throws IllegalStateException {
-        if (this.getProjects() == null) {
-            throw new IllegalStateException("Projects property not yet initialized.");
-        }
-
-        return !this.getProjects().isEmpty();
-    }
-
-    /**
-     * Returns the projects.
-     *
-     * @return the projects
-     */
-    Collection<Employment> getProjects();
+  /**
+   * Returns the projects.
+   *
+   * @return the projects
+   */
+  Collection<Employment> getProjects();
 }

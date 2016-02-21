@@ -30,62 +30,69 @@ import net.havox.times.model.times.impl.WorkUnitImpl;
  *
  * @author Christian Otto
  */
-public class TimesModelFactory {
+public class TimesModelFactory
+{
 
-    /**
-     * The singleton model factory instance.
-     */
-    private static final TimesModelFactory instance = new TimesModelFactory();
+  /**
+   * The singleton model factory instance.
+   */
+  private static final TimesModelFactory instance = new TimesModelFactory();
 
-    /**
-     * The private default constructor.
-     */
-    private TimesModelFactory() {
-        super();
-    }
+  /**
+   * The private default constructor.
+   */
+  private TimesModelFactory()
+  {
+    super();
+  }
 
-    /**
-     * Returns the singleton model factory.
-     *
-     * @return the {@link TimesModelFactory} instance.
-     */
-    public static TimesModelFactory getInstance() {
-        return TimesModelFactory.instance;
-    }
+  /**
+   * Returns the singleton model factory.
+   *
+   * @return the {@link TimesModelFactory} instance.
+   */
+  public static TimesModelFactory getInstance()
+  {
+    return TimesModelFactory.instance;
+  }
 
-    /**
-     * Returns a new {@link Employment}.
-     *
-     * @return a new employment entity
-     */
-    public Employment getNewEmployment() {
-        return new EmploymentImpl();
-    }
+  /**
+   * Returns a new {@link Employment}.
+   *
+   * @return a new employment entity
+   */
+  public Employment getNewEmployment()
+  {
+    return new EmploymentImpl();
+  }
 
-    /**
-     * Returns a new {@link Issue}.
-     *
-     * @return a new issue entity
-     */
-    public Issue getNewIssue() {
-        return new IssueImpl();
-    }
+  /**
+   * Returns a new {@link Issue}.
+   *
+   * @return a new issue entity
+   */
+  public Issue getNewIssue()
+  {
+    return new IssueImpl();
+  }
 
-    /**
-     * Returns a new {@link Task}.
-     *
-     * @return a new task entity
-     */
-    public Task getNewTask() {
-        return new TaskImpl();
-    }
+  /**
+   * Returns a new {@link Task}.
+   *
+   * @return a new task entity
+   */
+  public Task getNewTask()
+  {
+    return new TaskImpl();
+  }
 
-    /**
-     * Returns a new {@link WorkUnit}.
-     *
-     * @return a new work unit entity
-     */
-    public WorkUnit getNewWorkUnit() {
-        return new WorkUnitImpl();
-    }
+  /**
+   * Returns a new {@link WorkUnit}.
+   *
+   * @return a new work unit entity
+   */
+  public WorkUnit getNewWorkUnit()
+  {
+    return new WorkUnitImpl();
+  }
 }

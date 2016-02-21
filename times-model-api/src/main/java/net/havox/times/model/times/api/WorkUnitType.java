@@ -20,9 +20,14 @@ package net.havox.times.model.times.api;
  *
  * @author Christian Otto
  */
-public enum WorkUnitType {
-    WORK,
-    PAUSE,
-    VACATION,
-    ILLNESS;
+public enum WorkUnitType
+{
+  /** The time worked. */
+  WORK,
+  /** The time having a break. */
+  BREAK,
+  /** The time away for having vacation. */
+  VACATION,
+  /** The time away because of illness. */
+  ILLNESS;
 }

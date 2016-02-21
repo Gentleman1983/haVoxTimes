@@ -22,89 +22,90 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 
 /**
- * This describes an work issue. An issue consists of one or more
- * {@link Task tasks}.
+ * This describes an work issue. An issue consists of one or more {@link Task tasks}.
  *
  * @author Christian Otto
  */
-public interface Issue extends Serializable {
+public interface Issue extends Serializable
+{
 
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    Long getId();
+  /**
+   * Gets the id.
+   *
+   * @return the id
+   */
+  Long getId();
 
-    /**
-     * Gets the version.
-     *
-     * @return the version
-     */
-    long getVersion();
+  /**
+   * Gets the version.
+   *
+   * @return the version
+   */
+  long getVersion();
 
-    /**
-     * Returns the description.
-     *
-     * @return the description
-     */
-    String getDescription();
+  /**
+   * Returns the description.
+   *
+   * @return the description
+   */
+  String getDescription();
 
-    /**
-     * Sets the description.
-     *
-     * @param description the description
-     */
-    void setDescription(String description);
+  /**
+   * Sets the description.
+   *
+   * @param description the description
+   */
+  void setDescription( String description );
 
-    /**
-     * Returns the tasks.
-     *
-     * @return the tasks
-     */
-    Collection<Task> getTasks();
+  /**
+   * Returns the tasks.
+   *
+   * @return the tasks
+   */
+  Collection<Task> getTasks();
 
-    /**
-     * Returns the issue start.
-     *
-     * @return the start
-     */
-    LocalDateTime getStart();
+  /**
+   * Returns the issue start.
+   *
+   * @return the start
+   */
+  LocalDateTime getStart();
 
-    /**
-     * Sets the issue start.
-     *
-     * @param start the start
-     */
-    void setStart(LocalDateTime start);
+  /**
+   * Sets the issue start.
+   *
+   * @param start the start
+   */
+  void setStart( LocalDateTime start );
 
-    /**
-     * Gets the issue end.
-     *
-     * @return the end
-     */
-    LocalDateTime getEnd();
+  /**
+   * Gets the issue end.
+   *
+   * @return the end
+   */
+  LocalDateTime getEnd();
 
-    /**
-     * Sets the issue end.
-     *
-     * @param end the end
-     */
-    void setEnd(LocalDateTime end);
+  /**
+   * Sets the issue end.
+   *
+   * @param end the end
+   */
+  void setEnd( LocalDateTime end );
 
-    /**
-     * Returns the duration of the issue (the sum of durations of the
-     * {@link Task task's} durations.
-     *
-     * @return the duration
-     */
-    default Duration getDuration() {
-        Duration duration = Duration.ZERO;
+  /**
+   * Returns the duration of the issue (the sum of durations of the {@link Task task's} durations.
+   *
+   * @return the duration
+   */
+  default Duration getDuration()
+  {
+    Duration duration = Duration.ZERO;
 
-        for (Task task : this.getTasks()) {
-            duration = duration.plus(task.getDuration());
-        }
-
-        return duration;
+    for ( Task task : this.getTasks() )
+    {
+      duration = duration.plus( task.getDuration() );
     }
+
+    return duration;
+  }
 }

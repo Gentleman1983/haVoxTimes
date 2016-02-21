@@ -23,61 +23,62 @@ import java.io.Serializable;
  *
  * @author Christian Otto
  */
-public interface City extends Serializable {
+public interface City extends Serializable
+{
 
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    Long getId();
+  /**
+   * Gets the id.
+   *
+   * @return the id
+   */
+  Long getId();
 
-    /**
-     * Gets the version.
-     *
-     * @return the version
-     */
-    long getVersion();
+  /**
+   * Gets the version.
+   *
+   * @return the version
+   */
+  long getVersion();
 
-    /**
-     * Gets the ZIP code.
-     *
-     * @return the ZIP code
-     */
-    String getZipCode();
+  /**
+   * Gets the ZIP code.
+   *
+   * @return the ZIP code
+   */
+  String getZipCode();
 
-    /**
-     * Sets the ZIP code.
-     *
-     * @param zipCode the ZIP code
-     */
-    void setZipCode(String zipCode);
+  /**
+   * Sets the ZIP code.
+   *
+   * @param zipCode the ZIP code
+   */
+  void setZipCode( String zipCode );
 
-    /**
-     * Gets the city name.
-     *
-     * @return the city name
-     */
-    String getName();
+  /**
+   * Gets the city name.
+   *
+   * @return the city name
+   */
+  String getName();
 
-    /**
-     * Sets the city name.
-     *
-     * @param name the city name
-     */
-    void setName(String name);
+  /**
+   * Sets the city name.
+   *
+   * @param name the city name
+   */
+  void setName( String name );
 
-    /**
-     * Gets the country.
-     *
-     * @return the county.
-     */
-    Country getCountry();
+  /**
+   * Gets the country.
+   *
+   * @return the county.
+   */
+  Country getCountry();
 
-    /**
-     * Sets the country.
-     *
-     * @param country the country
-     */
-    void setCountry(Country country);
+  /**
+   * Sets the country.
+   *
+   * @param country the country
+   */
+  void setCountry( Country country );
 }

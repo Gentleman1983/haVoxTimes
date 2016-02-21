@@ -27,107 +27,122 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author Christian Otto
  */
-public class CountryImpl implements Country {
+public class CountryImpl implements Country
+{
 
-    /**
-     * The SerialVersionUID.
-     */
-    private static final long serialVersionUID = -632142391869704255L;
+  /**
+   * The SerialVersionUID.
+   */
+  private static final long serialVersionUID = -632142391869704255L;
 
-    /**
-     * The id.
-     */
-    private Long id;
-    /**
-     * The version.
-     */
-    private long version;
-    /**
-     * The country name.
-     */
-    private String name;
+  /**
+   * The id.
+   */
+  private Long id;
+  /**
+   * The version.
+   */
+  private long version;
+  /**
+   * The country name.
+   */
+  private String name;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Long getId() {
-        return this.id;
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Long getId()
+  {
+    return this.id;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public long getVersion()
+  {
+    return this.version;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getName()
+  {
+    return this.name;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setName( String name )
+  {
+    this.name = name;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int hashCode()
+  {
+    int hashCode;
+
+    if ( this.getId() == null )
+    {
+      hashCode = super.hashCode();
+    }
+    else
+    {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      builder.append( this.getId() );
+
+      hashCode = builder.toHashCode();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public long getVersion() {
-        return this.version;
+    return hashCode;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean equals( Object obj )
+  {
+    if ( obj instanceof Country )
+    {
+      Country country = ( Country ) obj;
+
+      if ( this.getId() == null )
+      {
+        return ( this == country );
+      }
+      else
+      {
+        EqualsBuilder builder = new EqualsBuilder();
+
+        builder.append( this.getId(), country.getId() );
+
+        return builder.isEquals();
+      }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getName() {
-        return this.name;
-    }
+    return false;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString()
+  {
+    ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE );
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode() {
-        int hashCode;
-
-        if (this.getId() == null) {
-            hashCode = super.hashCode();
-        } else {
-            HashCodeBuilder builder = new HashCodeBuilder();
-
-            builder.append(this.getId());
-
-            hashCode = builder.toHashCode();
-        }
-
-        return hashCode;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Country) {
-            Country country = (Country) obj;
-
-            if (this.getId() == null) {
-                return (this == country);
-            } else {
-                EqualsBuilder builder = new EqualsBuilder();
-
-                builder.append(this.getId(), country.getId());
-
-                return builder.isEquals();
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
-
-        return builder.toString();
-    }
+    return builder.toString();
+  }
 }

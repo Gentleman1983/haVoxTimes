@@ -23,61 +23,62 @@ import java.io.Serializable;
  *
  * @author Christian Otto
  */
-public interface Address extends Serializable {
+public interface Address extends Serializable
+{
 
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    Long getId();
+  /**
+   * Gets the id.
+   *
+   * @return the id
+   */
+  Long getId();
 
-    /**
-     * Gets the version.
-     *
-     * @return the version
-     */
-    long getVersion();
+  /**
+   * Gets the version.
+   *
+   * @return the version
+   */
+  long getVersion();
 
-    /**
-     * Gets the street name.
-     *
-     * @return the street name
-     */
-    String getStreet();
+  /**
+   * Gets the street name.
+   *
+   * @return the street name
+   */
+  String getStreet();
 
-    /**
-     * Sets the street name.
-     *
-     * @param street the street name
-     */
-    void setStreet(String street);
+  /**
+   * Sets the street name.
+   *
+   * @param street the street name
+   */
+  void setStreet( String street );
 
-    /**
-     * Gets the house number.
-     *
-     * @return the house number
-     */
-    String getHouseNumber();
+  /**
+   * Gets the house number.
+   *
+   * @return the house number
+   */
+  String getHouseNumber();
 
-    /**
-     * Sets the house number.
-     *
-     * @param houseNumber the house number
-     */
-    void setHouseNumber(String houseNumber);
+  /**
+   * Sets the house number.
+   *
+   * @param houseNumber the house number
+   */
+  void setHouseNumber( String houseNumber );
 
-    /**
-     * Gets the city.
-     *
-     * @return the city
-     */
-    City getCity();
+  /**
+   * Gets the city.
+   *
+   * @return the city
+   */
+  City getCity();
 
-    /**
-     * Sets the city.
-     *
-     * @param city the cityS
-     */
-    void setCity(City city);
+  /**
+   * Sets the city.
+   *
+   * @param city the cityS
+   */
+  void setCity( City city );
 }

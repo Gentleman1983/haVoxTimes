@@ -25,155 +25,174 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * The standard implementation of a city.
- * 
+ *
  * @author Christian Otto
  */
-public class CityImpl implements City {
+public class CityImpl implements City
+{
 
-    /**
-     * The SerialVersionUID.
-     */
-    private static final long serialVersionUID = -416723199770693783L;
+  /**
+   * The SerialVersionUID.
+   */
+  private static final long serialVersionUID = -416723199770693783L;
 
-    /**
-     * The id.
-     */
-    private Long id;
-    /**
-     * The version.
-     */
-    private long version;
-    /**
-     * The zip code.
-     */
-    private String zipCode;
-    /**
-     * The city name.
-     */
-    private String name;
-    /**
-     * The country.
-     */
-    private Country country;
+  /**
+   * The id.
+   */
+  private Long id;
+  /**
+   * The version.
+   */
+  private long version;
+  /**
+   * The zip code.
+   */
+  private String zipCode;
+  /**
+   * The city name.
+   */
+  private String name;
+  /**
+   * The country.
+   */
+  private Country country;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Long getId() {
-        return this.id;
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Long getId()
+  {
+    return this.id;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public long getVersion()
+  {
+    return this.version;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getZipCode()
+  {
+    return this.zipCode;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setZipCode( String zipCode )
+  {
+    this.zipCode = zipCode;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getName()
+  {
+    return this.name;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setName( String name )
+  {
+    this.name = name;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Country getCountry()
+  {
+    return this.country;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setCountry( Country country )
+  {
+    this.country = country;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int hashCode()
+  {
+    int hashCode;
+
+    if ( this.getId() == null )
+    {
+      hashCode = super.hashCode();
+    }
+    else
+    {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      builder.append( this.getId() );
+
+      hashCode = builder.toHashCode();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public long getVersion() {
-        return this.version;
+    return hashCode;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean equals( Object obj )
+  {
+    if ( obj instanceof City )
+    {
+      City city = ( City ) obj;
+
+      if ( this.getId() == null )
+      {
+        return ( this == city );
+      }
+      else
+      {
+        EqualsBuilder builder = new EqualsBuilder();
+
+        builder.append( this.getId(), city.getId() );
+
+        return builder.isEquals();
+      }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getZipCode() {
-        return this.zipCode;
-    }
+    return false;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString()
+  {
+    ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE );
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getName() {
-        return this.name;
-    }
+    builder.append( this.getId() );
+    builder.append( this.getZipCode() );
+    builder.append( this.getName() );
+    builder.append( this.getCountry() );
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Country getCountry() {
-        return this.country;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode() {
-        int hashCode;
-
-        if (this.getId() == null) {
-            hashCode = super.hashCode();
-        } else {
-            HashCodeBuilder builder = new HashCodeBuilder();
-
-            builder.append(this.getId());
-
-            hashCode = builder.toHashCode();
-        }
-
-        return hashCode;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof City) {
-            City city = (City) obj;
-
-            if (this.getId() == null) {
-                return (this == city);
-            } else {
-                EqualsBuilder builder = new EqualsBuilder();
-
-                builder.append(this.getId(), city.getId());
-
-                return builder.isEquals();
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
-
-        builder.append(this.getId());
-        builder.append(this.getZipCode());
-        builder.append(this.getName());
-        builder.append(this.getCountry());
-
-        return builder.toString();
-    }
+    return builder.toString();
+  }
 }

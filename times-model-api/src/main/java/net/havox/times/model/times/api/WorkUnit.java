@@ -24,47 +24,48 @@ import java.util.Set;
  *
  * @author Christian Otto
  */
-public interface WorkUnit extends Serializable {
+public interface WorkUnit extends Serializable
+{
 
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    Long getId();
+  /**
+   * Gets the id.
+   *
+   * @return the id
+   */
+  Long getId();
 
-    /**
-     * Gets the version.
-     *
-     * @return the version
-     */
-    long getVersion();
+  /**
+   * Gets the version.
+   *
+   * @return the version
+   */
+  long getVersion();
 
-    /**
-     * Gets the type of the work unit.
-     * 
-     * @return the {@link WorkUnitType}
-     */
-    WorkUnitType getType();
+  /**
+   * Gets the type of the work unit.
+   *
+   * @return the {@link WorkUnitType}
+   */
+  WorkUnitType getType();
 
-    /**
-     * Sets the type of the work unit.
-     * 
-     * @param type the {@link WorkUnitType}
-     */
-    void setType(WorkUnitType type);
+  /**
+   * Sets the type of the work unit.
+   *
+   * @param type the {@link WorkUnitType}
+   */
+  void setType( WorkUnitType type );
 
-    /**
-     * Returns the work duration.
-     *
-     * @return the duration
-     */
-    WorkUnitDuration getDuration();
+  /**
+   * Returns the work duration.
+   *
+   * @return the duration
+   */
+  WorkUnitDuration getDuration();
 
-    /**
-     * Gets a set of the tasks worked on.
-     *
-     * @return the tasks
-     */
-    Set<Task> getTasks();
+  /**
+   * Gets a set of the tasks worked on.
+   *
+   * @return the tasks
+   */
+  Set<Task> getTasks();
 }

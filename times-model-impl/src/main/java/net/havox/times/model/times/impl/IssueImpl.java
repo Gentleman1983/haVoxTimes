@@ -28,171 +28,190 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * The standard implementation of an issue.
- * 
+ *
  * @author Christian Otto
  */
-public class IssueImpl implements Issue {
+public class IssueImpl implements Issue
+{
 
-    /**
-     * The SerialVersionUID.
-     */
-    private static final long serialVersionUID = -8302339463943510497L;
+  /**
+   * The SerialVersionUID.
+   */
+  private static final long serialVersionUID = -8302339463943510497L;
 
-    /**
-     * The id.
-     */
-    private Long id;
-    
-    /**
-     * The version.
-     */
-    private long version;
-    /**
-     * The issue description.
-     */
-    private String description;
-    /**
-     * The start time.
-     */
-    private LocalDateTime start;
-    /**
-     * The end time.
-     */
-    private LocalDateTime end;
-    /**
-     * The contained tasks.
-     */
-    private Collection<Task> tasks = new ArrayList<>();
-    
+  /**
+   * The id.
+   */
+  private Long id;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Long getId() {
-        return this.id;
+  /**
+   * The version.
+   */
+  private long version;
+  /**
+   * The issue description.
+   */
+  private String description;
+  /**
+   * The start time.
+   */
+  private LocalDateTime start;
+  /**
+   * The end time.
+   */
+  private LocalDateTime end;
+  /**
+   * The contained tasks.
+   */
+  private Collection<Task> tasks = new ArrayList<>();
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Long getId()
+  {
+    return this.id;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public long getVersion()
+  {
+    return this.version;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getDescription()
+  {
+    return this.description;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setDescription( String description )
+  {
+    this.description = description;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Collection<Task> getTasks()
+  {
+    return this.tasks;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public LocalDateTime getStart()
+  {
+    return this.start;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setStart( LocalDateTime start )
+  {
+    this.start = start;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public LocalDateTime getEnd()
+  {
+    return this.end;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setEnd( LocalDateTime end )
+  {
+    this.end = end;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int hashCode()
+  {
+    int hashCode;
+
+    if ( this.getId() == null )
+    {
+      hashCode = super.hashCode();
+    }
+    else
+    {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      builder.append( this.getId() );
+
+      hashCode = builder.toHashCode();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public long getVersion() {
-        return this.version;
+    return hashCode;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean equals( Object obj )
+  {
+    if ( obj instanceof Issue )
+    {
+      Issue issue = ( Issue ) obj;
+
+      if ( this.getId() == null )
+      {
+        return ( this == issue );
+      }
+      else
+      {
+        EqualsBuilder builder = new EqualsBuilder();
+
+        builder.append( this.getId(), issue.getId() );
+
+        return builder.isEquals();
+      }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getDescription() {
-        return this.description;
-    }
+    return false;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString()
+  {
+    ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE );
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Collection<Task> getTasks() {
-        return this.tasks;
-    }
+    builder.append( this.getId() );
+    builder.append( this.getDescription() );
+    builder.append( this.getStart() );
+    builder.append( this.getEnd() );
+    builder.append( this.getDuration() );
+    builder.append( this.getTasks() );
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public LocalDateTime getStart() {
-        return this.start;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setStart(LocalDateTime start) {
-        this.start = start;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public LocalDateTime getEnd() {
-        return this.end;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setEnd(LocalDateTime end) {
-        this.end = end;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode() {
-        int hashCode;
-
-        if (this.getId() == null) {
-            hashCode = super.hashCode();
-        } else {
-            HashCodeBuilder builder = new HashCodeBuilder();
-
-            builder.append(this.getId());
-
-            hashCode = builder.toHashCode();
-        }
-
-        return hashCode;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Issue) {
-            Issue issue = (Issue) obj;
-
-            if (this.getId() == null) {
-                return (this == issue);
-            } else {
-                EqualsBuilder builder = new EqualsBuilder();
-
-                builder.append(this.getId(), issue.getId());
-
-                return builder.isEquals();
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
-        
-        builder.append(this.getId());
-        builder.append(this.getDescription());
-        builder.append(this.getStart());
-        builder.append(this.getEnd());
-        builder.append(this.getDuration());
-        builder.append(this.getTasks());
-
-        return builder.toString();
-    }
+    return builder.toString();
+  }
 }

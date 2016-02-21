@@ -24,70 +24,72 @@ import java.util.Collection;
  *
  * @author Christian Otto
  */
-public interface Company extends Serializable {
+public interface Company extends Serializable
+{
 
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    Long getId();
+  /**
+   * Gets the id.
+   *
+   * @return the id
+   */
+  Long getId();
 
-    /**
-     * Gets the version.
-     *
-     * @return the version
-     */
-    long getVersion();
+  /**
+   * Gets the version.
+   *
+   * @return the version
+   */
+  long getVersion();
 
-    /**
-     * Gets the company name.
-     *
-     * @return the company name
-     */
-    String getName();
+  /**
+   * Gets the company name.
+   *
+   * @return the company name
+   */
+  String getName();
 
-    /**
-     * Sets the company name.
-     *
-     * @param name the company name
-     */
-    void setName(String name);
+  /**
+   * Sets the company name.
+   *
+   * @param name the company name
+   */
+  void setName( String name );
 
-    /**
-     * Gets the company address.
-     *
-     * @return the company address
-     */
-    Address getAddress();
+  /**
+   * Gets the company address.
+   *
+   * @return the company address
+   */
+  Address getAddress();
 
-    /**
-     * Sets the company address.
-     *
-     * @param address the company address
-     */
-    void setAddress(Address address);
+  /**
+   * Sets the company address.
+   *
+   * @param address the company address
+   */
+  void setAddress( Address address );
 
-    /**
-     * Has this company subcompanies?
-     *
-     * @return true, if this company has sub companies
-     *
-     * @throws IllegalStateException In case that the sub companies property are
-     * not yet initialized
-     */
-    default boolean hasSubCompanies() throws IllegalStateException {
-        if (this.getSubCompanies() == null) {
-            throw new IllegalStateException("Sub-companies property not yet initialized.");
-        }
-
-        return !this.getSubCompanies().isEmpty();
+  /**
+   * Has this company subcompanies?
+   *
+   * @return true, if this company has sub companies
+   *
+   * @throws IllegalStateException In case that the sub companies property are not yet initialized
+   */
+  default boolean hasSubCompanies()
+  {
+    if ( this.getSubCompanies() == null )
+    {
+      throw new IllegalStateException( "Sub-companies property not yet initialized." );
     }
 
-    /**
-     * Gets the sub companies.
-     *
-     * @return the sub companies
-     */
-    Collection<Company> getSubCompanies();
+    return !this.getSubCompanies().isEmpty();
+  }
+
+  /**
+   * Gets the sub companies.
+   *
+   * @return the sub companies
+   */
+  Collection<Company> getSubCompanies();
 }

@@ -24,63 +24,61 @@ import java.time.LocalDateTime;
  *
  * @author Christian Otto
  */
-public interface WorkUnitDuration extends Serializable {
+public interface WorkUnitDuration extends Serializable
+{
 
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    Long getId();
+  /**
+   * Gets the id.
+   *
+   * @return the id
+   */
+  Long getId();
 
-    /**
-     * Gets the version.
-     *
-     * @return the version
-     */
-    long getVersion();
+  /**
+   * Gets the version.
+   *
+   * @return the version
+   */
+  long getVersion();
 
-    /**
-     * Returns the duration of the work, defined either by the duration or the
-     * start and end time.
-     *
-     * @return the work duration
-     */
-    Duration getDuration();
+  /**
+   * Returns the duration of the work, defined either by the duration or the start and end time.
+   *
+   * @return the work duration
+   */
+  Duration getDuration();
 
-    /**
-     * Sets the work duration using a start and end time.
-     *
-     * @param start the start time
-     * @param end the end time
-     *
-     * @throws NullPointerException , if any of the parameters is
-     * <code>null</code>.
-     */
-    void setDuration(LocalDateTime start, LocalDateTime end) throws NullPointerException;
+  /**
+   * Sets the work duration using a start and end time.
+   *
+   * @param start the start time
+   * @param end the end time
+   *
+   * @throws NullPointerException , if any of the parameters is <code>null</code>.
+   */
+  void setDuration( LocalDateTime start, LocalDateTime end );
 
-    /**
-     * Sets the work duration using a duration value.
-     *
-     * @param start the start time
-     * @param duration the duration
-     *
-     * @throws NullPointerException , if any of the parameters is
-     * <code>null</code>.
-     */
-    void setDuration(LocalDateTime start, Duration duration) throws NullPointerException;
+  /**
+   * Sets the work duration using a duration value.
+   *
+   * @param start the start time
+   * @param duration the duration
+   *
+   * @throws NullPointerException , if any of the parameters is <code>null</code>.
+   */
+  void setDuration( LocalDateTime start, Duration duration );
 
-    /**
-     * Returns the start date.
-     *
-     * @return the start date
-     */
-    LocalDateTime getStart();
+  /**
+   * Returns the start date.
+   *
+   * @return the start date
+   */
+  LocalDateTime getStart();
 
-    /**
-     * Returns the end date.
-     *
-     * @return the end date
-     */
-    LocalDateTime getEnd();
+  /**
+   * Returns the end date.
+   *
+   * @return the end date
+   */
+  LocalDateTime getEnd();
 }

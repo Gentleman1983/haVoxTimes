@@ -30,162 +30,182 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author Christian Otto
  */
-public class WorkUnitDurationImpl implements WorkUnitDuration {
+public class WorkUnitDurationImpl implements WorkUnitDuration
+{
 
-    /**
-     * The SerialVersionUID.
-     */
-    private static final long serialVersionUID = 2700239318546499492L;
+  /**
+   * The SerialVersionUID.
+   */
+  private static final long serialVersionUID = 2700239318546499492L;
 
-    /**
-     * The id.
-     */
-    private Long id;
+  /**
+   * The id.
+   */
+  private Long id;
 
-    /**
-     * The version.
-     */
-    private long version;
+  /**
+   * The version.
+   */
+  private long version;
 
-    /**
-     * The duration.
-     */
-    private Duration duration;
+  /**
+   * The duration.
+   */
+  private Duration duration;
 
-    /**
-     * The start time.
-     */
-    private LocalDateTime start;
+  /**
+   * The start time.
+   */
+  private LocalDateTime start;
 
-    /**
-     * The end time.
-     */
-    private LocalDateTime end;
+  /**
+   * The end time.
+   */
+  private LocalDateTime end;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Long getId() {
-        return this.id;
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Long getId()
+  {
+    return this.id;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public long getVersion()
+  {
+    return this.version;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Duration getDuration()
+  {
+    return this.duration;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setDuration( LocalDateTime start, LocalDateTime end ) throws NullPointerException
+  {
+    if ( ( start == null ) || ( end == null ) )
+    {
+      String message = "Neigther the parameter 'start'=" + start + " nor the parameter 'end'=" + end + "is allowed to be NULL.";
+      throw new NullPointerException( message );
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public long getVersion() {
-        return this.version;
+    this.start = start;
+    this.end = end;
+    this.duration = Duration.between( start, end );
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setDuration( LocalDateTime start, Duration duration ) throws NullPointerException
+  {
+    if ( ( start == null ) || ( duration == null ) )
+    {
+      String message = "Neigther the parameter 'start'=" + start + " nor the parameter 'duration'=" + duration + "is allowed to be NULL.";
+      throw new NullPointerException( message );
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Duration getDuration() {
-        return this.duration;
+    this.start = start;
+    this.duration = duration;
+    this.end = LocalDateTime.from( start ).plus( duration );
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public LocalDateTime getStart()
+  {
+    return this.start;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public LocalDateTime getEnd()
+  {
+    return this.end;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int hashCode()
+  {
+    int hashCode;
+
+    if ( this.getId() == null )
+    {
+      hashCode = super.hashCode();
+    }
+    else
+    {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      builder.append( this.getId() );
+
+      hashCode = builder.toHashCode();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setDuration(LocalDateTime start, LocalDateTime end) throws NullPointerException {
-        if ((start == null) || (end == null)) {
-            String message = "Neigther the parameter 'start'=" + start + " nor the parameter 'end'=" + end + "is allowed to be NULL.";
-            throw new NullPointerException(message);
-        }
+    return hashCode;
+  }
 
-        this.start = start;
-        this.end = end;
-        this.duration = Duration.between(start, end);
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean equals( Object obj )
+  {
+    if ( obj instanceof WorkUnitDuration )
+    {
+      WorkUnitDuration workUnitDuration = ( WorkUnitDuration ) obj;
+
+      if ( this.getId() == null )
+      {
+        return ( this == workUnitDuration );
+      }
+      else
+      {
+        EqualsBuilder builder = new EqualsBuilder();
+
+        builder.append( this.getId(), workUnitDuration.getId() );
+
+        return builder.isEquals();
+      }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setDuration(LocalDateTime start, Duration duration) throws NullPointerException {
-        if ((start == null) || (duration == null)) {
-            String message = "Neigther the parameter 'start'=" + start + " nor the parameter 'duration'=" + duration + "is allowed to be NULL.";
-            throw new NullPointerException(message);
-        }
+    return false;
+  }
 
-        this.start = start;
-        this.duration = duration;
-        this.end = LocalDateTime.from(start).plus(duration);
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString()
+  {
+    ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.MULTI_LINE_STYLE );
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public LocalDateTime getStart() {
-        return this.start;
-    }
+    builder.append( this.id );
+    builder.append( this.start );
+    builder.append( this.end );
+    builder.append( this.duration );
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public LocalDateTime getEnd() {
-        return this.end;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode() {
-        int hashCode;
-
-        if (this.getId() == null) {
-            hashCode = super.hashCode();
-        } else {
-            HashCodeBuilder builder = new HashCodeBuilder();
-
-            builder.append(this.getId());
-
-            hashCode = builder.toHashCode();
-        }
-
-        return hashCode;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof WorkUnitDuration) {
-            WorkUnitDuration workUnitDuration = (WorkUnitDuration) obj;
-
-            if (this.getId() == null) {
-                return (this == workUnitDuration);
-            } else {
-                EqualsBuilder builder = new EqualsBuilder();
-
-                builder.append(this.getId(), workUnitDuration.getId());
-
-                return builder.isEquals();
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE);
-
-        builder.append(this.id);
-        builder.append(this.start);
-        builder.append(this.end);
-        builder.append(this.duration);
-
-        return builder.toString();
-    }
+    return builder.toString();
+  }
 }

@@ -21,69 +21,70 @@ import java.time.Duration;
 import java.util.Collection;
 
 /**
- * Defines a task. A task may contain subtasks, has a name and duration. The
- * subtasks' sum of durations is not allowed to exceed the duration of the main
- * task.
+ * Defines a task. A task may contain subtasks, has a name and duration. The subtasks' sum of durations is not allowed
+ * to exceed the duration of the main task.
  *
  * @author Christian Otto
  */
-public interface Task extends Serializable {
+public interface Task extends Serializable
+{
 
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    Long getId();
+  /**
+   * Gets the id.
+   *
+   * @return the id
+   */
+  Long getId();
 
-    /**
-     * Gets the version.
-     *
-     * @return the version
-     */
-    long getVersion();
+  /**
+   * Gets the version.
+   *
+   * @return the version
+   */
+  long getVersion();
 
-    /**
-     * Returns the task name.
-     *
-     * @return the name
-     */
-    String getName();
+  /**
+   * Returns the task name.
+   *
+   * @return the name
+   */
+  String getName();
 
-    /**
-     * Sets the task name.
-     *
-     * @param name the name
-     */
-    void setName(String name);
+  /**
+   * Sets the task name.
+   *
+   * @param name the name
+   */
+  void setName( String name );
 
-    /**
-     * Returns the task's duration.
-     *
-     * @return the duration
-     */
-    Duration getDuration();
+  /**
+   * Returns the task's duration.
+   *
+   * @return the duration
+   */
+  Duration getDuration();
 
-    /**
-     * Sets the task's duration.
-     *
-     * @param duration the duration
-     */
-    void setDuration(Duration duration);
+  /**
+   * Sets the task's duration.
+   *
+   * @param duration the duration
+   */
+  void setDuration( Duration duration );
 
-    /**
-     * Checks if the task has subtasks.
-     *
-     * @return true, if the task has subtasks
-     */
-    default boolean hasSubTasks() {
-        return !this.getSubTasks().isEmpty();
-    }
+  /**
+   * Checks if the task has subtasks.
+   *
+   * @return true, if the task has subtasks
+   */
+  default boolean hasSubTasks()
+  {
+    return !this.getSubTasks().isEmpty();
+  }
 
-    /**
-     * Returns the subtasks.
-     *
-     * @return the subtasks
-     */
-    Collection<Task> getSubTasks();
+  /**
+   * Returns the subtasks.
+   *
+   * @return the subtasks
+   */
+  Collection<Task> getSubTasks();
 }

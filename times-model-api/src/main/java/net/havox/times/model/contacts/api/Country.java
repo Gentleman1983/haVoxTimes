@@ -23,33 +23,34 @@ import java.io.Serializable;
  *
  * @author Christian Otto
  */
-public interface Country extends Serializable {
+public interface Country extends Serializable
+{
 
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    Long getId();
+  /**
+   * Gets the id.
+   *
+   * @return the id
+   */
+  Long getId();
 
-    /**
-     * Gets the version.
-     *
-     * @return the version
-     */
-    long getVersion();
+  /**
+   * Gets the version.
+   *
+   * @return the version
+   */
+  long getVersion();
 
-    /**
-     * Gets the country name.
-     *
-     * @return the country name
-     */
-    String getName();
+  /**
+   * Gets the country name.
+   *
+   * @return the country name
+   */
+  String getName();
 
-    /**
-     * Sets the country name.
-     *
-     * @param name the country name
-     */
-    void setName(String name);
+  /**
+   * Sets the country name.
+   *
+   * @param name the country name
+   */
+  void setName( String name );
 }

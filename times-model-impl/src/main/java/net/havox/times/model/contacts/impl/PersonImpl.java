@@ -26,197 +26,221 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * The standard implementation of a person.
- * 
+ *
  * @author Christian Otto
  */
-public class PersonImpl implements Person {
-    /**
-     * The SerialVersionUID.
-     */
-    private static final long serialVersionUID = 5520806245947083462L;
+public class PersonImpl implements Person
+{
 
-    /**
-     * The id.
-     */
-    private Long id;
-    /**
-     * The version.
-     */
-    private long version;
-    /**
-     * The first name.
-     */
-    private String firstName;
-    /**
-     * The middle initials.
-     */
-    private String middleInitials;
-    /**
-     * The last name.
-     */
-    private String lastName;
-    /**
-     * The address.
-     */
-    private Address address;
-    /**
-     * The date of birth.
-     */
-    private LocalDate dateOfBirth;
+  /**
+   * The SerialVersionUID.
+   */
+  private static final long serialVersionUID = 5520806245947083462L;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Long getId() {
-        return this.id;
+  /**
+   * The id.
+   */
+  private Long id;
+  /**
+   * The version.
+   */
+  private long version;
+  /**
+   * The first name.
+   */
+  private String firstName;
+  /**
+   * The middle initials.
+   */
+  private String middleInitials;
+  /**
+   * The last name.
+   */
+  private String lastName;
+  /**
+   * The address.
+   */
+  private Address address;
+  /**
+   * The date of birth.
+   */
+  private LocalDate dateOfBirth;
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Long getId()
+  {
+    return this.id;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public long getVersion()
+  {
+    return this.version;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getLastName()
+  {
+    return this.lastName;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setLastName( String lastName )
+  {
+    this.lastName = lastName;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getMiddleInnitials()
+  {
+    return this.middleInitials;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMiddleInnitials( String middleInnitials )
+  {
+    this.middleInitials = middleInnitials;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getFirstName()
+  {
+    return this.firstName;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setFirstName( String firstName )
+  {
+    this.firstName = firstName;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public LocalDate getDateOfBirth()
+  {
+    return this.dateOfBirth;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setDateOfBirth( LocalDate dateOfBirth )
+  {
+    this.dateOfBirth = dateOfBirth;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Address getAddress()
+  {
+    return this.address;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setAddress( Address address )
+  {
+    this.address = address;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int hashCode()
+  {
+    int hashCode;
+
+    if ( this.getId() == null )
+    {
+      hashCode = super.hashCode();
+    }
+    else
+    {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      builder.append( this.getId() );
+
+      hashCode = builder.toHashCode();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public long getVersion() {
-        return this.version;
+    return hashCode;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean equals( Object obj )
+  {
+    if ( obj instanceof Person )
+    {
+      Person person = ( Person ) obj;
+
+      if ( this.getId() == null )
+      {
+        return ( this == person );
+      }
+      else
+      {
+        EqualsBuilder builder = new EqualsBuilder();
+
+        builder.append( this.getId(), person.getId() );
+
+        return builder.isEquals();
+      }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getLastName() {
-        return this.lastName;
-    }
+    return false;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString()
+  {
+    ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE );
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getMiddleInnitials() {
-        return this.middleInitials;
-    }
+    builder.append( this.getId() );
+    builder.append( this.getFirstName() );
+    builder.append( this.getMiddleInnitials() );
+    builder.append( this.getLastName() );
+    builder.append( this.getAddress() );
+    builder.append( this.getDateOfBirth() );
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setMiddleInnitials(String middleInnitials) {
-        this.middleInitials = middleInnitials;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public LocalDate getDateOfBirth() {
-        return this.dateOfBirth;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Address getAddress() {
-        return this.address;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode() {
-        int hashCode;
-
-        if (this.getId() == null) {
-            hashCode = super.hashCode();
-        } else {
-            HashCodeBuilder builder = new HashCodeBuilder();
-
-            builder.append(this.getId());
-
-            hashCode = builder.toHashCode();
-        }
-
-        return hashCode;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Person) {
-            Person person = (Person) obj;
-
-            if (this.getId() == null) {
-                return (this == person);
-            } else {
-                EqualsBuilder builder = new EqualsBuilder();
-
-                builder.append(this.getId(), person.getId());
-
-                return builder.isEquals();
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
-
-        builder.append(this.getId());
-        builder.append(this.getFirstName());
-        builder.append(this.getMiddleInnitials());
-        builder.append(this.getLastName());
-        builder.append(this.getAddress());
-        builder.append(this.getDateOfBirth());
-
-        return builder.toString();
-    }
+    return builder.toString();
+  }
 
 }

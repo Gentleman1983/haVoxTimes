@@ -20,15 +20,14 @@ package net.havox.times.model.times.impl;
  *
  * @author Christian Otto
  */
-public enum WorkUnitDurationType {
-    /**
-     * The Duration Type. This means the work unit is defined by its beginning
-     * and duration.
-     */
-    DURATION,
-    /**
-     * The Start/End Type. This means the work unit is defined by its start end
-     * end time.
-     */
-    STARTEND;
+public enum WorkUnitDurationType
+{
+  /**
+   * The Duration Type. This means the work unit is defined by its beginning and duration.
+   */
+  DURATION,
+  /**
+   * The Start/End Type. This means the work unit is defined by its start end end time.
+   */
+  STARTEND;
 }

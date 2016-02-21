@@ -27,147 +27,165 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * The standard implementation of a task.
- * 
+ *
  * @author Christian Otto
  */
-public class TaskImpl implements Task {
+public class TaskImpl implements Task
+{
 
-    /**
-     * The SerialVersionUID.
-     */
-    private static final long serialVersionUID = 8471130167805360250L;
+  /**
+   * The SerialVersionUID.
+   */
+  private static final long serialVersionUID = 8471130167805360250L;
 
-    /**
-     * The id.
-     */
-    private Long id;
-    /**
-     * The version.
-     */
-    private long version;
-    /**
-     * The task name.
-     */
-    private String name;
-    /**
-     * The task duration.
-     */
-    private Duration duration;
-    /**
-     * The sub tasks.
-     */
-    Collection<Task> subTasks = new ArrayList<>();
+  /**
+   * The id.
+   */
+  private Long id;
+  /**
+   * The version.
+   */
+  private long version;
+  /**
+   * The task name.
+   */
+  private String name;
+  /**
+   * The task duration.
+   */
+  private Duration duration;
+  /**
+   * The sub tasks.
+   */
+  Collection<Task> subTasks = new ArrayList<>();
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Long getId() {
-        return this.id;
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Long getId()
+  {
+    return this.id;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public long getVersion()
+  {
+    return this.version;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getName()
+  {
+    return this.name;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setName( String name )
+  {
+    this.name = name;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Duration getDuration()
+  {
+    return this.duration;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setDuration( Duration duration )
+  {
+    this.duration = duration;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Collection<Task> getSubTasks()
+  {
+    return this.subTasks;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int hashCode()
+  {
+    int hashCode;
+
+    if ( this.getId() == null )
+    {
+      hashCode = super.hashCode();
+    }
+    else
+    {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      builder.append( this.getId() );
+
+      hashCode = builder.toHashCode();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public long getVersion() {
-        return this.version;
+    return hashCode;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean equals( Object obj )
+  {
+    if ( obj instanceof Task )
+    {
+      Task task = ( Task ) obj;
+
+      if ( this.getId() == null )
+      {
+        return ( this == task );
+      }
+      else
+      {
+        EqualsBuilder builder = new EqualsBuilder();
+
+        builder.append( this.getId(), task.getId() );
+
+        return builder.isEquals();
+      }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getName() {
-        return this.name;
-    }
+    return false;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString()
+  {
+    ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE );
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Duration getDuration() {
-        return this.duration;
-    }
+    builder.append( this.getId() );
+    builder.append( this.getName() );
+    builder.append( this.getDuration() );
+    builder.append( this.getSubTasks() );
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setDuration(Duration duration) {
-        this.duration = duration;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Collection<Task> getSubTasks() {
-        return this.subTasks;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode() {
-        int hashCode;
-
-        if (this.getId() == null) {
-            hashCode = super.hashCode();
-        } else {
-            HashCodeBuilder builder = new HashCodeBuilder();
-
-            builder.append(this.getId());
-
-            hashCode = builder.toHashCode();
-        }
-
-        return hashCode;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Task) {
-            Task task = (Task) obj;
-
-            if (this.getId() == null) {
-                return (this == task);
-            } else {
-                EqualsBuilder builder = new EqualsBuilder();
-
-                builder.append(this.getId(), task.getId());
-
-                return builder.isEquals();
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
-
-        builder.append(this.getId());
-        builder.append(this.getName());
-        builder.append(this.getDuration());
-        builder.append(this.getSubTasks());
-
-        return builder.toString();
-    }
+    return builder.toString();
+  }
 }

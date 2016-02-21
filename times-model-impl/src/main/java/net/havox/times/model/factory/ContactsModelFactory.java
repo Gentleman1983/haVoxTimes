@@ -32,71 +32,79 @@ import net.havox.times.model.contacts.impl.PersonImpl;
  *
  * @author Christian Otto
  */
-public class ContactsModelFactory {
+public class ContactsModelFactory
+{
 
-    /**
-     * The singleton model factory instance.
-     */
-    private static final ContactsModelFactory instance = new ContactsModelFactory();
+  /**
+   * The singleton model factory instance.
+   */
+  private static final ContactsModelFactory instance = new ContactsModelFactory();
 
-    /**
-     * The private default constructor.
-     */
-    private ContactsModelFactory() {
-        super();
-    }
+  /**
+   * The private default constructor.
+   */
+  private ContactsModelFactory()
+  {
+    super();
+  }
 
-    /**
-     * Returns the singleton model factory.
-     *
-     * @return the {@link ContactsModelFactory} instance.
-     */
-    public static ContactsModelFactory getInstance() {
-        return ContactsModelFactory.instance;
-    }
+  /**
+   * Returns the singleton model factory.
+   *
+   * @return the {@link ContactsModelFactory} instance.
+   */
+  public static ContactsModelFactory getInstance()
+  {
+    return ContactsModelFactory.instance;
+  }
 
-    /**
-     * Returns a new {@link Address}.
-     *
-     * @return a new address entity
-     */
-    public Address getNewAddress() {
-        return new AddressImpl();
-    }
+  /**
+   * Returns a new {@link Address}.
+   *
+   * @return a new address entity
+   */
+  public Address getNewAddress()
+  {
+    return new AddressImpl();
+  }
 
-    /**
-     * Returns a new {@link City}.
-     *
-     * @return a new city entity
-     */
-    public City getNewCity() {
-        return new CityImpl();
-    }
+  /**
+   * Returns a new {@link City}.
+   *
+   * @return a new city entity
+   */
+  public City getNewCity()
+  {
+    return new CityImpl();
+  }
 
-    /**
-     * Returns a new {@link Company}.
-     *
-     * @return a new company entity
-     */
-    public Company getNewCompany() {
-        return new CompanyImpl();
-    }
+  /**
+   * Returns a new {@link Company}.
+   *
+   * @return a new company entity
+   */
+  public Company getNewCompany()
+  {
+    return new CompanyImpl();
+  }
 
-    /**
-     * Returns a new {@link Country}.
-     *
-     * @return a new country entity
-     */
-    public Country getNewCountry() {
-        return new CountryImpl();
-    }
+  /**
+   * Returns a new {@link Country}.
+   *
+   * @return a new country entity
+   */
+  public Country getNewCountry()
+  {
+    return new CountryImpl();
+  }
 
-    /**
-     * Returns a new {@link Person}.
-     *
-     * @return a new person entity
-     */
-    public Person getNewPersion() {
-        return new PersonImpl();
-    }
+  /**
+   * Returns a new {@link Person}.
+   *
+   * @return a new person entity
+   */
+  public Person getNewPersion()
+  {
+    return new PersonImpl();
+  }
 }

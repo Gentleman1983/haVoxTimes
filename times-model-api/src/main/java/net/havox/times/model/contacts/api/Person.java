@@ -26,104 +26,107 @@ import java.time.LocalDate;
  *
  * @author Christian Otto
  */
-public interface Person extends Serializable {
+public interface Person extends Serializable
+{
 
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    Long getId();
+  /**
+   * Gets the id.
+   *
+   * @return the id
+   */
+  Long getId();
 
-    /**
-     * Gets the version.
-     *
-     * @return the version
-     */
-    long getVersion();
+  /**
+   * Gets the version.
+   *
+   * @return the version
+   */
+  long getVersion();
 
-    /**
-     * Gets the last name.
-     *
-     * @return the last name
-     */
-    String getLastName();
+  /**
+   * Gets the last name.
+   *
+   * @return the last name
+   */
+  String getLastName();
 
-    /**
-     * Sets the last name.
-     *
-     * @param lastName the last name
-     */
-    void setLastName(String lastName);
+  /**
+   * Sets the last name.
+   *
+   * @param lastName the last name
+   */
+  void setLastName( String lastName );
 
-    /**
-     * Gets the middle innitials.
-     *
-     * @return the middle innitials
-     */
-    String getMiddleInnitials();
+  /**
+   * Gets the middle innitials.
+   *
+   * @return the middle innitials
+   */
+  String getMiddleInnitials();
 
-    /**
-     * Sets the middle innitials.
-     *
-     * @param middleInnitials the middle innitials
-     */
-    void setMiddleInnitials(String middleInnitials);
+  /**
+   * Sets the middle innitials.
+   *
+   * @param middleInnitials the middle innitials
+   */
+  void setMiddleInnitials( String middleInnitials );
 
-    /**
-     * Gets the first name.
-     *
-     * @return the first name
-     */
-    String getFirstName();
+  /**
+   * Gets the first name.
+   *
+   * @return the first name
+   */
+  String getFirstName();
 
-    /**
-     * Sets the first name.
-     *
-     * @param firstName the first name
-     */
-    void setFirstName(String firstName);
+  /**
+   * Sets the first name.
+   *
+   * @param firstName the first name
+   */
+  void setFirstName( String firstName );
 
-    /**
-     * Gets the age.
-     *
-     * @return the age
-     *
-     * @throws IllegalStateException In case the birth date is not set.
-     */
-    default Duration getAge() throws IllegalStateException {
-        if (this.getDateOfBirth() == null) {
-            throw new IllegalStateException("Unable to calculate age. No birth date set.");
-        }
-
-        return Duration.between(Instant.now(), this.getDateOfBirth());
+  /**
+   * Gets the age.
+   *
+   * @return the age
+   *
+   * @throws IllegalStateException In case the birth date is not set.
+   */
+  default Duration getAge()
+  {
+    if ( this.getDateOfBirth() == null )
+    {
+      throw new IllegalStateException( "Unable to calculate age. No birth date set." );
     }
 
-    /**
-     * Gets the date of birth.
-     *
-     * @return the date of birth
-     */
-    LocalDate getDateOfBirth();
+    return Duration.between( Instant.now(), this.getDateOfBirth() );
+  }
 
-    /**
-     * Sets the date of birth.
-     *
-     * @param dateOfBirth the date of birth
-     */
-    void setDateOfBirth(LocalDate dateOfBirth);
+  /**
+   * Gets the date of birth.
+   *
+   * @return the date of birth
+   */
+  LocalDate getDateOfBirth();
 
-    /**
-     * Gets the address.
-     *
-     * @return the address
-     */
-    Address getAddress();
+  /**
+   * Sets the date of birth.
+   *
+   * @param dateOfBirth the date of birth
+   */
+  void setDateOfBirth( LocalDate dateOfBirth );
 
-    /**
-     * Sets the address.
-     *
-     * @param address the address
-     */
-    void setAddress(Address address);
+  /**
+   * Gets the address.
+   *
+   * @return the address
+   */
+  Address getAddress();
+
+  /**
+   * Sets the address.
+   *
+   * @param address the address
+   */
+  void setAddress( Address address );
 }

@@ -27,147 +27,165 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * The standard implementation of the company.
- * 
+ *
  * @author Christian Otto
  */
-public class CompanyImpl implements Company {
+public class CompanyImpl implements Company
+{
 
-    /**
-     * The SerialVersionUID.
-     */
-    private static final long serialVersionUID = 7315535092868289098L;
+  /**
+   * The SerialVersionUID.
+   */
+  private static final long serialVersionUID = 7315535092868289098L;
 
-    /**
-     * The id.
-     */
-    private Long id;
-    /**
-     * The version.
-     */
-    private long version;
-    /**
-     * The company name.
-     */
-    private String name;
-    /**
-     * The company address.
-     */
-    private Address address;
-    /**
-     * The sub companies.
-     */
-    private Collection<Company> subCompanies = new ArrayList<>();
+  /**
+   * The id.
+   */
+  private Long id;
+  /**
+   * The version.
+   */
+  private long version;
+  /**
+   * The company name.
+   */
+  private String name;
+  /**
+   * The company address.
+   */
+  private Address address;
+  /**
+   * The sub companies.
+   */
+  private Collection<Company> subCompanies = new ArrayList<>();
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Long getId() {
-        return this.id;
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Long getId()
+  {
+    return this.id;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public long getVersion()
+  {
+    return this.version;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getName()
+  {
+    return this.name;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setName( String name )
+  {
+    this.name = name;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Address getAddress()
+  {
+    return this.address;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setAddress( Address address )
+  {
+    this.address = address;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Collection<Company> getSubCompanies()
+  {
+    return this.subCompanies;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int hashCode()
+  {
+    int hashCode;
+
+    if ( this.getId() == null )
+    {
+      hashCode = super.hashCode();
+    }
+    else
+    {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      builder.append( this.getId() );
+
+      hashCode = builder.toHashCode();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public long getVersion() {
-        return this.version;
+    return hashCode;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean equals( Object obj )
+  {
+    if ( obj instanceof Company )
+    {
+      Company company = ( Company ) obj;
+
+      if ( this.getId() == null )
+      {
+        return ( this == company );
+      }
+      else
+      {
+        EqualsBuilder builder = new EqualsBuilder();
+
+        builder.append( this.getId(), company.getId() );
+
+        return builder.isEquals();
+      }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getName() {
-        return this.name;
-    }
+    return false;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString()
+  {
+    ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE );
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Address getAddress() {
-        return this.address;
-    }
+    builder.append( this.getId() );
+    builder.append( this.getName() );
+    builder.append( this.getAddress() );
+    builder.append( this.getSubCompanies() );
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Collection<Company> getSubCompanies() {
-        return this.subCompanies;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode() {
-        int hashCode;
-
-        if (this.getId() == null) {
-            hashCode = super.hashCode();
-        } else {
-            HashCodeBuilder builder = new HashCodeBuilder();
-
-            builder.append(this.getId());
-
-            hashCode = builder.toHashCode();
-        }
-
-        return hashCode;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Company) {
-            Company company = (Company) obj;
-
-            if (this.getId() == null) {
-                return (this == company);
-            } else {
-                EqualsBuilder builder = new EqualsBuilder();
-
-                builder.append(this.getId(), company.getId());
-
-                return builder.isEquals();
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
-
-        builder.append(this.getId());
-        builder.append(this.getName());
-        builder.append(this.getAddress());
-        builder.append(this.getSubCompanies());
-
-        return builder.toString();
-    }
+    return builder.toString();
+  }
 }
