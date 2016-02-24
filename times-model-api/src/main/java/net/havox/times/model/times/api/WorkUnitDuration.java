@@ -21,6 +21,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 /**
+ * Represents the duration of a work unit.
  *
  * @author Christian Otto
  */

@@ -28,7 +28,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- *
+ * This is the implementation of a work unit.
+ * 
  * @author Christian Otto
  */
 public class WorkUnitImpl implements WorkUnit

@@ -17,7 +17,8 @@
 package net.havox.times.model.times.api;
 
 /**
- *
+ * Represents the different types of work units.
+ * 
  * @author Christian Otto
  */
 public enum WorkUnitType

@@ -14,10 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.havox.times.model.times.impl;
+package net.havox.times.model.times.api;
 
 /**
- *
+ * This represents the duration type, needed especially for managing the input.
+ * 
  * @author Christian Otto
  */
 public enum WorkUnitDurationType

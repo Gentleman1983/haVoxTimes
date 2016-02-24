@@ -24,7 +24,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
+ * Represents a work day.
+ * 
  * @author Christian Otto
  */
 public interface WorkDay
