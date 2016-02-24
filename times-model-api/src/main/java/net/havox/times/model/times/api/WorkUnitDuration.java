@@ -54,7 +54,7 @@ public interface WorkUnitDuration extends Serializable
    * @param start the start time
    * @param end the end time
    *
-   * @throws NullPointerException , if any of the parameters is <code>null</code>.
+   * @throws IllegalArgumentException , if any of the parameters is <code>null</code>.
    */
   void setDuration( LocalDateTime start, LocalDateTime end );
 
@@ -64,7 +64,7 @@ public interface WorkUnitDuration extends Serializable
    * @param start the start time
    * @param duration the duration
    *
-   * @throws NullPointerException , if any of the parameters is <code>null</code>.
+   * @throws IllegalArgumentException , if any of the parameters is <code>null</code>.
    */
   void setDuration( LocalDateTime start, Duration duration );
 

@@ -57,7 +57,7 @@ public class TaskImpl implements Task
   /**
    * The sub tasks.
    */
-  Collection<Task> subTasks = new ArrayList<>();
+  private Collection<Task> subTasks = new ArrayList<>();
 
   /**
    * {@inheritDoc}

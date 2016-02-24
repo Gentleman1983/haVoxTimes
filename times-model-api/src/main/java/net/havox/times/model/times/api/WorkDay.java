@@ -127,14 +127,14 @@ public interface WorkDay
    * @param type the WorkUnitType to calculate
    * @return the duration
    *
-   * @throws NullPointerException , if the type parameter is not set
+   * @throws IllegalArgumentException, if the type parameter is not set
    */
   default Duration getDuration( WorkUnitType type )
   {
     if ( type == null )
     {
       String message = "The WorkUnitType parameter type has to be set.";
-      throw new NullPointerException( message );
+      throw new IllegalArgumentException( message );
     }
     Duration duration = Duration.ZERO;
 

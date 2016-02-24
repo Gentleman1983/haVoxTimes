@@ -86,19 +86,19 @@ public interface Project extends Serializable
    * @param type the {@link WorkUnitType}
    * @return the calculated work duration for this month
    *
-   * @throws NullPointerException, if the month is not set.
-   * @throws NullPointerException, if the work unit type is not set.
+   * @throws IllegalArgumentException, if the month is not set.
+   * @throws IllegalArgumentException, if the work unit type is not set.
    * @throws IllegalArgumentException, if the month does not fit the Employment duration.
    */
   default Duration getDuraration( Month month, int year, WorkUnitType type )
   {
     if ( month == null )
     {
-      throw new NullPointerException( "The month has to be set." );
+      throw new IllegalArgumentException( "The month has to be set." );
     }
     else if ( type == null )
     {
-      throw new NullPointerException( "The work unit type has to be set." );
+      throw new IllegalArgumentException( "The work unit type has to be set." );
     }
 
     LocalDate monthStart = LocalDate.of( year, month, 1 );

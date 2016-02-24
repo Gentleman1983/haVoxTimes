@@ -93,12 +93,12 @@ public class WorkUnitDurationImpl implements WorkUnitDuration
    * {@inheritDoc}
    */
   @Override
-  public void setDuration( LocalDateTime start, LocalDateTime end ) throws NullPointerException
+  public void setDuration( LocalDateTime start, LocalDateTime end )
   {
     if ( ( start == null ) || ( end == null ) )
     {
       String message = "Neigther the parameter 'start'=" + start + " nor the parameter 'end'=" + end + "is allowed to be NULL.";
-      throw new NullPointerException( message );
+      throw new IllegalArgumentException( message );
     }
 
     this.start = start;
@@ -110,12 +110,12 @@ public class WorkUnitDurationImpl implements WorkUnitDuration
    * {@inheritDoc}
    */
   @Override
-  public void setDuration( LocalDateTime start, Duration duration ) throws NullPointerException
+  public void setDuration( LocalDateTime start, Duration duration )
   {
     if ( ( start == null ) || ( duration == null ) )
     {
       String message = "Neigther the parameter 'start'=" + start + " nor the parameter 'duration'=" + duration + "is allowed to be NULL.";
-      throw new NullPointerException( message );
+      throw new IllegalArgumentException( message );
     }
 
     this.start = start;
