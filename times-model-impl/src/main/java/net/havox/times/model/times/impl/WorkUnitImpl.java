@@ -183,10 +183,10 @@ public class WorkUnitImpl implements WorkUnit
   {
     ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.MULTI_LINE_STYLE );
 
-    builder.append( this.id );
-    builder.append( this.type );
-    builder.append( this.duration );
-    builder.append( this.tasks );
+    builder.append( this.getId() );
+    builder.append( this.getType() );
+    builder.append( this.getDuration() );
+    builder.append( this.getTasks() );
 
     return builder.toString();
   }

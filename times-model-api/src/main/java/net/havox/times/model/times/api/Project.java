@@ -208,20 +208,20 @@ public interface Project extends Serializable
    * @return true, if the employment contains sub projects
    * @throws IllegalStateException if the projects propery is not initialized
    */
-  default boolean hasProjects() throws IllegalStateException
+  default boolean hasSubprojects() throws IllegalStateException
   {
-    if ( this.getProjects() == null )
+    if ( this.getSubprojects() == null )
     {
       throw new IllegalStateException( "Projects property not yet initialized." );
     }
 
-    return !this.getProjects().isEmpty();
+    return !this.getSubprojects().isEmpty();
   }
 
   /**
-   * Returns the projects.
+   * Returns the sub projects.
    *
-   * @return the projects
+   * @return the sub projects
    */
-  Collection<Project> getProjects();
+  Collection<Project> getSubprojects();
 }

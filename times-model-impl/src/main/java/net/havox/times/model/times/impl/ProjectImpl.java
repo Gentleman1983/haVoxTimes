@@ -16,51 +16,60 @@
  */
 package net.havox.times.model.times.impl;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import net.havox.times.model.times.api.WorkUnitDuration;
+import java.time.LocalDate;
+import java.util.Collection;
+import java.util.HashSet;
+import net.havox.times.model.contacts.api.Company;
+import net.havox.times.model.contacts.api.Person;
+import net.havox.times.model.times.api.Project;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * The implemantation of the work unit duration.
  *
  * @author Christian Otto
  */
-public class WorkUnitDurationImpl implements WorkUnitDuration
+public class ProjectImpl implements Project
 {
-
   /**
    * The SerialVersionUID.
    */
-  private static final long serialVersionUID = 2700239318546499492L;
+  private static final long serialVersionUID = -537340800679521572L;
 
   /**
    * The id.
    */
   private Long id;
-
   /**
    * The version.
    */
   private long version;
-
   /**
-   * The duration.
+   * The name of the project.
    */
-  private Duration duration;
-
+  private String name;
   /**
-   * The start time.
+   * The start date of the project.
    */
-  private LocalDateTime start;
-
+  private LocalDate start;
   /**
-   * The end time.
+   * The end date of the project.
    */
-  private LocalDateTime end;
+  private LocalDate end;
+  /**
+   * The employing company.
+   */
+  private Company employer;
+  /**
+   * The employee.
+   */
+  private Person employee;
+  /**
+   * The sub projects.
+   */
+  private Collection<Project> subprojects = new HashSet<>();
 
   /**
    * {@inheritDoc}
@@ -84,50 +93,25 @@ public class WorkUnitDurationImpl implements WorkUnitDuration
    * {@inheritDoc}
    */
   @Override
-  public Duration getDuration()
+  public String getName()
   {
-    return this.duration;
+    return this.name;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setDuration( LocalDateTime start, LocalDateTime end )
+  public void setName( String name )
   {
-    if ( ( start == null ) || ( end == null ) )
-    {
-      String message = "Neigther the parameter 'start'=" + start + " nor the parameter 'end'=" + end + "is allowed to be NULL.";
-      throw new IllegalArgumentException( message );
-    }
-
-    this.start = start;
-    this.end = end;
-    this.duration = Duration.between( start, end );
+    this.name = name;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void setDuration( LocalDateTime start, Duration duration )
-  {
-    if ( ( start == null ) || ( duration == null ) )
-    {
-      String message = "Neigther the parameter 'start'=" + start + " nor the parameter 'duration'=" + duration + "is allowed to be NULL.";
-      throw new IllegalArgumentException( message );
-    }
-
-    this.start = start;
-    this.duration = duration;
-    this.end = LocalDateTime.from( start ).plus( duration );
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public LocalDateTime getStart()
+  public LocalDate getStart()
   {
     return this.start;
   }
@@ -136,9 +120,72 @@ public class WorkUnitDurationImpl implements WorkUnitDuration
    * {@inheritDoc}
    */
   @Override
-  public LocalDateTime getEnd()
+  public void setStart( LocalDate start )
+  {
+    this.start = start;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public LocalDate getEnd()
   {
     return this.end;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setEnd( LocalDate end )
+  {
+    this.end = end;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Company getEmployer()
+  {
+    return this.employer;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setEmployer( Company employer )
+  {
+    this.employer = employer;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Person getEmployee()
+  {
+    return this.employee;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setEmployee( Person employee )
+  {
+    this.employee = employee;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Collection<Project> getSubprojects()
+  {
+    return this.subprojects;
   }
 
   /**
@@ -179,17 +226,17 @@ public class WorkUnitDurationImpl implements WorkUnitDuration
     }
     else if ( this.getClass() == obj.getClass() )
     {
-      WorkUnitDuration workUnitDuration = ( WorkUnitDurationImpl ) obj;
+      Project project = ( ProjectImpl ) obj;
 
       if ( this.getId() == null )
       {
-        return ( this == workUnitDuration );
+        return ( this == project );
       }
       else
       {
         EqualsBuilder builder = new EqualsBuilder();
 
-        builder.append( this.getId(), workUnitDuration.getId() );
+        builder.append(this.getId(), project.getId() );
 
         return builder.isEquals();
       }
@@ -207,9 +254,6 @@ public class WorkUnitDurationImpl implements WorkUnitDuration
     ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.MULTI_LINE_STYLE );
 
     builder.append( this.getId() );
-    builder.append( this.getStart() );
-    builder.append( this.getEnd() );
-    builder.append( this.getDuration() );
 
     return builder.toString();
   }
