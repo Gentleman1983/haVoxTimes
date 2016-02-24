@@ -176,9 +176,9 @@ public class IssueImpl implements Issue
   @Override
   public boolean equals( Object obj )
   {
-    if ( obj instanceof Issue )
+    if ( this.getClass() == obj.getClass() )
     {
-      Issue issue = ( Issue ) obj;
+      Issue issue = ( IssueImpl ) obj;
 
       if ( this.getId() == null )
       {

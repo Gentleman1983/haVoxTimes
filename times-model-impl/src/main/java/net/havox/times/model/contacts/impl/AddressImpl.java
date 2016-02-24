@@ -158,7 +158,7 @@ public class AddressImpl implements Address
   @Override
   public boolean equals( Object obj )
   {
-    if ( obj instanceof AddressImpl )
+    if ( this.getClass() == obj.getClass() )
     {
       AddressImpl address = ( AddressImpl ) obj;
 

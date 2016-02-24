@@ -148,9 +148,9 @@ public class WorkUnitImpl implements WorkUnit
   @Override
   public boolean equals( Object obj )
   {
-    if ( obj instanceof WorkUnit )
+    if ( this.getClass() == obj.getClass() )
     {
-      WorkUnit workUnit = ( WorkUnit ) obj;
+      WorkUnit workUnit = ( WorkUnitImpl ) obj;
 
       if ( this.getId() == null )
       {

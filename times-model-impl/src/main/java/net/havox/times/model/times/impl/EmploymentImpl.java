@@ -199,9 +199,9 @@ public class EmploymentImpl implements Employment
   @Override
   public boolean equals( Object obj )
   {
-    if ( obj instanceof Employment )
+    if ( this.getClass() == obj.getClass() )
     {
-      Employment employment = ( Employment ) obj;
+      Employment employment = ( EmploymentImpl ) obj;
 
       if ( this.getId() == null )
       {

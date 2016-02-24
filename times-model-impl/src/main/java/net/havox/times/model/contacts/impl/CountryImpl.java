@@ -114,9 +114,9 @@ public class CountryImpl implements Country
   @Override
   public boolean equals( Object obj )
   {
-    if ( obj instanceof Country )
+    if ( this.getClass() == obj.getClass() )
     {
-      Country country = ( Country ) obj;
+      Country country = ( CountryImpl ) obj;
 
       if ( this.getId() == null )
       {

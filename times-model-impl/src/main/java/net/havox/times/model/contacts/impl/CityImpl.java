@@ -159,9 +159,9 @@ public class CityImpl implements City
   @Override
   public boolean equals( Object obj )
   {
-    if ( obj instanceof City )
+    if ( this.getClass() == obj.getClass() )
     {
-      City city = ( City ) obj;
+      City city = ( CityImpl ) obj;
 
       if ( this.getId() == null )
       {

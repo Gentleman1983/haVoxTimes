@@ -18,7 +18,6 @@ package net.havox.times.model.times.impl;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import net.havox.times.model.times.api.WorkUnit;
 import net.havox.times.model.times.api.WorkUnitDuration;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -172,9 +171,9 @@ public class WorkUnitDurationImpl implements WorkUnitDuration
   @Override
   public boolean equals( Object obj )
   {
-    if ( obj instanceof WorkUnitDuration )
+    if ( this.getClass() == obj.getClass() )
     {
-      WorkUnitDuration workUnitDuration = ( WorkUnitDuration ) obj;
+      WorkUnitDuration workUnitDuration = ( WorkUnitDurationImpl ) obj;
 
       if ( this.getId() == null )
       {

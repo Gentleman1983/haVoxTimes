@@ -152,9 +152,9 @@ public class CompanyImpl implements Company
   @Override
   public boolean equals( Object obj )
   {
-    if ( obj instanceof Company )
+    if ( this.getClass() == obj.getClass() )
     {
-      Company company = ( Company ) obj;
+      Company company = ( CompanyImpl ) obj;
 
       if ( this.getId() == null )
       {

@@ -204,9 +204,9 @@ public class PersonImpl implements Person
   @Override
   public boolean equals( Object obj )
   {
-    if ( obj instanceof Person )
+    if ( this.getClass() == obj.getClass() )
     {
-      Person person = ( Person ) obj;
+      Person person = ( PersonImpl ) obj;
 
       if ( this.getId() == null )
       {

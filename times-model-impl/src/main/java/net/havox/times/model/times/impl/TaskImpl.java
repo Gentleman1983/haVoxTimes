@@ -152,9 +152,9 @@ public class TaskImpl implements Task
   @Override
   public boolean equals( Object obj )
   {
-    if ( obj instanceof Task )
+    if ( this.getClass() == obj.getClass() )
     {
-      Task task = ( Task ) obj;
+      Task task = ( TaskImpl ) obj;
 
       if ( this.getId() == null )
       {
