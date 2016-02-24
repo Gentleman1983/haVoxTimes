@@ -171,7 +171,13 @@ public class WorkUnitDurationImpl implements WorkUnitDuration
   @Override
   public boolean equals( Object obj )
   {
-    if ( this.getClass() == obj.getClass() )
+    if ( this == obj ) {
+      return true;
+    }
+    else if ( obj == null ) {
+      return false;
+    }
+    else if ( this.getClass() == obj.getClass() )
     {
       WorkUnitDuration workUnitDuration = ( WorkUnitDurationImpl ) obj;
 
