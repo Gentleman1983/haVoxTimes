@@ -1,52 +1,35 @@
 // This file is to be applied to every project.
-
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
-String mavenGroupId = 'net.havox.times'
-String mavenVersion = '0.0.1-SNAPSHOT'
-
-String localNexusURL = 'http://devserver:8081'
-String localNexusPublic = "${localNexusURL}/content/groups/public/"
-String localNexusReleases = "${localNexusURL}/content/groups/releases"
-String localNexusSnapshots = "${localNexusURL}/content/groups/snapshots"
-String localNexusUsername = 'deployment'
-String localNexusPassword = 'd3pl0ym3nt'
-
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-
-repositories {
-    maven {
-        url localNexusPublic
-    }
-    mavenCentral()
-    jcenter {
-        url 'http://jcenter.bintray.com/'
-    }
-}
 
 dependencies {
     // Adding dependencies here will add the dependencies to each subproject.
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    testCompile group: 'org.hamcrest', name: 'hamcrest-junit', version: '2.0.0.0'
-    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+    testCompile group: 'junit', name: 'junit', version: project.ext.'libraryVersion.junit.junit'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-junit', version: project.ext.'libraryVersion.hamcrest.hamcrest'
+    testCompile group: 'org.mockito', name: 'mockito-all', version: project.ext.'libraryVersion.mockito.mockito'
 }
 
 String mavenArtifactId = name
 
-group = mavenGroupId
-version = mavenVersion
+group = project.ext.mavenGroupId
+version = project.ext.mavenVersion
 
 task sourcesJar(type: Jar, dependsOn: classes, description: 'Creates a jar from the source files.') {
     classifier = 'sources'
     from sourceSets.main.allSource
 }
 
+task javadocJar(type: Jar, dependsOn: 'javadoc') {
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
 artifacts {
     archives jar
+    archives javadocJar
     archives sourcesJar
 }
 
@@ -55,28 +38,10 @@ publishing {
         mavenJava(MavenPublication) {
             from components.java
 
-            artifact sourcesJar {
-                classifier 'sources'
-            }
-            
-            //artifact javadoc {
-            //    classifier 'javadoc'
-            //}
+            artifact sourcesJar
+            artifact javadocJar
         }
     }
-}
-
-uploadArchives {  
-    repositories {  
-        mavenDeployer {  
-            repository(url: "${localNexusReleases}") {  
-                authentication(userName: localNexusUsername, password: localNexusPassword);  
-            }  
-            snapshotRepository(url: "${localNexusSnapshots}") {
-                authentication(userName: localNexusUsername, password: localNexusPassword);  
-            }  
-        }  
-    }  
 }
 
 configure(install.repositories.mavenInstaller) {

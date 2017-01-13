@@ -1,22 +1,69 @@
 import org.gradle.api.artifacts.*
 
-apply plugin: 'base' // To add "clean" task to the root project.
-
 buildscript {
-  repositories {
-    maven {
-      url "https://plugins.gradle.org/m2/"
+    repositories {
+        maven {
+            url 'http://devserver:8081/artifactory/plugins-release'
+            credentials {
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+        
+            }
+        }
+        //maven {
+        //    url "https://plugins.gradle.org/m2/"
+        //}
     }
-  }
-  dependencies {
-    classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:1.2"
-  }
+    dependencies {
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${project.ext.'gradlePluginVersion.sonarsource.sonarqube-gradle-plugin'}"
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:${project.ext.'gradlePluginVersion.jfrog.build-info-extractor-gradle'}"
+    }
 }
 
+apply plugin: 'base' // To add "clean" task to the root project.
 apply plugin: "org.sonarqube"
 
 allprojects {
     apply from: rootProject.file('common.gradle')
+    apply plugin: "com.jfrog.artifactory"
+}
+
+// Print build information...
+println '***********************************************************'
+println '* Build environment information:'
+println '* =============================='
+println "* Gradle wrapper version: ${GradleVersion.current()}"
+println "* JDK version: ${JavaVersion.current()}"
+println "* Source compatibility: ${project.sourceCompatibility}"
+println "* Target compatibility: ${project.targetCompatibility}"
+println '*'
+println '* MAVEN artifact information:'
+println '* ==========================='
+println "* Group ID: ${project.group}"
+println "* Artifact ID: ${project.name}"
+println "* Version: ${project.version}"
+println '***********************************************************'
+
+artifactory {
+    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
+    publish {
+        repository {
+            repoKey = 'libs-release-local'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+            
+        }
+    }
+    resolve {
+        repository {
+            repoKey = 'libs-release'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+            
+        }
+    }
 }
 
 task mergedJavadoc(type: Javadoc, description: 'Creates Javadoc from all the projects.') {
@@ -25,7 +72,7 @@ task mergedJavadoc(type: Javadoc, description: 'Creates Javadoc from all the pro
 
     // Note: The closures below are executed lazily.
     source {
-       subprojects*.sourceSets*.main*.allSource
+        subprojects*.sourceSets*.main*.allSource
     }
     classpath.from {
         subprojects*.configurations*.compile*.copyRecursive({ !(it instanceof ProjectDependency); })*.resolve()

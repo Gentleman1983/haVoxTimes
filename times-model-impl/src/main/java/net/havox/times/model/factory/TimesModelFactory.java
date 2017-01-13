@@ -18,11 +18,15 @@ package net.havox.times.model.factory;
 
 import net.havox.times.model.times.api.Employment;
 import net.havox.times.model.times.api.Issue;
+import net.havox.times.model.times.api.Project;
 import net.havox.times.model.times.api.Task;
 import net.havox.times.model.times.api.WorkUnit;
+import net.havox.times.model.times.api.WorkUnitDuration;
 import net.havox.times.model.times.impl.EmploymentImpl;
 import net.havox.times.model.times.impl.IssueImpl;
+import net.havox.times.model.times.impl.ProjectImpl;
 import net.havox.times.model.times.impl.TaskImpl;
+import net.havox.times.model.times.impl.WorkUnitDurationImpl;
 import net.havox.times.model.times.impl.WorkUnitImpl;
 
 /**
@@ -36,7 +40,7 @@ public class TimesModelFactory
   /**
    * The singleton model factory instance.
    */
-  private static final TimesModelFactory instance = new TimesModelFactory();
+  private static final TimesModelFactory INSTANCE = new TimesModelFactory();
 
   /**
    * The private default constructor.
@@ -53,7 +57,7 @@ public class TimesModelFactory
    */
   public static TimesModelFactory getInstance()
   {
-    return TimesModelFactory.instance;
+    return TimesModelFactory.INSTANCE;
   }
 
   /**
@@ -77,6 +81,16 @@ public class TimesModelFactory
   }
 
   /**
+   * Returns a new {@link Project}.
+   *
+   * @return a new project entity
+   */
+  public Project getNewProject()
+  {
+    return new ProjectImpl();
+  }
+
+  /**
    * Returns a new {@link Task}.
    *
    * @return a new task entity
@@ -84,6 +98,16 @@ public class TimesModelFactory
   public Task getNewTask()
   {
     return new TaskImpl();
+  }
+
+  /**
+   * Returns a new {@link WorkUnitDuration}.
+   *
+   * @return a new work unit duration entity
+   */
+  public WorkUnitDuration getNewWorkUnitDuration()
+  {
+    return new WorkUnitDurationImpl();
   }
 
   /**

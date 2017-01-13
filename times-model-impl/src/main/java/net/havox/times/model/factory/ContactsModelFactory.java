@@ -38,7 +38,7 @@ public class ContactsModelFactory
   /**
    * The singleton model factory instance.
    */
-  private static final ContactsModelFactory instance = new ContactsModelFactory();
+  private static final ContactsModelFactory INSTANCE = new ContactsModelFactory();
 
   /**
    * The private default constructor.
@@ -55,7 +55,7 @@ public class ContactsModelFactory
    */
   public static ContactsModelFactory getInstance()
   {
-    return ContactsModelFactory.instance;
+    return ContactsModelFactory.INSTANCE;
   }
 
   /**
@@ -103,7 +103,7 @@ public class ContactsModelFactory
    *
    * @return a new person entity
    */
-  public Person getNewPersion()
+  public Person getNewPerson()
   {
     return new PersonImpl();
   }
