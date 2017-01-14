@@ -16,8 +16,12 @@
  */
 package net.havox.times.model.contacts.impl;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import net.havox.times.model.contacts.api.City;
 import net.havox.times.model.contacts.api.Country;
+import net.havox.times.model.impl.AbstractChangeAwareClass;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -28,110 +32,55 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author Christian Otto
  */
-public class CityImpl implements City
+@Entity
+@Table( name = CityImpl.DB_TABLE_NAME )
+public class CityImpl extends AbstractChangeAwareClass implements City
 {
+  /** The db table name. */
+  public static final String DB_TABLE_NAME = "HAVOX_TIMES_CITY";
 
-  /**
-   * The SerialVersionUID.
-   */
   private static final long serialVersionUID = -416723199770693783L;
 
-  /**
-   * The id.
-   */
-  private Long id;
-  /**
-   * The version.
-   */
-  private long version;
-  /**
-   * The zip code.
-   */
   private String zipCode;
-  /**
-   * The city name.
-   */
   private String name;
-  /**
-   * The country.
-   */
   private Country country;
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Long getId()
-  {
-    return this.id;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public long getVersion()
-  {
-    return this.version;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getZipCode()
   {
     return this.zipCode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setZipCode( String zipCode )
   {
     this.zipCode = zipCode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getName()
   {
     return this.name;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setName( String name )
   {
     this.name = name;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Country getCountry()
   {
     return this.country;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setCountry( Country country )
   {
     this.country = country;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode()
   {
@@ -153,16 +102,15 @@ public class CityImpl implements City
     return hashCode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals( Object obj )
   {
-    if ( this == obj ) {
+    if ( this == obj )
+    {
       return true;
     }
-    else if ( obj == null ) {
+    else if ( obj == null )
+    {
       return false;
     }
     else if ( this.getClass() == obj.getClass() )
@@ -186,9 +134,6 @@ public class CityImpl implements City
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString()
   {

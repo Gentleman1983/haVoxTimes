@@ -21,27 +21,15 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 
+import net.havox.times.model.api.ChangeAware;
+
 /**
  * This interface represents a person.
  *
  * @author Christian Otto
  */
-public interface Person extends Serializable
+public interface Person extends ChangeAware, Serializable
 {
-
-  /**
-   * Gets the id.
-   *
-   * @return the id
-   */
-  Long getId();
-
-  /**
-   * Gets the version.
-   *
-   * @return the version
-   */
-  long getVersion();
 
   /**
    * Gets the last name.

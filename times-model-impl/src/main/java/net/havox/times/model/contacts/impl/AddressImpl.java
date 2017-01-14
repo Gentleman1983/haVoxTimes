@@ -16,8 +16,12 @@
  */
 package net.havox.times.model.contacts.impl;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import net.havox.times.model.contacts.api.Address;
 import net.havox.times.model.contacts.api.City;
+import net.havox.times.model.impl.AbstractChangeAwareClass;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -28,109 +32,54 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author Christian Otto
  */
-public class AddressImpl implements Address
+@Entity
+@Table( name = AddressImpl.DB_TABLE_NAME )
+public class AddressImpl extends AbstractChangeAwareClass implements Address
 {
-  /**
-   * The serialVersionUID.
-   */
-  private static final long serialVersionUID = -3857698669332938089L;
+  /** The db table name. */
+  public static final String DB_TABLE_NAME = "HAVOX_TIMES_ADDRESS";
 
-  /**
-   * The id.
-   */
-  private Long id;
-  /**
-   * The version.
-   */
-  private long version;
-  /**
-   * The street name.
-   */
+  private static final long serialVersionUID = -3857698669332938089L;
   private String street;
-  /**
-   * The house number.
-   */
   private String houseNumber;
-  /**
-   * The City.
-   */
   private City city;
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Long getId()
-  {
-    return this.id;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public long getVersion()
-  {
-    return this.version;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getStreet()
   {
     return this.street;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setStreet( String street )
   {
     this.street = street;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getHouseNumber()
   {
     return this.houseNumber;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setHouseNumber( String houseNumber )
   {
     this.houseNumber = houseNumber;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public City getCity()
   {
     return this.city;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setCity( City city )
   {
     this.city = city;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode()
   {
@@ -152,16 +101,15 @@ public class AddressImpl implements Address
     return hashCode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals( Object obj )
   {
-    if ( this == obj ) {
+    if ( this == obj )
+    {
       return true;
     }
-    else if ( obj == null ) {
+    else if ( obj == null )
+    {
       return false;
     }
     else if ( this.getClass() == obj.getClass() )
@@ -185,9 +133,6 @@ public class AddressImpl implements Address
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString()
   {

@@ -4,4 +4,5 @@ dependencies {
     compile project( ':times-model-api' )
     
     compile group: 'org.apache.commons', name: 'commons-lang3', version: project.ext.'libraryVersion.apache.commons-lang3'
+    compile group: 'javax.persistence', name: 'persistence-api', version: project.ext.'libraryVersion.javax.persistence-api'
 }

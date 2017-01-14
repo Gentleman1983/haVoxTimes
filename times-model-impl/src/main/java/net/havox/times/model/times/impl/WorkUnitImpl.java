@@ -16,12 +16,17 @@
  */
 package net.havox.times.model.times.impl;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.times.api.Task;
 import net.havox.times.model.times.api.WorkUnit;
 import net.havox.times.model.times.api.WorkUnitDuration;
 import net.havox.times.model.times.api.WorkUnitType;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -29,99 +34,48 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * This is the implementation of a work unit.
- * 
+ *
  * @author Christian Otto
  */
-public class WorkUnitImpl implements WorkUnit
+@Entity
+@Table( name = WorkUnitImpl.DB_TABLE_NAME )
+public class WorkUnitImpl extends AbstractChangeAwareClass implements WorkUnit
 {
-
   /**
-   * The SerialVersionUID.
+   * The db table name.
    */
+  public static final String DB_TABLE_NAME = "HAVOX_TIMES_WORK_UNIT";
+          
   private static final long serialVersionUID = 944542180473045373L;
 
-  /**
-   * The id.
-   */
-  private Long id;
-
-  /**
-   * The version.
-   */
-  private long version;
-
-  /**
-   * The type of work unit.
-   */
   private WorkUnitType type;
-
-  /**
-   * The work duration.
-   */
   private WorkUnitDuration duration;
+  private final Set<Task> tasks = new ConcurrentSkipListSet<>();
 
-  /**
-   * The accomplished tasks during this work unit.
-   */
-  private Set<Task> tasks = new HashSet<>();
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Long getId()
-  {
-    return this.id;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public long getVersion()
-  {
-    return this.version;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public WorkUnitType getType()
   {
     return this.type;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setType( WorkUnitType type )
   {
     this.type = type;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public WorkUnitDuration getDuration()
   {
     return this.duration;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Set<Task> getTasks()
   {
     return this.tasks;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode()
   {
@@ -143,16 +97,15 @@ public class WorkUnitImpl implements WorkUnit
     return hashCode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals( Object obj )
   {
-    if ( this == obj ) {
+    if ( this == obj )
+    {
       return true;
     }
-    else if ( obj == null ) {
+    else if ( obj == null )
+    {
       return false;
     }
     else if ( this.getClass() == obj.getClass() )
@@ -176,9 +129,6 @@ public class WorkUnitImpl implements WorkUnit
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString()
   {

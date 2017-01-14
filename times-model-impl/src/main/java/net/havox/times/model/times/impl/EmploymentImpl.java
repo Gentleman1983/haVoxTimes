@@ -17,11 +17,19 @@
 package net.havox.times.model.times.impl;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.concurrent.CopyOnWriteArrayList;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import net.havox.times.model.contacts.api.Company;
 import net.havox.times.model.contacts.api.Person;
+import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.times.api.Employment;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -32,146 +40,80 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author Christian Otto
  */
-public class EmploymentImpl implements Employment
+@Entity
+@Table( name = EmploymentImpl.DB_TABLE_NAME )
+public class EmploymentImpl extends AbstractChangeAwareClass implements Employment
 {
+  /** The db table name. */
+  public static final String DB_TABLE_NAME = "HAVOX_TIMES_EMPLOYMENT";
 
-  /**
-   * The SerialVersionUID.
-   */
   private static final long serialVersionUID = 544489079880583555L;
 
-  /**
-   * The id.
-   */
-  private Long id;
-
-  /**
-   * The version.
-   */
-  private long version;
-  /**
-   * The employment start.
-   */
+  @Column( name = "start" )
   private LocalDate start;
-  /**
-   * The employment end.
-   */
+  @Column( name = "end" )
   private LocalDate end;
-  /**
-   * The employee.
-   */
+  @Column( name = "employee" )
   private Person employee;
-  /**
-   * The employer.
-   */
+  @Column( name = "employer" )
   private Company employer;
-  /**
-   * The projects during the employment.
-   */
-  private Collection<Employment> projects = new ArrayList<>();
+  @OneToMany(targetEntity=Employment.class)
+  private final Collection<Employment> projects = new CopyOnWriteArrayList<>();
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Long getId()
-  {
-    return this.id;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public long getVersion()
-  {
-    return this.version;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public LocalDate getStart()
   {
     return this.start;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setStart( LocalDate start )
   {
     this.start = start;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public LocalDate getEnd()
   {
     return this.end;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setEnd( LocalDate end )
   {
     this.end = end;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Company getEmployer()
   {
     return this.employer;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setEmployer( Company employer )
   {
     this.employer = employer;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Person getEmployee()
   {
     return this.employee;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setEmployee( Person employee )
   {
     this.employee = employee;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Collection<Employment> getProjects()
   {
     return this.projects;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode()
   {
@@ -193,16 +135,15 @@ public class EmploymentImpl implements Employment
     return hashCode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals( Object obj )
   {
-    if ( this == obj ) {
+    if ( this == obj )
+    {
       return true;
     }
-    else if ( obj == null ) {
+    else if ( obj == null )
+    {
       return false;
     }
     else if ( this.getClass() == obj.getClass() )
@@ -226,9 +167,6 @@ public class EmploymentImpl implements Employment
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString()
   {

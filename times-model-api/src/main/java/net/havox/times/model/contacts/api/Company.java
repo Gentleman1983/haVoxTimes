@@ -19,27 +19,15 @@ package net.havox.times.model.contacts.api;
 import java.io.Serializable;
 import java.util.Collection;
 
+import net.havox.times.model.api.ChangeAware;
+
 /**
  * This interface represents a company.
  *
  * @author Christian Otto
  */
-public interface Company extends Serializable
+public interface Company extends ChangeAware, Serializable
 {
-
-  /**
-   * Gets the id.
-   *
-   * @return the id
-   */
-  Long getId();
-
-  /**
-   * Gets the version.
-   *
-   * @return the version
-   */
-  long getVersion();
 
   /**
    * Gets the company name.

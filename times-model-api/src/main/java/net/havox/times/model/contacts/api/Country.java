@@ -18,27 +18,15 @@ package net.havox.times.model.contacts.api;
 
 import java.io.Serializable;
 
+import net.havox.times.model.api.ChangeAware;
+
 /**
  * This interface represents a country.
  *
  * @author Christian Otto
  */
-public interface Country extends Serializable
+public interface Country extends ChangeAware, Serializable
 {
-
-  /**
-   * Gets the id.
-   *
-   * @return the id
-   */
-  Long getId();
-
-  /**
-   * Gets the version.
-   *
-   * @return the version
-   */
-  long getVersion();
 
   /**
    * Gets the country name.

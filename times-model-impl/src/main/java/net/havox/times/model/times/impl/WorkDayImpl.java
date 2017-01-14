@@ -16,13 +16,16 @@
  */
 package net.havox.times.model.times.impl;
 
-import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import net.havox.times.model.impl.AbstractChangeAwareClass;
-import net.havox.times.model.times.api.WorkUnitDuration;
+import net.havox.times.model.times.api.WorkDay;
+import net.havox.times.model.times.api.WorkUnit;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -30,55 +33,40 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * The implemantation of the work unit duration.
+ * Represents a work day.
  *
  * @author Christian Otto
  */
 @Entity
-@Table( name = WorkUnitDurationImpl.DB_TABLE_NAME )
-public class WorkUnitDurationImpl extends AbstractChangeAwareClass implements WorkUnitDuration
+@Table( name = WorkDayImpl.DB_TABLE_NAME )
+public class WorkDayImpl extends AbstractChangeAwareClass implements WorkDay
 {
   /** The db table name. */
-  public static final String DB_TABLE_NAME = "HAVOX_TIMES_WORK_UNIT_DUR";
+  public static final String DB_TABLE_NAME = "HAVOX_TIMES_WORK_DAY";
 
-  private static final long serialVersionUID = 2700239318546499492L;
+  private static final long serialVersionUID = -1468588140684922531L;
 
-  private Duration duration;
+  private LocalDate date;
   private LocalDateTime start;
   private LocalDateTime end;
+  private final Set<WorkUnit> workUnits = new ConcurrentSkipListSet<>();
 
   @Override
-  public Duration getDuration()
+  public LocalDate getDate()
   {
-    return this.duration;
+    return this.date;
   }
 
   @Override
-  public void setDuration( LocalDateTime start, LocalDateTime end )
+  public void setDate( LocalDate date )
   {
-    if ( ( start == null ) || ( end == null ) )
-    {
-      String message = "Neigther the parameter 'start'=" + start + " nor the parameter 'end'=" + end + "is allowed to be NULL.";
-      throw new IllegalArgumentException( message );
-    }
-
-    this.start = start;
-    this.end = end;
-    this.duration = Duration.between( start, end );
+    this.date = date;
   }
 
   @Override
-  public void setDuration( LocalDateTime start, Duration duration )
+  public Set<WorkUnit> getWorkUnits()
   {
-    if ( ( start == null ) || ( duration == null ) )
-    {
-      String message = "Neigther the parameter 'start'=" + start + " nor the parameter 'duration'=" + duration + "is allowed to be NULL.";
-      throw new IllegalArgumentException( message );
-    }
-
-    this.start = start;
-    this.duration = duration;
-    this.end = LocalDateTime.from( start ).plus( duration );
+    return this.workUnits;
   }
 
   @Override
@@ -88,9 +76,21 @@ public class WorkUnitDurationImpl extends AbstractChangeAwareClass implements Wo
   }
 
   @Override
+  public void setStart( LocalDateTime start )
+  {
+    this.start = start;
+  }
+
+  @Override
   public LocalDateTime getEnd()
   {
     return this.end;
+  }
+
+  @Override
+  public void setEnd( LocalDateTime end )
+  {
+    this.end = end;
   }
 
   @Override
@@ -127,17 +127,17 @@ public class WorkUnitDurationImpl extends AbstractChangeAwareClass implements Wo
     }
     else if ( this.getClass() == obj.getClass() )
     {
-      WorkUnitDuration workUnitDuration = ( WorkUnitDurationImpl ) obj;
+      WorkDayImpl workDay = ( WorkDayImpl ) obj;
 
       if ( this.getId() == null )
       {
-        return ( this == workUnitDuration );
+        return ( this == workDay );
       }
       else
       {
         EqualsBuilder builder = new EqualsBuilder();
 
-        builder.append( this.getId(), workUnitDuration.getId() );
+        builder.append( this.getId(), workDay.getId() );
 
         return builder.isEquals();
       }
@@ -152,9 +152,10 @@ public class WorkUnitDurationImpl extends AbstractChangeAwareClass implements Wo
     ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.MULTI_LINE_STYLE );
 
     builder.append( this.getId() );
+    builder.append( this.getDate() );
     builder.append( this.getStart() );
     builder.append( this.getEnd() );
-    builder.append( this.getDuration() );
+    builder.append( this.getWorkUnits() );
 
     return builder.toString();
   }

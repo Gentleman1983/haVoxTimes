@@ -17,34 +17,22 @@
 package net.havox.times.model.times.api;
 
 import java.io.Serializable;
-import net.havox.times.model.contacts.api.Company;
-import net.havox.times.model.contacts.api.Person;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Collection;
+
+import net.havox.times.model.api.ChangeAware;
+import net.havox.times.model.contacts.api.Company;
+import net.havox.times.model.contacts.api.Person;
 
 /**
  * This interface represents an employment.
  *
  * @author Christian Otto
  */
-public interface Project extends Serializable
+public interface Project extends ChangeAware, Serializable
 {
-
-  /**
-   * Gets the id.
-   *
-   * @return the id
-   */
-  Long getId();
-
-  /**
-   * Gets the version.
-   *
-   * @return the version
-   */
-  long getVersion();
 
   /**
    * Gets the project name.
@@ -86,9 +74,9 @@ public interface Project extends Serializable
    * @param type the {@link WorkUnitType}
    * @return the calculated work duration for this month
    *
-   * @throws IllegalArgumentException, if the month is not set.
-   * @throws IllegalArgumentException, if the work unit type is not set.
-   * @throws IllegalArgumentException, if the month does not fit the Employment duration.
+   * @throws IllegalArgumentException if the month is not set.
+   * @throws IllegalArgumentException if the work unit type is not set.
+   * @throws IllegalArgumentException if the month does not fit the Employment duration.
    */
   default Duration getDuraration( Month month, int year, WorkUnitType type )
   {

@@ -16,21 +16,23 @@
  */
 package net.havox.times.model.factory;
 
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
+
 import net.havox.times.model.times.api.Employment;
 import net.havox.times.model.times.api.Issue;
 import net.havox.times.model.times.api.Project;
 import net.havox.times.model.times.api.Task;
+import net.havox.times.model.times.api.WorkDay;
 import net.havox.times.model.times.api.WorkUnit;
 import net.havox.times.model.times.api.WorkUnitDuration;
 import net.havox.times.model.times.impl.EmploymentImpl;
 import net.havox.times.model.times.impl.IssueImpl;
 import net.havox.times.model.times.impl.ProjectImpl;
 import net.havox.times.model.times.impl.TaskImpl;
+import net.havox.times.model.times.impl.WorkDayImpl;
 import net.havox.times.model.times.impl.WorkUnitDurationImpl;
 import net.havox.times.model.times.impl.WorkUnitImpl;
-
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -100,6 +102,17 @@ public class TimesModelFactoryTest
     
     // Is the instance of the correct type?
     assertThat ( instanceUnderTest, is ( instanceOf ( TaskImpl.class ) ) );
+  }
+  
+  @Test
+  public void testGetNewWorkDay() {
+    WorkDay instanceUnderTest = factory.getNewWorkDay();
+    
+    // Is the instance initialized?
+    assertThat ( instanceUnderTest, is ( notNullValue () ) );
+    
+    // Is the instance of the correct type?
+    assertThat ( instanceUnderTest, is ( instanceOf ( WorkDayImpl.class ) ) );
   }
   
   @Test

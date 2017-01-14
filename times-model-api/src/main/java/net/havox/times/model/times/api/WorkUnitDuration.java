@@ -20,27 +20,15 @@ import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import net.havox.times.model.api.ChangeAware;
+
 /**
  * Represents the duration of a work unit.
  *
  * @author Christian Otto
  */
-public interface WorkUnitDuration extends Serializable
+public interface WorkUnitDuration extends ChangeAware, Serializable
 {
-
-  /**
-   * Gets the id.
-   *
-   * @return the id
-   */
-  Long getId();
-
-  /**
-   * Gets the version.
-   *
-   * @return the version
-   */
-  long getVersion();
 
   /**
    * Returns the duration of the work, defined either by the duration or the start and end time.

@@ -16,7 +16,11 @@
  */
 package net.havox.times.model.contacts.impl;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import net.havox.times.model.contacts.api.Country;
+import net.havox.times.model.impl.AbstractChangeAwareClass;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -27,66 +31,29 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author Christian Otto
  */
-public class CountryImpl implements Country
+@Entity
+@Table( name = CountryImpl.DB_TABLE_NAME )
+public class CountryImpl extends AbstractChangeAwareClass implements Country
 {
+  /** The db table name. */
+  public static final String DB_TABLE_NAME = "HAVOX_TIMES_COUNTRY";
 
-  /**
-   * The SerialVersionUID.
-   */
   private static final long serialVersionUID = -632142391869704255L;
 
-  /**
-   * The id.
-   */
-  private Long id;
-  /**
-   * The version.
-   */
-  private long version;
-  /**
-   * The country name.
-   */
   private String name;
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Long getId()
-  {
-    return this.id;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public long getVersion()
-  {
-    return this.version;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getName()
   {
     return this.name;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setName( String name )
   {
     this.name = name;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode()
   {
@@ -108,16 +75,15 @@ public class CountryImpl implements Country
     return hashCode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals( Object obj )
   {
-    if ( this == obj ) {
+    if ( this == obj )
+    {
       return true;
     }
-    else if ( obj == null ) {
+    else if ( obj == null )
+    {
       return false;
     }
     else if ( this.getClass() == obj.getClass() )
@@ -141,9 +107,6 @@ public class CountryImpl implements Country
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString()
   {

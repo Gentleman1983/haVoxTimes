@@ -17,9 +17,14 @@
 package net.havox.times.model.times.impl;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.concurrent.CopyOnWriteArrayList;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.times.api.Task;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -30,101 +35,50 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author Christian Otto
  */
-public class TaskImpl implements Task
+@Entity
+@Table( name = TaskImpl.DB_TABLE_NAME )
+public class TaskImpl extends AbstractChangeAwareClass implements Task
 {
+  /** The db table name. */
+  public static final String DB_TABLE_NAME = "HAVOX_TIMES_TASK";
 
-  /**
-   * The SerialVersionUID.
-   */
   private static final long serialVersionUID = 8471130167805360250L;
-
-  /**
-   * The id.
-   */
   private Long id;
-  /**
-   * The version.
-   */
   private long version;
-  /**
-   * The task name.
-   */
   private String name;
-  /**
-   * The task duration.
-   */
   private Duration duration;
-  /**
-   * The sub tasks.
-   */
-  private Collection<Task> subTasks = new ArrayList<>();
+  private final Collection<Task> subTasks = new CopyOnWriteArrayList<>();
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Long getId()
-  {
-    return this.id;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public long getVersion()
-  {
-    return this.version;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getName()
   {
     return this.name;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setName( String name )
   {
     this.name = name;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Duration getDuration()
   {
     return this.duration;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setDuration( Duration duration )
   {
     this.duration = duration;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Collection<Task> getSubTasks()
   {
     return this.subTasks;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode()
   {
@@ -146,16 +100,15 @@ public class TaskImpl implements Task
     return hashCode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals( Object obj )
   {
-    if ( this == obj ) {
+    if ( this == obj )
+    {
       return true;
     }
-    else if ( obj == null ) {
+    else if ( obj == null )
+    {
       return false;
     }
     else if ( this.getClass() == obj.getClass() )
@@ -179,9 +132,6 @@ public class TaskImpl implements Task
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString()
   {

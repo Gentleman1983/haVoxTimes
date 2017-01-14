@@ -16,6 +16,7 @@
  */
 package net.havox.times.model.times.api;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,27 +24,15 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import net.havox.times.model.api.ChangeAware;
+
 /**
  * Represents a work day.
- * 
+ *
  * @author Christian Otto
  */
-public interface WorkDay
+public interface WorkDay extends ChangeAware, Serializable
 {
-
-  /**
-   * Gets the id.
-   *
-   * @return the id
-   */
-  Long getId();
-
-  /**
-   * Gets the version.
-   *
-   * @return the version
-   */
-  long getVersion();
 
   /**
    * Gets the date of the work day, e.g. 4th of March, 2013.
@@ -128,7 +117,7 @@ public interface WorkDay
    * @param type the WorkUnitType to calculate
    * @return the duration
    *
-   * @throws IllegalArgumentException, if the type parameter is not set
+   * @throws IllegalArgumentException if the type parameter is not set
    */
   default Duration getDuration( WorkUnitType type )
   {

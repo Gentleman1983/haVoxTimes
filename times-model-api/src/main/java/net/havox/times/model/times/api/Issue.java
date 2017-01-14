@@ -21,27 +21,15 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
+import net.havox.times.model.api.ChangeAware;
+
 /**
  * This describes an work issue. An issue consists of one or more {@link Task tasks}.
  *
  * @author Christian Otto
  */
-public interface Issue extends Serializable
+public interface Issue extends ChangeAware, Serializable
 {
-
-  /**
-   * Gets the id.
-   *
-   * @return the id
-   */
-  Long getId();
-
-  /**
-   * Gets the version.
-   *
-   * @return the version
-   */
-  long getVersion();
 
   /**
    * Returns the description.

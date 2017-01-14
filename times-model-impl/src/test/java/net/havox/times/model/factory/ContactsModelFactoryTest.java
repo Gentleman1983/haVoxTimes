@@ -16,6 +16,9 @@
  */
 package net.havox.times.model.factory;
 
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
+
 import net.havox.times.model.contacts.api.Address;
 import net.havox.times.model.contacts.api.City;
 import net.havox.times.model.contacts.api.Company;
@@ -26,9 +29,6 @@ import net.havox.times.model.contacts.impl.CityImpl;
 import net.havox.times.model.contacts.impl.CompanyImpl;
 import net.havox.times.model.contacts.impl.CountryImpl;
 import net.havox.times.model.contacts.impl.PersonImpl;
-
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

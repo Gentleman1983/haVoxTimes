@@ -17,8 +17,13 @@
 package net.havox.times.model.contacts.impl;
 
 import java.time.LocalDate;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import net.havox.times.model.contacts.api.Address;
 import net.havox.times.model.contacts.api.Person;
+import net.havox.times.model.impl.AbstractChangeAwareClass;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -29,154 +34,81 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author Christian Otto
  */
-public class PersonImpl implements Person
+@Entity
+@Table( name = PersonImpl.DB_TABLE_NAME )
+public class PersonImpl extends AbstractChangeAwareClass implements Person
 {
+  /** The db table name. */
+  public static final String DB_TABLE_NAME = "HAVOX_TIMES_PERSON";
 
-  /**
-   * The SerialVersionUID.
-   */
   private static final long serialVersionUID = 5520806245947083462L;
 
-  /**
-   * The id.
-   */
-  private Long id;
-  /**
-   * The version.
-   */
-  private long version;
-  /**
-   * The first name.
-   */
   private String firstName;
-  /**
-   * The middle initials.
-   */
   private String middleInitials;
-  /**
-   * The last name.
-   */
   private String lastName;
-  /**
-   * The address.
-   */
   private Address address;
-  /**
-   * The date of birth.
-   */
   private LocalDate dateOfBirth;
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Long getId()
-  {
-    return this.id;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public long getVersion()
-  {
-    return this.version;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getLastName()
   {
     return this.lastName;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setLastName( String lastName )
   {
     this.lastName = lastName;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getMiddleInnitials()
   {
     return this.middleInitials;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setMiddleInnitials( String middleInnitials )
   {
     this.middleInitials = middleInnitials;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getFirstName()
   {
     return this.firstName;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setFirstName( String firstName )
   {
     this.firstName = firstName;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public LocalDate getDateOfBirth()
   {
     return this.dateOfBirth;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setDateOfBirth( LocalDate dateOfBirth )
   {
     this.dateOfBirth = dateOfBirth;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Address getAddress()
   {
     return this.address;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setAddress( Address address )
   {
     this.address = address;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode()
   {
@@ -198,16 +130,15 @@ public class PersonImpl implements Person
     return hashCode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals( Object obj )
   {
-    if ( this == obj ) {
+    if ( this == obj )
+    {
       return true;
     }
-    else if ( obj == null ) {
+    else if ( obj == null )
+    {
       return false;
     }
     else if ( this.getClass() == obj.getClass() )
@@ -231,9 +162,6 @@ public class PersonImpl implements Person
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString()
   {
@@ -248,5 +176,4 @@ public class PersonImpl implements Person
 
     return builder.toString();
   }
-
 }

@@ -20,28 +20,16 @@ import java.io.Serializable;
 import java.time.Duration;
 import java.util.Collection;
 
+import net.havox.times.model.api.ChangeAware;
+
 /**
  * Defines a task. A task may contain subtasks, has a name and duration. The subtasks' sum of durations is not allowed
  * to exceed the duration of the main task.
  *
  * @author Christian Otto
  */
-public interface Task extends Serializable
+public interface Task extends ChangeAware, Serializable
 {
-
-  /**
-   * Gets the id.
-   *
-   * @return the id
-   */
-  Long getId();
-
-  /**
-   * Gets the version.
-   *
-   * @return the version
-   */
-  long getVersion();
 
   /**
    * Returns the task name.

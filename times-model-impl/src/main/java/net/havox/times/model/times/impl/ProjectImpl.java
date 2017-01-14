@@ -18,10 +18,15 @@ package net.havox.times.model.times.impl;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.concurrent.ConcurrentSkipListSet;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import net.havox.times.model.contacts.api.Company;
 import net.havox.times.model.contacts.api.Person;
+import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.times.api.Project;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -31,166 +36,88 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author Christian Otto
  */
-public class ProjectImpl implements Project
+@Entity
+@Table( name = ProjectImpl.DB_TABLE_NAME )
+public class ProjectImpl extends AbstractChangeAwareClass implements Project
 {
-  /**
-   * The SerialVersionUID.
-   */
+  /** The db table name. */
+  public static final String DB_TABLE_NAME = "HAVOX_TIMES_PROJECT";
+
   private static final long serialVersionUID = -537340800679521572L;
 
-  /**
-   * The id.
-   */
-  private Long id;
-  /**
-   * The version.
-   */
-  private long version;
-  /**
-   * The name of the project.
-   */
   private String name;
-  /**
-   * The start date of the project.
-   */
   private LocalDate start;
-  /**
-   * The end date of the project.
-   */
   private LocalDate end;
-  /**
-   * The employing company.
-   */
   private Company employer;
-  /**
-   * The employee.
-   */
   private Person employee;
-  /**
-   * The sub projects.
-   */
-  private Collection<Project> subprojects = new HashSet<>();
+  private final Collection<Project> subprojects = new ConcurrentSkipListSet<>();
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Long getId()
-  {
-    return this.id;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public long getVersion()
-  {
-    return this.version;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getName()
   {
     return this.name;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setName( String name )
   {
     this.name = name;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public LocalDate getStart()
   {
     return this.start;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setStart( LocalDate start )
   {
     this.start = start;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public LocalDate getEnd()
   {
     return this.end;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setEnd( LocalDate end )
   {
     this.end = end;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Company getEmployer()
   {
     return this.employer;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setEmployer( Company employer )
   {
     this.employer = employer;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Person getEmployee()
   {
     return this.employee;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setEmployee( Person employee )
   {
     this.employee = employee;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Collection<Project> getSubprojects()
   {
     return this.subprojects;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode()
   {
@@ -212,16 +139,15 @@ public class ProjectImpl implements Project
     return hashCode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals( Object obj )
   {
-    if ( this == obj ) {
+    if ( this == obj )
+    {
       return true;
     }
-    else if ( obj == null ) {
+    else if ( obj == null )
+    {
       return false;
     }
     else if ( this.getClass() == obj.getClass() )
@@ -236,7 +162,7 @@ public class ProjectImpl implements Project
       {
         EqualsBuilder builder = new EqualsBuilder();
 
-        builder.append(this.getId(), project.getId() );
+        builder.append( this.getId(), project.getId() );
 
         return builder.isEquals();
       }
@@ -245,9 +171,6 @@ public class ProjectImpl implements Project
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString()
   {

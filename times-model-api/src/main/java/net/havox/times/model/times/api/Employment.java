@@ -17,33 +17,21 @@
 package net.havox.times.model.times.api;
 
 import java.io.Serializable;
-import net.havox.times.model.contacts.api.Company;
-import net.havox.times.model.contacts.api.Person;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Collection;
+
+import net.havox.times.model.api.ChangeAware;
+import net.havox.times.model.contacts.api.Company;
+import net.havox.times.model.contacts.api.Person;
 
 /**
  * This interface represents an employment.
  *
  * @author Christian Otto
  */
-public interface Employment extends Serializable
+public interface Employment extends ChangeAware, Serializable
 {
-
-  /**
-   * Gets the id.
-   *
-   * @return the id
-   */
-  Long getId();
-
-  /**
-   * Gets the version.
-   *
-   * @return the version
-   */
-  long getVersion();
 
   /**
    * Calculates the duration of the employment.
@@ -134,7 +122,7 @@ public interface Employment extends Serializable
    * Checks if this employment contains sub projects.
    *
    * @return true, if the employment contains sub projects
-   * 
+   *
    * @throws IllegalStateException if the projects propery is not initialized
    */
   default boolean hasProjects()

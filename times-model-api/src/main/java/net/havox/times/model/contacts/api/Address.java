@@ -18,27 +18,15 @@ package net.havox.times.model.contacts.api;
 
 import java.io.Serializable;
 
+import net.havox.times.model.api.ChangeAware;
+
 /**
  * This interface represents an address.
  *
  * @author Christian Otto
  */
-public interface Address extends Serializable
+public interface Address extends ChangeAware, Serializable
 {
-
-  /**
-   * Gets the id.
-   *
-   * @return the id
-   */
-  Long getId();
-
-  /**
-   * Gets the version.
-   *
-   * @return the version
-   */
-  long getVersion();
 
   /**
    * Gets the street name.

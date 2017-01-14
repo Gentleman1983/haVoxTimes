@@ -19,27 +19,15 @@ package net.havox.times.model.times.api;
 import java.io.Serializable;
 import java.util.Set;
 
+import net.havox.times.model.api.ChangeAware;
+
 /**
  * Defines a work unit (work day).
  *
  * @author Christian Otto
  */
-public interface WorkUnit extends Serializable
+public interface WorkUnit extends ChangeAware, Serializable
 {
-
-  /**
-   * Gets the id.
-   *
-   * @return the id
-   */
-  Long getId();
-
-  /**
-   * Gets the version.
-   *
-   * @return the version
-   */
-  long getVersion();
 
   /**
    * Gets the type of the work unit.

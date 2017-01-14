@@ -17,10 +17,15 @@
 package net.havox.times.model.times.impl;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.concurrent.CopyOnWriteArrayList;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.times.api.Issue;
 import net.havox.times.model.times.api.Task;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -31,124 +36,62 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author Christian Otto
  */
-public class IssueImpl implements Issue
+@Entity
+@Table( name = IssueImpl.DB_TABLE_NAME )
+public class IssueImpl extends AbstractChangeAwareClass implements Issue
 {
+  /** The db table name. */
+  public static final String DB_TABLE_NAME = "HAVOX_TIMES_ISSUE";
 
-  /**
-   * The SerialVersionUID.
-   */
   private static final long serialVersionUID = -8302339463943510497L;
 
-  /**
-   * The id.
-   */
-  private Long id;
-
-  /**
-   * The version.
-   */
-  private long version;
-  /**
-   * The issue description.
-   */
   private String description;
-  /**
-   * The start time.
-   */
   private LocalDateTime start;
-  /**
-   * The end time.
-   */
   private LocalDateTime end;
-  /**
-   * The contained tasks.
-   */
-  private Collection<Task> tasks = new ArrayList<>();
+  private final Collection<Task> tasks = new CopyOnWriteArrayList<>();
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Long getId()
-  {
-    return this.id;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public long getVersion()
-  {
-    return this.version;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String getDescription()
   {
     return this.description;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setDescription( String description )
   {
     this.description = description;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public Collection<Task> getTasks()
   {
     return this.tasks;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public LocalDateTime getStart()
   {
     return this.start;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setStart( LocalDateTime start )
   {
     this.start = start;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public LocalDateTime getEnd()
   {
     return this.end;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void setEnd( LocalDateTime end )
   {
     this.end = end;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public int hashCode()
   {
@@ -170,16 +113,15 @@ public class IssueImpl implements Issue
     return hashCode;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public boolean equals( Object obj )
   {
-    if ( this == obj ) {
+    if ( this == obj )
+    {
       return true;
     }
-    else if ( obj == null ) {
+    else if ( obj == null )
+    {
       return false;
     }
     else if ( this.getClass() == obj.getClass() )
@@ -203,9 +145,6 @@ public class IssueImpl implements Issue
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String toString()
   {
