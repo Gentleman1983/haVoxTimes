@@ -29,7 +29,7 @@ import net.havox.times.model.api.ChangeAware;
  * @author Christian Otto
  */
 @MappedSuperclass
-public class AbstractChangeAwareClass implements ChangeAware
+public abstract class AbstractChangeAwareClass implements ChangeAware
 {
 
   @Id
