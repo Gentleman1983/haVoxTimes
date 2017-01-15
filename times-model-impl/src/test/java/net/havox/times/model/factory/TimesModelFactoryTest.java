@@ -91,7 +91,6 @@ public class TimesModelFactoryTest
     
     // Is the instance of the correct type?
     assertThat ( instanceUnderTest, is ( instanceOf ( ProjectImpl.class ) ) );
-    assertThat ( instanceUnderTest, is ( not ( instanceOf ( ProjectImpl.class ) ) ) );
   }
   
   @Test
