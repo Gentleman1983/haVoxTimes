@@ -18,16 +18,16 @@ String mavenArtifactId = name
 group = project.ext.mavenGroupId
 version = project.ext.mavenVersion
 // Append suffix '-SNAPSHOT' if it is a snapshot release...
-if(project.ext.typeOfRelease.equalsIgnoreCase('SNAPSHOT')) {
+if ( project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) ) {
     version += '-SNAPSHOT'
 }
 
-task sourcesJar(type: Jar, dependsOn: classes, description: 'Creates a jar from the source files.') {
+task sourcesJar( type: Jar, dependsOn: classes, description: 'Creates a jar from the source files.' ) {
     classifier = 'sources'
     from sourceSets.main.allSource
 }
 
-task javadocJar(type: Jar, dependsOn: 'javadoc', description: 'Creates a jar from the JavaDoc files.') {
+task javadocJar( type: Jar, dependsOn: 'javadoc', description: 'Creates a jar from the JavaDoc files.' ) {
     from javadoc.destinationDir
     classifier = 'javadoc'
 }
@@ -40,7 +40,7 @@ artifacts {
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        mavenJava( MavenPublication ) {
             from components.java
 
             artifact sourcesJar
@@ -49,7 +49,7 @@ publishing {
     }
 }
 
-configure(install.repositories.mavenInstaller) {
+configure( install.repositories.mavenInstaller ) {
     pom.project {
         groupId = mavenGroupId
         artifactId = mavenArtifactId
@@ -57,9 +57,9 @@ configure(install.repositories.mavenInstaller) {
     }
 }
 
-task createFolders(description: 'Creates the source folders if they do not exist.') doLast {
+task createFolders( description: 'Creates the source folders if they do not exist.' ) doLast {
     sourceSets*.allSource*.srcDirs*.each { File srcDir ->
-        if (!srcDir.isDirectory()) {
+        if ( !srcDir.isDirectory() ) {
             println "Creating source folder: ${srcDir}"
             srcDir.mkdirs()
         }

@@ -1,7 +1,7 @@
 import org.gradle.api.artifacts.*
 
 if ( !project.hasProperty( 'typeOfRelease' ) || ( !project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) && !project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) ) ) {
-    throw new GradleException("No valid type of release selected. Please add parameter 'typeOfRelease' with values 'SNAPSHOT' for snapshot release or 'RELEASE' for productive release. ")
+    throw new GradleException( "No valid type of release selected. Please add parameter 'typeOfRelease' with values 'SNAPSHOT' for snapshot release or 'RELEASE' for productive release." )
 }
 
 buildscript {
@@ -22,11 +22,11 @@ buildscript {
 }
 
 apply plugin: 'base' // To add "clean" task to the root project.
-apply plugin: "org.sonarqube"
+apply plugin: 'org.sonarqube'
 
 allprojects {
-    apply from: rootProject.file('common.gradle')
-    apply plugin: "com.jfrog.artifactory"
+    apply from: rootProject.file( 'common.gradle' )
+    apply plugin: 'com.jfrog.artifactory'
 }
 
 // Print build information...
@@ -71,15 +71,15 @@ artifactory {
     }
 }
 
-task mergedJavadoc(type: Javadoc, description: 'Creates Javadoc from all the projects.') {
+task mergedJavadoc( type: Javadoc, description: 'Creates Javadoc from all the projects.' ) {
     title = 'All modules'
-    destinationDir = new File(project.buildDir, 'merged-javadoc')
+    destinationDir = new File( project.buildDir, 'merged-javadoc' )
 
     // Note: The closures below are executed lazily.
     source {
         subprojects*.sourceSets*.main*.allSource
     }
     classpath.from {
-        subprojects*.configurations*.compile*.copyRecursive({ !(it instanceof ProjectDependency); })*.resolve()
+        subprojects*.configurations*.compile*.copyRecursive( { !( it instanceof ProjectDependency ); } )*.resolve()
     }
 }
