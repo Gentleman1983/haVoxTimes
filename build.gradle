@@ -1,5 +1,9 @@
 import org.gradle.api.artifacts.*
 
+if ( !project.hasProperty( 'typeOfRelease' ) || ( !project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) && !project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) ) ) {
+    throw new GradleException("No valid type of release selected. Please add parameter 'typeOfRelease' with values 'SNAPSHOT' for snapshot release or 'RELEASE' for productive release. ")
+}
+
 buildscript {
     repositories {
         maven {
@@ -10,9 +14,6 @@ buildscript {
         
             }
         }
-        //maven {
-        //    url "https://plugins.gradle.org/m2/"
-        //}
     }
     dependencies {
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${project.ext.'gradlePluginVersion.sonarsource.sonarqube-gradle-plugin'}"
@@ -48,11 +49,15 @@ artifactory {
     contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
     publish {
         repository {
-            repoKey = 'libs-release-local'
+            if ( project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) ) {
+                repoKey = 'libs-snapshot-local'
+            }
+            else if ( project.ext.typeOfRelease.equalsIgnoreCase( 'RELEASE' ) ) {
+                repoKey = 'libs-release-local'
+            }
             username = "${artifactory_user}"
             password = "${artifactory_password}"
-            maven = true
-            
+            maven = true   
         }
     }
     resolve {
