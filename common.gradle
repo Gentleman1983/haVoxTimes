@@ -12,13 +12,18 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-core', version: project.ext.'libraryVersion.mockito.mockito'
 }
 
-
+test {
+    reports {
+        junitXml.enabled = true
+        html.enabled = true
+    }               
+}
 
 String mavenArtifactId = name
 group = project.ext.mavenGroupId
 version = project.ext.mavenVersion
 // Append suffix '-SNAPSHOT' if it is a snapshot release...
-if ( project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) ) {
+if ( !project.hasProperty( 'typeOfRelease' ) || project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) ) {
     version += '-SNAPSHOT'
 }
 

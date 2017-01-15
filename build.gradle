@@ -1,7 +1,7 @@
 import org.gradle.api.artifacts.*
 
 if ( !project.hasProperty( 'typeOfRelease' ) || ( !project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) && !project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) ) ) {
-    throw new GradleException( "No valid type of release selected. Please add parameter 'typeOfRelease' with values 'SNAPSHOT' for snapshot release or 'RELEASE' for productive release." )
+    println( "No valid type of release selected. Please add parameter 'typeOfRelease' with values 'SNAPSHOT' for snapshot release or 'RELEASE' for productive release." )
 }
 
 buildscript {
@@ -49,7 +49,7 @@ artifactory {
     contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
     publish {
         repository {
-            if ( project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) ) {
+            if ( !project.hasProperty( 'typeOfRelease' ) || project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) ) {
                 repoKey = 'libs-snapshot-local'
             }
             else if ( project.ext.typeOfRelease.equalsIgnoreCase( 'RELEASE' ) ) {
