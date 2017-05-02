@@ -27,8 +27,6 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.times.api.WorkDay;
 import net.havox.times.model.times.api.WorkUnit;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -39,7 +37,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 @Entity
 @Table( name = WorkDayImpl.DB_TABLE_NAME )
-public class WorkDayImpl extends AbstractChangeAwareClass implements WorkDay
+public class WorkDayImpl extends AbstractChangeAwareClass<WorkDayImpl> implements WorkDay
 {
   /** The db table name. */
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_WORK_DAY";
@@ -91,59 +89,6 @@ public class WorkDayImpl extends AbstractChangeAwareClass implements WorkDay
   public void setEnd( LocalDateTime end )
   {
     this.end = end;
-  }
-
-  @Override
-  public int hashCode()
-  {
-    int hashCode;
-
-    if ( this.getId() == null )
-    {
-      hashCode = super.hashCode();
-    }
-    else
-    {
-      HashCodeBuilder builder = new HashCodeBuilder();
-
-      builder.append( this.getId() );
-
-      hashCode = builder.toHashCode();
-    }
-
-    return hashCode;
-  }
-
-  @Override
-  public boolean equals( Object obj )
-  {
-    if ( this == obj )
-    {
-      return true;
-    }
-    else if ( obj == null )
-    {
-      return false;
-    }
-    else if ( this.getClass() == obj.getClass() )
-    {
-      WorkDayImpl workDay = ( WorkDayImpl ) obj;
-
-      if ( this.getId() == null )
-      {
-        return ( this == workDay );
-      }
-      else
-      {
-        EqualsBuilder builder = new EqualsBuilder();
-
-        builder.append( this.getId(), workDay.getId() );
-
-        return builder.isEquals();
-      }
-    }
-
-    return false;
   }
 
   @Override

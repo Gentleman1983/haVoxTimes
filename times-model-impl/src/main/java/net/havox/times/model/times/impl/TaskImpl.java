@@ -25,8 +25,6 @@ import javax.persistence.Table;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.times.api.Task;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -37,7 +35,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 @Entity
 @Table( name = TaskImpl.DB_TABLE_NAME )
-public class TaskImpl extends AbstractChangeAwareClass implements Task
+public class TaskImpl extends AbstractChangeAwareClass<TaskImpl> implements Task
 {
   /** The db table name. */
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_TASK";
@@ -77,59 +75,6 @@ public class TaskImpl extends AbstractChangeAwareClass implements Task
   public Collection<Task> getSubTasks()
   {
     return this.subTasks;
-  }
-
-  @Override
-  public int hashCode()
-  {
-    int hashCode;
-
-    if ( this.getId() == null )
-    {
-      hashCode = super.hashCode();
-    }
-    else
-    {
-      HashCodeBuilder builder = new HashCodeBuilder();
-
-      builder.append( this.getId() );
-
-      hashCode = builder.toHashCode();
-    }
-
-    return hashCode;
-  }
-
-  @Override
-  public boolean equals( Object obj )
-  {
-    if ( this == obj )
-    {
-      return true;
-    }
-    else if ( obj == null )
-    {
-      return false;
-    }
-    else if ( this.getClass() == obj.getClass() )
-    {
-      Task task = ( TaskImpl ) obj;
-
-      if ( this.getId() == null )
-      {
-        return ( this == task );
-      }
-      else
-      {
-        EqualsBuilder builder = new EqualsBuilder();
-
-        builder.append( this.getId(), task.getId() );
-
-        return builder.isEquals();
-      }
-    }
-
-    return false;
   }
 
   @Override

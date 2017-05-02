@@ -25,8 +25,6 @@ import net.havox.times.model.contacts.api.Address;
 import net.havox.times.model.contacts.api.Company;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -37,7 +35,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 @Entity
 @Table( name = CompanyImpl.DB_TABLE_NAME )
-public class CompanyImpl extends AbstractChangeAwareClass implements Company
+public class CompanyImpl extends AbstractChangeAwareClass<CompanyImpl> implements Company
 {
   /** The db table name. */
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_COMPANY";
@@ -76,59 +74,6 @@ public class CompanyImpl extends AbstractChangeAwareClass implements Company
   public Collection<Company> getSubCompanies()
   {
     return this.subCompanies;
-  }
-
-  @Override
-  public int hashCode()
-  {
-    int hashCode;
-
-    if ( this.getId() == null )
-    {
-      hashCode = super.hashCode();
-    }
-    else
-    {
-      HashCodeBuilder builder = new HashCodeBuilder();
-
-      builder.append( this.getId() );
-
-      hashCode = builder.toHashCode();
-    }
-
-    return hashCode;
-  }
-
-  @Override
-  public boolean equals( Object obj )
-  {
-    if ( this == obj )
-    {
-      return true;
-    }
-    else if ( obj == null )
-    {
-      return false;
-    }
-    else if ( this.getClass() == obj.getClass() )
-    {
-      Company company = ( CompanyImpl ) obj;
-
-      if ( this.getId() == null )
-      {
-        return ( this == company );
-      }
-      else
-      {
-        EqualsBuilder builder = new EqualsBuilder();
-
-        builder.append( this.getId(), company.getId() );
-
-        return builder.isEquals();
-      }
-    }
-
-    return false;
   }
 
   @Override

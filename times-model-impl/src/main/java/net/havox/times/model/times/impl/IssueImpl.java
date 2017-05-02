@@ -26,8 +26,6 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.times.api.Issue;
 import net.havox.times.model.times.api.Task;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -38,7 +36,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 @Entity
 @Table( name = IssueImpl.DB_TABLE_NAME )
-public class IssueImpl extends AbstractChangeAwareClass implements Issue
+public class IssueImpl extends AbstractChangeAwareClass<IssueImpl> implements Issue
 {
   /** The db table name. */
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_ISSUE";
@@ -90,59 +88,6 @@ public class IssueImpl extends AbstractChangeAwareClass implements Issue
   public void setEnd( LocalDateTime end )
   {
     this.end = end;
-  }
-
-  @Override
-  public int hashCode()
-  {
-    int hashCode;
-
-    if ( this.getId() == null )
-    {
-      hashCode = super.hashCode();
-    }
-    else
-    {
-      HashCodeBuilder builder = new HashCodeBuilder();
-
-      builder.append( this.getId() );
-
-      hashCode = builder.toHashCode();
-    }
-
-    return hashCode;
-  }
-
-  @Override
-  public boolean equals( Object obj )
-  {
-    if ( this == obj )
-    {
-      return true;
-    }
-    else if ( obj == null )
-    {
-      return false;
-    }
-    else if ( this.getClass() == obj.getClass() )
-    {
-      Issue issue = ( IssueImpl ) obj;
-
-      if ( this.getId() == null )
-      {
-        return ( this == issue );
-      }
-      else
-      {
-        EqualsBuilder builder = new EqualsBuilder();
-
-        builder.append( this.getId(), issue.getId() );
-
-        return builder.isEquals();
-      }
-    }
-
-    return false;
   }
 
   @Override

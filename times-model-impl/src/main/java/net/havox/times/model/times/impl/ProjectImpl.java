@@ -27,8 +27,6 @@ import net.havox.times.model.contacts.api.Person;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.times.api.Project;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -38,7 +36,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 @Entity
 @Table( name = ProjectImpl.DB_TABLE_NAME )
-public class ProjectImpl extends AbstractChangeAwareClass implements Project
+public class ProjectImpl extends AbstractChangeAwareClass<ProjectImpl> implements Project
 {
   /** The db table name. */
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_PROJECT";
@@ -116,59 +114,6 @@ public class ProjectImpl extends AbstractChangeAwareClass implements Project
   public Collection<Project> getSubprojects()
   {
     return this.subprojects;
-  }
-
-  @Override
-  public int hashCode()
-  {
-    int hashCode;
-
-    if ( this.getId() == null )
-    {
-      hashCode = super.hashCode();
-    }
-    else
-    {
-      HashCodeBuilder builder = new HashCodeBuilder();
-
-      builder.append( this.getId() );
-
-      hashCode = builder.toHashCode();
-    }
-
-    return hashCode;
-  }
-
-  @Override
-  public boolean equals( Object obj )
-  {
-    if ( this == obj )
-    {
-      return true;
-    }
-    else if ( obj == null )
-    {
-      return false;
-    }
-    else if ( this.getClass() == obj.getClass() )
-    {
-      Project project = ( ProjectImpl ) obj;
-
-      if ( this.getId() == null )
-      {
-        return ( this == project );
-      }
-      else
-      {
-        EqualsBuilder builder = new EqualsBuilder();
-
-        builder.append( this.getId(), project.getId() );
-
-        return builder.isEquals();
-      }
-    }
-
-    return false;
   }
 
   @Override

@@ -24,8 +24,6 @@ import javax.persistence.Table;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.times.api.WorkUnitDuration;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -36,7 +34,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 @Entity
 @Table( name = WorkUnitDurationImpl.DB_TABLE_NAME )
-public class WorkUnitDurationImpl extends AbstractChangeAwareClass implements WorkUnitDuration
+public class WorkUnitDurationImpl extends AbstractChangeAwareClass<WorkUnitDurationImpl> implements WorkUnitDuration
 {
   /** The db table name. */
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_WORK_UNIT_DUR";
@@ -91,59 +89,6 @@ public class WorkUnitDurationImpl extends AbstractChangeAwareClass implements Wo
   public LocalDateTime getEnd()
   {
     return this.end;
-  }
-
-  @Override
-  public int hashCode()
-  {
-    int hashCode;
-
-    if ( this.getId() == null )
-    {
-      hashCode = super.hashCode();
-    }
-    else
-    {
-      HashCodeBuilder builder = new HashCodeBuilder();
-
-      builder.append( this.getId() );
-
-      hashCode = builder.toHashCode();
-    }
-
-    return hashCode;
-  }
-
-  @Override
-  public boolean equals( Object obj )
-  {
-    if ( this == obj )
-    {
-      return true;
-    }
-    else if ( obj == null )
-    {
-      return false;
-    }
-    else if ( this.getClass() == obj.getClass() )
-    {
-      WorkUnitDuration workUnitDuration = ( WorkUnitDurationImpl ) obj;
-
-      if ( this.getId() == null )
-      {
-        return ( this == workUnitDuration );
-      }
-      else
-      {
-        EqualsBuilder builder = new EqualsBuilder();
-
-        builder.append( this.getId(), workUnitDuration.getId() );
-
-        return builder.isEquals();
-      }
-    }
-
-    return false;
   }
 
   @Override

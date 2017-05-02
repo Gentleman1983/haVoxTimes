@@ -27,8 +27,6 @@ import net.havox.times.model.times.api.WorkUnit;
 import net.havox.times.model.times.api.WorkUnitDuration;
 import net.havox.times.model.times.api.WorkUnitType;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -39,7 +37,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 @Entity
 @Table( name = WorkUnitImpl.DB_TABLE_NAME )
-public class WorkUnitImpl extends AbstractChangeAwareClass implements WorkUnit
+public class WorkUnitImpl extends AbstractChangeAwareClass<WorkUnitImpl> implements WorkUnit
 {
   /**
    * The db table name.
@@ -74,59 +72,6 @@ public class WorkUnitImpl extends AbstractChangeAwareClass implements WorkUnit
   public Set<Task> getTasks()
   {
     return this.tasks;
-  }
-
-  @Override
-  public int hashCode()
-  {
-    int hashCode;
-
-    if ( this.getId() == null )
-    {
-      hashCode = super.hashCode();
-    }
-    else
-    {
-      HashCodeBuilder builder = new HashCodeBuilder();
-
-      builder.append( this.getId() );
-
-      hashCode = builder.toHashCode();
-    }
-
-    return hashCode;
-  }
-
-  @Override
-  public boolean equals( Object obj )
-  {
-    if ( this == obj )
-    {
-      return true;
-    }
-    else if ( obj == null )
-    {
-      return false;
-    }
-    else if ( this.getClass() == obj.getClass() )
-    {
-      WorkUnit workUnit = ( WorkUnitImpl ) obj;
-
-      if ( this.getId() == null )
-      {
-        return ( this == workUnit );
-      }
-      else
-      {
-        EqualsBuilder builder = new EqualsBuilder();
-
-        builder.append( this.getId(), workUnit.getId() );
-
-        return builder.isEquals();
-      }
-    }
-
-    return false;
   }
 
   @Override

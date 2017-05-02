@@ -21,15 +21,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import net.havox.times.model.api.ChangeAware;
 
 /**
  * This class provides the basic functionality to provide change awareness.
  *
+ * @param <T> the type of change aware class.
+ * 
  * @author Christian Otto
  */
 @MappedSuperclass
-public abstract class AbstractChangeAwareClass implements ChangeAware
+public abstract class AbstractChangeAwareClass<T extends AbstractChangeAwareClass> implements ChangeAware
 {
 
   @Id
@@ -55,5 +60,58 @@ public abstract class AbstractChangeAwareClass implements ChangeAware
   public long incrementVersion()
   {
     return ++this.version;
+  }
+
+  @Override
+  public int hashCode()
+  {
+    int hashCode;
+
+    if ( this.getId() == null )
+    {
+      hashCode = super.hashCode();
+    }
+    else
+    {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      builder.append( this.getId() );
+
+      hashCode = builder.toHashCode();
+    }
+
+    return hashCode;
+  }
+
+  @Override
+  public boolean equals( Object object )
+  {
+    if ( this == object )
+    {
+      return true;
+    }
+    else if ( object == null )
+    {
+      return false;
+    }
+    else if ( this.getClass() == object.getClass() )
+    {
+      T typedObject = ( T ) object;
+
+      if ( this.getId() == null )
+      {
+        return ( this == typedObject );
+      }
+      else
+      {
+        EqualsBuilder builder = new EqualsBuilder();
+
+        builder.append(this.getId(), typedObject.getId() );
+
+        return builder.isEquals();
+      }
+    }
+
+    return false;
   }
 }

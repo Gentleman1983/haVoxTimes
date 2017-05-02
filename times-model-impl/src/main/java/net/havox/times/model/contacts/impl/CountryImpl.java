@@ -21,8 +21,6 @@ import javax.persistence.Table;
 import net.havox.times.model.contacts.api.Country;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -33,7 +31,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 @Entity
 @Table( name = CountryImpl.DB_TABLE_NAME )
-public class CountryImpl extends AbstractChangeAwareClass implements Country
+public class CountryImpl extends AbstractChangeAwareClass<CountryImpl> implements Country
 {
   /** The db table name. */
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_COUNTRY";
@@ -52,59 +50,6 @@ public class CountryImpl extends AbstractChangeAwareClass implements Country
   public void setName( String name )
   {
     this.name = name;
-  }
-
-  @Override
-  public int hashCode()
-  {
-    int hashCode;
-
-    if ( this.getId() == null )
-    {
-      hashCode = super.hashCode();
-    }
-    else
-    {
-      HashCodeBuilder builder = new HashCodeBuilder();
-
-      builder.append( this.getId() );
-
-      hashCode = builder.toHashCode();
-    }
-
-    return hashCode;
-  }
-
-  @Override
-  public boolean equals( Object obj )
-  {
-    if ( this == obj )
-    {
-      return true;
-    }
-    else if ( obj == null )
-    {
-      return false;
-    }
-    else if ( this.getClass() == obj.getClass() )
-    {
-      Country country = ( CountryImpl ) obj;
-
-      if ( this.getId() == null )
-      {
-        return ( this == country );
-      }
-      else
-      {
-        EqualsBuilder builder = new EqualsBuilder();
-
-        builder.append( this.getId(), country.getId() );
-
-        return builder.isEquals();
-      }
-    }
-
-    return false;
   }
 
   @Override
