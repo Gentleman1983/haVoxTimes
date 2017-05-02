@@ -31,9 +31,8 @@ public class GuruMeditationError extends Error
    * Constructs a new error with the specified detail message and cause.
    * 
    * @param code the error code.
-   * @param message the detail message (which is saved for later retrieval by the {@link Error.getMessage()} method).
-   * @param cause the cause (which is saved for later retrieval by the {@link Error.getCause()} method). (A null value 
-   *              is permitted, and indicates that the cause is nonexistent or unknown.)
+   * @param message the detail message.
+   * @param cause the cause. (A null value is permitted, and indicates that the cause is non-existent or unknown.)
    */
   public GuruMeditationError(GuruErrorCode code, String message, Throwable cause) {
     super(message, cause);
@@ -45,7 +44,7 @@ public class GuruMeditationError extends Error
    * Constructs a new error with the specified detail message.
    * 
    * @param code the error code.
-   * @param message the detail message (which is saved for later retrieval by the {@link Error.getMessage()} method).
+   * @param message the detail message.
    */
   public GuruMeditationError(GuruErrorCode code, String message) {
     this(code, message, null);
