@@ -1,5 +1,6 @@
 // This file is to be applied to every project.
 apply plugin: 'java'
+apply plugin: "jacoco"
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
@@ -17,6 +18,10 @@ test {
         junitXml.enabled = true
         html.enabled = true
     }               
+}
+
+jacoco {
+    toolVersion = "0.7.9"
 }
 
 String mavenArtifactId = name

@@ -83,3 +83,6 @@ task mergedJavadoc( type: Javadoc, description: 'Creates Javadoc from all the pr
         subprojects*.configurations*.compile*.copyRecursive( { !( it instanceof ProjectDependency ); } )*.resolve()
     }
 }
+
+// Run JaCoCo test reports before triggering SonarQube analysis.
+sonarqube.dependsOn jacocoTestReport
