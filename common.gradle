@@ -21,7 +21,7 @@ test {
 }
 
 jacoco {
-    toolVersion = "0.7.9"
+    toolVersion = project.ext.'gradlePluginVersion.jacoco.toolVersion'
 }
 
 String mavenArtifactId = name

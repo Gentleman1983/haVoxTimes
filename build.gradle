@@ -27,6 +27,9 @@ apply plugin: 'org.sonarqube'
 allprojects {
     apply from: rootProject.file( 'common.gradle' )
     apply plugin: 'com.jfrog.artifactory'
+    
+    // Run JaCoCo test reports before triggering SonarQube analysis.
+    rootProject.tasks.sonarqube.dependsOn jacocoTestReport
 }
 
 // Print build information...
@@ -83,6 +86,3 @@ task mergedJavadoc( type: Javadoc, description: 'Creates Javadoc from all the pr
         subprojects*.configurations*.compile*.copyRecursive( { !( it instanceof ProjectDependency ); } )*.resolve()
     }
 }
-
-// Run JaCoCo test reports before triggering SonarQube analysis.
-sonarqube.dependsOn jacocoTestReport
