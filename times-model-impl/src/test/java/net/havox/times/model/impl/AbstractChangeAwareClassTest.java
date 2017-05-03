@@ -44,7 +44,7 @@ public abstract class AbstractChangeAwareClassTest
   {
     AbstractChangeAwareClass instance1 = createNewInstance( 1L, randomGenerator.nextLong() );
     AbstractChangeAwareClass instance2 = createNewInstance( 2L, randomGenerator.nextLong() );
-    AbstractChangeAwareClass instance3 = createNewInstance( 3L, randomGenerator.nextLong() );
+    AbstractChangeAwareClass instance3 = createNewInstance( null, randomGenerator.nextLong() );
 
     assertNotNull( instance1 );
     assertNotNull( instance2 );
@@ -113,7 +113,7 @@ public abstract class AbstractChangeAwareClassTest
   {
     AbstractChangeAwareClass instance1 = createNewInstance( 1L, randomGenerator.nextLong() );
     AbstractChangeAwareClass instance2 = createNewInstance( 2L, randomGenerator.nextLong() );
-    AbstractChangeAwareClass instance3 = createNewInstance( 3L, randomGenerator.nextLong() );
+    AbstractChangeAwareClass instance3 = createNewInstance( null, randomGenerator.nextLong() );
     AbstractChangeAwareClass nullInstance = null;
 
     assertNotNull( instance1 );
@@ -131,7 +131,7 @@ public abstract class AbstractChangeAwareClassTest
   {
     AbstractChangeAwareClass instance1 = createNewInstance( 1L, randomGenerator.nextLong() );
     AbstractChangeAwareClass instance2 = createNewInstance( 2L, randomGenerator.nextLong() );
-    AbstractChangeAwareClass instance3 = createNewInstance( 3L, randomGenerator.nextLong() );
+    AbstractChangeAwareClass instance3 = createNewInstance( null, randomGenerator.nextLong() );
 
     assertNotNull( instance1 );
     assertNotNull( instance2 );
@@ -151,7 +151,7 @@ public abstract class AbstractChangeAwareClassTest
   {
     AbstractChangeAwareClass instance1 = createNewInstance( 1L, randomGenerator.nextLong() );
     AbstractChangeAwareClass instance2 = createNewInstance( 2L, randomGenerator.nextLong() );
-    AbstractChangeAwareClass instance3 = createNewInstance( 3L, randomGenerator.nextLong() );
+    AbstractChangeAwareClass instance3 = createNewInstance( null, randomGenerator.nextLong() );
 
     assertNotNull( instance1 );
     assertNotNull( instance2 );
