@@ -250,7 +250,6 @@ public abstract class AbstractChangeAwareClassTest
   public void testIncrementVersionSinglePointOfChange() throws Exception
   {
     AbstractChangeAwareClass instance = createNewInstance( randomGenerator.nextLong(), randomGenerator.nextLong() );
-    System.out.println( instance.getVersion() );
 
     assertNotNull( instance );
 
@@ -289,8 +288,6 @@ public abstract class AbstractChangeAwareClassTest
       String fieldName = field.getName();
       Object fieldValue = field.get( instance );
 
-      System.out.println( "2: " + fieldName + "|" + fieldValue );
-
       assertEquals( "Field '" + fieldName + "': Expected <" + elementMap.get( classPrefix + fieldName ) + ">, but was <" + fieldValue + ">.", elementMap.get( classPrefix + fieldName ), fieldValue );
     }
     for ( Field field : instance.getClass().getSuperclass().getDeclaredFields() )
@@ -299,8 +296,6 @@ public abstract class AbstractChangeAwareClassTest
 
       String fieldName = field.getName();
       Object fieldValue = field.get( instance );
-
-      System.out.println( "S2: " + fieldName + "|" + fieldValue );
 
       // Only the superclass version will be changed.
       if ( fieldName.equals( "version" ) )
