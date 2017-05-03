@@ -124,6 +124,23 @@ public abstract class AbstractChangeAwareClassTest
     assertNotEquals( instance1, nullInstance );
     assertNotEquals( instance2, nullInstance );
     assertNotEquals( instance3, nullInstance );
+
+    assertNotEquals( nullInstance, instance1 );
+    assertNotEquals( nullInstance, instance2 );
+    assertNotEquals( nullInstance, instance3 );
+  }
+
+  @Test
+  public void testEqualsNoIdInequality() throws Exception
+  {
+    AbstractChangeAwareClass instance1 = createNewInstance( 1L, randomGenerator.nextLong() );
+    AbstractChangeAwareClass instance2 = createNewInstance( null, randomGenerator.nextLong() );
+
+    assertNotNull( instance1 );
+    assertNotNull( instance2 );
+
+    assertNotEquals( instance1, instance2 );
+    assertNotEquals( instance2, instance1 );
   }
 
   @Test
