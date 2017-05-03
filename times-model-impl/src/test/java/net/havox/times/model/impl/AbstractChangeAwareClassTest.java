@@ -16,6 +16,9 @@
  */
 package net.havox.times.model.impl;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import org.junit.BeforeClass;
@@ -25,6 +28,7 @@ import static org.junit.Assert.*;
 
 public abstract class AbstractChangeAwareClassTest
 {
+
   private static Random randomGenerator;
 
   @BeforeClass
@@ -81,7 +85,7 @@ public abstract class AbstractChangeAwareClassTest
   }
 
   @Test
-  public void testEqualsConsitence() throws Exception
+  public void testEqualsConsistence() throws Exception
   {
     AbstractChangeAwareClass instance1 = createNewInstance( 1L, randomGenerator.nextLong() );
     AbstractChangeAwareClass instance2 = createNewInstance( 2L, randomGenerator.nextLong() );
@@ -192,6 +196,20 @@ public abstract class AbstractChangeAwareClassTest
   @Test
   public void testIncrementVersion() throws Exception
   {
+    AbstractChangeAwareClass instance = createNewInstance( randomGenerator.nextLong(), randomGenerator.nextLong() );
+
+    assertNotNull( instance );
+
+    long versionInstance = instance.getVersion();
+
+    instance.incrementVersion();
+
+    assertTrue( instance.getVersion() == versionInstance + 1 );
+  }
+
+  @Test
+  public void testIncrementVersionConsistence() throws Exception
+  {
     AbstractChangeAwareClass instance1 = createNewInstance( randomGenerator.nextLong(), randomGenerator.nextLong() );
     AbstractChangeAwareClass instance2 = createNewInstance( randomGenerator.nextLong(), randomGenerator.nextLong() );
 
@@ -208,6 +226,75 @@ public abstract class AbstractChangeAwareClassTest
 
       assertTrue( instance1.getVersion() == versionInstance1 + i );
       assertTrue( instance2.getVersion() == versionInstance2 + i );
+    }
+  }
+
+  @Test
+  public void testIncrementVersionSinglePointOfChange() throws Exception
+  {
+    AbstractChangeAwareClass instance = createNewInstance( randomGenerator.nextLong(), randomGenerator.nextLong() );
+    System.out.println( instance.getVersion() );
+
+    assertNotNull( instance );
+
+    Map<String, Object> elementMap = new HashMap<>();
+
+    String classPrefix = "§CLASS§";
+    String superclassPrefix = "§SUPERCLASS§";
+
+    // Read field values to elementMap...
+    for ( Field field : instance.getClass().getDeclaredFields() )
+    {
+      field.setAccessible( true );
+
+      String fieldName = field.getName();
+      Object fieldValue = field.get( instance );
+
+      elementMap.put( classPrefix + fieldName, fieldValue );
+    }
+    for ( Field field : instance.getClass().getSuperclass().getDeclaredFields() )
+    {
+      field.setAccessible( true );
+
+      String fieldName = field.getName();
+      Object fieldValue = field.get( instance );
+
+      elementMap.put( superclassPrefix + fieldName, fieldValue );
+    }
+
+    instance.incrementVersion();
+
+    // Now check that no differences except the version did occur.
+    for ( Field field : instance.getClass().getDeclaredFields() )
+    {
+      field.setAccessible( true );
+
+      String fieldName = field.getName();
+      Object fieldValue = field.get( instance );
+
+      System.out.println( "2: " + fieldName + "|" + fieldValue );
+
+      assertEquals( "Field '" + fieldName + "': Expected <" + elementMap.get( classPrefix + fieldName ) + ">, but was <" + fieldValue + ">.", elementMap.get( classPrefix + fieldName ), fieldValue );
+    }
+    for ( Field field : instance.getClass().getSuperclass().getDeclaredFields() )
+    {
+      field.setAccessible( true );
+
+      String fieldName = field.getName();
+      Object fieldValue = field.get( instance );
+
+      System.out.println( "S2: " + fieldName + "|" + fieldValue );
+
+      // Only the superclass version will be changed.
+      if ( fieldName.equals( "version" ) )
+      {
+        Long expectedValue = ( Long ) elementMap.get( superclassPrefix + fieldName ) + 1;
+        assertEquals( "Field '" + fieldName + "': Expected <" + expectedValue + ">, but was <" + ( Long ) fieldValue + ">.", expectedValue, ( Long ) fieldValue );
+      }
+      else
+      {
+        assertEquals( "Field '" + fieldName + "': Expected <" + elementMap.get( superclassPrefix + fieldName ) + ">, but was <" + fieldValue + ">.", elementMap.get( superclassPrefix + fieldName ), fieldValue );
+      }
     }
   }
 }
