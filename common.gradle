@@ -1,4 +1,8 @@
 // This file is to be applied to every project.
+configurations {
+    testArtifacts.extendsFrom testRuntime
+}
+
 apply plugin: 'java'
 apply plugin: "jacoco"
 apply plugin: 'maven'
@@ -42,10 +46,17 @@ task javadocJar( type: Jar, dependsOn: 'javadoc', description: 'Creates a jar fr
     classifier = 'javadoc'
 }
 
+task testJar(type: Jar) {
+    classifier "test"
+    from sourceSets.test.output
+}
+
 artifacts {
     archives jar
     archives javadocJar
     archives sourcesJar
+    
+    testArtifacts testJar
 }
 
 publishing {
