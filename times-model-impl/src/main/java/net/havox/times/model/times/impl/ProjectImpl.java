@@ -26,6 +26,7 @@ import net.havox.times.model.contacts.api.Company;
 import net.havox.times.model.contacts.api.Person;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.times.api.Project;
+import net.havox.times.model.times.api.WorkDay;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -49,6 +50,7 @@ public class ProjectImpl extends AbstractChangeAwareClass<ProjectImpl> implement
   private Company employer;
   private Person employee;
   private final Collection<Project> subprojects = new ConcurrentSkipListSet<>();
+  private final Collection<WorkDay> workDays = new ConcurrentSkipListSet<>();
 
   @Override
   public String getName()
@@ -114,6 +116,12 @@ public class ProjectImpl extends AbstractChangeAwareClass<ProjectImpl> implement
   public Collection<Project> getSubprojects()
   {
     return this.subprojects;
+  }
+
+  @Override
+  public Collection<WorkDay> getWorkDays()
+  {
+    return this.workDays;
   }
 
   @Override

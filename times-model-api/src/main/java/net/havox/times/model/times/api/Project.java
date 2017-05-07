@@ -21,7 +21,9 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 import net.havox.times.model.api.ChangeAware;
 import net.havox.times.model.contacts.api.Company;
@@ -71,7 +73,7 @@ public interface Project extends ChangeAware, Serializable
    * Calculates the work duration for a given month, year and work unit type.
    *
    * @param month the month
-   * @param year the work
+   * @param year the year
    * @param type the {@link WorkUnitType}
    * @return the calculated work duration for this month
    *
@@ -80,6 +82,24 @@ public interface Project extends ChangeAware, Serializable
    * @throws IllegalArgumentException if the month does not fit the Employment duration.
    */
   default Duration getDuraration( Month month, int year, WorkUnitType type )
+  {
+    return getDuraration( month, year, type, true );
+  }
+
+  /**
+   * Calculates the work duration for a given month, year and work unit type.
+   *
+   * @param month the month
+   * @param year the year
+   * @param type the {@link WorkUnitType}
+   * @param includeSubProjects Shall we include subProjects (default: true).
+   * @return the calculated work duration for this month
+   *
+   * @throws IllegalArgumentException if the month is not set.
+   * @throws IllegalArgumentException if the work unit type is not set.
+   * @throws IllegalArgumentException if the month does not fit the Employment duration.
+   */
+  default Duration getDuraration( Month month, int year, WorkUnitType type, boolean includeSubProjects )
   {
     if ( month == null )
     {
@@ -91,12 +111,12 @@ public interface Project extends ChangeAware, Serializable
     }
 
     LocalDate monthStart = LocalDate.of( year, month, 1 );
-    LocalDate nextMonthStart = LocalDate.of( year, month.getValue() + 1, 1 );
+    LocalDate monthEnd = LocalDate.of( year, month.getValue() + 1, 1 ).minus( 1, ChronoUnit.DAYS );
 
     if ( ( monthStart.compareTo( this.getEnd() ) > 0 )
             && // project end date before regarded month
-            ( nextMonthStart.compareTo( this.getStart() ) <= 0 ) )
-    { // project start adter regarded month
+            ( monthEnd.compareTo( this.getStart() ) < 0 ) )
+    { // project start after regarded month
       StringBuilder builder = new StringBuilder();
 
       builder.append( "The seleceted month '" ).append( month.toString() ).append( " " ).append( year ).append( "'" );
@@ -106,8 +126,22 @@ public interface Project extends ChangeAware, Serializable
       throw new IllegalArgumentException( builder.toString() );
     }
 
-    //TODO: Add calculation
-    return null;
+    Duration duration = Duration.ZERO;
+
+    // Calculate the duration of this project.
+    for ( WorkDay workDay : getWorkDays( monthStart, monthEnd ) )
+    {
+      duration.plus( workDay.getDuration( type ) );
+    }
+
+    // Calculate the duration of subprojects.
+    if( includeSubProjects ) {
+      for( Project subProject : getSubprojects() ) {
+        duration.plus( subProject.getDuraration( month, year, type, includeSubProjects) );
+      }
+    }
+    
+    return duration;
   }
 
   /**
@@ -213,4 +247,43 @@ public interface Project extends ChangeAware, Serializable
    * @return the sub projects
    */
   Collection<Project> getSubprojects();
+
+  /**
+   * Returns the work days for this project.
+   *
+   * @return the work days
+   */
+  Collection<WorkDay> getWorkDays();
+
+  /**
+   * Returns the work days in a given time period. The start and end date are included.
+   *
+   * @param start the starting day of this period
+   * @param end the ending day of this period
+   * @return the work days in this time period
+   *
+   * @throws IllegalArgumentException, if the start parameter is null.
+   * @throws IllegalArgumentException, if the end parameter is null.
+   */
+  default Collection<WorkDay> getWorkDays( LocalDate start, LocalDate end )
+  {
+    if ( start == null || end == null )
+    {
+      throw new IllegalArgumentException( "The start and end parameter have to be set." );
+    }
+
+    Collection<WorkDay> selectedWorkDays = new ConcurrentSkipListSet<>();
+
+    for ( WorkDay workDay : getWorkDays() )
+    {                                               // The work day matches the
+      if ( ( workDay.getDate().isAfter( start ) || workDay.getDate().isEqual( start ) )
+              && // given period, is on start
+              ( workDay.getDate().isBefore( end ) || workDay.getDate().isEqual( end ) ) )
+      {  // or end date or between.
+        selectedWorkDays.add( workDay );
+      }
+    }
+
+    return selectedWorkDays;
+  }
 }
