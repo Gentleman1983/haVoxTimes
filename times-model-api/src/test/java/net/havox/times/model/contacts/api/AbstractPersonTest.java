@@ -26,11 +26,11 @@ import static org.junit.Assert.*;
 
 public abstract class AbstractPersonTest
 {
-  public abstract Person getNewInstance( LocalDate dateOfBirth );
-  public abstract Person getNewInstanceWithNonInitializedDateOfBirth();
+  public abstract Person getNewInstance( LocalDate dateOfBirth ) throws Exception;
+  public abstract Person getNewInstanceWithNonInitializedDateOfBirth() throws Exception;
   
   @Test
-  public void testGetAge() {
+  public void testGetAge() throws Exception {
     Person personBornToday = getNewInstance( LocalDate.now() );
     Person personBornOneHundredYearsAgo = getNewInstance( LocalDate.now().minus( 100, ChronoUnit.YEARS ) );
     
@@ -42,7 +42,7 @@ public abstract class AbstractPersonTest
   }
   
   @Test( expected = IllegalStateException.class )
-  public void testGetAgeNotInitialized() {
+  public void testGetAgeNotInitialized() throws Exception {
     Person person = getNewInstanceWithNonInitializedDateOfBirth();
     
     person.getAge();
