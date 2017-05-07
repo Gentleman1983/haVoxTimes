@@ -91,6 +91,8 @@ public class WorkUnitDurationImplTest extends AbstractChangeAwareClassTest
     assertNotNull( endTime );
     
     processTestSetDuration( startTime, endTime, expectedDuration );
+    
+    fail( "This should never be reached..." );
   }
   
   @Test(expected = IllegalArgumentException.class)
@@ -115,6 +117,8 @@ public class WorkUnitDurationImplTest extends AbstractChangeAwareClassTest
     assertNull( endTime );
     
     processTestSetDuration( startTime, endTime, expectedDuration );
+    
+    fail( "This should never be reached..." );
   }
   
   @Test
@@ -139,6 +143,8 @@ public class WorkUnitDurationImplTest extends AbstractChangeAwareClassTest
     assertNotNull( duration );
     
     processTestSetDuration( startTime, duration, expectedDuration );
+    
+    fail( "This should never be reached..." );
   }
   
   @Test(expected = IllegalArgumentException.class)
@@ -151,6 +157,8 @@ public class WorkUnitDurationImplTest extends AbstractChangeAwareClassTest
     assertNull( duration );
     
     processTestSetDuration( startTime, duration, expectedDuration );
+    
+    fail( "This should never be reached..." );
   }
   
   @Test(expected = IllegalArgumentException.class)
@@ -163,5 +171,7 @@ public class WorkUnitDurationImplTest extends AbstractChangeAwareClassTest
     assertNull( duration );
     
     processTestSetDuration( startTime, duration, expectedDuration );
+    
+    fail( "This should never be reached..." );
   }
 }
