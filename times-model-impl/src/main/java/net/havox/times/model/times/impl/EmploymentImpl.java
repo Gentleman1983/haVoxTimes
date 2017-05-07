@@ -120,7 +120,7 @@ public class EmploymentImpl extends AbstractChangeAwareClass<EmploymentImpl> imp
     builder.append( this.getId() );
     builder.append( this.getEmployee() );
     builder.append( this.getEmployer() );
-    builder.append( this.getDuration() );
+    builder.append( this.getEmploymentPeriod() );
     builder.append( this.getStart() );
     builder.append( this.getEnd() );
     builder.append( this.isActive() );
