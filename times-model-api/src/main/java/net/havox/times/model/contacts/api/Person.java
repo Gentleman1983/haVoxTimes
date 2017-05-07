@@ -17,9 +17,8 @@
 package net.havox.times.model.contacts.api;
 
 import java.io.Serializable;
-import java.time.Duration;
-import java.time.Instant;
 import java.time.LocalDate;
+import java.time.Period;
 
 import net.havox.times.model.api.ChangeAware;
 
@@ -80,14 +79,14 @@ public interface Person extends ChangeAware, Serializable
    *
    * @throws IllegalStateException In case the birth date is not set.
    */
-  default Duration getAge()
+  default Period getAge()
   {
     if ( this.getDateOfBirth() == null )
     {
       throw new IllegalStateException( "Unable to calculate age. No birth date set." );
     }
 
-    return Duration.between( Instant.now(), this.getDateOfBirth() );
+    return Period.between( LocalDate.now(), this.getDateOfBirth() );
   }
 
   /**

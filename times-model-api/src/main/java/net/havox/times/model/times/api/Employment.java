@@ -17,8 +17,8 @@
 package net.havox.times.model.times.api;
 
 import java.io.Serializable;
-import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Collection;
 
 import net.havox.times.model.api.ChangeAware;
@@ -34,11 +34,11 @@ public interface Employment extends ChangeAware, Serializable
 {
 
   /**
-   * Calculates the duration of the employment.
+   * Calculates the period of the employment.
    *
-   * @return the duration
+   * @return the period
    */
-  default Duration getDuration()
+  default Period getEmploymentPeriod()
   {
     LocalDate start = this.getStart();
     LocalDate end = this.getEnd();
@@ -48,7 +48,7 @@ public interface Employment extends ChangeAware, Serializable
       end = LocalDate.now();
     }
 
-    return Duration.between( start, end );
+    return Period.between( start, end );
   }
 
   /**
