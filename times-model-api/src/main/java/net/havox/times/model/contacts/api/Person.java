@@ -86,7 +86,7 @@ public interface Person extends ChangeAware, Serializable
       throw new IllegalStateException( "Unable to calculate age. No birth date set." );
     }
 
-    return Period.between( LocalDate.now(), this.getDateOfBirth() );
+    return Period.between( this.getDateOfBirth(), LocalDate.now() );
   }
 
   /**
