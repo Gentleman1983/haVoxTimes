@@ -48,7 +48,7 @@ public interface Employment extends ChangeAware, Serializable
       end = LocalDate.now();
     }
 
-    return Period.between( start, end );
+    return Period.between( start, end ).plus( Period.ofDays( 1 ) );
   }
 
   /**
@@ -72,8 +72,9 @@ public interface Employment extends ChangeAware, Serializable
    */
   default boolean isActive()
   {
-    boolean isInTheFuture = this.getEnd().isAfter( LocalDate.now() );
-    return ( this.getEnd() == null ) || isInTheFuture;
+    return ( this.getEnd() == null ) ||                  // No end defined.
+            this.getEnd().isAfter( LocalDate.now() ) ||  // End in the future.
+            this.getEnd().equals( LocalDate.now() );     // End today.
   }
 
   /**
@@ -140,5 +141,5 @@ public interface Employment extends ChangeAware, Serializable
    *
    * @return the projects
    */
-  Collection<Employment> getProjects();
+  Collection<Project> getProjects();
 }

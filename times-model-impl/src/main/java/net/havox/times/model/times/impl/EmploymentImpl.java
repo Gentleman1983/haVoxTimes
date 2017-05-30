@@ -29,6 +29,7 @@ import net.havox.times.model.contacts.api.Company;
 import net.havox.times.model.contacts.api.Person;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.times.api.Employment;
+import net.havox.times.model.times.api.Project;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -55,8 +56,8 @@ public class EmploymentImpl extends AbstractChangeAwareClass<EmploymentImpl> imp
   private Person employee;
   @Column( name = "employer" )
   private Company employer;
-  @OneToMany(targetEntity=Employment.class)
-  private final Collection<Employment> projects = new CopyOnWriteArrayList<>();
+  @OneToMany(targetEntity=Project.class)
+  private final Collection<Project> projects = new CopyOnWriteArrayList<>();
 
   @Override
   public LocalDate getStart()
@@ -107,7 +108,7 @@ public class EmploymentImpl extends AbstractChangeAwareClass<EmploymentImpl> imp
   }
 
   @Override
-  public Collection<Employment> getProjects()
+  public Collection<Project> getProjects()
   {
     return this.projects;
   }
