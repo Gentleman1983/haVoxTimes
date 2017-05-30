@@ -19,6 +19,7 @@ package net.havox.times.model.times.api;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 
 import net.havox.times.model.api.ChangeAware;
@@ -40,15 +41,28 @@ public interface Employment extends ChangeAware, Serializable
    */
   default Period getEmploymentPeriod()
   {
+    /* 
+     * For correct legth calculation we cannot use the default between function of Period.between( x, y ). E.g. when
+     * calculating 1 year ending in december the Period.between( x, y ) returns a Period of 11 months and 31 days
+     * instead of 1 year.
+     * * So we have to look for a way to calculate the correct Period. First in the case of an employment, if I work 
+     *   only today, it is needed that the result is 1 day. So we have to either increase the end date by one day or
+     *   decrease the starting date.
+     * * If we have got an open end, today is the current ending date and has to be added in the calculation.
+     */
     LocalDate start = this.getStart();
-    LocalDate end = this.getEnd();
+    LocalDate end = ( this.getEnd() == null ) ? 
+            LocalDate.now().plus( 1, ChronoUnit.DAYS ) : this.getEnd().plus( 1, ChronoUnit.DAYS );
+    int years = (int) ChronoUnit.YEARS.between(start, end );
+    end = end.minus( years, ChronoUnit.YEARS ); // For not to count the duration of years multiple times, we have to
+                                                // decrease the end date by the number of years.
+    int months = (int) ChronoUnit.MONTHS.between(start, end );
+    end = end.minus( months, ChronoUnit.MONTHS ); // For not to count the duration of months multiple times, we have to
+                                                  // decrease the end date by the number of months.
+    int days = (int) ChronoUnit.DAYS.between(start, end );
 
-    if ( end == null )
-    {
-      end = LocalDate.now();
-    }
-
-    return Period.between( start, end ).plus( Period.ofDays( 1 ) );
+    // After calculation of the correct number of years, months and days we can wrap it up in a Period object.
+    return Period.of( years, months, days );
   }
 
   /**
