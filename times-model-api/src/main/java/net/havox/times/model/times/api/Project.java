@@ -262,8 +262,8 @@ public interface Project extends ChangeAware, Serializable
    * @param end the ending day of this period
    * @return the work days in this time period
    *
-   * @throws IllegalArgumentException, if the start parameter is null.
-   * @throws IllegalArgumentException, if the end parameter is null.
+   * @throws IllegalArgumentException if the start parameter is null.
+   * @throws IllegalArgumentException if the end parameter is null.
    */
   default Collection<WorkDay> getWorkDays( LocalDate start, LocalDate end )
   {
