@@ -20,6 +20,10 @@ package net.havox.times.model.times.impl;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.Arrays;
+import net.havox.times.model.contacts.api.Company;
+import net.havox.times.model.contacts.api.Person;
+import net.havox.times.model.contacts.impl.CompanyImpl;
+import net.havox.times.model.contacts.impl.PersonImpl;
 
 import net.havox.times.model.times.api.AbstractEmploymentTest;
 import net.havox.times.model.times.api.Employment;
@@ -61,5 +65,17 @@ public class EmploymentApiTest extends AbstractEmploymentTest
     instance.setStart( start );
     instance.setEnd( end );
     return instance;
+  }
+
+  @Override
+  public Company getNewCompany() throws Exception
+  {
+    return new CompanyImpl();
+  }
+
+  @Override
+  public Person getNewPerson() throws Exception
+  {
+    return new PersonImpl();
   }
 }

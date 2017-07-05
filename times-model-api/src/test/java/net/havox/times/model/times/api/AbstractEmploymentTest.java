@@ -19,66 +19,131 @@ package net.havox.times.model.times.api;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
+import net.havox.times.model.api.ExtendedRunner;
+import net.havox.times.model.api.ModelRandomGenerator;
+import net.havox.times.model.api.Repeat;
+import net.havox.times.model.contacts.api.Company;
+import net.havox.times.model.contacts.api.Person;
 
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
 
+@RunWith( ExtendedRunner.class )
 public abstract class AbstractEmploymentTest
 {
+
   public abstract Project getNewProject() throws Exception;
+
   public abstract Employment getNewInstanceWithUninitializedProjects() throws Exception;
+
   public abstract Employment getNewInstance( Project... projects ) throws Exception;
+
   public abstract Employment getNewInstance( LocalDate start, LocalDate end ) throws Exception;
-  
+
+  public abstract Company getNewCompany() throws Exception;
+
+  public abstract Person getNewPerson() throws Exception;
+
   @Test
-  public void testGetEmploymentPeriodStartEnd() throws Exception {
+  public void testGetEmploymentMonthsStartEnd() throws Exception
+  {
     Employment employmentOneYear = getNewInstance( LocalDate.of( 2017, Month.JANUARY, 1 ), LocalDate.of( 2017, Month.DECEMBER, 31 ) );
     Employment employmentTwoYears = getNewInstance( LocalDate.of( 2017, Month.JANUARY, 1 ), LocalDate.of( 2018, Month.DECEMBER, 31 ) );
     Employment employmentSingleDay = getNewInstance( LocalDate.of( 2017, Month.JANUARY, 1 ), LocalDate.of( 2017, Month.JANUARY, 1 ) );
-    
-    assertEquals( Period.ofYears( 1 ), employmentOneYear.getEmploymentPeriod() );
-    assertEquals( Period.ofYears( 2 ), employmentTwoYears.getEmploymentPeriod() );
-    assertEquals( Period.ofDays( 1 ), employmentSingleDay.getEmploymentPeriod() );
+
+    assertEquals( 12l, employmentOneYear.getEmploymentMonths() );
+    assertEquals( 24l, employmentTwoYears.getEmploymentMonths() );
+    assertEquals( 0l, employmentSingleDay.getEmploymentMonths() );
   }
-  
+
   @Test
-  public void testGetEmploymentPeriodStartNow() throws Exception {
+  public void testGetEmploymentMonthsStartNow() throws Exception
+  {
     Employment employmentToday = getNewInstance( LocalDate.now(), null );
-    Employment employmentOneMonth = getNewInstance( LocalDate.now().minus( Period.ofMonths( 1 ) ), null );
+    LocalDate startDateEmploymentOneMonth = LocalDate.now().minus( Period.ofMonths( 1 ) );
+    Employment employmentOneMonth = getNewInstance( startDateEmploymentOneMonth, null );
     
-    assertEquals( Period.ofDays( 1 ), employmentToday.getEmploymentPeriod() );
-    assertEquals( Period.ofMonths( 1 ), employmentOneMonth.getEmploymentPeriod() );
+    assertEquals( 0l, employmentToday.getEmploymentMonths() );
+    assertEquals( 1l, employmentOneMonth.getEmploymentMonths());
   }
-  
+
   @Test
-  public void testIsActive() throws Exception {
+  public void testIsActive() throws Exception
+  {
     Employment employmentUntillToday = getNewInstance( LocalDate.now().minus( Period.ofYears( 1 ) ), LocalDate.now() );
     Employment employmentUntillTomorrow = getNewInstance( LocalDate.now().minus( Period.ofYears( 1 ) ), LocalDate.now().plus( Period.ofDays( 1 ) ) );
     Employment employmentUntillYeaterday = getNewInstance( LocalDate.now().minus( Period.ofYears( 1 ) ), LocalDate.now().minus( Period.ofDays( 1 ) ) );
     Employment employmentOpenEnd = getNewInstance( LocalDate.now().minus( Period.ofYears( 1 ) ), null );
-    
+
     assertFalse( employmentUntillYeaterday.isActive() );
     assertTrue( employmentUntillToday.isActive() );
     assertTrue( employmentUntillTomorrow.isActive() );
     assertTrue( employmentOpenEnd.isActive() );
   }
-  
+
   @Test
-  public void testHasProjects() throws Exception {
+  public void testHasProjects() throws Exception
+  {
     Employment employmentWithOutProjects = getNewInstance();
     Project project = getNewProject();
     Employment employmentWithProject = getNewInstance( project );
-    
+
     assertFalse( employmentWithOutProjects.hasProjects() );
     assertTrue( employmentWithProject.hasProjects() );
   }
-  
+
   @Test( expected = IllegalStateException.class )
-  public void testHasProjectsNotInitialized() throws Exception {
+  public void testHasProjectsNotInitialized() throws Exception
+  {
     Employment employment = getNewInstanceWithUninitializedProjects();
     employment.hasProjects();
-    
+
     fail( "This should never be reached..." );
+  }
+
+  @Test
+  @Repeat( 25 )
+  public void testModifyStart() throws Exception
+  {
+    LocalDate start = ModelRandomGenerator.randomLocalDate();
+
+    Employment objectUnderTest = getNewInstance();
+    objectUnderTest.setStart( start );
+    assertEquals( start, objectUnderTest.getStart() );
+  }
+
+  @Test
+  @Repeat( 25 )
+  public void testModifyEnd() throws Exception
+  {
+    LocalDate end = ModelRandomGenerator.randomLocalDate();
+
+    Employment objectUnderTest = getNewInstance();
+    objectUnderTest.setEnd( end );
+    assertEquals( end, objectUnderTest.getEnd() );
+  }
+
+  @Test
+  @Repeat( 25 )
+  public void testModifyEmployer() throws Exception
+  {
+    Company employer = getNewCompany();
+
+    Employment objectUnderTest = getNewInstance();
+    objectUnderTest.setEmployer( employer );
+    assertEquals( employer, objectUnderTest.getEmployer() );
+  }
+
+  @Test
+  @Repeat( 25 )
+  public void testModifyEmployee() throws Exception
+  {
+    Person employee = getNewPerson();
+
+    Employment objectUnderTest = getNewInstance();
+    objectUnderTest.setEmployee( employee );
+    assertEquals( employee, objectUnderTest.getEmployee() );
   }
 }

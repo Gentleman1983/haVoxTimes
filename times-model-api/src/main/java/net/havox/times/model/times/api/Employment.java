@@ -35,11 +35,11 @@ public interface Employment extends ChangeAware, Serializable
 {
 
   /**
-   * Calculates the period of the employment.
+   * Calculates the number of months of the employment.
    *
-   * @return the period
+   * @return the number of months
    */
-  default Period getEmploymentPeriod()
+  default long getEmploymentMonths()
   {
     /* 
      * For correct legth calculation we cannot use the default between function of Period.between( x, y ). E.g. when
@@ -62,7 +62,7 @@ public interface Employment extends ChangeAware, Serializable
     int days = (int) ChronoUnit.DAYS.between(start, end );
 
     // After calculation of the correct number of years, months and days we can wrap it up in a Period object.
-    return Period.of( years, months, days );
+    return Period.of( years, months, days ).toTotalMonths();
   }
 
   /**
