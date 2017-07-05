@@ -16,9 +16,46 @@
  */
 package net.havox.times.model.times.impl;
 
+import java.lang.reflect.Field;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import net.havox.times.model.times.api.AbstractWorkUnitTest;
+import net.havox.times.model.times.api.Task;
+import net.havox.times.model.times.api.WorkUnit;
 
 public class WorkUnitApiTest extends AbstractWorkUnitTest
 {
+
+  @Override
+  public WorkUnit newInstance() throws Exception
+  {
+    return new WorkUnitImpl();
+  }
+
+  @Override
+  public WorkUnit newInstance( LocalDateTime start, LocalDateTime end ) throws Exception
+  {
+    WorkUnit instance = newInstance();
+    
+    Field startField = instance.getClass().getDeclaredField( "workUnitStart" );
+    startField.setAccessible( true );
+    startField.set( instance, start );
+    
+    Field endField = instance.getClass().getDeclaredField( "workUnitEnd" );
+    endField.setAccessible( true );
+    endField.set( instance, end );
+    
+    return instance;
+  }
+
+  @Override
+  public Task newTask( Duration duration ) throws Exception
+  {
+    Task instance = new TaskImpl();
+    
+    instance.setDuration( duration );
+    
+    return instance;
+  }
   
 }

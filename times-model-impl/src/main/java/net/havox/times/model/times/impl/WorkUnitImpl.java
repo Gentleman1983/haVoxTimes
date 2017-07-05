@@ -18,6 +18,7 @@ package net.havox.times.model.times.impl;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
 import javax.persistence.Entity;
@@ -99,7 +100,7 @@ public class WorkUnitImpl extends AbstractChangeAwareClass<WorkUnitImpl> impleme
     }
 
     this.workUnitStart = start;
-    this.workUnitEnd = LocalDateTime.from( start ).plus( duration );
+    this.workUnitEnd = start.plus( duration.toNanos(), ChronoUnit.NANOS );
   }
 
   @Override
