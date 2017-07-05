@@ -17,12 +17,14 @@
 package net.havox.times.model.times.api;
 
 import java.io.Serializable;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import net.havox.times.model.api.ChangeAware;
 
 /**
- * Defines a work unit (work day).
+ * Defines a work unit (e.g. WORK slice, BREAK slice and another WORK slice).
  *
  * @author Christian Otto
  */
@@ -48,7 +50,15 @@ public interface WorkUnit extends ChangeAware, Serializable
    *
    * @return the duration
    */
-  WorkUnitDuration getDuration();
+  default Duration getDuration() {
+    Duration duration = Duration.ZERO;
+    
+    for( Task task : this.getTasks() ) {
+      duration = duration.plus( task.getDuration() );
+    }
+    
+    return duration;
+  }
 
   /**
    * Gets a set of the tasks worked on.
@@ -56,4 +66,47 @@ public interface WorkUnit extends ChangeAware, Serializable
    * @return the tasks
    */
   Set<Task> getTasks();
+  
+  /**
+   * Returns the duration of the work, defined either by the duration or the start and end time.
+   *
+   * @return the work duration
+   *
+   * @throws IllegalStateException , if the workUnitStart of workUnitEnd is <code>null</code>.
+   */
+  Duration getWorkUnitDuration();
+
+  /**
+   * Sets the work duration using a start and end time.
+   *
+   * @param start the start time
+   * @param end the end time
+   *
+   * @throws IllegalArgumentException , if any of the parameters is <code>null</code>.
+   */
+  void setWorkUnitDuration( LocalDateTime start, LocalDateTime end );
+
+  /**
+   * Sets the work duration using a duration value.
+   *
+   * @param start the start time
+   * @param duration the duration
+   *
+   * @throws IllegalArgumentException , if any of the parameters is <code>null</code>.
+   */
+  void setWorkUnitDuration( LocalDateTime start, Duration duration );
+
+  /**
+   * Returns the start date.
+   *
+   * @return the start date
+   */
+  LocalDateTime getWorkUnitStart();
+
+  /**
+   * Returns the end date.
+   *
+   * @return the end date
+   */
+  LocalDateTime getWorkUnitEnd();
 }

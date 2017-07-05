@@ -16,6 +16,8 @@
  */
 package net.havox.times.model.times.impl;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
 import javax.persistence.Entity;
@@ -24,7 +26,6 @@ import javax.persistence.Table;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.times.api.Task;
 import net.havox.times.model.times.api.WorkUnit;
-import net.havox.times.model.times.api.WorkUnitDuration;
 import net.havox.times.model.times.api.WorkUnitType;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -46,8 +47,9 @@ public class WorkUnitImpl extends AbstractChangeAwareClass<WorkUnitImpl> impleme
           
   private static final long serialVersionUID = 944542180473045373L;
 
+  private LocalDateTime workUnitStart;
+  private LocalDateTime workUnitEnd;
   private WorkUnitType type;
-  private WorkUnitDuration duration;
   private final Set<Task> tasks = new ConcurrentSkipListSet<>();
 
   @Override
@@ -61,11 +63,55 @@ public class WorkUnitImpl extends AbstractChangeAwareClass<WorkUnitImpl> impleme
   {
     this.type = type;
   }
+  
+  @Override
+  public Duration getWorkUnitDuration()
+  {
+    if ( ( this.workUnitStart == null ) || ( this.workUnitEnd == null ) )
+    {
+      String message = "Neigther the 'start'=" + this.workUnitStart + " nor the 'end'=" + this.workUnitEnd + " parameter is allowed to be NULL.";
+      throw new IllegalStateException( message );
+    }
+    
+    return Duration.between(this.workUnitStart, this.workUnitEnd );
+  }
 
   @Override
-  public WorkUnitDuration getDuration()
+  public void setWorkUnitDuration( LocalDateTime start, LocalDateTime end )
   {
-    return this.duration;
+    if ( ( start == null ) || ( end == null ) )
+    {
+      String message = "Neigther the parameter 'start'=" + start + " nor the parameter 'end'=" + end + "is allowed to be NULL.";
+      throw new IllegalArgumentException( message );
+    }
+
+    this.workUnitStart = start;
+    this.workUnitEnd = end;
+  }
+
+  @Override
+  public void setWorkUnitDuration( LocalDateTime start, Duration duration )
+  {
+    if ( ( start == null ) || ( duration == null ) )
+    {
+      String message = "Neigther the parameter 'start'=" + start + " nor the parameter 'duration'=" + duration + "is allowed to be NULL.";
+      throw new IllegalArgumentException( message );
+    }
+
+    this.workUnitStart = start;
+    this.workUnitEnd = LocalDateTime.from( start ).plus( duration );
+  }
+
+  @Override
+  public LocalDateTime getWorkUnitStart()
+  {
+    return this.workUnitStart;
+  }
+
+  @Override
+  public LocalDateTime getWorkUnitEnd()
+  {
+    return this.workUnitEnd;
   }
 
   @Override

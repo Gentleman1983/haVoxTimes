@@ -52,11 +52,11 @@ public interface Project extends ChangeAware, Serializable
   void setName( String name );
 
   /**
-   * Calculates the period of the employment.
+   * Calculates the months of the employment.
    *
-   * @return the period
+   * @return the completed months
    */
-  default Period getEmploymentPeriod()
+  default long getEmploymentMonths()
   {
     LocalDate start = this.getStart();
     LocalDate end = this.getEnd();
@@ -66,7 +66,7 @@ public interface Project extends ChangeAware, Serializable
       end = LocalDate.now();
     }
 
-    return Period.between( start, end );
+    return Period.between( start, end ).getMonths();
   }
 
   /**
@@ -114,7 +114,7 @@ public interface Project extends ChangeAware, Serializable
     LocalDate monthEnd = LocalDate.of( year, month.getValue() + 1, 1 ).minus( 1, ChronoUnit.DAYS );
 
     if ( ( monthStart.compareTo( this.getEnd() ) > 0 )
-            && // project end date before regarded month
+            || // project end date before regarded month
             ( monthEnd.compareTo( this.getStart() ) < 0 ) )
     { // project start after regarded month
       StringBuilder builder = new StringBuilder();
@@ -131,16 +131,18 @@ public interface Project extends ChangeAware, Serializable
     // Calculate the duration of this project.
     for ( WorkDay workDay : getWorkDays( monthStart, monthEnd ) )
     {
-      duration.plus( workDay.getDuration( type ) );
+      duration = duration.plus( workDay.getDuration( type ) );
     }
 
     // Calculate the duration of subprojects.
-    if( includeSubProjects ) {
-      for( Project subProject : getSubprojects() ) {
-        duration.plus( subProject.getDuraration( month, year, type, includeSubProjects) );
+    if ( includeSubProjects )
+    {
+      for ( Project subProject : getSubprojects() )
+      {
+        duration = duration.plus( subProject.getDuraration( month, year, type, includeSubProjects ) );
       }
     }
-    
+
     return duration;
   }
 
@@ -159,28 +161,32 @@ public interface Project extends ChangeAware, Serializable
   void setStart( LocalDate start );
 
   /**
-   * Checks if the employment is active. This means either the end is in the future or the end has not been defined.
+   * Checks if the employment is active. This means the project has started and either the end is in the future or the
+   * end has not been defined.
    *
    * @return true, if the employment is active
    */
   default boolean isActive()
   {
-    if ( this.getStart() == null )
+    if ( !this.hasStarted() )
     {
       return false;
     }
-    boolean isInTheFuture = this.getEnd().isAfter( LocalDate.now() );
-    return ( this.getEnd() == null ) || isInTheFuture;
+    return ( this.getEnd() == null ) || this.getEnd().isAfter( LocalDate.now() );
   }
 
   /**
-   * Checks if the employment has started. This means either the start is in the past.
+   * Checks if the employment has started. This means either the start is in the past or today.
    *
    * @return true, if the employment has started
    */
   default boolean hasStarted()
   {
-    return this.getStart().isBefore( LocalDate.now() );
+    if ( this.getStart() == null )
+    {
+      return false;
+    }
+    return this.getStart().isBefore( LocalDate.now() ) || this.getStart().isEqual( LocalDate.now() );
   }
 
   /**

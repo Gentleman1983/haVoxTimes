@@ -34,7 +34,7 @@ import net.havox.times.model.api.ChangeAware;
  * @author Christian Otto
  */
 @MappedSuperclass
-public abstract class AbstractChangeAwareClass<T extends AbstractChangeAwareClass> implements ChangeAware
+public abstract class AbstractChangeAwareClass<T extends AbstractChangeAwareClass> implements ChangeAware, Comparable<T>
 {
 
   @Id
@@ -113,5 +113,13 @@ public abstract class AbstractChangeAwareClass<T extends AbstractChangeAwareClas
     }
 
     return false;
+  }
+  
+  @Override
+  public int compareTo(T other) {
+    if( null == this.getId() || null == other.getId() ) {
+      return super.hashCode() - ((Object) other).hashCode();
+    }
+    return (int) ( this.getId() - other.getId() );
   }
 }

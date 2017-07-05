@@ -25,13 +25,11 @@ import net.havox.times.model.times.api.Project;
 import net.havox.times.model.times.api.Task;
 import net.havox.times.model.times.api.WorkDay;
 import net.havox.times.model.times.api.WorkUnit;
-import net.havox.times.model.times.api.WorkUnitDuration;
 import net.havox.times.model.times.impl.EmploymentImpl;
 import net.havox.times.model.times.impl.IssueImpl;
 import net.havox.times.model.times.impl.ProjectImpl;
 import net.havox.times.model.times.impl.TaskImpl;
 import net.havox.times.model.times.impl.WorkDayImpl;
-import net.havox.times.model.times.impl.WorkUnitDurationImpl;
 import net.havox.times.model.times.impl.WorkUnitImpl;
 
 import org.junit.BeforeClass;
@@ -113,17 +111,6 @@ public class TimesModelFactoryTest
     
     // Is the instance of the correct type?
     assertThat ( instanceUnderTest, is ( instanceOf ( WorkDayImpl.class ) ) );
-  }
-  
-  @Test
-  public void testGetNewWorkUnitDuration() {
-    WorkUnitDuration instanceUnderTest = factory.getNewWorkUnitDuration();
-    
-    // Is the instance initialized?
-    assertThat ( instanceUnderTest, is ( notNullValue () ) );
-    
-    // Is the instance of the correct type?
-    assertThat ( instanceUnderTest, is ( instanceOf ( WorkUnitDurationImpl.class ) ) );
   }
   
   @Test

@@ -22,13 +22,11 @@ import net.havox.times.model.times.api.Project;
 import net.havox.times.model.times.api.Task;
 import net.havox.times.model.times.api.WorkDay;
 import net.havox.times.model.times.api.WorkUnit;
-import net.havox.times.model.times.api.WorkUnitDuration;
 import net.havox.times.model.times.impl.EmploymentImpl;
 import net.havox.times.model.times.impl.IssueImpl;
 import net.havox.times.model.times.impl.ProjectImpl;
 import net.havox.times.model.times.impl.TaskImpl;
 import net.havox.times.model.times.impl.WorkDayImpl;
-import net.havox.times.model.times.impl.WorkUnitDurationImpl;
 import net.havox.times.model.times.impl.WorkUnitImpl;
 
 /**
@@ -110,16 +108,6 @@ public class TimesModelFactory
   public WorkDay getNewWorkDay()
   {
     return new WorkDayImpl();
-  }
-
-  /**
-   * Returns a new {@link WorkUnitDuration}.
-   *
-   * @return a new work unit duration entity
-   */
-  public WorkUnitDuration getNewWorkUnitDuration()
-  {
-    return new WorkUnitDurationImpl();
   }
 
   /**

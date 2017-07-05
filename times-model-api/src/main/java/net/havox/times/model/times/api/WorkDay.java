@@ -132,7 +132,7 @@ public interface WorkDay extends ChangeAware, Serializable
     {
       if ( type == workUnit.getType() )
       {
-        duration = duration.plus( workUnit.getDuration().getDuration() );
+        duration = duration.plus( workUnit.getDuration() );
       }
     }
 
