@@ -18,7 +18,9 @@ package net.havox.times.model.api;
 
 import java.security.SecureRandom;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.ZoneOffset;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ModelRandomGenerator
@@ -95,5 +97,19 @@ public class ModelRandomGenerator
     long randomDay = ThreadLocalRandom.current().nextLong( minDay, maxDay );
 
     return LocalDate.ofEpochDay( randomDay );
+  }
+  
+  public static LocalDateTime randomLocalDateTime()
+  {
+    return randomLocalDateTime( LocalDateTime.of( 1970, Month.JANUARY, 1, 0, 0), LocalDateTime.now() );
+  }
+  
+  public static LocalDateTime randomLocalDateTime( LocalDateTime min, LocalDateTime max )
+  {
+    long minSecond = min.toEpochSecond( ZoneOffset.UTC );
+    long maxSecond = max.toEpochSecond( ZoneOffset.UTC );
+    long randomSecond = ThreadLocalRandom.current().nextLong(minSecond, maxSecond );
+
+    return LocalDateTime.ofEpochSecond(randomSecond, 0, ZoneOffset.UTC );
   }
 }
