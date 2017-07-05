@@ -17,6 +17,9 @@
 package net.havox.times.model.api;
 
 import java.security.SecureRandom;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ModelRandomGenerator
 {
@@ -25,8 +28,10 @@ public class ModelRandomGenerator
 
   public static final String ALPHANUMERIC_STRING = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   public static final String ALPHABETIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-  
-  private ModelRandomGenerator() {}
+
+  private ModelRandomGenerator()
+  {
+  }
 
   public static String randomString( int length )
   {
@@ -52,11 +57,12 @@ public class ModelRandomGenerator
   {
     return RANDOM.nextInt( bound );
   }
-  
-  public static int randomIntInRange( int min, int max) {
+
+  public static int randomIntInRange( int min, int max )
+  {
     return randomInt( max - min + 1 ) + min;
   }
-  
+
   public static long randomLong()
   {
     return RANDOM.nextLong();
@@ -66,7 +72,7 @@ public class ModelRandomGenerator
   {
     return RANDOM.nextBoolean();
   }
-  
+
   public static double randomDouble()
   {
     return RANDOM.nextDouble();
@@ -75,5 +81,19 @@ public class ModelRandomGenerator
   public static float randomFloat()
   {
     return RANDOM.nextFloat();
+  }
+
+  public static LocalDate randomLocalDate()
+  {
+    return randomLocalDate( LocalDate.of( 1970, Month.JANUARY, 1 ), LocalDate.now() );
+  }
+
+  public static LocalDate randomLocalDate( LocalDate min, LocalDate max )
+  {
+    long minDay = min.toEpochDay();
+    long maxDay = max.toEpochDay();
+    long randomDay = ThreadLocalRandom.current().nextLong( minDay, maxDay );
+
+    return LocalDate.ofEpochDay( randomDay );
   }
 }

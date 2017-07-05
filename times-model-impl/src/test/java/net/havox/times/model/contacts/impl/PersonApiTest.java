@@ -18,6 +18,7 @@ package net.havox.times.model.contacts.impl;
 
 import java.time.LocalDate;
 import net.havox.times.model.contacts.api.AbstractPersonTest;
+import net.havox.times.model.contacts.api.Address;
 import net.havox.times.model.contacts.api.Person;
 
 public class PersonApiTest extends AbstractPersonTest
@@ -35,5 +36,11 @@ public class PersonApiTest extends AbstractPersonTest
   public Person getNewInstanceWithNonInitializedDateOfBirth()
   {
     return getNewInstance( null );
+  }
+
+  @Override
+  public Address getNewAddress() throws Exception
+  {
+    return new AddressImpl();
   }
 }

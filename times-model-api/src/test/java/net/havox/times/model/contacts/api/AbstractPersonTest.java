@@ -19,15 +19,21 @@ package net.havox.times.model.contacts.api;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
+import net.havox.times.model.api.ExtendedRunner;
+import net.havox.times.model.api.ModelRandomGenerator;
+import net.havox.times.model.api.Repeat;
 
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
 
+@RunWith( ExtendedRunner.class )
 public abstract class AbstractPersonTest
 {
   public abstract Person getNewInstance( LocalDate dateOfBirth ) throws Exception;
   public abstract Person getNewInstanceWithNonInitializedDateOfBirth() throws Exception;
+  public abstract Address getNewAddress() throws Exception;
   
   @Test
   public void testGetAge() throws Exception {
@@ -50,4 +56,69 @@ public abstract class AbstractPersonTest
     fail( "This should never be reached..." );
   }
   
+  @Test
+  @Repeat( 25 )
+  public void testModifyLastName() throws Exception
+  {
+    String alphabet = ModelRandomGenerator.ALPHABETIC_STRING + " -";
+    String name = ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 1, 50 ), alphabet );
+
+    Person objectUnderTest = getNewInstanceWithNonInitializedDateOfBirth();
+    objectUnderTest.setLastName( name );
+    assertEquals( name, objectUnderTest.getLastName() );
+  }
+  
+  @Test
+  @Repeat( 25 )
+  public void testModifyMiddleInitials() throws Exception
+  {
+    int numberOfMiddleInitials = ModelRandomGenerator.randomIntInRange( 0, 10 );
+    StringBuilder builder = new StringBuilder();
+    for( int i = 0; i < numberOfMiddleInitials; i++ ) {
+      if( i > 0 ) {
+        builder.append( " " );
+      }
+      builder.append( ModelRandomGenerator.randomString( 1, ModelRandomGenerator.ALPHABETIC_STRING ) );
+      builder.append( "." );
+    }
+    String middleInitials = builder.toString();
+
+    Person objectUnderTest = getNewInstanceWithNonInitializedDateOfBirth();
+    objectUnderTest.setMiddleInnitials( middleInitials );
+    assertEquals( middleInitials, objectUnderTest.getMiddleInnitials() );
+  }
+  
+  @Test
+  @Repeat( 25 )
+  public void testModifyFirstName() throws Exception
+  {
+    String alphabet = ModelRandomGenerator.ALPHABETIC_STRING + " -";
+    String name = ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 1, 50 ), alphabet );
+
+    Person objectUnderTest = getNewInstanceWithNonInitializedDateOfBirth();
+    objectUnderTest.setFirstName( name );
+    assertEquals( name, objectUnderTest.getFirstName() );
+  }
+  
+  @Test
+  @Repeat( 25 )
+  public void testModifyDateOfBirth() throws Exception
+  {
+    LocalDate date = ModelRandomGenerator.randomLocalDate();
+
+    Person objectUnderTest = getNewInstanceWithNonInitializedDateOfBirth();
+    objectUnderTest.setDateOfBirth( date );
+    assertEquals( date, objectUnderTest.getDateOfBirth() );
+  }
+  
+  @Test
+  @Repeat( 25 )
+  public void testModifyAddress() throws Exception
+  {
+    Address address = getNewAddress();
+
+    Person objectUnderTest = getNewInstanceWithNonInitializedDateOfBirth();
+    objectUnderTest.setAddress( address );
+    assertEquals( address, objectUnderTest.getAddress() );
+  }
 }
