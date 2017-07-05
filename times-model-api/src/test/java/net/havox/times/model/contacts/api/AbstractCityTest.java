@@ -27,35 +27,40 @@ import org.junit.runner.RunWith;
 @RunWith( ExtendedRunner.class )
 public abstract class AbstractCityTest
 {
+
   public abstract City newInstance() throws Exception;
+
   public abstract Country newCountry() throws Exception;
-  
+
   @Test
   @Repeat( 25 )
-  public void testModifyZipCode() throws Exception {
+  public void testModifyZipCode() throws Exception
+  {
     String zipCode = ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 4, 8 ), ModelRandomGenerator.ALPHANUMERIC_STRING );
-    
+
     City objectUnderTest = newInstance();
     objectUnderTest.setZipCode( zipCode );
     assertEquals( zipCode, objectUnderTest.getZipCode() );
   }
-  
+
   @Test
   @Repeat( 25 )
-  public void testModifyName() throws Exception {
+  public void testModifyName() throws Exception
+  {
     String alphabet = ModelRandomGenerator.ALPHABETIC_STRING + " -";
     String name = ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 1, 50 ), alphabet );
-    
+
     City objectUnderTest = newInstance();
     objectUnderTest.setName( name );
     assertEquals( name, objectUnderTest.getName() );
   }
-  
+
   @Test
   @Repeat( 25 )
-  public void testModifyCounty() throws Exception {
+  public void testModifyCounty() throws Exception
+  {
     Country country = newCountry();
-    
+
     City objectUnderTest = newInstance();
     objectUnderTest.setCountry( country );
     assertEquals( country, objectUnderTest.getCountry() );
