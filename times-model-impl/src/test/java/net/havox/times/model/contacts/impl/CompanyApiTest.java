@@ -20,6 +20,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 
 import net.havox.times.model.contacts.api.AbstractCompanyTest;
+import net.havox.times.model.contacts.api.Address;
 import net.havox.times.model.contacts.api.Company;
 
 /**
@@ -48,5 +49,10 @@ public class CompanyApiTest extends AbstractCompanyTest
     
     return company;
   }
-  
+
+  @Override
+  public Address getNewAddress() throws Exception
+  {
+    return new AddressImpl();
+  }
 }
