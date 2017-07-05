@@ -19,7 +19,6 @@ package net.havox.times.model.contacts.api;
 import net.havox.times.model.api.ExtendedRunner;
 import net.havox.times.model.api.ModelRandomGenerator;
 import net.havox.times.model.api.Repeat;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
