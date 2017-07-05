@@ -128,6 +128,9 @@ public class WorkUnitImpl extends AbstractChangeAwareClass<WorkUnitImpl> impleme
     builder.append( this.getId() );
     builder.append( this.getType() );
     builder.append( this.getDuration() );
+    builder.append( this.getWorkUnitDuration() );
+    builder.append( this.getWorkUnitStart() );
+    builder.append( this.getWorkUnitEnd() );
     builder.append( this.getTasks() );
 
     return builder.toString();
