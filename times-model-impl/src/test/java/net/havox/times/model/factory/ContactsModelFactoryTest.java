@@ -38,76 +38,84 @@ import org.junit.Test;
  */
 public class ContactsModelFactoryTest
 {
+
   public static ContactsModelFactory factory;
-  
+
   @BeforeClass
-  public static void setupClass() {
+  public static void setupClass()
+  {
     factory = ContactsModelFactory.getInstance();
   }
-    
+
   @Test
-  public void testGetInstance() {
+  public void testGetInstance()
+  {
     Object instanceUnderTest = ContactsModelFactory.getInstance();
-    
+
     // Is the instance initialized?
-    assertThat ( instanceUnderTest, is ( notNullValue () ) );
-    
+    assertThat( instanceUnderTest, is( notNullValue() ) );
+
     // Is the instance of the correct type?
-    assertThat ( instanceUnderTest, is ( instanceOf ( ContactsModelFactory.class ) ) );
+    assertThat( instanceUnderTest, is( instanceOf( ContactsModelFactory.class ) ) );
   }
-  
+
   @Test
-  public void testGetNewAddress() {
+  public void testGetNewAddress()
+  {
     Address instanceUnderTest = factory.getNewAddress();
-    
+
     // Is the instance initialized?
-    assertThat ( instanceUnderTest, is ( notNullValue () ) );
-    
+    assertThat( instanceUnderTest, is( notNullValue() ) );
+
     // Is the instance of the correct type?
-    assertThat ( instanceUnderTest, is ( instanceOf ( AddressImpl.class ) ) );
+    assertThat( instanceUnderTest, is( instanceOf( AddressImpl.class ) ) );
   }
-  
+
   @Test
-  public void testGetNewCity() {
+  public void testGetNewCity()
+  {
     City instanceUnderTest = factory.getNewCity();
-    
+
     // Is the instance initialized?
-    assertThat ( instanceUnderTest, is ( notNullValue () ) );
-    
+    assertThat( instanceUnderTest, is( notNullValue() ) );
+
     // Is the instance of the correct type?
-    assertThat ( instanceUnderTest, is ( instanceOf ( CityImpl.class ) ) );
+    assertThat( instanceUnderTest, is( instanceOf( CityImpl.class ) ) );
   }
-  
+
   @Test
-  public void testGetNewCompany() {
+  public void testGetNewCompany()
+  {
     Company instanceUnderTest = factory.getNewCompany();
-    
+
     // Is the instance initialized?
-    assertThat ( instanceUnderTest, is ( notNullValue () ) );
-    
+    assertThat( instanceUnderTest, is( notNullValue() ) );
+
     // Is the instance of the correct type?
-    assertThat ( instanceUnderTest, is ( instanceOf ( CompanyImpl.class ) ) );
+    assertThat( instanceUnderTest, is( instanceOf( CompanyImpl.class ) ) );
   }
-  
+
   @Test
-  public void testGetNewCountry() {
+  public void testGetNewCountry()
+  {
     Country instanceUnderTest = factory.getNewCountry();
-    
+
     // Is the instance initialized?
-    assertThat ( instanceUnderTest, is ( notNullValue () ) );
-    
+    assertThat( instanceUnderTest, is( notNullValue() ) );
+
     // Is the instance of the correct type?
-    assertThat ( instanceUnderTest, is ( instanceOf ( CountryImpl.class ) ) );
+    assertThat( instanceUnderTest, is( instanceOf( CountryImpl.class ) ) );
   }
-  
+
   @Test
-  public void testGetNewPerson() {
+  public void testGetNewPerson()
+  {
     Person instanceUnderTest = factory.getNewPerson();
-    
+
     // Is the instance initialized?
-    assertThat ( instanceUnderTest, is ( notNullValue () ) );
-    
+    assertThat( instanceUnderTest, is( notNullValue() ) );
+
     // Is the instance of the correct type?
-    assertThat ( instanceUnderTest, is ( instanceOf ( PersonImpl.class ) ) );
+    assertThat( instanceUnderTest, is( instanceOf( PersonImpl.class ) ) );
   }
 }

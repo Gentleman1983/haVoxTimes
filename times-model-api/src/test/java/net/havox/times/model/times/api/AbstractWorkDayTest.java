@@ -228,7 +228,8 @@ public abstract class AbstractWorkDayTest
         String message = "WorkUnitType " + type.name() + ": The duration should be 8h, but duration was: " + objectUnderTest.getDuration( type ) + ".";
         assertEquals( message, Duration.of( 8, ChronoUnit.HOURS ), objectUnderTest.getDuration( type ) );
       }
-      else if( WorkUnitType.BREAK.equals( type ) ) {
+      else if ( WorkUnitType.BREAK.equals( type ) )
+      {
         String message = "WorkUnitType " + type.name() + ": The duration should be 30m, but duration was: " + objectUnderTest.getDuration( type ) + ".";
         assertEquals( message, Duration.of( 30, ChronoUnit.MINUTES ), objectUnderTest.getDuration( type ) );
       }

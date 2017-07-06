@@ -41,11 +41,12 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Table( name = WorkUnitImpl.DB_TABLE_NAME )
 public class WorkUnitImpl extends AbstractChangeAwareClass<WorkUnitImpl> implements WorkUnit
 {
+
   /**
    * The db table name.
    */
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_WORK_UNIT";
-          
+
   private static final long serialVersionUID = 944542180473045373L;
 
   private LocalDateTime workUnitStart;
@@ -64,7 +65,7 @@ public class WorkUnitImpl extends AbstractChangeAwareClass<WorkUnitImpl> impleme
   {
     this.type = type;
   }
-  
+
   @Override
   public Duration getWorkUnitDuration()
   {
@@ -73,8 +74,8 @@ public class WorkUnitImpl extends AbstractChangeAwareClass<WorkUnitImpl> impleme
       String message = "Neigther the 'start'=" + this.workUnitStart + " nor the 'end'=" + this.workUnitEnd + " parameter is allowed to be NULL.";
       throw new IllegalStateException( message );
     }
-    
-    return Duration.between(this.workUnitStart, this.workUnitEnd );
+
+    return Duration.between( this.workUnitStart, this.workUnitEnd );
   }
 
   @Override

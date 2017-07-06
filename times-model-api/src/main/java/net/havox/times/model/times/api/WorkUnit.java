@@ -50,13 +50,15 @@ public interface WorkUnit extends ChangeAware, Serializable
    *
    * @return the duration
    */
-  default Duration getDuration() {
+  default Duration getDuration()
+  {
     Duration duration = Duration.ZERO;
-    
-    for( Task task : this.getTasks() ) {
+
+    for ( Task task : this.getTasks() )
+    {
       duration = duration.plus( task.getDuration() );
     }
-    
+
     return duration;
   }
 
@@ -66,7 +68,7 @@ public interface WorkUnit extends ChangeAware, Serializable
    * @return the tasks
    */
   Set<Task> getTasks();
-  
+
   /**
    * Returns the duration of the work, defined either by the duration or the start and end time.
    *

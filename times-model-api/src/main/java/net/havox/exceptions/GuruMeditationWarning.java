@@ -18,26 +18,30 @@ package net.havox.exceptions;
 
 /**
  * Master wrapper class for any haVox {@link RuntimeException}.
- * 
+ *
  * @author Christian Otto
  */
 public class GuruMeditationWarning extends RuntimeException
 {
+
   private static final long serialVersionUID = 381815545100816135L;
 
   private final GuruErrorCode errorCode;
-  
-  public GuruMeditationWarning(GuruErrorCode code, String message, Throwable cause) {
-    super(message, cause);
-    
+
+  public GuruMeditationWarning( GuruErrorCode code, String message, Throwable cause )
+  {
+    super( message, cause );
+
     this.errorCode = code;
   }
-  
-  public GuruMeditationWarning(GuruErrorCode code, String message) {
-    this(code, message, null);
+
+  public GuruMeditationWarning( GuruErrorCode code, String message )
+  {
+    this( code, message, null );
   }
-  
-  public GuruErrorCode getErrorCode() {
+
+  public GuruErrorCode getErrorCode()
+  {
     return this.errorCode;
   }
 }

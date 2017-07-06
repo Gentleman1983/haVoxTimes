@@ -31,7 +31,7 @@ import org.junit.Test;
 
 public class WorkUnitImplTest extends AbstractChangeAwareClassTest
 {
-  
+
   @Override
   public AbstractChangeAwareClass createNewInstance( Long id, long version ) throws Exception
   {
@@ -48,131 +48,141 @@ public class WorkUnitImplTest extends AbstractChangeAwareClassTest
 
     return ( WorkUnitImpl ) instance;
   }
-  
-  private void processTestSetWorkUnitDuration( LocalDateTime startTime, LocalDateTime endTime, Duration expectedDuration ) {
+
+  private void processTestSetWorkUnitDuration( LocalDateTime startTime, LocalDateTime endTime, Duration expectedDuration )
+  {
     WorkUnit objectUnderTest = new WorkUnitImpl();
-    
+
     assertNotNull( objectUnderTest );
-    
+
     objectUnderTest.setWorkUnitDuration( startTime, endTime );
-    
+
     assertEquals( expectedDuration, objectUnderTest.getWorkUnitDuration() );
   }
-  
-  private void processTestSetWorkUnitDuration( LocalDateTime startTime, Duration duration, Duration expectedDuration ) {
+
+  private void processTestSetWorkUnitDuration( LocalDateTime startTime, Duration duration, Duration expectedDuration )
+  {
     WorkUnit objectUnderTest = new WorkUnitImpl();
-    
+
     assertNotNull( objectUnderTest );
-    
+
     objectUnderTest.setWorkUnitDuration( startTime, duration );
-    
+
     assertEquals( expectedDuration, objectUnderTest.getWorkUnitDuration() );
   }
-  
+
   @Test
-  public void testSetWorkUnitDurationLocalDateTimeLocalDateTimeNoException() {
+  public void testSetWorkUnitDurationLocalDateTimeLocalDateTimeNoException()
+  {
     LocalDateTime startTime = LocalDateTime.now();
     Duration expectedDuration = Duration.ofMinutes( 23 * 60 + 59 );
-    LocalDateTime endTime = startTime.plus(expectedDuration );
-    
+    LocalDateTime endTime = startTime.plus( expectedDuration );
+
     assertNotNull( startTime );
     assertNotNull( endTime );
-    
+
     processTestSetWorkUnitDuration( startTime, endTime, expectedDuration );
   }
-  
-  @Test(expected = IllegalArgumentException.class)
-  public void testSetWorkUnitDurationLocalDateTimeLocalDateTimeFirstParameterNull() {
+
+  @Test( expected = IllegalArgumentException.class )
+  public void testSetWorkUnitDurationLocalDateTimeLocalDateTimeFirstParameterNull()
+  {
     LocalDateTime startTime = LocalDateTime.now();
     Duration expectedDuration = Duration.ofMinutes( 23 * 60 + 59 );
-    LocalDateTime endTime = startTime.plus(expectedDuration );
+    LocalDateTime endTime = startTime.plus( expectedDuration );
     startTime = null;
-    
+
     assertNull( startTime );
     assertNotNull( endTime );
-    
+
     processTestSetWorkUnitDuration( startTime, endTime, expectedDuration );
-    
+
     fail( "This should never be reached..." );
   }
-  
-  @Test(expected = IllegalArgumentException.class)
-  public void testSetWorkUnitDurationLocalDateTimeLocalDateTimeSecondParameterNull() {
+
+  @Test( expected = IllegalArgumentException.class )
+  public void testSetWorkUnitDurationLocalDateTimeLocalDateTimeSecondParameterNull()
+  {
     LocalDateTime startTime = LocalDateTime.now();
     Duration expectedDuration = Duration.ofMinutes( 23 * 60 + 59 );
     LocalDateTime endTime = null;
-    
+
     assertNotNull( startTime );
     assertNull( endTime );
-    
+
     processTestSetWorkUnitDuration( startTime, endTime, expectedDuration );
   }
-  
-  @Test(expected = IllegalArgumentException.class)
-  public void testSetWorkUnitDurationLocalDateTimeLocalDateTimeBothParametersNull() {
+
+  @Test( expected = IllegalArgumentException.class )
+  public void testSetWorkUnitDurationLocalDateTimeLocalDateTimeBothParametersNull()
+  {
     LocalDateTime startTime = null;
     Duration expectedDuration = Duration.ofMinutes( 23 * 60 + 59 );
     LocalDateTime endTime = null;
-    
+
     assertNull( startTime );
     assertNull( endTime );
-    
+
     processTestSetWorkUnitDuration( startTime, endTime, expectedDuration );
-    
+
     fail( "This should never be reached..." );
   }
-  
+
   @Test
-  public void testSetWorkUnitDurationLocalDateTimeDurationNoException() {
+  public void testSetWorkUnitDurationLocalDateTimeDurationNoException()
+  {
     LocalDateTime startTime = LocalDateTime.now();
     Duration duration = Duration.ofMinutes( 23 * 60 + 59 );
     Duration expectedDuration = duration;
-    
+
     assertNotNull( startTime );
     assertNotNull( duration );
-    
+
     processTestSetWorkUnitDuration( startTime, duration, expectedDuration );
   }
-  
-  @Test(expected = IllegalArgumentException.class)
-  public void testSetWorkUnitDurationLocalDateTimeDurationFirstParameterNull() {
+
+  @Test( expected = IllegalArgumentException.class )
+  public void testSetWorkUnitDurationLocalDateTimeDurationFirstParameterNull()
+  {
     LocalDateTime startTime = null;
     Duration duration = Duration.ofMinutes( 23 * 60 + 59 );
     Duration expectedDuration = Duration.ZERO;
-    
+
     assertNull( startTime );
     assertNotNull( duration );
-    
+
     processTestSetWorkUnitDuration( startTime, duration, expectedDuration );
-    
+
     fail( "This should never be reached..." );
   }
-  
-  @Test(expected = IllegalArgumentException.class)
-  public void testSetWorkUnitDurationLocalDateTimeDurationSecondParameterNull() {
+
+  @Test( expected = IllegalArgumentException.class )
+  public void testSetWorkUnitDurationLocalDateTimeDurationSecondParameterNull()
+  {
     LocalDateTime startTime = LocalDateTime.now();
     Duration duration = null;
     Duration expectedDuration = Duration.ZERO;
-    
+
     assertNotNull( startTime );
     assertNull( duration );
-    
+
     processTestSetWorkUnitDuration( startTime, duration, expectedDuration );
-    
+
     fail( "This should never be reached..." );
   }
-  
-  @Test(expected = IllegalArgumentException.class)
-  public void testSetWorkUnitDurationLocalDateTimeDurationBothParametersNull() {
+
+  @Test( expected = IllegalArgumentException.class )
+  public void testSetWorkUnitDurationLocalDateTimeDurationBothParametersNull()
+  {
     LocalDateTime startTime = null;
     Duration duration = null;
     Duration expectedDuration = Duration.ZERO;
-    
+
     assertNull( startTime );
     assertNull( duration );
-    
+
     processTestSetWorkUnitDuration( startTime, duration, expectedDuration );
-    
+
     fail( "This should never be reached..." );
   }
 }

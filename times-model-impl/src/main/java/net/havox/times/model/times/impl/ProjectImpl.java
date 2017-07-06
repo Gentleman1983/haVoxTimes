@@ -39,7 +39,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Table( name = ProjectImpl.DB_TABLE_NAME )
 public class ProjectImpl extends AbstractChangeAwareClass<ProjectImpl> implements Project
 {
-  /** The db table name. */
+
+  /**
+   * The db table name.
+   */
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_PROJECT";
 
   private static final long serialVersionUID = -537340800679521572L;

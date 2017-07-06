@@ -45,11 +45,11 @@ public class ProjectApiTest extends AbstractProjectTest
   public Project newInstanceWithoutInitializedSubprojects() throws Exception
   {
     Project instance = new ProjectImpl();
-    
+
     Field subprojectsField = instance.getClass().getDeclaredField( "subprojects" );
     subprojectsField.setAccessible( true );
     subprojectsField.set( instance, null );
-    
+
     return instance;
   }
 
@@ -70,7 +70,7 @@ public class ProjectApiTest extends AbstractProjectTest
   {
     WorkDay instance = new WorkDayImpl();
     instance.setDate( workDate );
-    
+
     return instance;
   }
 
@@ -79,18 +79,18 @@ public class ProjectApiTest extends AbstractProjectTest
   {
     Task task = new TaskImpl();
     task.setDuration( duration );
-    
+
     WorkUnit workUnit = new WorkUnitImpl();
     workUnit.getTasks().add( task );
     workUnit.setType( type );
     workUnit.setWorkUnitDuration( LocalDateTime.of( workDate, LocalTime.MIN ), duration );
-    
+
     WorkDay instance = newWorkday( workDate );
     instance.addWorkUnit( workUnit );
     instance.setStart( LocalDateTime.of( workDate, LocalTime.MIN ) );
     instance.setEnd( LocalDateTime.of( workDate, LocalTime.MAX ) );
-    
+
     return instance;
   }
-  
+
 }

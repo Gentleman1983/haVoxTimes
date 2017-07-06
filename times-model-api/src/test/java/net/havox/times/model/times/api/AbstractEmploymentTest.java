@@ -64,9 +64,9 @@ public abstract class AbstractEmploymentTest
     Employment employmentToday = getNewInstance( LocalDate.now(), null );
     LocalDate startDateEmploymentOneMonth = LocalDate.now().minus( Period.ofMonths( 1 ) );
     Employment employmentOneMonth = getNewInstance( startDateEmploymentOneMonth, null );
-    
+
     assertEquals( 0l, employmentToday.getEmploymentMonths() );
-    assertEquals( 1l, employmentOneMonth.getEmploymentMonths());
+    assertEquals( 1l, employmentOneMonth.getEmploymentMonths() );
   }
 
   @Test

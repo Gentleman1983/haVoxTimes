@@ -39,7 +39,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Table( name = WorkDayImpl.DB_TABLE_NAME )
 public class WorkDayImpl extends AbstractChangeAwareClass<WorkDayImpl> implements WorkDay
 {
-  /** The db table name. */
+
+  /**
+   * The db table name.
+   */
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_WORK_DAY";
 
   private static final long serialVersionUID = -1468588140684922531L;

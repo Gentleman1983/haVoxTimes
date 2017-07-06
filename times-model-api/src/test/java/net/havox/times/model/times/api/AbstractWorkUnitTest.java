@@ -164,17 +164,17 @@ public abstract class AbstractWorkUnitTest
   {
     WorkUnit noTasks = newInstance();
     assertEquals( Duration.ZERO, noTasks.getDuration() );
-    
+
     WorkUnit zeroDurationTask = newInstance();
     Task zeroTask = newTask( Duration.ZERO );
     zeroDurationTask.getTasks().add( zeroTask );
     assertEquals( Duration.ZERO, zeroDurationTask.getDuration() );
-    
+
     WorkUnit twoHourTask = newInstance();
     Task twoHour = newTask( Duration.ofHours( 2 ) );
     twoHourTask.getTasks().add( twoHour );
     assertEquals( Duration.of( 2, ChronoUnit.HOURS ), twoHourTask.getDuration() );
-    
+
     WorkUnit sixHourTasks = newInstance();
     Task fourHour = newTask( Duration.ofHours( 4 ) );
     sixHourTasks.getTasks().add( twoHour );

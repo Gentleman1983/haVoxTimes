@@ -43,7 +43,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Table( name = EmploymentImpl.DB_TABLE_NAME )
 public class EmploymentImpl extends AbstractChangeAwareClass<EmploymentImpl> implements Employment
 {
-  /** The db table name. */
+
+  /**
+   * The db table name.
+   */
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_EMPLOYMENT";
 
   private static final long serialVersionUID = 544489079880583555L;
@@ -56,7 +59,7 @@ public class EmploymentImpl extends AbstractChangeAwareClass<EmploymentImpl> imp
   private Person employee;
   @Column( name = "employer" )
   private Company employer;
-  @OneToMany(targetEntity=Project.class)
+  @OneToMany( targetEntity = Project.class )
   private final Collection<Project> projects = new CopyOnWriteArrayList<>();
 
   @Override

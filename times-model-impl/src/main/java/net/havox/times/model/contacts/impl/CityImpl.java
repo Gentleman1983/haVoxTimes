@@ -34,7 +34,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Table( name = CityImpl.DB_TABLE_NAME )
 public class CityImpl extends AbstractChangeAwareClass<CityImpl> implements City
 {
-  /** The db table name. */
+
+  /**
+   * The db table name.
+   */
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_CITY";
 
   private static final long serialVersionUID = -416723199770693783L;

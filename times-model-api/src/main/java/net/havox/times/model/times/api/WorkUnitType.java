@@ -18,17 +18,25 @@ package net.havox.times.model.times.api;
 
 /**
  * Represents the different types of work units.
- * 
+ *
  * @author Christian Otto
  */
 public enum WorkUnitType
 {
-  /** The time worked. */
+  /**
+   * The time worked.
+   */
   WORK,
-  /** The time having a break. */
+  /**
+   * The time having a break.
+   */
   BREAK,
-  /** The time away for having vacation. */
+  /**
+   * The time away for having vacation.
+   */
   VACATION,
-  /** The time away because of illness. */
+  /**
+   * The time away because of illness.
+   */
   ILLNESS;
 }

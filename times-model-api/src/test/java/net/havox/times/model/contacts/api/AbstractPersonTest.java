@@ -31,31 +31,36 @@ import org.junit.runner.RunWith;
 @RunWith( ExtendedRunner.class )
 public abstract class AbstractPersonTest
 {
+
   public abstract Person getNewInstance( LocalDate dateOfBirth ) throws Exception;
+
   public abstract Person getNewInstanceWithNonInitializedDateOfBirth() throws Exception;
+
   public abstract Address getNewAddress() throws Exception;
-  
+
   @Test
-  public void testGetAge() throws Exception {
+  public void testGetAge() throws Exception
+  {
     Person personBornToday = getNewInstance( LocalDate.now() );
     Person personBornOneHundredYearsAgo = getNewInstance( LocalDate.now().minus( 100, ChronoUnit.YEARS ) );
-    
+
     assertNotNull( personBornToday );
     assertNotNull( personBornOneHundredYearsAgo );
-    
+
     assertEquals( Period.ZERO, personBornToday.getAge() );
-    assertEquals( Period.of(100, 0, 0), personBornOneHundredYearsAgo.getAge() );
+    assertEquals( Period.of( 100, 0, 0 ), personBornOneHundredYearsAgo.getAge() );
   }
-  
+
   @Test( expected = IllegalStateException.class )
-  public void testGetAgeNotInitialized() throws Exception {
+  public void testGetAgeNotInitialized() throws Exception
+  {
     Person person = getNewInstanceWithNonInitializedDateOfBirth();
-    
+
     person.getAge();
-    
+
     fail( "This should never be reached..." );
   }
-  
+
   @Test
   @Repeat( 25 )
   public void testModifyLastName() throws Exception
@@ -67,15 +72,17 @@ public abstract class AbstractPersonTest
     objectUnderTest.setLastName( name );
     assertEquals( name, objectUnderTest.getLastName() );
   }
-  
+
   @Test
   @Repeat( 25 )
   public void testModifyMiddleInitials() throws Exception
   {
     int numberOfMiddleInitials = ModelRandomGenerator.randomIntInRange( 0, 10 );
     StringBuilder builder = new StringBuilder();
-    for( int i = 0; i < numberOfMiddleInitials; i++ ) {
-      if( i > 0 ) {
+    for ( int i = 0; i < numberOfMiddleInitials; i++ )
+    {
+      if ( i > 0 )
+      {
         builder.append( " " );
       }
       builder.append( ModelRandomGenerator.randomString( 1, ModelRandomGenerator.ALPHABETIC_STRING ) );
@@ -87,7 +94,7 @@ public abstract class AbstractPersonTest
     objectUnderTest.setMiddleInnitials( middleInitials );
     assertEquals( middleInitials, objectUnderTest.getMiddleInnitials() );
   }
-  
+
   @Test
   @Repeat( 25 )
   public void testModifyFirstName() throws Exception
@@ -99,7 +106,7 @@ public abstract class AbstractPersonTest
     objectUnderTest.setFirstName( name );
     assertEquals( name, objectUnderTest.getFirstName() );
   }
-  
+
   @Test
   @Repeat( 25 )
   public void testModifyDateOfBirth() throws Exception
@@ -110,7 +117,7 @@ public abstract class AbstractPersonTest
     objectUnderTest.setDateOfBirth( date );
     assertEquals( date, objectUnderTest.getDateOfBirth() );
   }
-  
+
   @Test
   @Repeat( 25 )
   public void testModifyAddress() throws Exception

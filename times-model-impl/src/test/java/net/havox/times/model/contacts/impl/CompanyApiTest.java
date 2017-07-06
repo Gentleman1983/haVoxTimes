@@ -42,11 +42,11 @@ public class CompanyApiTest extends AbstractCompanyTest
   public Company getNewInstanceWithUninitializedSubCompanyValue() throws Exception
   {
     CompanyImpl company = new CompanyImpl();
-    
+
     Field idField = company.getClass().getDeclaredField( "subCompanies" );
     idField.setAccessible( true );
     idField.set( company, null );
-    
+
     return company;
   }
 

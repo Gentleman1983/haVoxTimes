@@ -33,7 +33,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Table( name = CountryImpl.DB_TABLE_NAME )
 public class CountryImpl extends AbstractChangeAwareClass<CountryImpl> implements Country
 {
-  /** The db table name. */
+
+  /**
+   * The db table name.
+   */
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_COUNTRY";
 
   private static final long serialVersionUID = -632142391869704255L;

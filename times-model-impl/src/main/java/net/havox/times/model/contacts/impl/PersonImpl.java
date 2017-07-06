@@ -36,7 +36,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Table( name = PersonImpl.DB_TABLE_NAME )
 public class PersonImpl extends AbstractChangeAwareClass<PersonImpl> implements Person
 {
-  /** The db table name. */
+
+  /**
+   * The db table name.
+   */
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_PERSON";
 
   private static final long serialVersionUID = 5520806245947083462L;

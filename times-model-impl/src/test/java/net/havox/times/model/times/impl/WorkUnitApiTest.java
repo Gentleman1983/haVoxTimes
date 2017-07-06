@@ -36,15 +36,15 @@ public class WorkUnitApiTest extends AbstractWorkUnitTest
   public WorkUnit newInstance( LocalDateTime start, LocalDateTime end ) throws Exception
   {
     WorkUnit instance = newInstance();
-    
+
     Field startField = instance.getClass().getDeclaredField( "workUnitStart" );
     startField.setAccessible( true );
     startField.set( instance, start );
-    
+
     Field endField = instance.getClass().getDeclaredField( "workUnitEnd" );
     endField.setAccessible( true );
     endField.set( instance, end );
-    
+
     return instance;
   }
 
@@ -52,10 +52,10 @@ public class WorkUnitApiTest extends AbstractWorkUnitTest
   public Task newTask( Duration duration ) throws Exception
   {
     Task instance = new TaskImpl();
-    
+
     instance.setDuration( duration );
-    
+
     return instance;
   }
-  
+
 }

@@ -37,7 +37,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Table( name = TaskImpl.DB_TABLE_NAME )
 public class TaskImpl extends AbstractChangeAwareClass<TaskImpl> implements Task
 {
-  /** The db table name. */
+
+  /**
+   * The db table name.
+   */
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_TASK";
 
   private static final long serialVersionUID = 8471130167805360250L;

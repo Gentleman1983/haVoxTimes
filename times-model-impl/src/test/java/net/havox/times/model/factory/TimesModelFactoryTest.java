@@ -40,87 +40,96 @@ import org.junit.Test;
  */
 public class TimesModelFactoryTest
 {
+
   public static TimesModelFactory factory;
-  
+
   @BeforeClass
-  public static void setupClass() {
+  public static void setupClass()
+  {
     factory = TimesModelFactory.getInstance();
   }
-    
+
   @Test
-  public void testGetInstance() {
+  public void testGetInstance()
+  {
     Object instanceUnderTest = TimesModelFactory.getInstance();
-    
+
     // Is the instance initialized?
-    assertThat ( instanceUnderTest, is ( notNullValue () ) );
-    
+    assertThat( instanceUnderTest, is( notNullValue() ) );
+
     // Is the instance of the correct type?
-    assertThat ( instanceUnderTest, is ( instanceOf ( TimesModelFactory.class ) ) );
+    assertThat( instanceUnderTest, is( instanceOf( TimesModelFactory.class ) ) );
   }
-  
+
   @Test
-  public void testGetNewEmployment() {
+  public void testGetNewEmployment()
+  {
     Employment instanceUnderTest = factory.getNewEmployment();
-    
+
     // Is the instance initialized?
-    assertThat ( instanceUnderTest, is ( notNullValue () ) );
-    
+    assertThat( instanceUnderTest, is( notNullValue() ) );
+
     // Is the instance of the correct type?
-    assertThat ( instanceUnderTest, is ( instanceOf ( EmploymentImpl.class ) ) );
+    assertThat( instanceUnderTest, is( instanceOf( EmploymentImpl.class ) ) );
   }
-  
+
   @Test
-  public void testGetNewIssue() {
+  public void testGetNewIssue()
+  {
     Issue instanceUnderTest = factory.getNewIssue();
-    
+
     // Is the instance initialized?
-    assertThat ( instanceUnderTest, is ( notNullValue () ) );
-    
+    assertThat( instanceUnderTest, is( notNullValue() ) );
+
     // Is the instance of the correct type?
-    assertThat ( instanceUnderTest, is ( instanceOf ( IssueImpl.class ) ) );
+    assertThat( instanceUnderTest, is( instanceOf( IssueImpl.class ) ) );
   }
-  
+
   @Test
-  public void testGetNewProject() {
+  public void testGetNewProject()
+  {
     Project instanceUnderTest = factory.getNewProject();
-    
+
     // Is the instance initialized?
-    assertThat ( instanceUnderTest, is ( notNullValue () ) );
-    
+    assertThat( instanceUnderTest, is( notNullValue() ) );
+
     // Is the instance of the correct type?
-    assertThat ( instanceUnderTest, is ( instanceOf ( ProjectImpl.class ) ) );
+    assertThat( instanceUnderTest, is( instanceOf( ProjectImpl.class ) ) );
   }
-  
+
   @Test
-  public void testGetNewTask() {
+  public void testGetNewTask()
+  {
     Task instanceUnderTest = factory.getNewTask();
-    
+
     // Is the instance initialized?
-    assertThat ( instanceUnderTest, is ( notNullValue () ) );
-    
+    assertThat( instanceUnderTest, is( notNullValue() ) );
+
     // Is the instance of the correct type?
-    assertThat ( instanceUnderTest, is ( instanceOf ( TaskImpl.class ) ) );
+    assertThat( instanceUnderTest, is( instanceOf( TaskImpl.class ) ) );
   }
-  
+
   @Test
-  public void testGetNewWorkDay() {
+  public void testGetNewWorkDay()
+  {
     WorkDay instanceUnderTest = factory.getNewWorkDay();
-    
+
     // Is the instance initialized?
-    assertThat ( instanceUnderTest, is ( notNullValue () ) );
-    
+    assertThat( instanceUnderTest, is( notNullValue() ) );
+
     // Is the instance of the correct type?
-    assertThat ( instanceUnderTest, is ( instanceOf ( WorkDayImpl.class ) ) );
+    assertThat( instanceUnderTest, is( instanceOf( WorkDayImpl.class ) ) );
   }
-  
+
   @Test
-  public void testGetNewWorkUnit() {
+  public void testGetNewWorkUnit()
+  {
     WorkUnit instanceUnderTest = factory.getNewWorkUnit();
-    
+
     // Is the instance initialized?
-    assertThat ( instanceUnderTest, is ( notNullValue () ) );
-    
+    assertThat( instanceUnderTest, is( notNullValue() ) );
+
     // Is the instance of the correct type?
-    assertThat ( instanceUnderTest, is ( instanceOf ( WorkUnitImpl.class ) ) );
+    assertThat( instanceUnderTest, is( instanceOf( WorkUnitImpl.class ) ) );
   }
 }

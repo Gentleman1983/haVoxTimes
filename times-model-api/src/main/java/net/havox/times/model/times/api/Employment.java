@@ -51,15 +51,15 @@ public interface Employment extends ChangeAware, Serializable
      * * If we have got an open end, today is the current ending date and has to be added in the calculation.
      */
     LocalDate start = this.getStart();
-    LocalDate end = ( this.getEnd() == null ) ? 
-            LocalDate.now().plus( 1, ChronoUnit.DAYS ) : this.getEnd().plus( 1, ChronoUnit.DAYS );
-    int years = (int) ChronoUnit.YEARS.between(start, end );
+    LocalDate end = ( this.getEnd() == null )
+            ? LocalDate.now().plus( 1, ChronoUnit.DAYS ) : this.getEnd().plus( 1, ChronoUnit.DAYS );
+    int years = ( int ) ChronoUnit.YEARS.between( start, end );
     end = end.minus( years, ChronoUnit.YEARS ); // For not to count the duration of years multiple times, we have to
-                                                // decrease the end date by the number of years.
-    int months = (int) ChronoUnit.MONTHS.between(start, end );
+    // decrease the end date by the number of years.
+    int months = ( int ) ChronoUnit.MONTHS.between( start, end );
     end = end.minus( months, ChronoUnit.MONTHS ); // For not to count the duration of months multiple times, we have to
-                                                  // decrease the end date by the number of months.
-    int days = (int) ChronoUnit.DAYS.between(start, end );
+    // decrease the end date by the number of months.
+    int days = ( int ) ChronoUnit.DAYS.between( start, end );
 
     // After calculation of the correct number of years, months and days we can wrap it up in a Period object.
     return Period.of( years, months, days ).toTotalMonths();
@@ -86,8 +86,10 @@ public interface Employment extends ChangeAware, Serializable
    */
   default boolean isActive()
   {
-    return ( this.getEnd() == null ) ||                  // No end defined.
-            this.getEnd().isAfter( LocalDate.now() ) ||  // End in the future.
+    return ( this.getEnd() == null )
+            || // No end defined.
+            this.getEnd().isAfter( LocalDate.now() )
+            || // End in the future.
             this.getEnd().equals( LocalDate.now() );     // End today.
   }
 

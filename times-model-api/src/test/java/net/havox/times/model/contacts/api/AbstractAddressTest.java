@@ -24,41 +24,45 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 
-
 @RunWith( ExtendedRunner.class )
 public abstract class AbstractAddressTest
 {
+
   public abstract Address newInstance() throws Exception;
+
   public abstract City newCity() throws Exception;
-  
+
   @Test
   @Repeat( 25 )
-  public void testModifyStreet() throws Exception {
+  public void testModifyStreet() throws Exception
+  {
     String alphabet = " -" + ModelRandomGenerator.ALPHABETIC_STRING;
     String streetName = ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 1, 50 ), alphabet );
-    
+
     Address objectUnderTest = newInstance();
     objectUnderTest.setStreet( streetName );
     assertEquals( streetName, objectUnderTest.getStreet() );
   }
-  
+
   @Test
   @Repeat( 25 )
-  public void testModifyHouseNumber() throws Exception {
+  public void testModifyHouseNumber() throws Exception
+  {
     int number = ModelRandomGenerator.randomIntInRange( 1, 9999 );
     String letter = ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 0, 1 ), ModelRandomGenerator.ALPHABETIC_STRING );
     String houseNumber = "" + number + letter;
-    
+
     Address objectUnderTest = newInstance();
     objectUnderTest.setHouseNumber( houseNumber );
     assertEquals( houseNumber, objectUnderTest.getHouseNumber() );
   }
-  
+
   @Test
   @Repeat( 25 )
-  public void testModifyCity() throws Exception {
+  public void testModifyCity() throws Exception
+  {
     City city = newCity();
-    
+
     Address objectUnderTest = newInstance();
     objectUnderTest.setCity( city );
     assertEquals( city, objectUnderTest.getCity() );

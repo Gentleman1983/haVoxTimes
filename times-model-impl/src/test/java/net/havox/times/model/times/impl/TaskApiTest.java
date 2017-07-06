@@ -27,5 +27,5 @@ public class TaskApiTest extends AbstractTaskTest
   {
     return new TaskImpl();
   }
-  
+
 }

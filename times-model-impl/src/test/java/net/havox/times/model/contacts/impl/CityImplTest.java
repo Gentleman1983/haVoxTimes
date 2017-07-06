@@ -23,7 +23,7 @@ import net.havox.times.model.impl.AbstractChangeAwareClassTest;
 
 public class CityImplTest extends AbstractChangeAwareClassTest
 {
-  
+
   @Override
   public AbstractChangeAwareClass createNewInstance( Long id, long version ) throws Exception
   {

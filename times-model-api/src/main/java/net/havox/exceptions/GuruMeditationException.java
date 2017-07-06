@@ -18,26 +18,30 @@ package net.havox.exceptions;
 
 /**
  * Master wrapper class for any haVox {@link Exception}.
- * 
+ *
  * @author Christian Otto
  */
 public class GuruMeditationException extends Exception
 {
+
   private static final long serialVersionUID = 2950576533956158185L;
 
   private final GuruErrorCode errorCode;
-  
-  public GuruMeditationException(GuruErrorCode code, String message, Throwable cause) {
-    super(message, cause);
-    
+
+  public GuruMeditationException( GuruErrorCode code, String message, Throwable cause )
+  {
+    super( message, cause );
+
     this.errorCode = code;
   }
-  
-  public GuruMeditationException(GuruErrorCode code, String message) {
-    this(code, message, null);
+
+  public GuruMeditationException( GuruErrorCode code, String message )
+  {
+    this( code, message, null );
   }
-  
-  public GuruErrorCode getErrorCode() {
+
+  public GuruErrorCode getErrorCode()
+  {
     return this.errorCode;
   }
 }

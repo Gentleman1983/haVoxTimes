@@ -67,33 +67,34 @@ public abstract class AbstractIssueTest
     objectUnderTest.setEnd( end );
     assertEquals( end, objectUnderTest.getEnd() );
   }
-  
+
   @Test
-  public void testDuration() throws Exception {
+  public void testDuration() throws Exception
+  {
     Task zeroSecondsTask = mock( Task.class );
     when( zeroSecondsTask.getDuration() ).thenReturn( Duration.ZERO );
-    
+
     Task twentyMinuteTask = mock( Task.class );
     when( twentyMinuteTask.getDuration() ).thenReturn( Duration.of( 20, ChronoUnit.MINUTES ) );
-    
+
     Task fourHourTask = mock( Task.class );
     when( fourHourTask.getDuration() ).thenReturn( Duration.of( 4, ChronoUnit.HOURS ) );
-    
+
     Issue issueNoIssue = newInstance();
-    
+
     Issue issueNoDuration = newInstance();
     issueNoDuration.getTasks().add( zeroSecondsTask );
-    
+
     Issue issuetwentyMinutes = newInstance();
     issuetwentyMinutes.getTasks().add( twentyMinuteTask );
-    
+
     Issue issueFourHours = newInstance();
     issueFourHours.getTasks().add( fourHourTask );
-    
+
     Issue issueFourHoursAndTwentyMinutes = newInstance();
     issueFourHoursAndTwentyMinutes.getTasks().add( twentyMinuteTask );
     issueFourHoursAndTwentyMinutes.getTasks().add( fourHourTask );
-    
+
     assertEquals( Duration.ZERO, issueNoIssue.getDuration() );
     assertEquals( Duration.ZERO, issueNoDuration.getDuration() );
     assertEquals( Duration.of( 20, ChronoUnit.MINUTES ), issuetwentyMinutes.getDuration() );

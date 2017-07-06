@@ -38,7 +38,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Table( name = IssueImpl.DB_TABLE_NAME )
 public class IssueImpl extends AbstractChangeAwareClass<IssueImpl> implements Issue
 {
-  /** The db table name. */
+
+  /**
+   * The db table name.
+   */
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_ISSUE";
 
   private static final long serialVersionUID = -8302339463943510497L;

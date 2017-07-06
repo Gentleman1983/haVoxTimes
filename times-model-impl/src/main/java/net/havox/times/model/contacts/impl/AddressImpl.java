@@ -34,7 +34,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Table( name = AddressImpl.DB_TABLE_NAME )
 public class AddressImpl extends AbstractChangeAwareClass<AddressImpl> implements Address
 {
-  /** The db table name. */
+
+  /**
+   * The db table name.
+   */
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_ADDRESS";
 
   private static final long serialVersionUID = -3857698669332938089L;

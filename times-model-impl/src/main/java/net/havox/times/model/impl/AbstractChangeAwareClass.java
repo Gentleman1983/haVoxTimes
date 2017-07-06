@@ -30,7 +30,7 @@ import net.havox.times.model.api.ChangeAware;
  * This class provides the basic functionality to provide change awareness.
  *
  * @param <T> the type of change aware class.
- * 
+ *
  * @author Christian Otto
  */
 @MappedSuperclass
@@ -106,7 +106,7 @@ public abstract class AbstractChangeAwareClass<T extends AbstractChangeAwareClas
       {
         EqualsBuilder builder = new EqualsBuilder();
 
-        builder.append(this.getId(), typedObject.getId() );
+        builder.append( this.getId(), typedObject.getId() );
 
         return builder.isEquals();
       }
@@ -114,12 +114,14 @@ public abstract class AbstractChangeAwareClass<T extends AbstractChangeAwareClas
 
     return false;
   }
-  
+
   @Override
-  public int compareTo(T other) {
-    if( null == this.getId() || null == other.getId() ) {
-      return super.hashCode() - ((Object) other).hashCode();
+  public int compareTo( T other )
+  {
+    if ( null == this.getId() || null == other.getId() )
+    {
+      return super.hashCode() - ( ( Object ) other ).hashCode();
     }
-    return (int) ( this.getId() - other.getId() );
+    return ( int ) ( this.getId() - other.getId() );
   }
 }
