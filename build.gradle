@@ -7,7 +7,15 @@ if ( !project.hasProperty( 'typeOfRelease' ) || ( !project.ext.typeOfRelease.equ
 buildscript {
     repositories {
         maven {
-            url "${repository_contextUrl}/${repository_publicRepositoryName}"
+            url "${repository_contextUrl}/${repository_pluginsRepositoryName}"
+            credentials {
+                username = "${repository_user}"
+                password = "${repository_password}"
+        
+            }
+        }
+        maven {
+            url "${repository_contextUrl}/${repository_remoteRepositoryName}"
             credentials {
                 username = "${repository_user}"
                 password = "${repository_password}"

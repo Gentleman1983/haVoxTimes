@@ -12,13 +12,21 @@ apply plugin: 'maven-publish'
 
 repositories {
     maven {
-        url "${repository_contextUrl}/${repository_publicRepositoryName}"
-        credentials {
-            username = "${repository_user}"
-            password = "${repository_password}"
+            url "${repository_contextUrl}/${repository_libsRepositoryName}"
+            credentials {
+                username = "${repository_user}"
+                password = "${repository_password}"
         
+            }
         }
-    }
+        maven {
+            url "${repository_contextUrl}/${repository_remoteRepositoryName}"
+            credentials {
+                username = "${repository_user}"
+                password = "${repository_password}"
+        
+            }
+        }
 }
 
 dependencies {
