@@ -104,9 +104,3 @@ def jacocoExecFileList = 'build/jacoco/text.exec'
 subprojects*.each {
     jacocoExecFileList+=",${it.name}/build/jacoco/text.exec"
 }
-
-sonarqube{
-    properties {
-        property "sonar.jacoco.reportPaths" "${jacocoExecFileList}"
-    }
-}
