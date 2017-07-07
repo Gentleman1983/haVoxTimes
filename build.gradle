@@ -85,7 +85,7 @@ task codeCoverageReport(type: JacocoReport) {
     reports {
       xml.enabled true
       html.enabled true
-      html.destination "${buildDir}/reports/jacoco"
+      html.destination file("${buildDir}/reports/jacoco")
       csv.enabled false
     }
 }
@@ -98,4 +98,15 @@ tasks.sonarqube.dependsOn codeCoverageReport
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.0.1'
+}
+
+def jacocoExecFileList = 'build/jacoco/text.exec'
+subprojects*.each {
+    jacocoExecFileList+=",${it.name}/build/jacoco/text.exec"
+}
+
+sonarqube{
+    properties {
+        property "sonar.jacoco.reportPaths" "${jacocoExecFileList}"
+    }
 }
