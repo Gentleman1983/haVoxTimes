@@ -22,6 +22,8 @@ buildscript {
         
             }
         }
+        mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${project.ext.'gradlePluginVersion.sonarsource.sonarqube-gradle-plugin'}"
