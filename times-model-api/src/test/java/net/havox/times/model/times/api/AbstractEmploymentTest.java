@@ -19,9 +19,9 @@ package net.havox.times.model.times.api;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
-import net.havox.times.model.api.ExtendedRunner;
-import net.havox.times.model.api.ModelRandomGenerator;
-import net.havox.times.model.api.Repeat;
+import net.havox.test.utils.ExtendedRunner;
+import net.havox.test.utils.ModelRandomGenerator;
+import net.havox.test.utils.Repeat;
 import net.havox.times.model.contacts.api.Company;
 import net.havox.times.model.contacts.api.Person;
 

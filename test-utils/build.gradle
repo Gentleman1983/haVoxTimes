@@ -1,0 +1,5 @@
+dependencies {
+    compile group: 'junit', name: 'junit', version: project.ext.'libraryVersion.junit.junit'
+    compile group: 'org.hamcrest', name: 'hamcrest-junit', version: project.ext.'libraryVersion.hamcrest.hamcrest'
+    compile group: 'org.mockito', name: 'mockito-core', version: project.ext.'libraryVersion.mockito.mockito'
+}

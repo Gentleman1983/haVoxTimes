@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.havox.times.model.api;
+package net.havox.test.utils;
 
 import org.junit.Ignore;
 import org.junit.runner.Description;

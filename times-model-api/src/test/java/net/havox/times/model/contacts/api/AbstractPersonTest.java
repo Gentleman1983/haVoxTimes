@@ -19,9 +19,9 @@ package net.havox.times.model.contacts.api;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
-import net.havox.times.model.api.ExtendedRunner;
-import net.havox.times.model.api.ModelRandomGenerator;
-import net.havox.times.model.api.Repeat;
+import net.havox.test.utils.ExtendedRunner;
+import net.havox.test.utils.ModelRandomGenerator;
+import net.havox.test.utils.Repeat;
 
 import org.junit.Test;
 
