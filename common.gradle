@@ -10,6 +10,17 @@ apply plugin: 'maven-publish'
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
+repositories {
+    maven {
+        url "${repository_contextUrl}/${repository_publicRepositoryName}"
+        credentials {
+            username = "${repository_user}"
+            password = "${repository_password}"
+        
+        }
+    }
+}
+
 dependencies {
     // Adding dependencies here will add the dependencies to each subproject.
     testCompile group: 'junit', name: 'junit', version: project.ext.'libraryVersion.junit.junit'
@@ -60,6 +71,32 @@ artifacts {
 }
 
 publishing {
+    def repoKey = ''
+    
+    if ( !project.hasProperty( 'typeOfRelease' ) || project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) ) {
+        repoKey = 'snapshot'
+    }
+    else if ( project.ext.typeOfRelease.equalsIgnoreCase( 'RELEASE' ) ) {
+        repoKey = 'release'
+    }
+    
+    repositories {
+        
+        maven {
+            name repoKey
+            credentials {
+                username repository_user
+                password repository_password
+            }
+            if ( !project.hasProperty( 'typeOfRelease' ) || project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) ) {
+                url "${repository_contextUrl}/${repository_snapshotRepositoryName}"
+            }
+            else if ( project.ext.typeOfRelease.equalsIgnoreCase( 'RELEASE' ) ) {
+                url "${repository_contextUrl}/${repository_releaseRepositoryName}"
+            }
+        }
+    }
+    
     publications {
         mavenJava( MavenPublication ) {
             from components.java

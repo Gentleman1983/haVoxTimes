@@ -7,10 +7,10 @@ if ( !project.hasProperty( 'typeOfRelease' ) || ( !project.ext.typeOfRelease.equ
 buildscript {
     repositories {
         maven {
-            url 'http://devserver:8081/artifactory/plugins-release'
+            url "${repository_contextUrl}/${repository_publicRepositoryName}"
             credentials {
-                username = "${artifactory_user}"
-                password = "${artifactory_password}"
+                username = "${repository_user}"
+                password = "${repository_password}"
         
             }
         }
@@ -26,7 +26,6 @@ apply plugin: 'org.sonarqube'
 
 allprojects {
     apply from: rootProject.file( 'common.gradle' )
-    apply plugin: 'com.jfrog.artifactory'
     
     // Run JaCoCo test reports before triggering SonarQube analysis.
     rootProject.tasks.sonarqube.dependsOn jacocoTestReport
@@ -47,32 +46,6 @@ println "* Group ID: ${project.group}"
 println "* Artifact ID: ${project.name}"
 println "* Version: ${project.version}"
 println '***********************************************************'
-
-artifactory {
-    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
-    publish {
-        repository {
-            if ( !project.hasProperty( 'typeOfRelease' ) || project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) ) {
-                repoKey = 'libs-snapshot-local'
-            }
-            else if ( project.ext.typeOfRelease.equalsIgnoreCase( 'RELEASE' ) ) {
-                repoKey = 'libs-release-local'
-            }
-            username = "${artifactory_user}"
-            password = "${artifactory_password}"
-            maven = true   
-        }
-    }
-    resolve {
-        repository {
-            repoKey = 'libs-release'
-            username = "${artifactory_user}"
-            password = "${artifactory_password}"
-            maven = true
-            
-        }
-    }
-}
 
 task mergedJavadoc( type: Javadoc, description: 'Creates Javadoc from all the projects.' ) {
     title = 'All modules'
