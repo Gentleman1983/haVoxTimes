@@ -1,4 +1,7 @@
 dependencies {
     compile project( ':times-persistence-impl' )
     compile project( ':times-service-api' )
+    
+    testCompile project( path:':times-service-api', configuration:'testArtifacts')
+    testCompile project( ':test-utils' )
 }

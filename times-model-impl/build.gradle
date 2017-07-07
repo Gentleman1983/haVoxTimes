@@ -7,4 +7,5 @@ dependencies {
     compile group: 'javax.persistence', name: 'persistence-api', version: project.ext.'libraryVersion.javax.persistence-api'
     
     testCompile project( path:':times-model-api', configuration:'testArtifacts')
+    testCompile project( ':test-utils' )
 }
