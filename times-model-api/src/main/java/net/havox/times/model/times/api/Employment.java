@@ -38,6 +38,7 @@ public interface Employment extends ChangeAware, Serializable
    * Calculates the number of months of the employment.
    *
    * @return the number of months
+   * @throws IllegalStateException if the start parameter is null.
    */
   default long getEmploymentMonths()
   {
@@ -51,6 +52,11 @@ public interface Employment extends ChangeAware, Serializable
      * * If we have got an open end, today is the current ending date and has to be added in the calculation.
      */
     LocalDate start = this.getStart();
+    
+    if( null == start ) {
+      throw new IllegalStateException( "The start date of the employment has to be set." );
+    }
+    
     LocalDate end = ( this.getEnd() == null )
             ? LocalDate.now().plus( 1, ChronoUnit.DAYS ) : this.getEnd().plus( 1, ChronoUnit.DAYS );
     int years = ( int ) ChronoUnit.YEARS.between( start, end );

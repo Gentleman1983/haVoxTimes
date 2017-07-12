@@ -309,4 +309,15 @@ public abstract class AbstractChangeAwareClassTest
       }
     }
   }
+  
+  @Test
+  public void toStringNoExceptionTest() throws Exception {
+    AbstractChangeAwareClass instance1 = createNewInstance( 1L, randomGenerator.nextLong() );
+    AbstractChangeAwareClass instance2 = createNewInstance( 2L, randomGenerator.nextLong() );
+    AbstractChangeAwareClass instance3 = createNewInstance( null, randomGenerator.nextLong() );
+    
+    instance1.toString();
+    instance2.toString();
+    instance3.toString();
+  }
 }

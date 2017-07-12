@@ -45,6 +45,8 @@ public class WorkUnitImplTest extends AbstractChangeAwareClassTest
     Field versionField = instance.getClass().getSuperclass().getDeclaredField( "version" );
     versionField.setAccessible( true );
     versionField.set( instance, version );
+    
+    (( WorkUnitImpl ) instance).setWorkUnitDuration( LocalDateTime.MIN, LocalDateTime.MAX );
 
     return ( WorkUnitImpl ) instance;
   }

@@ -28,6 +28,7 @@ buildscript {
     dependencies {
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${project.ext.'gradlePluginVersion.sonarsource.sonarqube-gradle-plugin'}"
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:${project.ext.'gradlePluginVersion.jfrog.build-info-extractor-gradle'}"
+        classpath "org.liquibase:liquibase-gradle-plugin:${project.ext.'gradlePluginVersion.liquibase.liquibase-gradle-plugin'}"
     }
 }
 
@@ -96,11 +97,21 @@ codeCoverageReport.dependsOn {
 }
 tasks.sonarqube.dependsOn codeCoverageReport
 
+
+task codeCoverageReport2(type: JacocoReport) {
+    dependsOn = subprojects.test
+    additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
+    sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
+    classDirectories =  files(subprojects.sourceSets.main.output)
+    executionData = files(subprojects.jacocoTestReport.executionData)
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        csv.enabled = false
+    }
+}
+tasks.sonarqube.dependsOn codeCoverageReport2
+
 task wrapper(type: Wrapper) {
     gradleVersion = '4.0.1'
-}
-
-def jacocoExecFileList = 'build/jacoco/text.exec'
-subprojects*.each {
-    jacocoExecFileList+=",${it.name}/build/jacoco/text.exec"
 }

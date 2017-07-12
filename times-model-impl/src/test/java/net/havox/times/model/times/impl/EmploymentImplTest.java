@@ -17,6 +17,7 @@
 package net.havox.times.model.times.impl;
 
 import java.lang.reflect.Field;
+import java.time.LocalDate;
 
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.impl.AbstractChangeAwareClassTest;
@@ -37,6 +38,8 @@ public class EmploymentImplTest extends AbstractChangeAwareClassTest
     Field versionField = instance.getClass().getSuperclass().getDeclaredField( "version" );
     versionField.setAccessible( true );
     versionField.set( instance, version );
+    
+    (( EmploymentImpl ) instance).setStart( LocalDate.now() );
 
     return ( EmploymentImpl ) instance;
   }

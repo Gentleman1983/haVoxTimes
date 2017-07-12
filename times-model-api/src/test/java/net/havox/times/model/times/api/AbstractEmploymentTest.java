@@ -45,6 +45,22 @@ public abstract class AbstractEmploymentTest
   public abstract Company getNewCompany() throws Exception;
 
   public abstract Person getNewPerson() throws Exception;
+  
+  @Test( expected = IllegalStateException.class )
+  public void testGetEmploymentMonthsStartNotSet() throws Exception
+  {
+    Employment instanceUnderTest = getNewInstance( null, LocalDate.MAX );
+    
+    try {
+      instanceUnderTest.getEmploymentMonths();
+      
+      fail( "This should never be reached!" );
+    }
+    catch( IllegalStateException ise ) {
+      assertEquals( "The start date of the employment has to be set.", ise.getMessage() );
+      throw ise;
+    }
+  }
 
   @Test
   public void testGetEmploymentMonthsStartEnd() throws Exception
