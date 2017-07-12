@@ -1,3 +1,17 @@
+// Activate liquibase on this implementation.
+apply plugin: 'org.liquibase.gradle'
+
+/*liquibase {
+  activities {
+    main {
+      changeLogFile 'src/main/db/changelogs.groovy'
+      url 'jdbc:mysql://localhost:3306/my_db'
+	  username 'myusername'
+	  password 'mypassword'
+    }
+  }
+}*/
+
 dependencies {
     compile project( ':times-model-impl' )
     compile project( ':times-persistence-api' )
