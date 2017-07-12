@@ -49,6 +49,17 @@ jacoco {
     toolVersion = project.ext.'gradlePluginVersion.jacoco.toolVersion'
 }
 
+jacocoTestReport {
+    additionalSourceDirs = files(sourceSets.main.allSource.srcDirs)
+    sourceDirectories = files(sourceSets.main.allSource.srcDirs)
+    classDirectories =  files(sourceSets.main.output)
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        csv.enabled = false
+    }
+}
+
 String mavenArtifactId = name
 group = project.ext.mavenGroupId
 version = project.ext.mavenVersion
