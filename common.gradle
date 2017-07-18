@@ -67,33 +67,6 @@ jacocoTestReport {
     }
 }
 
-clover {
-    classesBackupDir = file("${buildDir}/classes-backup")
-    
-    //additionalSourceSet {
-    //    srcDirs = project(':test-utils').sourceSets.main.allSource.srcDirs
-    //    srcDirs += project(':times-model-api').sourceSets.main.allSource.srcDirs
-    //    classesDir = project(':test-utils').sourceSets.main.output.classesDir
-    //    classesDir += project(':times-model-api').sourceSets.main.output.classesDir
-    //}
-    //additionalTestSourceSet {
-    //    srcDirs = project(':test-utils').sourceSets.test.allSource.srcDirs
-    //    srcDirs += project(':times-model-api').sourceSets.test.allSource.srcDirs
-    //    classesDir = project(':test-utils').sourceSets.test.output.classesDir
-    //    classesDir += project(':times-model-api').sourceSets.test.output.classesDir
-    //}
-    
-    compiler {
-        encoding = 'UTF-8'
-    }
-    
-    report {
-        html = true
-        json = true
-        pdf = true
-    }
-}
-
 String mavenArtifactId = name
 group = project.ext.mavenGroupId
 version = project.ext.mavenVersion
