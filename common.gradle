@@ -51,7 +51,7 @@ test {
         html.enabled = true
     }
     jacoco {
-        append = true
+        //append = true
         destinationFile = file("${rootProject.buildDir}/jacoco/jacocoTest.exec")
     }
 }
