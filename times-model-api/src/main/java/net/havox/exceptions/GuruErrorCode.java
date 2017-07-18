@@ -22,5 +22,5 @@ package net.havox.exceptions;
  */
 public enum GuruErrorCode
 {
-
+  DEFAULT;
 }
