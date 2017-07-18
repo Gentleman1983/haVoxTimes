@@ -35,9 +35,6 @@ repositories {
 }
 
 dependencies {
-    // OpenClover dependency for coverage analysis.
-    clover 'org.openclover:clover:4.2.0'
-    
     // Adding dependencies here will add the dependencies to each subproject.
     testCompile group: 'junit', name: 'junit', version: project.ext.'libraryVersion.junit.junit'
     testCompile group: 'org.hamcrest', name: 'hamcrest-junit', version: project.ext.'libraryVersion.hamcrest.hamcrest'
