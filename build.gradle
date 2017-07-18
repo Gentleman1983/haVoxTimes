@@ -105,6 +105,7 @@ task wrapper(type: Wrapper) {
 
 sonarqube {
     properties {
-        property "sonar.jacoco.reportPaths", "**/build/jacoco/*.exec"
+        property "sonar.jacoco.reportPaths", "${buildDir}/jacoco/*.exec"
+        property "sonar.jacoco.reportPath", "${buildDir}/jacoco/*.exec"
     }
 }
