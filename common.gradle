@@ -7,7 +7,6 @@ sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
 apply plugin: 'java'
-apply plugin: "com.bmuschko.clover"
 apply plugin: "jacoco"
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
@@ -51,8 +50,8 @@ test {
         html.enabled = true
     }
     jacoco {
-        //append = true
-        destinationFile = file("${rootProject.buildDir}/jacoco/jacocoTest.exec")
+        append=true
+        destinationFile = file( "${rootProject.buildDir}/jacoco/jacocoTest.exec" ) 
     }
 }
 
