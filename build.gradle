@@ -95,16 +95,6 @@ jacocoAllProjectsTestReport.dependsOn {
 }
 tasks.sonarqube.dependsOn jacocoAllProjectsTestReport
 
-task jacocoMergeTestReports( type: JacocoMerge ) {
-    dependsOn( subprojects.jacocoTestReport.dependsOn )
-    mustRunAfter( subprojects.jacocoTestReport.mustRunAfter )
-    description 'Merges the JaCoCo test reports of the different projects to get correct cross-project-coverage data on sonarqube server.'
-    
-    destinationFile = file( "${buildDir}/jacoco/mergedTests.exec" )
-    executionData = files( subprojects.jacocoTestReport.executionData ).filter { jacocoReportFile -> jacocoReportFile.exists() }
-}
-tasks.sonarqube.dependsOn jacocoMergeTestReports
-
 task wrapper(type: Wrapper) {
     gradleVersion = '4.0.1'
 }
