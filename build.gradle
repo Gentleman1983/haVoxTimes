@@ -71,8 +71,8 @@ task mergedJavadoc( type: Javadoc, description: 'Creates Javadoc from all the pr
     }
 }
 
-task codeCoverageReport(type: JacocoReport) {
-    description "Creates a unified JaCoCo test report for the project."
+task jacocoAllProjectsTestReport(type: JacocoReport) {
+    description 'Creates a unified JaCoCo test report for the project.'
     
     // Gather execution data from all subprojects
     // (change this if you e.g. want to calculate unit test/integration test coverage separately)
@@ -89,20 +89,21 @@ task codeCoverageReport(type: JacocoReport) {
         csv.enabled false
     }
 }
-
-task jacocoMerge(type: JacocoMerge) {
-    dependsOn(subprojects.jacocoTestReport.dependsOn)
-    mustRunAfter(subprojects.jacocoTestReport.mustRunAfter)
-    destinationFile = file( "${buildDir}/jacoco/mergedTests.exec" )
-    executionData = files(subprojects.jacocoTestReport.executionData).filter { jacocoReportFile -> jacocoReportFile.exists() }
-}
-tasks.sonarqube.dependsOn jacocoMerge
-
 // always run the tests before generating the report
-codeCoverageReport.dependsOn {
+jacocoAllProjectsTestReport.dependsOn {
     subprojects*.test
 }
-tasks.sonarqube.dependsOn codeCoverageReport
+tasks.sonarqube.dependsOn jacocoAllProjectsTestReport
+
+task jacocoMergeTestReports( type: JacocoMerge ) {
+    dependsOn( subprojects.jacocoTestReport.dependsOn )
+    mustRunAfter( subprojects.jacocoTestReport.mustRunAfter )
+    description 'Merges the JaCoCo test reports of the different projects to get correct cross-project-coverage data on sonarqube server.'
+    
+    destinationFile = file( "${buildDir}/jacoco/mergedTests.exec" )
+    executionData = files( subprojects.jacocoTestReport.executionData ).filter { jacocoReportFile -> jacocoReportFile.exists() }
+}
+tasks.sonarqube.dependsOn jacocoMergeTestReports
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.0.1'

@@ -48,7 +48,6 @@ test {
     }
     jacoco {
         append=true
-        //destinationFile = file( "${rootProject.buildDir}/jacoco/jacocoTest.exec" ) 
     }
 }
 
