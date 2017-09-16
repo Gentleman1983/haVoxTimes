@@ -151,8 +151,13 @@ public abstract class AbstractChangeAwareClassTest
     assertNotNull( instance );
 
     Object notEqualObject = new Object();
+    
+    assertFalse( "Both objects should not be equal.", instance == notEqualObject );
+    assertFalse( "The object should not be NULL.", notEqualObject == null );
+    assertFalse( "Both objects should not be of the same class.", instance.getClass() == notEqualObject.getClass() );
 
     assertNotEquals( notEqualObject, instance );
+    assertNotEquals( instance, notEqualObject );
   }
 
   @Test
