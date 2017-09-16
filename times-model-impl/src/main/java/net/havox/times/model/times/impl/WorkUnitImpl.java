@@ -21,7 +21,11 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import net.havox.times.model.impl.AbstractChangeAwareClass;
@@ -49,9 +53,14 @@ public class WorkUnitImpl extends AbstractChangeAwareClass<WorkUnitImpl> impleme
 
   private static final long serialVersionUID = 944542180473045373L;
 
+  @Column( name = "start" )
   private transient LocalDateTime workUnitStart;
+  @Column( name = "end" )
   private transient LocalDateTime workUnitEnd;
+  @Column( name = "type" )
   private WorkUnitType type;
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = "task_id" )
   private final Set<Task> tasks = new ConcurrentSkipListSet<>();
 
   @Override

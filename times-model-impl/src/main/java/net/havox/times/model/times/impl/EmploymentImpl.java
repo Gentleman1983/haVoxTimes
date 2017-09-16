@@ -21,7 +21,9 @@ import java.util.Collection;
 import java.util.concurrent.CopyOnWriteArrayList;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -51,15 +53,18 @@ public class EmploymentImpl extends AbstractChangeAwareClass<EmploymentImpl> imp
 
   private static final long serialVersionUID = 544489079880583555L;
 
-  @Column( name = "start" )
+  @Column( name = "start_date" )
   private transient LocalDate start;
-  @Column( name = "end" )
+  @Column( name = "end_date" )
   private transient LocalDate end;
-  @Column( name = "employee" )
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = "employee_id" )
   private Person employee;
-  @Column( name = "employer" )
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = "employer_id" )
   private Company employer;
-  @OneToMany( targetEntity = Project.class )
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = "project_id" )
   private final Collection<Project> projects = new CopyOnWriteArrayList<>();
 
   @Override

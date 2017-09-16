@@ -17,7 +17,11 @@
 package net.havox.times.model.contacts.impl;
 
 import java.time.LocalDate;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import net.havox.times.model.contacts.api.Address;
@@ -44,10 +48,16 @@ public class PersonImpl extends AbstractChangeAwareClass<PersonImpl> implements 
 
   private static final long serialVersionUID = 5520806245947083462L;
 
+  @Column( name = "first_name" )
   private String firstName;
+  @Column( name = "middle_initials" )
   private String middleInitials;
+  @Column( name = "last_name" )
   private String lastName;
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = "address_id" )
   private Address address;
+  @Column( name = "dateOfBirth" )
   private transient LocalDate dateOfBirth;
 
   @Override

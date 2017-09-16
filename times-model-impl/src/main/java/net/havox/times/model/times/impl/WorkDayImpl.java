@@ -20,7 +20,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import net.havox.times.model.impl.AbstractChangeAwareClass;
@@ -47,9 +51,14 @@ public class WorkDayImpl extends AbstractChangeAwareClass<WorkDayImpl> implement
 
   private static final long serialVersionUID = -1468588140684922531L;
 
+  @Column( name = "date" )
   private transient LocalDate date;
+  @Column( name = "start_time" )
   private transient LocalDateTime start;
+  @Column( name = "end_time" )
   private transient LocalDateTime end;
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = "work_unit_id" )
   private final Set<WorkUnit> workUnits = new ConcurrentSkipListSet<>();
 
   @Override

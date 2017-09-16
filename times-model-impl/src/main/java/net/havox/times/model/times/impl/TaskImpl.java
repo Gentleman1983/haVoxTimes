@@ -19,7 +19,10 @@ package net.havox.times.model.times.impl;
 import java.time.Duration;
 import java.util.Collection;
 import java.util.concurrent.CopyOnWriteArrayList;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import net.havox.times.model.impl.AbstractChangeAwareClass;
@@ -44,10 +47,13 @@ public class TaskImpl extends AbstractChangeAwareClass<TaskImpl> implements Task
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_TASK";
 
   private static final long serialVersionUID = 8471130167805360250L;
-  private Long id;
-  private long version;
+  
+  @Column( name = "name" )
   private String name;
+  @Column( name = "duration" )
   private transient Duration duration;
+  @OneToMany
+  @JoinColumn( name = "head_task_id", referencedColumnName = "id" )
   private final Collection<Task> subTasks = new CopyOnWriteArrayList<>();
 
   @Override

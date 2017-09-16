@@ -16,7 +16,11 @@
  */
 package net.havox.times.model.contacts.impl;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import net.havox.times.model.contacts.api.City;
 import net.havox.times.model.contacts.api.Country;
@@ -42,8 +46,12 @@ public class CityImpl extends AbstractChangeAwareClass<CityImpl> implements City
 
   private static final long serialVersionUID = -416723199770693783L;
 
+  @Column( name = "zip_code" )
   private String zipCode;
+  @Column( name = "name" )
   private String name;
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = "country_id" )
   private Country country;
 
   @Override

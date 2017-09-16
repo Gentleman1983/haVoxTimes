@@ -18,7 +18,12 @@ package net.havox.times.model.contacts.impl;
 
 import java.util.Collection;
 import java.util.concurrent.CopyOnWriteArrayList;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import net.havox.times.model.contacts.api.Address;
@@ -45,8 +50,13 @@ public class CompanyImpl extends AbstractChangeAwareClass<CompanyImpl> implement
 
   private static final long serialVersionUID = 7315535092868289098L;
 
+  @Column( name = "name" )
   private String name;
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = "address_id" )
   private Address address;
+  @OneToMany
+  @JoinColumn( name = "head_company_id", referencedColumnName = "id" )
   private final Collection<Company> subCompanies = new CopyOnWriteArrayList<>();
 
   @Override

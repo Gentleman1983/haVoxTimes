@@ -19,7 +19,12 @@ package net.havox.times.model.times.impl;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentSkipListSet;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import net.havox.times.model.contacts.api.Company;
@@ -47,12 +52,23 @@ public class ProjectImpl extends AbstractChangeAwareClass<ProjectImpl> implement
 
   private static final long serialVersionUID = -537340800679521572L;
 
+  @Column( name = "name" )
   private String name;
+  @Column( name = "start_date" )
   private transient LocalDate start;
+  @Column( name = "end_date" )
   private transient LocalDate end;
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = "employer_id" )
   private Company employer;
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = "employee_id" )
   private Person employee;
+  @OneToMany
+  @JoinColumn( name = "head_project_id", referencedColumnName = "id" )
   private final Collection<Project> subprojects = new ConcurrentSkipListSet<>();
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = "work_day_id" )
   private final Collection<WorkDay> workDays = new ConcurrentSkipListSet<>();
 
   @Override

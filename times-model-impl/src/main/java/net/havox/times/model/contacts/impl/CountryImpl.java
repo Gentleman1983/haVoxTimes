@@ -16,6 +16,7 @@
  */
 package net.havox.times.model.contacts.impl;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import net.havox.times.model.contacts.api.Country;
@@ -41,6 +42,7 @@ public class CountryImpl extends AbstractChangeAwareClass<CountryImpl> implement
 
   private static final long serialVersionUID = -632142391869704255L;
 
+  @Column( name = "name" )
   private String name;
 
   @Override

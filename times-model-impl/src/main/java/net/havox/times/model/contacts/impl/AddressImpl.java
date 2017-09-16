@@ -16,7 +16,11 @@
  */
 package net.havox.times.model.contacts.impl;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import net.havox.times.model.contacts.api.Address;
 import net.havox.times.model.contacts.api.City;
@@ -41,8 +45,13 @@ public class AddressImpl extends AbstractChangeAwareClass<AddressImpl> implement
   public static final String DB_TABLE_NAME = "HAVOX_TIMES_ADDRESS";
 
   private static final long serialVersionUID = -3857698669332938089L;
+  
+  @Column( name = "street" )
   private String street;
+  @Column( name = "house_number" )
   private String houseNumber;
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = "city_id" )
   private City city;
 
   @Override
