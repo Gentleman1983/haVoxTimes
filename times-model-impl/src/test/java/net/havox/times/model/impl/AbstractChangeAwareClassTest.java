@@ -328,7 +328,7 @@ public abstract class AbstractChangeAwareClassTest
   }
 
   @Test
-  public void toStringNoExceptionTest() throws Exception
+  public void testToStringNoExceptionTest() throws Exception
   {
     AbstractChangeAwareClass instance1 = createNewInstance( 1L, randomGenerator.nextLong() );
     AbstractChangeAwareClass instance2 = createNewInstance( 2L, randomGenerator.nextLong() );
@@ -337,5 +337,19 @@ public abstract class AbstractChangeAwareClassTest
     instance1.toString();
     instance2.toString();
     instance3.toString();
+  }
+
+  @Test
+  public void testCompareToTest() throws Exception
+  {
+    AbstractChangeAwareClass instance1 = createNewInstance( 1L, randomGenerator.nextLong() );
+    AbstractChangeAwareClass instance2 = createNewInstance( 2L, randomGenerator.nextLong() );
+
+    assertEquals( instance1, instance1 );
+    assertTrue( "An instance should always be equal to itself.", instance1.compareTo( instance1 ) == 0 );
+    
+    assertNotEquals( instance1, instance2 );
+    assertTrue( "Instance 1 should have the lower ID.", instance1.compareTo( instance2 ) < 0 );
+    assertTrue( "Instance 1 should have the lower ID.", instance2.compareTo( instance1 ) > 0 );
   }
 }
