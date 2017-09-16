@@ -16,6 +16,8 @@ dependencies {
     compile project( ':times-model-impl' )
     compile project( ':times-persistence-api' )
     
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.11.Final'
+    
     testCompile project( path:':times-persistence-api', configuration:'testArtifacts')
     testCompile project( ':test-utils' )
 }
