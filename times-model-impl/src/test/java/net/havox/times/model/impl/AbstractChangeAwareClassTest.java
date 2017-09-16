@@ -144,6 +144,18 @@ public abstract class AbstractChangeAwareClassTest
   }
 
   @Test
+  public void testEqualsNewObject() throws Exception
+  {
+    AbstractChangeAwareClass instance = createNewInstance( 1L, randomGenerator.nextLong() );
+
+    assertNotNull( instance );
+
+    Object notEqualObject = new Object();
+
+    assertNotEquals( notEqualObject, instance );
+  }
+
+  @Test
   public void testHashCode() throws Exception
   {
     AbstractChangeAwareClass instance1 = createNewInstance( 1L, randomGenerator.nextLong() );
@@ -309,13 +321,14 @@ public abstract class AbstractChangeAwareClassTest
       }
     }
   }
-  
+
   @Test
-  public void toStringNoExceptionTest() throws Exception {
+  public void toStringNoExceptionTest() throws Exception
+  {
     AbstractChangeAwareClass instance1 = createNewInstance( 1L, randomGenerator.nextLong() );
     AbstractChangeAwareClass instance2 = createNewInstance( 2L, randomGenerator.nextLong() );
     AbstractChangeAwareClass instance3 = createNewInstance( null, randomGenerator.nextLong() );
-    
+
     instance1.toString();
     instance2.toString();
     instance3.toString();
