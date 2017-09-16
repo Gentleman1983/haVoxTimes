@@ -48,7 +48,7 @@ public class PersonImpl extends AbstractChangeAwareClass<PersonImpl> implements 
   private String middleInitials;
   private String lastName;
   private Address address;
-  private LocalDate dateOfBirth;
+  private transient LocalDate dateOfBirth;
 
   @Override
   public String getLastName()

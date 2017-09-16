@@ -48,8 +48,8 @@ public class ProjectImpl extends AbstractChangeAwareClass<ProjectImpl> implement
   private static final long serialVersionUID = -537340800679521572L;
 
   private String name;
-  private LocalDate start;
-  private LocalDate end;
+  private transient LocalDate start;
+  private transient LocalDate end;
   private Company employer;
   private Person employee;
   private final Collection<Project> subprojects = new ConcurrentSkipListSet<>();

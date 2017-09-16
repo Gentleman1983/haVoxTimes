@@ -47,9 +47,9 @@ public class WorkDayImpl extends AbstractChangeAwareClass<WorkDayImpl> implement
 
   private static final long serialVersionUID = -1468588140684922531L;
 
-  private LocalDate date;
-  private LocalDateTime start;
-  private LocalDateTime end;
+  private transient LocalDate date;
+  private transient LocalDateTime start;
+  private transient LocalDateTime end;
   private final Set<WorkUnit> workUnits = new ConcurrentSkipListSet<>();
 
   @Override

@@ -47,7 +47,7 @@ public class TaskImpl extends AbstractChangeAwareClass<TaskImpl> implements Task
   private Long id;
   private long version;
   private String name;
-  private Duration duration;
+  private transient Duration duration;
   private final Collection<Task> subTasks = new CopyOnWriteArrayList<>();
 
   @Override

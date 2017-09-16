@@ -52,9 +52,9 @@ public class EmploymentImpl extends AbstractChangeAwareClass<EmploymentImpl> imp
   private static final long serialVersionUID = 544489079880583555L;
 
   @Column( name = "start" )
-  private LocalDate start;
+  private transient LocalDate start;
   @Column( name = "end" )
-  private LocalDate end;
+  private transient LocalDate end;
   @Column( name = "employee" )
   private Person employee;
   @Column( name = "employer" )

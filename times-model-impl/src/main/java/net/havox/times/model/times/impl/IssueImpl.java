@@ -47,8 +47,8 @@ public class IssueImpl extends AbstractChangeAwareClass<IssueImpl> implements Is
   private static final long serialVersionUID = -8302339463943510497L;
 
   private String description;
-  private LocalDateTime start;
-  private LocalDateTime end;
+  private transient LocalDateTime start;
+  private transient LocalDateTime end;
   private final Collection<Task> tasks = new CopyOnWriteArrayList<>();
 
   @Override

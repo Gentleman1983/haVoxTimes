@@ -49,8 +49,8 @@ public class WorkUnitImpl extends AbstractChangeAwareClass<WorkUnitImpl> impleme
 
   private static final long serialVersionUID = 944542180473045373L;
 
-  private LocalDateTime workUnitStart;
-  private LocalDateTime workUnitEnd;
+  private transient LocalDateTime workUnitStart;
+  private transient LocalDateTime workUnitEnd;
   private WorkUnitType type;
   private final Set<Task> tasks = new ConcurrentSkipListSet<>();
 
