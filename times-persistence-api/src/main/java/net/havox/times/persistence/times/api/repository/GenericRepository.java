@@ -16,18 +16,78 @@
  */
 package net.havox.times.persistence.times.api.repository;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import net.havox.times.model.api.ChangeAware;
 
 public interface GenericRepository<T extends ChangeAware>
 {
 
+  // ******************************************************************************************************************
+  // Get entities from database. **************************************************************************************
+  // ******************************************************************************************************************
   Optional<T> get( Long id );
+
+  default Set<T> get( Predicate<T> predicate )
+  {
+    return get()
+            .stream()
+            .filter( predicate )
+            .collect( Collectors.toSet() );
+  }
 
   Set<T> get();
 
+  // ******************************************************************************************************************
+  // Update entities on database. *************************************************************************************
+  // ******************************************************************************************************************
   void persist( T entity );
 
+  default void persist( T... entities )
+  {
+    persist( Arrays.asList( entities ) );
+  }
+
+  default void persist( Collection<T> entities )
+  {
+    entities.forEach( this::persist );
+  }
+
+  // ******************************************************************************************************************
+  // Remove entities from database. ***********************************************************************************
+  // ******************************************************************************************************************
+  
+  // Remove objects by IDs.
+  default void remove( Long id )
+  {
+    remove( entity -> entity.getId().equals( id ) ); // predicate to match the id
+  }
+
+  default void remove( Long... ids )
+  {
+    Arrays.asList( ids ).forEach( this::remove );
+  }
+
+  // Remove using the entities.
   void remove( T entity );
+
+  default void remove( T... entities )
+  {
+    remove( Arrays.asList( entities ) );
+  }
+
+  default void remove( Collection<T> entities )
+  {
+    entities.forEach( this::remove );
+  }
+  
+  // Remove using predicate.
+  default void remove( Predicate<T> predicate )
+  {
+    get( predicate ).forEach( this::remove );
+  }
 }
