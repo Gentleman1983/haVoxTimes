@@ -14,20 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.havox.test.utils;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-@Retention( RetentionPolicy.RUNTIME )
-@Target( 
-{
-  ElementType.METHOD
-} )
-public @interface Repeat
-{
-
-  int value();
-}
+/**
+ * This package contains JUnit test utility classes for usage in the project.
+ */
+package net.havox.test.utils.junit;

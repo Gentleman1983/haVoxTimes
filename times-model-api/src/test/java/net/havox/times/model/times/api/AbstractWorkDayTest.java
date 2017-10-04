@@ -23,9 +23,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import net.havox.test.utils.ExtendedRunner;
-import net.havox.test.utils.ModelRandomGenerator;
-import net.havox.test.utils.Repeat;
+import net.havox.test.utils.junit.ExtendedRunner;
+import net.havox.test.utils.random.ModelRandomGenerator;
+import net.havox.test.utils.junit.Repeat;
 import net.havox.times.model.contacts.api.Person;
 import org.junit.Test;
 

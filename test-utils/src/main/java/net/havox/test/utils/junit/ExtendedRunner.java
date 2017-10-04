@@ -14,8 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.havox.test.utils;
+package net.havox.test.utils.junit;
 
+import net.havox.test.utils.junit.Repeat;
 import org.junit.Ignore;
 import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
