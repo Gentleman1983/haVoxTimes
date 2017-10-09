@@ -75,7 +75,7 @@ public interface WorkUnit extends ChangeAware, Serializable
    *
    * @return the work duration
    *
-   * @throws GuruMeditationWarning, if the workUnitStart of workUnitEnd is <code>null</code>.
+   * @throws GuruMeditationWarning , if the workUnitStart of workUnitEnd is <code>null</code>.
    */
   Duration getWorkUnitDuration();
 
@@ -85,7 +85,7 @@ public interface WorkUnit extends ChangeAware, Serializable
    * @param start the start time
    * @param end the end time
    *
-   * @throws GuruMeditationWarning, if any of the parameters is <code>null</code>.
+   * @throws GuruMeditationWarning , if any of the parameters is <code>null</code>.
    */
   void setWorkUnitDuration( LocalDateTime start, LocalDateTime end );
 
@@ -95,7 +95,7 @@ public interface WorkUnit extends ChangeAware, Serializable
    * @param start the start time
    * @param duration the duration
    *
-   * @throws GuruMeditationWarning, if any of the parameters is <code>null</code>.
+   * @throws GuruMeditationWarning , if any of the parameters is <code>null</code>.
    */
   void setWorkUnitDuration( LocalDateTime start, Duration duration );
 
