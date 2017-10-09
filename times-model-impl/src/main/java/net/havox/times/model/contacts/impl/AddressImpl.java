@@ -103,12 +103,6 @@ public class AddressImpl extends AbstractChangeAwareClass<AddressImpl> implement
   }
 
   @Override
-  public int compareTo( AddressImpl other )
-  {
-    return super.compareTo( other );
-  }
-
-  @Override
   public String toString()
   {
     ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE );
