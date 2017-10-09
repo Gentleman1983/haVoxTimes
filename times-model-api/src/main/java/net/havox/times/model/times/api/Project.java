@@ -237,7 +237,7 @@ public interface Project extends ChangeAware, Serializable
    * @return true, if the employment contains sub projects
    * @throws IllegalStateException if the projects propery is not initialized
    */
-  default boolean hasSubprojects() throws IllegalStateException
+  default boolean hasSubprojects()
   {
     if ( this.getSubprojects() == null )
     {
