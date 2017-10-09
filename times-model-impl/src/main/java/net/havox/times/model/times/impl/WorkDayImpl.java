@@ -104,18 +104,6 @@ public class WorkDayImpl extends AbstractChangeAwareClass<WorkDayImpl> implement
   }
 
   @Override
-  public int hashCode()
-  {
-    return super.hashCode();
-  }
-
-  @Override
-  public boolean equals( Object object )
-  {
-    return super.equals( object );
-  }
-
-  @Override
   public String toString()
   {
     ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.MULTI_LINE_STYLE );
