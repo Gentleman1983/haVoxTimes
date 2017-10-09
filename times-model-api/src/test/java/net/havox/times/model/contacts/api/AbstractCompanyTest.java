@@ -16,12 +16,16 @@
  */
 package net.havox.times.model.contacts.api;
 
+import static net.havox.exceptions.GuruErrorCode.ILLEGAL_STATE;
+
+import static org.junit.Assert.*;
+
+import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.test.utils.junit.ExtendedRunner;
 import net.havox.test.utils.random.ModelRandomGenerator;
 import net.havox.test.utils.junit.Repeat;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
@@ -50,12 +54,20 @@ public abstract class AbstractCompanyTest
     assertTrue( companyWithSubCompanies.hasSubCompanies() );
   }
 
-  @Test( expected = IllegalStateException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testHasSubcompaniesNotInitialized() throws Exception
   {
     Company company = getNewInstanceWithUninitializedSubCompanyValue();
 
-    company.hasSubCompanies();
+    try
+    {
+      company.hasSubCompanies();
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_STATE, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached..." );
   }

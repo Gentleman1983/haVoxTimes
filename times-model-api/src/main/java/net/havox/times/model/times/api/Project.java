@@ -16,6 +16,9 @@
  */
 package net.havox.times.model.times.api;
 
+import static net.havox.exceptions.GuruErrorCode.ILLEGAL_ARGUMENT;
+import static net.havox.exceptions.GuruErrorCode.ILLEGAL_STATE;
+
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -25,6 +28,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentSkipListSet;
 
+import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.times.model.api.ChangeAware;
 import net.havox.times.model.contacts.api.Company;
 import net.havox.times.model.contacts.api.Person;
@@ -77,9 +81,9 @@ public interface Project extends ChangeAware, Serializable
    * @param type the {@link WorkUnitType}
    * @return the calculated work duration for this month
    *
-   * @throws IllegalArgumentException if the month is not set.
-   * @throws IllegalArgumentException if the work unit type is not set.
-   * @throws IllegalArgumentException if the month does not fit the Employment duration.
+   * @throws GuruMeditationWarning if the month is not set.
+   * @throws GuruMeditationWarning if the work unit type is not set.
+   * @throws GuruMeditationWarning if the month does not fit the Employment duration.
    */
   default Duration getDuraration( Month month, int year, WorkUnitType type )
   {
@@ -95,19 +99,19 @@ public interface Project extends ChangeAware, Serializable
    * @param includeSubProjects Shall we include subProjects (default: true).
    * @return the calculated work duration for this month
    *
-   * @throws IllegalArgumentException if the month is not set.
-   * @throws IllegalArgumentException if the work unit type is not set.
-   * @throws IllegalArgumentException if the month does not fit the Employment duration.
+   * @throws GuruMeditationWarning if the month is not set.
+   * @throws GuruMeditationWarning if the work unit type is not set.
+   * @throws GuruMeditationWarning if the month does not fit the Employment duration.
    */
   default Duration getDuraration( Month month, int year, WorkUnitType type, boolean includeSubProjects )
   {
     if ( month == null )
     {
-      throw new IllegalArgumentException( "The month has to be set." );
+      throw new GuruMeditationWarning( ILLEGAL_ARGUMENT, "The month has to be set." );
     }
     else if ( type == null )
     {
-      throw new IllegalArgumentException( "The work unit type has to be set." );
+      throw new GuruMeditationWarning( ILLEGAL_ARGUMENT, "The work unit type has to be set." );
     }
 
     LocalDate monthStart = LocalDate.of( year, month, 1 );
@@ -123,7 +127,7 @@ public interface Project extends ChangeAware, Serializable
       builder.append( " has to be within project range (" ).append( this.getStart() ).append( " till " );
       builder.append( this.getEnd() ).append( ")." );
 
-      throw new IllegalArgumentException( builder.toString() );
+      throw new GuruMeditationWarning( ILLEGAL_ARGUMENT, builder.toString() );
     }
 
     Duration duration = Duration.ZERO;
@@ -235,13 +239,13 @@ public interface Project extends ChangeAware, Serializable
    * Checks if this employment contains sub projects.
    *
    * @return true, if the employment contains sub projects
-   * @throws IllegalStateException if the projects propery is not initialized
+   * @throws GuruMeditationWarning if the projects propery is not initialized
    */
   default boolean hasSubprojects()
   {
     if ( this.getSubprojects() == null )
     {
-      throw new IllegalStateException( "Projects property not yet initialized." );
+      throw new GuruMeditationWarning( ILLEGAL_STATE, "Projects property not yet initialized." );
     }
 
     return !this.getSubprojects().isEmpty();
@@ -268,14 +272,14 @@ public interface Project extends ChangeAware, Serializable
    * @param end the ending day of this period
    * @return the work days in this time period
    *
-   * @throws IllegalArgumentException if the start parameter is null.
-   * @throws IllegalArgumentException if the end parameter is null.
+   * @throws GuruMeditationWarning if the start parameter is null.
+   * @throws GuruMeditationWarning if the end parameter is null.
    */
   default Collection<WorkDay> getWorkDays( LocalDate start, LocalDate end )
   {
     if ( start == null || end == null )
     {
-      throw new IllegalArgumentException( "The start and end parameter have to be set." );
+      throw new GuruMeditationWarning( ILLEGAL_ARGUMENT, "The start and end parameter have to be set." );
     }
 
     Collection<WorkDay> selectedWorkDays = new ConcurrentSkipListSet<>();

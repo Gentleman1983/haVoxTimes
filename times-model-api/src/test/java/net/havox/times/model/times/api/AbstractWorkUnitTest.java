@@ -16,14 +16,19 @@
  */
 package net.havox.times.model.times.api;
 
+import static net.havox.exceptions.GuruErrorCode.ILLEGAL_ARGUMENT;
+
+import static org.junit.Assert.*;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+
+import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.test.utils.junit.ExtendedRunner;
 import net.havox.test.utils.junit.Repeat;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
@@ -69,92 +74,164 @@ public abstract class AbstractWorkUnitTest
     assertEquals( Duration.of( 30, ChronoUnit.DAYS ), objectUnderTest.getWorkUnitDuration() );
   }
 
-  @Test( expected = IllegalStateException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testGetWorkUnitDurationStartNotSet() throws Exception
   {
     WorkUnit objectUnderTest = newInstance( null, LocalDateTime.MAX );
 
-    objectUnderTest.getWorkUnitDuration();
+    try
+    {
+      objectUnderTest.getWorkUnitDuration();
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached!" );
   }
 
-  @Test( expected = IllegalStateException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testGetWorkUnitDurationEndNotSet() throws Exception
   {
     WorkUnit objectUnderTest = newInstance( LocalDateTime.MIN, null );
 
-    objectUnderTest.getWorkUnitDuration();
+    try
+    {
+      objectUnderTest.getWorkUnitDuration();
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached!" );
   }
 
-  @Test( expected = IllegalStateException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testGetWorkUnitDurationStartAndEndNotSet() throws Exception
   {
     WorkUnit objectUnderTest = newInstance( null, null );
 
-    objectUnderTest.getWorkUnitDuration();
+    try
+    {
+      objectUnderTest.getWorkUnitDuration();
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached!" );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testSetWorkUnitDurationLocalDateTimeLocalDateTimeStartNotSet() throws Exception
   {
     WorkUnit objectUnderTest = newInstance();
 
-    objectUnderTest.setWorkUnitDuration( null, LocalDateTime.MAX );
+    try
+    {
+      objectUnderTest.setWorkUnitDuration( null, LocalDateTime.MAX );
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached!" );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testSetWorkUnitDurationLocalDateTimeLocalDateTimeEndNotSet() throws Exception
   {
     WorkUnit objectUnderTest = newInstance();
 
-    objectUnderTest.setWorkUnitDuration( LocalDateTime.MIN, ( LocalDateTime ) null );
+    try
+    {
+      objectUnderTest.setWorkUnitDuration( LocalDateTime.MIN, ( LocalDateTime ) null );
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached!" );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testSetWorkUnitDurationLocalDateTimeLocalDateTimeStartAndEndNotSet() throws Exception
   {
     WorkUnit objectUnderTest = newInstance();
 
-    objectUnderTest.setWorkUnitDuration( null, ( LocalDateTime ) null );
+    try
+    {
+      objectUnderTest.setWorkUnitDuration( null, ( LocalDateTime ) null );
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached!" );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testSetWorkUnitDurationLocalDateTimeDurationStartNotSet() throws Exception
   {
     WorkUnit objectUnderTest = newInstance();
 
-    objectUnderTest.setWorkUnitDuration( null, Duration.ofDays( 1 ) );
+    try
+    {
+      objectUnderTest.setWorkUnitDuration( null, Duration.ofDays( 1 ) );
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached!" );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testSetWorkUnitDurationLocalDateTimeDurationEndNotSet() throws Exception
   {
     WorkUnit objectUnderTest = newInstance();
 
-    objectUnderTest.setWorkUnitDuration( LocalDateTime.MIN, ( Duration ) null );
+    try
+    {
+      objectUnderTest.setWorkUnitDuration( LocalDateTime.MIN, ( Duration ) null );
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached!" );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testSetWorkUnitDurationLocalDateTimeDurationStartAndEndNotSet() throws Exception
   {
     WorkUnit objectUnderTest = newInstance();
 
-    objectUnderTest.setWorkUnitDuration( null, ( Duration ) null );
+    try
+    {
+      objectUnderTest.setWorkUnitDuration( null, ( Duration ) null );
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached!" );
   }

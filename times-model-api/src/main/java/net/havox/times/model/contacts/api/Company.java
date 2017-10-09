@@ -16,9 +16,12 @@
  */
 package net.havox.times.model.contacts.api;
 
+import static net.havox.exceptions.GuruErrorCode.ILLEGAL_STATE;
+
 import java.io.Serializable;
 import java.util.Collection;
 
+import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.times.model.api.ChangeAware;
 
 /**
@@ -62,13 +65,13 @@ public interface Company extends ChangeAware, Serializable
    *
    * @return true, if this company has sub companies
    *
-   * @throws IllegalStateException In case that the sub companies property are not yet initialized
+   * @throws GuruMeditationWarning In case that the sub companies property are not yet initialized
    */
   default boolean hasSubCompanies()
   {
     if ( this.getSubCompanies() == null )
     {
-      throw new IllegalStateException( "Sub-companies property not yet initialized." );
+      throw new GuruMeditationWarning( ILLEGAL_STATE, "Sub-companies property not yet initialized." );
     }
 
     return !this.getSubCompanies().isEmpty();

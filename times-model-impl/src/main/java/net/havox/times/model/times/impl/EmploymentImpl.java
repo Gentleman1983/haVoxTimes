@@ -19,6 +19,7 @@ package net.havox.times.model.times.impl;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.concurrent.CopyOnWriteArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

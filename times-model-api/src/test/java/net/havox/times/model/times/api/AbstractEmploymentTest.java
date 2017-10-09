@@ -16,9 +16,16 @@
  */
 package net.havox.times.model.times.api;
 
+import static net.havox.exceptions.GuruErrorCode.ILLEGAL_ARGUMENT;
+import static net.havox.exceptions.GuruErrorCode.ILLEGAL_STATE;
+
+import static org.junit.Assert.*;
+
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
+
+import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.test.utils.junit.ExtendedRunner;
 import net.havox.test.utils.random.ModelRandomGenerator;
 import net.havox.test.utils.junit.Repeat;
@@ -26,8 +33,6 @@ import net.havox.times.model.contacts.api.Company;
 import net.havox.times.model.contacts.api.Person;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
@@ -45,20 +50,23 @@ public abstract class AbstractEmploymentTest
   public abstract Company getNewCompany() throws Exception;
 
   public abstract Person getNewPerson() throws Exception;
-  
-  @Test( expected = IllegalStateException.class )
+
+  @Test( expected = GuruMeditationWarning.class )
   public void testGetEmploymentMonthsStartNotSet() throws Exception
   {
     Employment instanceUnderTest = getNewInstance( null, LocalDate.MAX );
-    
-    try {
+
+    try
+    {
       instanceUnderTest.getEmploymentMonths();
-      
+
       fail( "This should never be reached!" );
     }
-    catch( IllegalStateException ise ) {
-      assertEquals( "The start date of the employment has to be set.", ise.getMessage() );
-      throw ise;
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      assertEquals( "The start date of the employment has to be set.", gmw.getMessage() );
+      throw gmw;
     }
   }
 
@@ -110,11 +118,20 @@ public abstract class AbstractEmploymentTest
     assertTrue( employmentWithProject.hasProjects() );
   }
 
-  @Test( expected = IllegalStateException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testHasProjectsNotInitialized() throws Exception
   {
     Employment employment = getNewInstanceWithUninitializedProjects();
-    employment.hasProjects();
+
+    try
+    {
+      employment.hasProjects();
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_STATE, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached..." );
   }

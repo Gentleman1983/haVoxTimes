@@ -21,6 +21,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+
 import net.havox.times.model.contacts.api.Company;
 import net.havox.times.model.contacts.api.Person;
 import net.havox.times.model.contacts.impl.CompanyImpl;

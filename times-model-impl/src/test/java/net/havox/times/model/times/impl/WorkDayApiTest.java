@@ -17,6 +17,7 @@
 package net.havox.times.model.times.impl;
 
 import java.time.Duration;
+
 import net.havox.times.model.times.api.AbstractWorkDayTest;
 import net.havox.times.model.times.api.Task;
 import net.havox.times.model.times.api.WorkDay;

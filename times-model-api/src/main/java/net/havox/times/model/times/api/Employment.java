@@ -16,12 +16,16 @@
  */
 package net.havox.times.model.times.api;
 
+import static net.havox.exceptions.GuruErrorCode.ILLEGAL_ARGUMENT;
+import static net.havox.exceptions.GuruErrorCode.ILLEGAL_STATE;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 
+import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.times.model.api.ChangeAware;
 import net.havox.times.model.contacts.api.Company;
 import net.havox.times.model.contacts.api.Person;
@@ -38,7 +42,7 @@ public interface Employment extends ChangeAware, Serializable
    * Calculates the number of months of the employment.
    *
    * @return the number of months
-   * @throws IllegalStateException if the start parameter is null.
+   * @throws GuruMeditationWarning if the start parameter is null.
    */
   default long getEmploymentMonths()
   {
@@ -52,11 +56,12 @@ public interface Employment extends ChangeAware, Serializable
      * * If we have got an open end, today is the current ending date and has to be added in the calculation.
      */
     LocalDate start = this.getStart();
-    
-    if( null == start ) {
-      throw new IllegalStateException( "The start date of the employment has to be set." );
+
+    if ( null == start )
+    {
+      throw new GuruMeditationWarning( ILLEGAL_ARGUMENT, "The start date of the employment has to be set." );
     }
-    
+
     LocalDate end = ( this.getEnd() == null )
             ? LocalDate.now().plus( 1, ChronoUnit.DAYS ) : this.getEnd().plus( 1, ChronoUnit.DAYS );
     int years = ( int ) ChronoUnit.YEARS.between( start, end );
@@ -146,13 +151,13 @@ public interface Employment extends ChangeAware, Serializable
    *
    * @return true, if the employment contains sub projects
    *
-   * @throws IllegalStateException if the projects propery is not initialized
+   * @throws GuruMeditationWarning if the projects propery is not initialized
    */
   default boolean hasProjects()
   {
     if ( this.getProjects() == null )
     {
-      throw new IllegalStateException( "Projects property not yet initialized." );
+      throw new GuruMeditationWarning( ILLEGAL_STATE, "Projects property not yet initialized." );
     }
 
     return !this.getProjects().isEmpty();

@@ -16,7 +16,6 @@
  */
 package net.havox.test.utils.junit;
 
-import net.havox.test.utils.junit.Repeat;
 import org.junit.Ignore;
 import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;

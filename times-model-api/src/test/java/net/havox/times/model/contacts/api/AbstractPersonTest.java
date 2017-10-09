@@ -16,16 +16,20 @@
  */
 package net.havox.times.model.contacts.api;
 
+import static net.havox.exceptions.GuruErrorCode.ILLEGAL_STATE;
+
+import static org.junit.Assert.*;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
+
+import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.test.utils.junit.ExtendedRunner;
 import net.havox.test.utils.random.ModelRandomGenerator;
 import net.havox.test.utils.junit.Repeat;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
@@ -51,12 +55,20 @@ public abstract class AbstractPersonTest
     assertEquals( Period.of( 100, 0, 0 ), personBornOneHundredYearsAgo.getAge() );
   }
 
-  @Test( expected = IllegalStateException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testGetAgeNotInitialized() throws Exception
   {
     Person person = getNewInstanceWithNonInitializedDateOfBirth();
 
-    person.getAge();
+    try
+    {
+      person.getAge();
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_STATE, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached..." );
   }

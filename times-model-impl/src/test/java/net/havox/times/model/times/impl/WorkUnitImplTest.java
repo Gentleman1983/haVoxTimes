@@ -16,18 +16,20 @@
  */
 package net.havox.times.model.times.impl;
 
+import static net.havox.exceptions.GuruErrorCode.ILLEGAL_ARGUMENT;
+
+import static org.junit.Assert.*;
+
 import java.lang.reflect.Field;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import org.junit.Test;
+
+import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.impl.AbstractChangeAwareClassTest;
 import net.havox.times.model.times.api.WorkUnit;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
-import org.junit.Test;
 
 public class WorkUnitImplTest extends AbstractChangeAwareClassTest
 {
@@ -45,8 +47,8 @@ public class WorkUnitImplTest extends AbstractChangeAwareClassTest
     Field versionField = instance.getClass().getSuperclass().getDeclaredField( "version" );
     versionField.setAccessible( true );
     versionField.set( instance, version );
-    
-    (( WorkUnitImpl ) instance).setWorkUnitDuration( LocalDateTime.MIN, LocalDateTime.MAX );
+
+    ( ( WorkUnitImpl ) instance ).setWorkUnitDuration( LocalDateTime.MIN, LocalDateTime.MAX );
 
     return ( WorkUnitImpl ) instance;
   }
@@ -86,7 +88,7 @@ public class WorkUnitImplTest extends AbstractChangeAwareClassTest
     processTestSetWorkUnitDuration( startTime, endTime, expectedDuration );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testSetWorkUnitDurationLocalDateTimeLocalDateTimeFirstParameterNull()
   {
     LocalDateTime startTime = LocalDateTime.now();
@@ -97,12 +99,20 @@ public class WorkUnitImplTest extends AbstractChangeAwareClassTest
     assertNull( startTime );
     assertNotNull( endTime );
 
-    processTestSetWorkUnitDuration( startTime, endTime, expectedDuration );
+    try
+    {
+      processTestSetWorkUnitDuration( startTime, endTime, expectedDuration );
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached..." );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testSetWorkUnitDurationLocalDateTimeLocalDateTimeSecondParameterNull()
   {
     LocalDateTime startTime = LocalDateTime.now();
@@ -112,10 +122,18 @@ public class WorkUnitImplTest extends AbstractChangeAwareClassTest
     assertNotNull( startTime );
     assertNull( endTime );
 
-    processTestSetWorkUnitDuration( startTime, endTime, expectedDuration );
+    try
+    {
+      processTestSetWorkUnitDuration( startTime, endTime, expectedDuration );
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testSetWorkUnitDurationLocalDateTimeLocalDateTimeBothParametersNull()
   {
     LocalDateTime startTime = null;
@@ -125,7 +143,15 @@ public class WorkUnitImplTest extends AbstractChangeAwareClassTest
     assertNull( startTime );
     assertNull( endTime );
 
-    processTestSetWorkUnitDuration( startTime, endTime, expectedDuration );
+    try
+    {
+      processTestSetWorkUnitDuration( startTime, endTime, expectedDuration );
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached..." );
   }
@@ -143,7 +169,7 @@ public class WorkUnitImplTest extends AbstractChangeAwareClassTest
     processTestSetWorkUnitDuration( startTime, duration, expectedDuration );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testSetWorkUnitDurationLocalDateTimeDurationFirstParameterNull()
   {
     LocalDateTime startTime = null;
@@ -153,12 +179,20 @@ public class WorkUnitImplTest extends AbstractChangeAwareClassTest
     assertNull( startTime );
     assertNotNull( duration );
 
-    processTestSetWorkUnitDuration( startTime, duration, expectedDuration );
+    try
+    {
+      processTestSetWorkUnitDuration( startTime, duration, expectedDuration );
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached..." );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testSetWorkUnitDurationLocalDateTimeDurationSecondParameterNull()
   {
     LocalDateTime startTime = LocalDateTime.now();
@@ -168,12 +202,20 @@ public class WorkUnitImplTest extends AbstractChangeAwareClassTest
     assertNotNull( startTime );
     assertNull( duration );
 
-    processTestSetWorkUnitDuration( startTime, duration, expectedDuration );
+    try
+    {
+      processTestSetWorkUnitDuration( startTime, duration, expectedDuration );
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached..." );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testSetWorkUnitDurationLocalDateTimeDurationBothParametersNull()
   {
     LocalDateTime startTime = null;
@@ -183,7 +225,15 @@ public class WorkUnitImplTest extends AbstractChangeAwareClassTest
     assertNull( startTime );
     assertNull( duration );
 
-    processTestSetWorkUnitDuration( startTime, duration, expectedDuration );
+    try
+    {
+      processTestSetWorkUnitDuration( startTime, duration, expectedDuration );
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached..." );
   }

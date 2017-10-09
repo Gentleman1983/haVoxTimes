@@ -22,6 +22,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 import net.havox.times.model.contacts.api.City;
 import net.havox.times.model.contacts.api.Country;
 import net.havox.times.model.impl.AbstractChangeAwareClass;

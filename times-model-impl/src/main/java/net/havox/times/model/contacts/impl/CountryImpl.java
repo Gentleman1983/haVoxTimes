@@ -19,6 +19,7 @@ package net.havox.times.model.contacts.impl;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
 import net.havox.times.model.contacts.api.Country;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 

@@ -16,22 +16,26 @@
  */
 package net.havox.times.model.times.api;
 
+import static net.havox.exceptions.GuruErrorCode.ILLEGAL_ARGUMENT;
+import static net.havox.exceptions.GuruErrorCode.ILLEGAL_STATE;
+
+import static org.junit.Assert.*;
+
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
+
+import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.test.utils.junit.ExtendedRunner;
 import net.havox.test.utils.random.ModelRandomGenerator;
 import net.havox.test.utils.junit.Repeat;
 import net.havox.times.model.contacts.api.Company;
 import net.havox.times.model.contacts.api.Person;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
@@ -106,11 +110,21 @@ public abstract class AbstractProjectTest
     assertEquals( employee, objectUnderTest.getEmployee() );
   }
 
-  @Test( expected = IllegalStateException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testHasSubprojectsUninitializedSubprojects() throws Exception
   {
     Project objectUnderTest = newInstanceWithoutInitializedSubprojects();
-    objectUnderTest.hasSubprojects();
+
+    try
+    {
+      objectUnderTest.hasSubprojects();
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_STATE, gmw.getErrorCode() );
+      throw gmw;
+    }
+
     fail( "This should never be able to reach." );
   }
 
@@ -140,27 +154,57 @@ public abstract class AbstractProjectTest
     assertTrue( objectUnderTestMultipleSubproject.hasSubprojects() );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testGetWorkDaysLocalDateLocalDateNoStartDate() throws Exception
   {
     Project objectUnderTest = newInstance();
-    objectUnderTest.getWorkDays( null, LocalDate.now() );
+
+    try
+    {
+      objectUnderTest.getWorkDays( null, LocalDate.now() );
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
+
     fail( "This should never be able to reach." );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testGetWorkDaysLocalDateLocalDateNoEndDate() throws Exception
   {
     Project objectUnderTest = newInstance();
-    objectUnderTest.getWorkDays( LocalDate.now(), null );
+
+    try
+    {
+      objectUnderTest.getWorkDays( LocalDate.now(), null );
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
+
     fail( "This should never be able to reach." );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testGetWorkDaysLocalDateLocalDateNoDates() throws Exception
   {
     Project objectUnderTest = newInstance();
-    objectUnderTest.getWorkDays( null, null );
+
+    try
+    {
+      objectUnderTest.getWorkDays( null, null );
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
+
     fail( "This should never be able to reach." );
   }
 
@@ -305,7 +349,7 @@ public abstract class AbstractProjectTest
     assertFalse( instanceUnderTest.isActive() );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testGetDurationMonthIntWorkUnitTypeBooleanNoMonth() throws Exception
   {
     Project instanceUnderTest = newInstance();
@@ -313,16 +357,17 @@ public abstract class AbstractProjectTest
     {
       instanceUnderTest.getDuraration( null, 2017, WorkUnitType.WORK, true );
     }
-    catch ( IllegalArgumentException iae )
+    catch ( GuruMeditationWarning gmw )
     {
-      assertEquals( "The month has to be set.", iae.getMessage() );
-      throw iae;
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      assertEquals( "The month has to be set.", gmw.getMessage() );
+      throw gmw;
     }
 
     fail( "This should never be reached!" );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testGetDurationMonthIntWorkUnitTypeBooleanNoType() throws Exception
   {
     Project instanceUnderTest = newInstance();
@@ -330,16 +375,17 @@ public abstract class AbstractProjectTest
     {
       instanceUnderTest.getDuraration( Month.JANUARY, 2017, null, true );
     }
-    catch ( IllegalArgumentException iae )
+    catch ( GuruMeditationWarning gmw )
     {
-      assertEquals( "The work unit type has to be set.", iae.getMessage() );
-      throw iae;
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      assertEquals( "The work unit type has to be set.", gmw.getMessage() );
+      throw gmw;
     }
 
     fail( "This should never be reached!" );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testGetDurationMonthIntWorkUnitTypeBooleanOutOfRangeBefore() throws Exception
   {
     Project instanceUnderTest = newInstance();
@@ -350,16 +396,17 @@ public abstract class AbstractProjectTest
     {
       instanceUnderTest.getDuraration( Month.JANUARY, LocalDate.now().getYear() - 1, WorkUnitType.BREAK, true );
     }
-    catch ( IllegalArgumentException iae )
+    catch ( GuruMeditationWarning gmw )
     {
-      assertTrue( iae.getMessage().contains( "has to be within project range" ) );
-      throw iae;
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      assertTrue( gmw.getMessage().contains( "has to be within project range" ) );
+      throw gmw;
     }
 
     fail( "This should never be reached!" );
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testGetDurationMonthIntWorkUnitTypeBooleanOutOfRangeAfter() throws Exception
   {
     Project instanceUnderTest = newInstance();
@@ -370,10 +417,11 @@ public abstract class AbstractProjectTest
     {
       instanceUnderTest.getDuraration( Month.JANUARY, LocalDate.now().getYear() + 1, WorkUnitType.BREAK, true );
     }
-    catch ( IllegalArgumentException iae )
+    catch ( GuruMeditationWarning gmw )
     {
-      assertTrue( iae.getMessage().contains( "has to be within project range" ) );
-      throw iae;
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      assertTrue( gmw.getMessage().contains( "has to be within project range" ) );
+      throw gmw;
     }
 
     fail( "This should never be reached!" );

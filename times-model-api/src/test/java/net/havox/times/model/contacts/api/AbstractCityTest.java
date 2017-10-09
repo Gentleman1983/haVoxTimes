@@ -16,12 +16,13 @@
  */
 package net.havox.times.model.contacts.api;
 
+import static org.junit.Assert.*;
+
 import net.havox.test.utils.junit.ExtendedRunner;
 import net.havox.test.utils.random.ModelRandomGenerator;
 import net.havox.test.utils.junit.Repeat;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )

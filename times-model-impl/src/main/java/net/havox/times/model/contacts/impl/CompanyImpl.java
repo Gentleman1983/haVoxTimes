@@ -18,6 +18,7 @@ package net.havox.times.model.contacts.impl;
 
 import java.util.Collection;
 import java.util.concurrent.CopyOnWriteArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

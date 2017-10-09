@@ -16,10 +16,13 @@
  */
 package net.havox.times.model.contacts.api;
 
+import static net.havox.exceptions.GuruErrorCode.ILLEGAL_STATE;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 
+import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.times.model.api.ChangeAware;
 
 /**
@@ -77,13 +80,13 @@ public interface Person extends ChangeAware, Serializable
    *
    * @return the age
    *
-   * @throws IllegalStateException In case the birth date is not set.
+   * @throws GuruMeditationWarning In case the birth date is not set.
    */
   default Period getAge()
   {
     if ( this.getDateOfBirth() == null )
     {
-      throw new IllegalStateException( "Unable to calculate age. No birth date set." );
+      throw new GuruMeditationWarning( ILLEGAL_STATE, "Unable to calculate age. No birth date set." );
     }
 
     return Period.between( this.getDateOfBirth(), LocalDate.now() );

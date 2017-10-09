@@ -16,6 +16,10 @@
  */
 package net.havox.times.model.times.api;
 
+import static net.havox.exceptions.GuruErrorCode.ILLEGAL_ARGUMENT;
+
+import static org.junit.Assert.*;
+
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,13 +27,13 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.test.utils.junit.ExtendedRunner;
 import net.havox.test.utils.random.ModelRandomGenerator;
 import net.havox.test.utils.junit.Repeat;
-import net.havox.times.model.contacts.api.Person;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
@@ -241,12 +245,20 @@ public abstract class AbstractWorkDayTest
     }
   }
 
-  @Test( expected = IllegalArgumentException.class )
+  @Test( expected = GuruMeditationWarning.class )
   public void testGetDurationWorkUnitTypeNoType() throws Exception
   {
     WorkDay objectUnderTest = newInstance();
 
-    objectUnderTest.getDuration( null );
+    try
+    {
+      objectUnderTest.getDuration( null );
+    }
+    catch ( GuruMeditationWarning gmw )
+    {
+      assertEquals( ILLEGAL_ARGUMENT, gmw.getErrorCode() );
+      throw gmw;
+    }
 
     fail( "This should never be reached!" );
   }

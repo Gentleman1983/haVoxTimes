@@ -16,6 +16,8 @@
  */
 package net.havox.times.model.times.api;
 
+import static net.havox.exceptions.GuruErrorCode.ILLEGAL_ARGUMENT;
+
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -24,6 +26,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.times.model.api.ChangeAware;
 
 /**
@@ -117,14 +120,14 @@ public interface WorkDay extends ChangeAware, Serializable
    * @param type the WorkUnitType to calculate
    * @return the duration
    *
-   * @throws IllegalArgumentException if the type parameter is not set
+   * @throws GuruMeditationWarning if the type parameter is not set
    */
   default Duration getDuration( WorkUnitType type )
   {
     if ( type == null )
     {
       String message = "The WorkUnitType parameter type has to be set.";
-      throw new IllegalArgumentException( message );
+      throw new GuruMeditationWarning( ILLEGAL_ARGUMENT, message );
     }
     Duration duration = Duration.ZERO;
 

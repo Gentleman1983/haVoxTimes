@@ -16,11 +16,14 @@
  */
 package net.havox.times.model.times.impl;
 
+import static net.havox.exceptions.GuruErrorCode.ILLEGAL_ARGUMENT;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,6 +31,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.times.api.Task;
 import net.havox.times.model.times.api.WorkUnit;
@@ -59,7 +63,7 @@ public class WorkUnitImpl extends AbstractChangeAwareClass<WorkUnitImpl> impleme
   private transient LocalDateTime workUnitEnd;
   @Column( name = "type" )
   private WorkUnitType type;
-  @ManyToOne(fetch=FetchType.LAZY)
+  @ManyToOne( fetch = FetchType.LAZY )
   @JoinColumn( name = "task_id" )
   private final Set<Task> tasks = new ConcurrentSkipListSet<>();
 
@@ -81,7 +85,7 @@ public class WorkUnitImpl extends AbstractChangeAwareClass<WorkUnitImpl> impleme
     if ( ( this.workUnitStart == null ) || ( this.workUnitEnd == null ) )
     {
       String message = "Neigther the 'start'=" + this.workUnitStart + " nor the 'end'=" + this.workUnitEnd + " parameter is allowed to be NULL.";
-      throw new IllegalStateException( message );
+      throw new GuruMeditationWarning( ILLEGAL_ARGUMENT, message );
     }
 
     return Duration.between( this.workUnitStart, this.workUnitEnd );
@@ -93,7 +97,7 @@ public class WorkUnitImpl extends AbstractChangeAwareClass<WorkUnitImpl> impleme
     if ( ( start == null ) || ( end == null ) )
     {
       String message = "Neigther the parameter 'start'=" + start + " nor the parameter 'end'=" + end + "is allowed to be NULL.";
-      throw new IllegalArgumentException( message );
+      throw new GuruMeditationWarning( ILLEGAL_ARGUMENT, message );
     }
 
     this.workUnitStart = start;
@@ -106,7 +110,7 @@ public class WorkUnitImpl extends AbstractChangeAwareClass<WorkUnitImpl> impleme
     if ( ( start == null ) || ( duration == null ) )
     {
       String message = "Neigther the parameter 'start'=" + start + " nor the parameter 'duration'=" + duration + "is allowed to be NULL.";
-      throw new IllegalArgumentException( message );
+      throw new GuruMeditationWarning( ILLEGAL_ARGUMENT, message );
     }
 
     this.workUnitStart = start;
