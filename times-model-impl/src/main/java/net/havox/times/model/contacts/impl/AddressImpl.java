@@ -89,6 +89,24 @@ public class AddressImpl extends AbstractChangeAwareClass<AddressImpl> implement
   {
     this.city = city;
   }
+  
+  @Override
+  public int hashCode()
+  {
+    return super.hashCode();
+  }
+
+  @Override
+  public boolean equals( Object object )
+  {
+    return super.equals( object );
+  }
+
+  @Override
+  public int compareTo( AddressImpl other )
+  {
+    return super.compareTo( other );
+  }
 
   @Override
   public String toString()
