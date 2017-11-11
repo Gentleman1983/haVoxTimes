@@ -50,7 +50,7 @@ println '* =============================='
 println "* Gradle wrapper version: ${GradleVersion.current().getVersion()}"
 println "* Groovy version: ${GroovySystem.getVersion()}"
 println "* JDK version: ${JavaVersion.current()} (${System.getProperty( 'java.version' )})"
-println "* Kotlin version: ${Kot}"
+println "* Kotlin version: ${project.ext.'gradlePluginVersion.kotlin.kotlin-gradle-plugin'}"
 println "* Source compatibility: ${project.sourceCompatibility}"
 println "* Target compatibility: ${project.targetCompatibility}"
 println '*'
