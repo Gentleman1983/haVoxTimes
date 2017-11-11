@@ -29,6 +29,7 @@ buildscript {
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${project.ext.'gradlePluginVersion.sonarsource.sonarqube-gradle-plugin'}"
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:${project.ext.'gradlePluginVersion.jfrog.build-info-extractor-gradle'}"
         classpath "org.liquibase:liquibase-gradle-plugin:${project.ext.'gradlePluginVersion.liquibase.liquibase-gradle-plugin'}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${project.ext.'gradlePluginVersion.kotlin.kotlin-gradle-plugin'}"
     }
 }
 
@@ -46,8 +47,10 @@ allprojects {
 println '***********************************************************'
 println '* Build environment information:'
 println '* =============================='
-println "* Gradle wrapper version: ${GradleVersion.current()}"
-println "* JDK version: ${JavaVersion.current()}"
+println "* Gradle wrapper version: ${GradleVersion.current().getVersion()}"
+println "* Groovy version: ${GroovySystem.getVersion()}"
+println "* JDK version: ${JavaVersion.current()} (${System.getProperty( 'java.version' )})"
+println "* Kotlin version: ${Kot}"
 println "* Source compatibility: ${project.sourceCompatibility}"
 println "* Target compatibility: ${project.targetCompatibility}"
 println '*'
@@ -96,7 +99,7 @@ jacocoAllProjectsTestReport.dependsOn {
 tasks.sonarqube.dependsOn jacocoAllProjectsTestReport
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.2.1'
+    gradleVersion = '4.3.1'
 }
 
 sonarqube {
