@@ -28,7 +28,10 @@ buildscript {
     dependencies {
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${project.ext.'gradlePluginVersion.sonarsource.sonarqube-gradle-plugin'}"
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:${project.ext.'gradlePluginVersion.jfrog.build-info-extractor-gradle'}"
-        classpath "org.liquibase:liquibase-gradle-plugin:${project.ext.'gradlePluginVersion.liquibase.liquibase-gradle-plugin'}"
+        classpath ("org.liquibase:liquibase-gradle-plugin:${project.ext.'gradlePluginVersion.liquibase.liquibase-gradle-plugin'}") {
+            exclude(module: 'liquibase-core') // <-- the liquibase core 3.4.2 is outdated | Release: 24-Nov-2015 -> Current 3.5.3 | Release: 13-Oct-2016
+        }
+        classpath 'org.liquibase:liquibase-core:3.5.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${project.ext.'gradlePluginVersion.kotlin.kotlin-gradle-plugin'}"
     }
 }
