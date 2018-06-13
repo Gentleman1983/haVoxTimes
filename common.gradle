@@ -17,7 +17,7 @@ apply plugin: 'maven-publish'
 
 repositories {
     maven {
-        url "${repository_public}"
+        url "${reporitory_url}/${repository_public}"
         credentials {
             username = "${repository_user}"
             password = "${repository_password}"
@@ -111,10 +111,10 @@ publishing {
                 password repository_password
             }
             if ( !project.hasProperty( 'typeOfRelease' ) || project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) ) {
-                url "${repository_snapshots}"
+                url "${reporitory_url}/${repository_snapshots}"
             }
             else if ( project.ext.typeOfRelease.equalsIgnoreCase( 'RELEASE' ) ) {
-                url "${repository_releases}"
+                url "${reporitory_url}/${repository_releases}"
             }
         }
     }
