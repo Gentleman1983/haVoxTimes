@@ -7,7 +7,7 @@ if ( !project.hasProperty( 'typeOfRelease' ) || ( !project.ext.typeOfRelease.equ
 buildscript {
     repositories {
         maven {
-            url "${repository_contextUrl}/${repository_pluginsRepositoryName}"
+            url "${repository_public}"
             credentials {
                 username = "${repository_user}"
                 password = "${repository_password}"
@@ -15,7 +15,7 @@ buildscript {
             }
         }
         maven {
-            url "${repository_contextUrl}/${repository_remoteRepositoryName}"
+            url "${repository_gradle_plugins}"
             credentials {
                 username = "${repository_user}"
                 password = "${repository_password}"
