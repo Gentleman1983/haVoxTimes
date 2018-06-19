@@ -13,10 +13,3 @@
 /times-service-api/build/
 /times-model-impl/build/
 /test-utils/build/
-/test-utils/.clover/
-/times-model-api/.clover/
-/times-model-impl/.clover/
-/times-persistence-api/.clover/
-/times-persistence-impl/.clover/
-/times-service-api/.clover/
-/times-service-impl/.clover/
