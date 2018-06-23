@@ -1,0 +1,7 @@
+dependencies {
+    compile project( ':haVox_times_persistence_impl' )
+    compile project( ':haVox_times_service_api' )
+    
+    testCompile project( path:':haVox_times_service_api', configuration:'testArtifacts')
+    testCompile project( ':test-utils' )
+}

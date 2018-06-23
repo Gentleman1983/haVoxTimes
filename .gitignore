@@ -13,3 +13,9 @@
 /times-service-api/build/
 /times-model-impl/build/
 /test-utils/build/
+/haVox_times_model_api/build/
+/haVox_times_model_impl/build/
+/haVox_times_persistence_api/build/
+/haVox_times_persistence_impl/build/
+/haVox_times_service_api/build/
+/haVox_times_service_impl/build/

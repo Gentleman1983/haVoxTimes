@@ -1,11 +1,11 @@
 apply plugin: 'java'
 
 dependencies {
-    compile project( ':times-model-api' )
+    compile project( ':haVox_times_model_api' )
     
     compile group: 'org.apache.commons', name: 'commons-lang3', version: project.ext.'libraryVersion.apache.commons-lang3'
     compile group: 'javax.persistence', name: 'persistence-api', version: project.ext.'libraryVersion.javax.persistence-api'
     
-    testCompile project( path:':times-model-api', configuration:'testArtifacts')
+    testCompile project( path:':haVox_times_model_api', configuration:'testArtifacts')
     testCompile project( ':test-utils' )
 }

@@ -1,5 +1,5 @@
 dependencies {
-    compile project( ':times-model-api' )
+    compile project( ':haVox_times_model_api' )
     
     testCompile project( ':test-utils' )
 }
