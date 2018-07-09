@@ -1,4 +1,5 @@
 import org.gradle.api.artifacts.*
+import org.gradle.util.*
 
 if ( !project.hasProperty( 'typeOfRelease' ) || ( !project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) && !project.ext.typeOfRelease.equalsIgnoreCase( 'SNAPSHOT' ) ) ) {
     println( "No valid type of release selected. Please add parameter 'typeOfRelease' with values 'SNAPSHOT' for snapshot release or 'RELEASE' for productive release." )
