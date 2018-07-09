@@ -29,9 +29,9 @@ import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
 import net.havox.exceptions.GuruMeditationWarning;
-import net.havox.test.utils.junit.ExtendedRunner;
-import net.havox.test.utils.random.ModelRandomGenerator;
-import net.havox.test.utils.junit.Repeat;
+import net.havox.javatools.test.utils.junit.ExtendedRunner;
+import net.havox.javatools.test.utils.random.ModelRandomGenerator;
+import net.havox.javatools.test.utils.junit.Repeat;
 import net.havox.times.model.contacts.api.Company;
 import net.havox.times.model.contacts.api.Person;
 

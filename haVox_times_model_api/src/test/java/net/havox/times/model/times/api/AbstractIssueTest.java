@@ -19,9 +19,9 @@ package net.havox.times.model.times.api;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import net.havox.test.utils.junit.ExtendedRunner;
-import net.havox.test.utils.random.ModelRandomGenerator;
-import net.havox.test.utils.junit.Repeat;
+import net.havox.javatools.test.utils.junit.ExtendedRunner;
+import net.havox.javatools.test.utils.random.ModelRandomGenerator;
+import net.havox.javatools.test.utils.junit.Repeat;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
