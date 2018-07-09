@@ -18,17 +18,18 @@ buildscript {
         jcenter()
     }
     dependencies {
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:${project.ext.'gradlePluginVersion.jfrog.gradle-bintray-plugin'}"
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${project.ext.'gradlePluginVersion.sonarsource.sonarqube-gradle-plugin'}"
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:${project.ext.'gradlePluginVersion.jfrog.build-info-extractor-gradle'}"
         classpath ("org.liquibase:liquibase-gradle-plugin:${project.ext.'gradlePluginVersion.liquibase.liquibase-gradle-plugin'}") {
             exclude(module: 'liquibase-core') // <-- the liquibase core 3.4.2 is outdated | Release: 24-Nov-2015 -> Current 3.5.3 | Release: 13-Oct-2016
         }
         classpath 'org.liquibase:liquibase-core:3.5.3'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${project.ext.'gradlePluginVersion.kotlin.kotlin-gradle-plugin'}"
     }
 }
 
 apply plugin: 'base' // To add "clean" task to the root project.
+apply plugin: 'com.jfrog.bintray'
 apply plugin: 'org.sonarqube'
 
 allprojects {
@@ -43,9 +44,7 @@ println '***********************************************************'
 println '* Build environment information:'
 println '* =============================='
 println "* Gradle wrapper version: ${GradleVersion.current().getVersion()}"
-println "* Groovy version: ${GroovySystem.getVersion()}"
 println "* JDK version: ${JavaVersion.current()} (${System.getProperty( 'java.version' )})"
-println "* Kotlin version: ${project.ext.'gradlePluginVersion.kotlin.kotlin-gradle-plugin'}"
 println "* Source compatibility: ${project.sourceCompatibility}"
 println "* Target compatibility: ${project.targetCompatibility}"
 println '*'
@@ -94,7 +93,7 @@ jacocoAllProjectsTestReport.dependsOn {
 tasks.sonarqube.dependsOn jacocoAllProjectsTestReport
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.5'
+    gradleVersion = '4.8.1'
 }
 
 sonarqube {

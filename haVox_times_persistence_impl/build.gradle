@@ -13,11 +13,11 @@ apply plugin: 'org.liquibase.gradle'
 }*/
 
 dependencies {
-    compile project( ':haVox_times_model_impl' )
-    compile project( ':haVox_times_persistence_api' )
+    implementation project( ':haVox_times_model_impl' )
+    api project( ':haVox_times_persistence_api' )
     
-    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.11.Final'
+    api group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.11.Final'
     
-    testCompile project( path:':haVox_times_persistence_api', configuration:'testArtifacts')
-    testCompile project( ':test-utils' )
+    testImplementation project( path:':haVox_times_persistence_api', configuration:'testArtifacts')
+    testImplementation project( ':test-utils' )
 }

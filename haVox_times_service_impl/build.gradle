@@ -1,7 +1,7 @@
 dependencies {
-    compile project( ':haVox_times_persistence_impl' )
-    compile project( ':haVox_times_service_api' )
+    implementation project( ':haVox_times_persistence_impl' )
+    api project( ':haVox_times_service_api' )
     
-    testCompile project( path:':haVox_times_service_api', configuration:'testArtifacts')
-    testCompile project( ':test-utils' )
+    testImplementation project( path:':haVox_times_service_api', configuration:'testArtifacts')
+    testImplementation project( ':test-utils' )
 }

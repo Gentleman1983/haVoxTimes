@@ -1,5 +1,5 @@
 dependencies {
-    compile project( ':haVox_times_persistence_api' )
+    api project( ':haVox_times_persistence_api' )
     
-    testCompile project( ':test-utils' )
+    testImplementation project( ':test-utils' )
 }
