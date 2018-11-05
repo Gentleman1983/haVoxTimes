@@ -16,7 +16,7 @@ dependencies {
     implementation project( ':haVox_times_model_impl' )
     api project( ':haVox_times_persistence_api' )
     
-    api group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.11.Final'
+    api group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.3.7.Final'
     
     testImplementation project( path:':haVox_times_persistence_api', configuration:'testArtifacts')
     testImplementation project( ':test-utils' )
