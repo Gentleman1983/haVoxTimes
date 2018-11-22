@@ -16,34 +16,40 @@
  */
 package net.havox.times.model.api.contact;
 
+import static net.havox.times.model.api.contact.ContactType.ValidationRegularExpressions.*;
+
 /**
  * Represents the different types of contact options.
  *
  * @author Christian Otto
  */
 public enum ContactType
-{ // TODO: Additional contact types
-  BLOG("Blog", ""), //TODO: Validation pattern
-  EMAIL("Email", ""), //TODO: Validation pattern
-  FAX("Fax", ""), //TODO: Validation pattern
-  FACEBOOK("Facebook", ""), //TODO: Validation pattern
-  HOMEPAGE("Homepage", ""), //TODO: Validation pattern
-  ICQ("ICQ", ""), //TODO: Validation pattern
-  INSTAGRAM("Instagram", ""), //TODO: Validation pattern
-  PHONE("Phone", ""), //TODO: Validation pattern
-  PHONE_WORK("Phone (Work)", ""), //TODO: Validation pattern
-  SKYPE("Skype", ""), //TODO: Validation pattern
-  TWITTER("Twitter", ""), //TODO: Validation pattern
-  XING("XING", ""); //TODO: Validation pattern
+{ // TODO: Additional contact types  
+  BLOG( "Blog", URL_REGEX ),
+  EMAIL( "Email", EMAIL_REGEX ),
+  FAX( "Fax", PHONE_REGEX ),
+  FACEBOOK( "Facebook", FACEBOOK_REGEX ),
+  HOMEPAGE( "Homepage", URL_REGEX ),
+  ICQ( "ICQ", ICQ_REGEX ),
+  INSTAGRAM( "Instagram", INSTAGRAM_REGEX ),
+  PHONE( "Phone", PHONE_REGEX ),
+  PHONE_WORK( "Phone (Work)", PHONE_REGEX ),
+  SKYPE( "Skype", SKYPE_REGEX ),
+  TWITTER( "Twitter", TWITTER_USER_REGEX ),
+  XING( "XING", ".*" ); //TODO: Validation pattern
 
-  /** The alias. */
+  /**
+   * The alias.
+   */
   private final String alias;
-  /** The regular expression used for content validation. */
+  /**
+   * The regular expression used for content validation.
+   */
   private final String validationRegEx;
 
   /**
    * The constructor.
-   * 
+   *
    * @param alias the alias.
    * @param regEx the validation regular expression.
    */
@@ -55,7 +61,7 @@ public enum ContactType
 
   /**
    * Returns the alias.
-   * 
+   *
    * @return the alias.
    */
   public String getAlias()
@@ -65,15 +71,40 @@ public enum ContactType
 
   /**
    * Returns the validation reg ex.
+   *
    * @return the regular expression used for content validation.
    */
   public String getValidationRegEx()
   {
     return this.validationRegEx;
   }
-  
+
   @Override
-  public String toString() {
+  public String toString()
+  {
     return this.getAlias();
+  }
+
+  /**
+   * Helper class for RegEx definitions.
+   */
+  protected static class ValidationRegularExpressions
+  {
+/**
+ * The Constructor.
+ */
+    private ValidationRegularExpressions()
+    {
+      // Only contains regular expressions for better readability of the enum.
+    }
+
+    public final static String EMAIL_REGEX = "^([A-Za-z0-9_\\-\\.])+\\@([A-Za-z0-9_\\-\\.])+\\.([A-Za-z]{2,4})";
+    public final static String FACEBOOK_REGEX = "^[A-Za-z0-9\\.-_]+";
+    public final static String ICQ_REGEX = "^\\d+";
+    public final static String INSTAGRAM_REGEX = "^[A-Za-z0-9\\._]+";
+    public final static String PHONE_REGEX = "^[0-9+][0-9-/ ]*";
+    public final static String SKYPE_REGEX = "[a-zA-Z][a-zA-Z0-9\\.,\\-_]{5,31}";
+    public final static String TWITTER_USER_REGEX = "^[A-Za-z0-9_]{1,15}$";
+    public final static String URL_REGEX = "^(ftp|http(s?))://((\\S+:)?\\S+@)?([a-zA-Z0-9][a-zA-Z0-9_\\-\\.]*[a-zA-Z0-9](:\\d{1,5})?)(/([a-zA-Z0-9_/\\&\\?\\=\\-\\.\\~\\%\\(\\)#]*))?";
   }
 }
