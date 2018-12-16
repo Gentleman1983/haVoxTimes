@@ -207,7 +207,13 @@ public class ContactTypeTest
   @Test
   public void testValidFacebookValues()
   {
-    List<String> validValues = Arrays.asList( "" );
+    List<String> validValues = Arrays.asList( 
+            "a",
+            "1",
+            "a1",
+            "a.1",
+            "a_1",
+            "foo-bar" );
 
     testValidValues( validValues, FACEBOOK );
   }
@@ -218,7 +224,14 @@ public class ContactTypeTest
   @Test
   public void testInvalidFacebookValues()
   {
-    List<String> invalidValues = Arrays.asList( "" );
+    List<String> invalidValues = Arrays.asList( 
+            "",
+            "man|eater",
+            "x,men",
+            "be;ready",
+            "michael:jackson",
+            "österreich",
+            "<tag>" );
 
     testInvalidValues( invalidValues, FACEBOOK );
   }
@@ -347,7 +360,12 @@ public class ContactTypeTest
   @Test
   public void testValidInstagramValues()
   {
-    List<String> validValues = Arrays.asList( "" );
+    List<String> validValues = Arrays.asList( 
+            "a",
+            "1",
+            "a1",
+            "a.1",
+            "a_1" );
 
     testValidValues( validValues, INSTAGRAM );
   }
@@ -358,7 +376,15 @@ public class ContactTypeTest
   @Test
   public void testInvalidInstagramValues()
   {
-    List<String> invalidValues = Arrays.asList( "" );
+    List<String> invalidValues = Arrays.asList( 
+            "",
+            "foo-bar",
+            "man|eater",
+            "x,men",
+            "be;ready",
+            "michael:jackson",
+            "österreich",
+            "<tag>" );
 
     testInvalidValues( invalidValues, INSTAGRAM );
   }
@@ -494,7 +520,14 @@ public class ContactTypeTest
   @Test
   public void testValidTwitterValues()
   {
-    List<String> validValues = Arrays.asList( "" );
+    List<String> validValues = Arrays.asList( 
+            "a",
+            "1",
+            "_",
+            "abcdefghijklmno",
+            "ABCDEFGHIJKLMNO",
+            "123456789012345",
+            "_______________" );
 
     testValidValues( validValues, TWITTER );
   }
@@ -505,7 +538,15 @@ public class ContactTypeTest
   @Test
   public void testInvalidTwitterValues()
   {
-    List<String> invalidValues = Arrays.asList( "" );
+    List<String> invalidValues = Arrays.asList( 
+            "",
+            "ä",
+            "+",
+            "-",
+            "abcdefghijklmnop",
+            "ABCDEFGHIJKLMNOP",
+            "1234567890123456",
+            "________________" );
 
     testInvalidValues( invalidValues, TWITTER );
   }
@@ -516,7 +557,9 @@ public class ContactTypeTest
   @Test
   public void testValidXingValues()
   {
-    List<String> validValues = Arrays.asList( "" );
+    List<String> validValues = Arrays.asList( 
+            "a",
+            "1" );
 
     testValidValues( validValues, XING );
   }
@@ -532,6 +575,16 @@ public class ContactTypeTest
     testInvalidValues( invalidValues, XING );
   }
 
+  // ###################################################################################################################
+  // # UTILITY METHODS...                                                                                              #
+  // ###################################################################################################################
+  
+  /**
+   * A standard test for valid values.
+   * 
+   * @param validValues the valid values.
+   * @param type the contact type.
+   */
   private void testValidValues( List<String> validValues, ContactType type )
   {
     String messages = "";
@@ -550,6 +603,12 @@ public class ContactTypeTest
     assertEquals( messages, "", messages );
   }
 
+  /**
+   * A standard test for invalid values.
+   * 
+   * @param invalidValues the invalid values.
+   * @param type the contact type.
+   */
   private void testInvalidValues( List<String> invalidValues, ContactType type )
   {
     String messages = "";
@@ -569,6 +628,14 @@ public class ContactTypeTest
     assertEquals( messages, "", messages );
   }
 
+  /**
+   * Validates a value depending of the {@link ContactType}.
+   * 
+   * @param type the contact type.
+   * @param validationTarget the value under validation.
+   * 
+   * @return the validation result.
+   */
   private ValidationResult validateContactValue( ContactType type, String validationTarget )
   {
     String regEx = type.getValidationRegEx();
@@ -589,27 +656,51 @@ public class ContactTypeTest
     return result;
   }
 
+  /**
+   * Utility class for representing a validation result.
+   */
   private static class ValidationResult
   {
-
+    /** Is the validation target valid? */
     private boolean isValid = true;
+    /** The validation message. */
     private String message;
 
+    /**
+     * Sets the valid flag.
+     * 
+     * @param valid true, if the validation target is valid.
+     */
     public void setValid( boolean valid )
     {
       this.isValid = valid;
     }
 
+    /**
+     * Checks if the validation target is valid.
+     * 
+     * @return true, if it's valid
+     */
     public boolean isValid()
     {
       return this.isValid;
     }
 
+    /**
+     * Sets the message.
+     * 
+     * @param message the validation message.
+     */
     public void setMessage( String message )
     {
       this.message = message;
     }
 
+    /**
+     * Returns the validation message.
+     * 
+     * @return the message.
+     */
     public String getMessage()
     {
       return this.message;
