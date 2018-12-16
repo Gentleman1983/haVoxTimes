@@ -16,16 +16,78 @@
  */
 package net.havox.times.model.api.contact;
 
+import java.util.ArrayList;
 import static net.havox.times.model.api.contact.ContactType.*;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class ContactTypeTest
 {
+  
+  /**
+   * User Story BM007 acceptance criteria 01 ("It has an unique type.").
+   */
+  @Test
+  public void testUniqueAlias() {
+    Map<String, ContactType> discoveredAliases = new HashMap<>();
+    List<String> findings = new ArrayList<>();
+    
+    for ( ContactType type : ContactType.values() )
+    {
+      if( discoveredAliases.keySet().contains( type.getAlias() ) ) {
+        ContactType discoveredType = discoveredAliases.get( type.getAlias() );
+        
+        StringBuilder msg = new StringBuilder();
+        msg.append( "Found duplicate alias '" ).append( type.getAlias() ).append( "'. The ContactTypes '" )
+                .append( discoveredType ).append( "' and '" ).append( type ).append( "' define this alias. ")
+                .append( "By definition the alias has to be unique.");
+        findings.add( msg.toString() );
+        continue;
+      }
+      
+      discoveredAliases.put( type.getAlias(), type);
+    }
+    
+    if( !findings.isEmpty() ) {
+      boolean firstFinding = true;
+      StringBuilder msg = new StringBuilder();
+      for( String finding : findings ) {
+        if(!firstFinding) {
+          msg.append( "\n" );
+        }
+        msg.append( finding );
+      }
+      fail( msg.toString() );
+    }
+  }
+
+  /**
+   * User Story BM007 acceptance criteria 02 ("It has a validation pattern depending on the contact type.").
+   */
+  @Test
+  public void testDoesEveryContactTypeHaveAValidationPattern()
+  {
+    String emptyValidationPattern = "";
+
+    for ( ContactType type : ContactType.values() )
+    {
+      StringBuilder msgNullPattern = new StringBuilder();
+      msgNullPattern.append( "[" ).append( type.getAlias() ).append( "]: " )
+              .append( "There should be a validation pattern." );
+      assertNotNull( msgNullPattern.toString(), type.getValidationRegEx() );
+      
+      StringBuilder msgEmptyPattern = new StringBuilder();
+      msgEmptyPattern.append( "[" ).append( type.getAlias() ).append( "]: " )
+              .append( "The validation pattern should not be empty." );
+      assertNotEquals( msgEmptyPattern.toString(), emptyValidationPattern, type.getValidationRegEx() );
+    }
+  }
 
   /**
    * User Story BM007 acceptance criteria 02 ("It has a validation pattern depending on the contact type.").
@@ -33,7 +95,7 @@ public class ContactTypeTest
   @Test
   public void testValidBlogValues()
   {
-    List<String> validValues = Arrays.asList( 
+    List<String> validValues = Arrays.asList(
             "http://foo.com/blah_blah",
             "http://foo.com/blah_blah/",
             "http://foo.com/blah_blah_(wikipedia)",
@@ -75,7 +137,7 @@ public class ContactTypeTest
   @Test
   public void testInvalidBlogValues()
   {
-    List<String> invalidValues = Arrays.asList( 
+    List<String> invalidValues = Arrays.asList(
             "http://",
             "http://.",
             "http://.",
@@ -114,7 +176,7 @@ public class ContactTypeTest
   @Test
   public void testValidEmailValues()
   {
-    List<String> validValues = Arrays.asList( 
+    List<String> validValues = Arrays.asList(
             "email@domain.com",
             "firstname.lastname@domain.com",
             "email@subdomain.domain.com",
@@ -138,7 +200,7 @@ public class ContactTypeTest
   @Test
   public void testInvalidEmailValues()
   {
-    List<String> invalidValues = Arrays.asList( 
+    List<String> invalidValues = Arrays.asList(
             "plainaddress",
             "#@%^%#$@#$@#.com",
             "@domain.com",
@@ -163,14 +225,14 @@ public class ContactTypeTest
   @Test
   public void testValidFaxValues()
   {
-    List<String> validValues = Arrays.asList( 
+    List<String> validValues = Arrays.asList(
             "112",
             "110",
             "4711",
             "47-11",
-            "08154711", 
-            "0815/4711", 
-            "(0815) 4711", 
+            "08154711",
+            "0815/4711",
+            "(0815) 4711",
             "+42 (815) 4711",
             "0042 815 4711" );
 
@@ -183,7 +245,7 @@ public class ContactTypeTest
   @Test
   public void testInvalidFaxValues()
   {
-    List<String> invalidValues = Arrays.asList( 
+    List<String> invalidValues = Arrays.asList(
             "17+4",
             " 110",
             "-110",
@@ -207,7 +269,7 @@ public class ContactTypeTest
   @Test
   public void testValidFacebookValues()
   {
-    List<String> validValues = Arrays.asList( 
+    List<String> validValues = Arrays.asList(
             "a",
             "1",
             "a1",
@@ -224,7 +286,7 @@ public class ContactTypeTest
   @Test
   public void testInvalidFacebookValues()
   {
-    List<String> invalidValues = Arrays.asList( 
+    List<String> invalidValues = Arrays.asList(
             "",
             "man|eater",
             "x,men",
@@ -242,7 +304,7 @@ public class ContactTypeTest
   @Test
   public void testValidHomepageValues()
   {
-    List<String> validValues = Arrays.asList(  
+    List<String> validValues = Arrays.asList(
             "http://foo.com/blah_blah",
             "http://foo.com/blah_blah/",
             "http://foo.com/blah_blah_(wikipedia)",
@@ -284,7 +346,7 @@ public class ContactTypeTest
   @Test
   public void testInvalidHomepageValues()
   {
-    List<String> invalidValues = Arrays.asList( 
+    List<String> invalidValues = Arrays.asList(
             "http://",
             "http://.",
             "http://.",
@@ -323,7 +385,7 @@ public class ContactTypeTest
   @Test
   public void testValidIcqValues()
   {
-    List<String> validValues = Arrays.asList( 
+    List<String> validValues = Arrays.asList(
             "1",
             "42",
             "4711",
@@ -339,7 +401,7 @@ public class ContactTypeTest
   @Test
   public void testInvalidIcqValues()
   {
-    List<String> invalidValues = Arrays.asList( 
+    List<String> invalidValues = Arrays.asList(
             "",
             "a",
             "1a",
@@ -360,7 +422,7 @@ public class ContactTypeTest
   @Test
   public void testValidInstagramValues()
   {
-    List<String> validValues = Arrays.asList( 
+    List<String> validValues = Arrays.asList(
             "a",
             "1",
             "a1",
@@ -376,7 +438,7 @@ public class ContactTypeTest
   @Test
   public void testInvalidInstagramValues()
   {
-    List<String> invalidValues = Arrays.asList( 
+    List<String> invalidValues = Arrays.asList(
             "",
             "foo-bar",
             "man|eater",
@@ -395,14 +457,14 @@ public class ContactTypeTest
   @Test
   public void testValidPhoneValues()
   {
-    List<String> validValues = Arrays.asList(  
+    List<String> validValues = Arrays.asList(
             "112",
             "110",
             "4711",
             "47-11",
-            "08154711", 
-            "0815/4711", 
-            "(0815) 4711", 
+            "08154711",
+            "0815/4711",
+            "(0815) 4711",
             "+42 (815) 4711",
             "0042 815 4711" );
 
@@ -415,7 +477,7 @@ public class ContactTypeTest
   @Test
   public void testInvalidPhoneValues()
   {
-    List<String> invalidValues = Arrays.asList( 
+    List<String> invalidValues = Arrays.asList(
             "17+4",
             " 110",
             "-110",
@@ -439,14 +501,14 @@ public class ContactTypeTest
   @Test
   public void testValidPhoneWorkValues()
   {
-    List<String> validValues = Arrays.asList(  
+    List<String> validValues = Arrays.asList(
             "112",
             "110",
             "4711",
             "47-11",
-            "08154711", 
-            "0815/4711", 
-            "(0815) 4711", 
+            "08154711",
+            "0815/4711",
+            "(0815) 4711",
             "+42 (815) 4711",
             "0042 815 4711" );
 
@@ -459,7 +521,7 @@ public class ContactTypeTest
   @Test
   public void testInvalidPhoneWorkValues()
   {
-    List<String> invalidValues = Arrays.asList( 
+    List<String> invalidValues = Arrays.asList(
             "17+4",
             " 110",
             "-110",
@@ -483,7 +545,7 @@ public class ContactTypeTest
   @Test
   public void testValidSkypeValues()
   {
-    List<String> validValues = Arrays.asList( 
+    List<String> validValues = Arrays.asList(
             "abcdef",
             "abcde1",
             "abcd12",
@@ -502,7 +564,7 @@ public class ContactTypeTest
   @Test
   public void testInvalidSkypeValues()
   {
-    List<String> invalidValues = Arrays.asList( 
+    List<String> invalidValues = Arrays.asList(
             "abcde",
             "a1234",
             "123456",
@@ -520,7 +582,7 @@ public class ContactTypeTest
   @Test
   public void testValidTwitterValues()
   {
-    List<String> validValues = Arrays.asList( 
+    List<String> validValues = Arrays.asList(
             "a",
             "1",
             "_",
@@ -538,7 +600,7 @@ public class ContactTypeTest
   @Test
   public void testInvalidTwitterValues()
   {
-    List<String> invalidValues = Arrays.asList( 
+    List<String> invalidValues = Arrays.asList(
             "",
             "ä",
             "+",
@@ -557,7 +619,7 @@ public class ContactTypeTest
   @Test
   public void testValidXingValues()
   {
-    List<String> validValues = Arrays.asList( 
+    List<String> validValues = Arrays.asList(
             "a",
             "1" );
 
@@ -578,10 +640,9 @@ public class ContactTypeTest
   // ###################################################################################################################
   // # UTILITY METHODS...                                                                                              #
   // ###################################################################################################################
-  
   /**
    * A standard test for valid values.
-   * 
+   *
    * @param validValues the valid values.
    * @param type the contact type.
    */
@@ -605,7 +666,7 @@ public class ContactTypeTest
 
   /**
    * A standard test for invalid values.
-   * 
+   *
    * @param invalidValues the invalid values.
    * @param type the contact type.
    */
@@ -630,10 +691,10 @@ public class ContactTypeTest
 
   /**
    * Validates a value depending of the {@link ContactType}.
-   * 
+   *
    * @param type the contact type.
    * @param validationTarget the value under validation.
-   * 
+   *
    * @return the validation result.
    */
   private ValidationResult validateContactValue( ContactType type, String validationTarget )
@@ -661,14 +722,19 @@ public class ContactTypeTest
    */
   private static class ValidationResult
   {
-    /** Is the validation target valid? */
+
+    /**
+     * Is the validation target valid?
+     */
     private boolean isValid = true;
-    /** The validation message. */
+    /**
+     * The validation message.
+     */
     private String message;
 
     /**
      * Sets the valid flag.
-     * 
+     *
      * @param valid true, if the validation target is valid.
      */
     public void setValid( boolean valid )
@@ -678,7 +744,7 @@ public class ContactTypeTest
 
     /**
      * Checks if the validation target is valid.
-     * 
+     *
      * @return true, if it's valid
      */
     public boolean isValid()
@@ -688,7 +754,7 @@ public class ContactTypeTest
 
     /**
      * Sets the message.
-     * 
+     *
      * @param message the validation message.
      */
     public void setMessage( String message )
@@ -698,7 +764,7 @@ public class ContactTypeTest
 
     /**
      * Returns the validation message.
-     * 
+     *
      * @return the message.
      */
     public String getMessage()
