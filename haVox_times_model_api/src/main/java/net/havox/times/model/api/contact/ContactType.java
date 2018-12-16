@@ -36,7 +36,7 @@ public enum ContactType
   PHONE_WORK( "Phone (Work)", PHONE_REGEX ),
   SKYPE( "Skype", SKYPE_REGEX ),
   TWITTER( "Twitter", TWITTER_USER_REGEX ),
-  XING( "XING", ".*" ); //TODO: Validation pattern
+  XING( "XING", XING_REGEX );
 
   /**
    * The alias.
@@ -99,12 +99,13 @@ public enum ContactType
     }
 
     public final static String EMAIL_REGEX = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
-    public final static String FACEBOOK_REGEX = "^[A-Za-z0-9\\.-_]+";
+    public final static String FACEBOOK_REGEX = "^[A-Za-z0-9\\.\\-_]+";
     public final static String ICQ_REGEX = "^\\d+";
     public final static String INSTAGRAM_REGEX = "^[A-Za-z0-9\\._]+";
     public final static String PHONE_REGEX = "^(\\+[0-9]{1,5}[ ]?)?(\\([0-9][0-9-/ ]*[0-9]\\)[ ]?)?[0-9][0-9-/ ]*[0-9]";
     public final static String SKYPE_REGEX = "[a-zA-Z][a-zA-Z0-9\\.,\\-_]{5,31}";
     public final static String TWITTER_USER_REGEX = "^[A-Za-z0-9_]{1,15}$";
     public final static String URL_REGEX = "^(ftp|http(s?))://((\\S+:)?\\S+@)?([a-zA-Z0-9][a-zA-Z0-9_\\-\\.]*[a-zA-Z0-9](:\\d{1,5})?)(/([a-zA-Z0-9_/\\&\\?\\=\\-\\.\\~\\%\\(\\)#]*))?";
+    public final static String XING_REGEX = "^.+"; // Currently no specifications known.
   }
 }
