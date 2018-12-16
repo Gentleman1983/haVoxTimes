@@ -16,7 +16,6 @@
  */
 package net.havox.times.model.api.user;
 
-import net.havox.times.model.contacts.api.*;
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
