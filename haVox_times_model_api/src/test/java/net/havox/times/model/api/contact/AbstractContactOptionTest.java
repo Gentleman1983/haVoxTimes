@@ -43,7 +43,7 @@ public abstract class AbstractContactOptionTest
   @Repeat( 25 )
   public void testModifyType() throws Exception
   {
-    ContactType type = ContactType.values()[ ModelRandomGenerator.randomIntInRange( 0, ContactType.values().length ) ];
+    ContactType type = ContactType.values()[ ModelRandomGenerator.randomIntInRange( 0, ContactType.values().length - 1 ) ];
     
     ContactOption objectUnderTest = newInstance();
     String value = objectUnderTest.getContactValue();
@@ -82,7 +82,7 @@ public abstract class AbstractContactOptionTest
   {
     String alphabet = ModelRandomGenerator.ALPHABETIC_STRING;
     String value = ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 1, 50 ), alphabet );
-    ContactType type = ContactType.values()[ ModelRandomGenerator.randomIntInRange( 0, ContactType.values().length ) ];
+    ContactType type = ContactType.values()[ ModelRandomGenerator.randomIntInRange( 0, ContactType.values().length - 1 ) ];
 
     ContactOption objectUnderTest = newInstance();
     objectUnderTest.setValue( type, value);
