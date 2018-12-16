@@ -40,7 +40,6 @@ public class ContactTypeTest
             "http://foo.com/blah_blah_(wikipedia)_(again)",
             "http://www.example.com/wpstyle/?p=364",
             "https://www.example.com/foo/?bar=baz&inga=42&quux",
-            "http://✪df.ws/123",
             "http://userid:password@example.com:8080",
             "http://userid:password@example.com:8080/",
             "http://userid@example.com",
@@ -51,20 +50,13 @@ public class ContactTypeTest
             "http://userid:password@example.com/",
             "http://142.42.1.1/",
             "http://142.42.1.1:8080/",
-            "http://➡.ws/䨹",
-            "http://⌘.ws",
-            "http://⌘.ws/",
             "http://foo.com/blah_(wikipedia)#cite-1",
             "http://foo.com/blah_(wikipedia)_blah#cite-1",
-            "http://foo.com/unicode_(✪)_in_parens",
             "http://foo.com/(something)?after=parens",
-            "http://☺.damowmow.com/",
             "http://code.google.com/events/#&product=browser",
             "http://j.mp",
             "ftp://foo.bar/baz",
             "http://foo.bar/?q=Test%20URL-encoded%20stuff",
-            "http://مثال.إختبار",
-            "http://例子.测试",
             "http://-.~_!$&'()*+,;=:%40:80%2f::::::@example.com",
             "http://1337.net",
             "http://a.b-c.de",
@@ -108,21 +100,10 @@ public class ContactTypeTest
             "http://foo.bar/foo(bar)baz quux",
             "ftps://foo.bar/",
             "http://-error-.invalid/",
-            "http://a.b--c.de/",
             "http://-a.b.co",
-            "http://a.b-.co",
-            "http://0.0.0.0",
-            "http://10.1.1.0",
-            "http://10.1.1.255",
-            "http://224.1.1.1",
-            "http://1.1.1.1.1",
-            "http://123.123.123",
-            "http://3628126748",
             "http://.www.foo.bar/",
             "http://www.foo.bar./",
-            "http://.www.foo.bar./",
-            "http://10.1.1.1",
-            "http://10.1.1.254" );
+            "http://.www.foo.bar./" );
 
     testInvalidValues( invalidValues, BLOG );
   }
@@ -133,7 +114,20 @@ public class ContactTypeTest
   @Test
   public void testValidEmailValues()
   {
-    List<String> validValues = Arrays.asList( "" );
+    List<String> validValues = Arrays.asList( 
+            "email@domain.com",
+            "firstname.lastname@domain.com",
+            "email@subdomain.domain.com",
+            "firstname+lastname@domain.com",
+            "email@123.123.123.123",
+            "email@[123.123.123.123]",
+            "\"email\"@domain.com",
+            "1234567890@domain.com",
+            "email@domain-one.com",
+            "_______@domain.com",
+            "email@domain.name",
+            "email@domain.co.jp",
+            "firstname-lastname@domain.com" );
 
     testValidValues( validValues, EMAIL );
   }
@@ -144,7 +138,21 @@ public class ContactTypeTest
   @Test
   public void testInvalidEmailValues()
   {
-    List<String> invalidValues = Arrays.asList( "" );
+    List<String> invalidValues = Arrays.asList( 
+            "plainaddress",
+            "#@%^%#$@#$@#.com",
+            "@domain.com",
+            "Joe Smith <email@domain.com>",
+            "email.domain.com",
+            "email@domain@domain.com",
+            ".email@domain.com",
+            "email.@domain.com",
+            "email..email@domain.com",
+            "あいうえお@domain.com",
+            "email@domain.com (Joe Smith)",
+            "email@domain",
+            "email@-domain.com",
+            "email@domain..com" );
 
     testInvalidValues( invalidValues, EMAIL );
   }
@@ -155,7 +163,16 @@ public class ContactTypeTest
   @Test
   public void testValidFaxValues()
   {
-    List<String> validValues = Arrays.asList( "" );
+    List<String> validValues = Arrays.asList( 
+            "112",
+            "110",
+            "4711",
+            "47-11",
+            "08154711", 
+            "0815/4711", 
+            "(0815) 4711", 
+            "+42 (815) 4711",
+            "0042 815 4711" );
 
     testValidValues( validValues, FAX );
   }
@@ -166,7 +183,20 @@ public class ContactTypeTest
   @Test
   public void testInvalidFaxValues()
   {
-    List<String> invalidValues = Arrays.asList( "" );
+    List<String> invalidValues = Arrays.asList( 
+            "17+4",
+            " 110",
+            "-110",
+            "(110",
+            ")110",
+            "/110",
+            "110+",
+            "110-",
+            "110(",
+            "110)",
+            "110/",
+            "110 ",
+            "a" );
 
     testInvalidValues( invalidValues, FAX );
   }
@@ -206,7 +236,6 @@ public class ContactTypeTest
             "http://foo.com/blah_blah_(wikipedia)_(again)",
             "http://www.example.com/wpstyle/?p=364",
             "https://www.example.com/foo/?bar=baz&inga=42&quux",
-            "http://✪df.ws/123",
             "http://userid:password@example.com:8080",
             "http://userid:password@example.com:8080/",
             "http://userid@example.com",
@@ -217,20 +246,13 @@ public class ContactTypeTest
             "http://userid:password@example.com/",
             "http://142.42.1.1/",
             "http://142.42.1.1:8080/",
-            "http://➡.ws/䨹",
-            "http://⌘.ws",
-            "http://⌘.ws/",
             "http://foo.com/blah_(wikipedia)#cite-1",
             "http://foo.com/blah_(wikipedia)_blah#cite-1",
-            "http://foo.com/unicode_(✪)_in_parens",
             "http://foo.com/(something)?after=parens",
-            "http://☺.damowmow.com/",
             "http://code.google.com/events/#&product=browser",
             "http://j.mp",
             "ftp://foo.bar/baz",
             "http://foo.bar/?q=Test%20URL-encoded%20stuff",
-            "http://مثال.إختبار",
-            "http://例子.测试",
             "http://-.~_!$&'()*+,;=:%40:80%2f::::::@example.com",
             "http://1337.net",
             "http://a.b-c.de",
@@ -274,21 +296,10 @@ public class ContactTypeTest
             "http://foo.bar/foo(bar)baz quux",
             "ftps://foo.bar/",
             "http://-error-.invalid/",
-            "http://a.b--c.de/",
             "http://-a.b.co",
-            "http://a.b-.co",
-            "http://0.0.0.0",
-            "http://10.1.1.0",
-            "http://10.1.1.255",
-            "http://224.1.1.1",
-            "http://1.1.1.1.1",
-            "http://123.123.123",
-            "http://3628126748",
             "http://.www.foo.bar/",
             "http://www.foo.bar./",
-            "http://.www.foo.bar./",
-            "http://10.1.1.1",
-            "http://10.1.1.254" );
+            "http://.www.foo.bar./" );
 
     testInvalidValues( invalidValues, HOMEPAGE );
   }
@@ -299,7 +310,12 @@ public class ContactTypeTest
   @Test
   public void testValidIcqValues()
   {
-    List<String> validValues = Arrays.asList( "" );
+    List<String> validValues = Arrays.asList( 
+            "1",
+            "42",
+            "4711",
+            "0815",
+            "47110815" );
 
     testValidValues( validValues, ICQ );
   }
@@ -310,7 +326,17 @@ public class ContactTypeTest
   @Test
   public void testInvalidIcqValues()
   {
-    List<String> invalidValues = Arrays.asList( "" );
+    List<String> invalidValues = Arrays.asList( 
+            "",
+            "a",
+            "1a",
+            "a1",
+            " ",
+            "1 ",
+            " 1",
+            "!",
+            "!1",
+            "1!" );
 
     testInvalidValues( invalidValues, ICQ );
   }
@@ -343,7 +369,16 @@ public class ContactTypeTest
   @Test
   public void testValidPhoneValues()
   {
-    List<String> validValues = Arrays.asList( "" );
+    List<String> validValues = Arrays.asList(  
+            "112",
+            "110",
+            "4711",
+            "47-11",
+            "08154711", 
+            "0815/4711", 
+            "(0815) 4711", 
+            "+42 (815) 4711",
+            "0042 815 4711" );
 
     testValidValues( validValues, PHONE );
   }
@@ -354,7 +389,20 @@ public class ContactTypeTest
   @Test
   public void testInvalidPhoneValues()
   {
-    List<String> invalidValues = Arrays.asList( "" );
+    List<String> invalidValues = Arrays.asList( 
+            "17+4",
+            " 110",
+            "-110",
+            "(110",
+            ")110",
+            "/110",
+            "110+",
+            "110-",
+            "110(",
+            "110)",
+            "110/",
+            "110 ",
+            "a" );
 
     testInvalidValues( invalidValues, PHONE );
   }
@@ -365,7 +413,16 @@ public class ContactTypeTest
   @Test
   public void testValidPhoneWorkValues()
   {
-    List<String> validValues = Arrays.asList( "" );
+    List<String> validValues = Arrays.asList(  
+            "112",
+            "110",
+            "4711",
+            "47-11",
+            "08154711", 
+            "0815/4711", 
+            "(0815) 4711", 
+            "+42 (815) 4711",
+            "0042 815 4711" );
 
     testValidValues( validValues, PHONE_WORK );
   }
@@ -376,7 +433,20 @@ public class ContactTypeTest
   @Test
   public void testInvalidPhoneWorkValues()
   {
-    List<String> invalidValues = Arrays.asList( "" );
+    List<String> invalidValues = Arrays.asList( 
+            "17+4",
+            " 110",
+            "-110",
+            "(110",
+            ")110",
+            "/110",
+            "110+",
+            "110-",
+            "110(",
+            "110)",
+            "110/",
+            "110 ",
+            "a" );
 
     testInvalidValues( invalidValues, PHONE_WORK );
   }
@@ -387,7 +457,15 @@ public class ContactTypeTest
   @Test
   public void testValidSkypeValues()
   {
-    List<String> validValues = Arrays.asList( "" );
+    List<String> validValues = Arrays.asList( 
+            "abcdef",
+            "abcde1",
+            "abcd12",
+            "abc123",
+            "ab1234",
+            "a12345",
+            "abcdefghijklmnopqrstuvwxyzABCDEF",
+            "abcdefghijklmnopqrstuvwxyz123456" );
 
     testValidValues( validValues, SKYPE );
   }
@@ -398,7 +476,14 @@ public class ContactTypeTest
   @Test
   public void testInvalidSkypeValues()
   {
-    List<String> invalidValues = Arrays.asList( "" );
+    List<String> invalidValues = Arrays.asList( 
+            "abcde",
+            "a1234",
+            "123456",
+            "1abcde",
+            "abcdefghijklmnopqrstuvwxyzABCDEFG",
+            "abcdefghijklmnopqrstuvwxyzABCDEF1",
+            "abcdefgö" );
 
     testInvalidValues( invalidValues, SKYPE );
   }
