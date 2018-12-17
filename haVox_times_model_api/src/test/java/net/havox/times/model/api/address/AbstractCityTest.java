@@ -46,7 +46,8 @@ public abstract class AbstractCityTest
   @Repeat( 25 )
   public void testModifyZipCode() throws Exception
   {
-    String zipCode = ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 4, 8 ), ModelRandomGenerator.ALPHANUMERIC_STRING );
+    String zipCode = ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 4, 8 ), 
+            ModelRandomGenerator.ALPHANUMERIC_STRING );
 
     City objectUnderTest = newInstance();
     objectUnderTest.setZipCode( zipCode );
