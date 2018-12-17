@@ -19,6 +19,7 @@ package net.havox.times.model.api.user;
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
+import net.havox.times.model.api.company.Worker;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -30,13 +31,14 @@ public abstract class AbstractUserTest
 
   public abstract User newInstance() throws Exception;
 
+  public abstract Worker newWorker() throws Exception;
+
   // *******************************************************************************************************************
   // Getter / Setter Tests
   // *******************************************************************************************************************
-    
   /**
    * User Story BM001 acceptance criteria 03 ("The user can store an email address.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -65,7 +67,7 @@ public abstract class AbstractUserTest
 
   /**
    * User Story BM001 acceptance criteria 01 ("A user has credentials to log in.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -78,13 +80,20 @@ public abstract class AbstractUserTest
 
   /**
    * User Story BM001 acceptance criteria 04 ("The user maps to a worker").
-   * 
+   *
    * @throws Exception
    */
   @Test
   @Repeat( 25 )
   public void testModifyWorker() throws Exception
   {
-    fail( "Not yet implemented." );
+    User objectUnderTest = newInstance();
+
+    Worker oldWorker = objectUnderTest.getWorker();
+    Worker newWorker = newWorker();
+    objectUnderTest.setWorker( newWorker );
+
+    assertNotEquals( oldWorker, objectUnderTest.getWorker() );
+    assertEquals( newWorker, objectUnderTest.getWorker() );
   }
 }

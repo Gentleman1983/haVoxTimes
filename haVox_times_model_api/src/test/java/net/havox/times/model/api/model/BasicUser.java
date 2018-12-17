@@ -16,6 +16,7 @@
  */
 package net.havox.times.model.api.model;
 
+import net.havox.times.model.api.company.Worker;
 import net.havox.times.model.api.user.User;
 
 /**
@@ -25,10 +26,12 @@ import net.havox.times.model.api.user.User;
  */
 public class BasicUser extends AbstractChangeAwareAndIdentifiableClass implements User
 {
-  private static final long serialVersionUID = -2415854975411332853L;
+
+  private static final long serialVersionUID = 7844031746824163564L;
 
   private String email;
   private final String credentials = "";
+  private Worker worker;
 
   @Override
   public String getEmailAddress()
@@ -46,5 +49,17 @@ public class BasicUser extends AbstractChangeAwareAndIdentifiableClass implement
   public String getCredentials()
   {
     return credentials;
+  }
+
+  @Override
+  public Worker getWorker()
+  {
+    return worker;
+  }
+
+  @Override
+  public void setWorker( Worker worker )
+  {
+    this.worker = worker;
   }
 }

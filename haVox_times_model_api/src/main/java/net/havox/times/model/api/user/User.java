@@ -19,6 +19,7 @@ package net.havox.times.model.api.user;
 import java.io.Serializable;
 import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.times.model.api.ChangeAware;
+import net.havox.times.model.api.company.Worker;
 
 /**
  * This class defines an application user.
@@ -51,4 +52,18 @@ public interface User extends ChangeAware, Serializable
    * @return the user credentials.
    */
   String getCredentials();
+  
+  /**
+   * Returns the corresponding worker.
+   * 
+   * @return the worker.
+   */
+  Worker getWorker();
+  
+  /**
+   * Sets the corresponding worker.
+   * 
+   * @param worker the worker.
+   */
+  void setWorker( Worker worker);
 }

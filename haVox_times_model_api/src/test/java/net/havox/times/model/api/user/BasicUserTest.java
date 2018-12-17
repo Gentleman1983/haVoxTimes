@@ -16,7 +16,9 @@
  */
 package net.havox.times.model.api.user;
 
+import net.havox.times.model.api.company.Worker;
 import net.havox.times.model.api.model.BasicUser;
+import net.havox.times.model.api.model.BasicWorker;
 
 /**
  * Simplest implementation for {@link AbstractUserTest}.
@@ -30,5 +32,11 @@ public class BasicUserTest extends AbstractUserTest
   public User newInstance() throws Exception
   {
     return new BasicUser();
+  }
+
+  @Override
+  public Worker newWorker() throws Exception
+  {
+    return new BasicWorker();
   }
 }
