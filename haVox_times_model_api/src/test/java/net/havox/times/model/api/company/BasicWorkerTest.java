@@ -16,19 +16,20 @@
  */
 package net.havox.times.model.api.company;
 
-import net.havox.times.model.api.model.BasicWorker;
+import net.havox.times.model.api.address.*;
+import net.havox.times.model.api.model.BasicCountry;
 
 /**
- * Basic implementation of {@link AbstractWorkerTest}.
+ * Basic implementation of {@link AbstractCountryTest}.
  *
  * @author Christian Otto
  */
-public class BasicWorkerTest extends AbstractWorkerTest
+public class BasicWorkerTest extends AbstractCountryTest
 {
 
   @Override
-  public Worker newInstance() throws Exception
+  public Country newInstance() throws Exception
   {
-    return new BasicWorker();
+    return new BasicCountry();
   }
 }
