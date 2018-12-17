@@ -17,9 +17,6 @@
 package net.havox.times.model.api.company;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import net.havox.times.model.api.address.*;
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
@@ -41,10 +38,9 @@ public abstract class AbstractWorkerTest
   // *******************************************************************************************************************
   // Getter / Setter Tests
   // *******************************************************************************************************************
-    
   /**
    * User Story BM002 acceptance criteria 01 ("It has a first name, middle initials and a last name.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -58,10 +54,10 @@ public abstract class AbstractWorkerTest
     objectUnderTest.setFirstName( name );
     assertEquals( name, objectUnderTest.getFirstName() );
   }
-  
+
   /**
    * User Story BM002 acceptance criteria 01 ("It has a first name, middle initials and a last name.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -75,10 +71,10 @@ public abstract class AbstractWorkerTest
     objectUnderTest.setMiddleInitials( name );
     assertEquals( name, objectUnderTest.getMiddleInitials() );
   }
-  
+
   /**
    * User Story BM002 acceptance criteria 01 ("It has a first name, middle initials and a last name.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -92,10 +88,10 @@ public abstract class AbstractWorkerTest
     objectUnderTest.setLastName( name );
     assertEquals( name, objectUnderTest.getLastName() );
   }
-  
+
   /**
    * User Story BM002 acceptance criteria 02 ("A worker has got an address.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -108,10 +104,10 @@ public abstract class AbstractWorkerTest
     objectUnderTest.setAddress( address );
     assertEquals( address, objectUnderTest.getAddress() );
   }
-  
+
   /**
    * User Story BM002 acceptance criteria 03 ("A worker has got a birth date.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -124,25 +120,27 @@ public abstract class AbstractWorkerTest
     objectUnderTest.setBirthDate( date );
     assertEquals( date, objectUnderTest.getBirthDate() );
   }
-  
+
   /**
    * User Story BM002 acceptance criteria 04 ("A worker has got a set of contact options.").
-   * 
+   *
    * @throws Exception
    */
   @Test
   @Repeat( 25 )
   public void testModifyAddContactOptions() throws Exception
   {
-    int elements = ModelRandomGenerator.randomIntInRange( 1, 25);
-    ContactOption[] contactOptionsToBeAdded = new ContactOption[elements];
-    for( int i = 0; i < elements; i++ ) {
-      contactOptionsToBeAdded[i] = new BasicContactOption();
+    int elements = ModelRandomGenerator.randomIntInRange( 1, 25 );
+    ContactOption[] contactOptionsToBeAdded = new ContactOption[ elements ];
+    for ( int i = 0; i < elements; i++ )
+    {
+      contactOptionsToBeAdded[ i ] = new BasicContactOption();
     }
-    
+
     Worker objectUnderTest = newInstance();
     objectUnderTest.addContactOptions( contactOptionsToBeAdded );
-    for( ContactOption addedElement : contactOptionsToBeAdded ) {
+    for ( ContactOption addedElement : contactOptionsToBeAdded )
+    {
       StringBuilder msg = new StringBuilder();
       msg.append( "Expected List of contact options '" ).append( objectUnderTest.getContactOptions() )
               .append( "' to contain all added elements. The value '" ).append( addedElement )
@@ -150,31 +148,34 @@ public abstract class AbstractWorkerTest
       assertTrue( msg.toString(), objectUnderTest.getContactOptions().contains( addedElement ) );
     }
   }
-  
+
   /**
    * User Story BM002 acceptance criteria 04 ("A worker has got a set of contact options.").
-   * 
+   *
    * @throws Exception
    */
   @Test
   @Repeat( 25 )
   public void testModifyRemoveContactOptions() throws Exception
   {
-    ContactOption[] contactOptionsToBeAdded = new ContactOption[100];
-    for( int i = 0; i < 100; i ++) {
-      contactOptionsToBeAdded[i] = new BasicContactOption();
+    ContactOption[] contactOptionsToBeAdded = new ContactOption[ 100 ];
+    for ( int i = 0; i < 100; i++ )
+    {
+      contactOptionsToBeAdded[ i ] = new BasicContactOption();
     }
-    
-    int elements = ModelRandomGenerator.randomIntInRange( 1, 25);
-    ContactOption[] contactOptionsToBeDeleted = new ContactOption[elements];
-    for( int i = 0; i < elements; i++ ) {
-      contactOptionsToBeAdded[i] = new BasicContactOption();
+
+    int elements = ModelRandomGenerator.randomIntInRange( 1, 25 );
+    ContactOption[] contactOptionsToBeDeleted = new ContactOption[ elements ];
+    for ( int i = 0; i < elements; i++ )
+    {
+      contactOptionsToBeAdded[ i ] = new BasicContactOption();
     }
-    
+
     Worker objectUnderTest = newInstance();
     objectUnderTest.addContactOptions( contactOptionsToBeAdded );
     objectUnderTest.addContactOptions( contactOptionsToBeDeleted );
-    for( ContactOption addedElement : contactOptionsToBeDeleted ) {
+    for ( ContactOption addedElement : contactOptionsToBeDeleted )
+    {
       StringBuilder msg = new StringBuilder();
       msg.append( "Expected List of contact options '" ).append( objectUnderTest.getContactOptions() )
               .append( "' to contain all added elements. The value '" ).append( addedElement )
@@ -182,12 +183,13 @@ public abstract class AbstractWorkerTest
       assertTrue( msg.toString(), objectUnderTest.getContactOptions().contains( addedElement ) );
     }
     objectUnderTest.removeContactOptions( contactOptionsToBeDeleted );
-    for( ContactOption checkedElement : contactOptionsToBeDeleted ) {
+    for ( ContactOption checkedElement : contactOptionsToBeDeleted )
+    {
       StringBuilder msg = new StringBuilder();
       msg.append( "Expected List of contact options '" ).append( objectUnderTest.getContactOptions() )
               .append( "' to contain none of the deleted elements. The value '" ).append( checkedElement )
               .append( "' was found." );
-      assertFalse(msg.toString(), objectUnderTest.getContactOptions().contains( checkedElement ) );
+      assertFalse( msg.toString(), objectUnderTest.getContactOptions().contains( checkedElement ) );
     }
   }
 }
