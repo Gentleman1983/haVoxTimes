@@ -33,13 +33,13 @@ import org.junit.runner.RunWith;
 public abstract class AbstractWorkerTest
 {
 
-  public abstract Employer newInstance() throws Exception;
+  public abstract Worker newInstance() throws Exception;
 
   // *******************************************************************************************************************
   // Getter / Setter Tests
   // *******************************************************************************************************************
   /**
-   * User Story BM015 acceptance criteria 01 ("An employer has a name, address and contact options.").
+   * User Story BM002 acceptance criteria 01 ("It has a first name, middle initials and a last name.").
    *
    * @throws Exception
    */
@@ -50,13 +50,47 @@ public abstract class AbstractWorkerTest
     String alphabet = ModelRandomGenerator.ALPHABETIC_STRING + " -";
     String name = ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 1, 50 ), alphabet );
 
-    Employer objectUnderTest = newInstance();
-    objectUnderTest.setName( name );
-    assertEquals( name, objectUnderTest.getName() );
+    Worker objectUnderTest = newInstance();
+    objectUnderTest.setFirstName( name );
+    assertEquals( name, objectUnderTest.getFirstName() );
   }
 
   /**
-   * User Story BM015 acceptance criteria 01 ("An employer has a name, address and contact options.").
+   * User Story BM002 acceptance criteria 01 ("It has a first name, middle initials and a last name.").
+   *
+   * @throws Exception
+   */
+  @Test
+  @Repeat( 25 )
+  public void testModifyInitials() throws Exception
+  {
+    String alphabet = ModelRandomGenerator.ALPHABETIC_STRING + " -";
+    String name = ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 1, 50 ), alphabet );
+
+    Worker objectUnderTest = newInstance();
+    objectUnderTest.setMiddleInitials( name );
+    assertEquals( name, objectUnderTest.getMiddleInitials() );
+  }
+
+  /**
+   * User Story BM002 acceptance criteria 01 ("It has a first name, middle initials and a last name.").
+   *
+   * @throws Exception
+   */
+  @Test
+  @Repeat( 25 )
+  public void testModifyLastName() throws Exception
+  {
+    String alphabet = ModelRandomGenerator.ALPHABETIC_STRING + " -";
+    String name = ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 1, 50 ), alphabet );
+
+    Worker objectUnderTest = newInstance();
+    objectUnderTest.setLastName( name );
+    assertEquals( name, objectUnderTest.getLastName() );
+  }
+
+  /**
+   * User Story BM002 acceptance criteria 02 ("A worker has got an address.").
    *
    * @throws Exception
    */
@@ -66,13 +100,29 @@ public abstract class AbstractWorkerTest
   {
     Address address = new BasicAddress();
 
-    Employer objectUnderTest = newInstance();
+    Worker objectUnderTest = newInstance();
     objectUnderTest.setAddress( address );
     assertEquals( address, objectUnderTest.getAddress() );
   }
 
   /**
-   * User Story BM015 acceptance criteria 01 ("An employer has a name, address and contact options.").
+   * User Story BM002 acceptance criteria 03 ("A worker has got a birth date.").
+   *
+   * @throws Exception
+   */
+  @Test
+  @Repeat( 25 )
+  public void testModifyBirthDate() throws Exception
+  {
+    LocalDate date = ModelRandomGenerator.randomLocalDate();
+
+    Worker objectUnderTest = newInstance();
+    objectUnderTest.setBirthDate( date );
+    assertEquals( date, objectUnderTest.getBirthDate() );
+  }
+
+  /**
+   * User Story BM002 acceptance criteria 04 ("A worker has got a set of contact options.").
    *
    * @throws Exception
    */
@@ -87,7 +137,7 @@ public abstract class AbstractWorkerTest
       contactOptionsToBeAdded[ i ] = new BasicContactOption();
     }
 
-    Employer objectUnderTest = newInstance();
+    Worker objectUnderTest = newInstance();
     objectUnderTest.addContactOptions( contactOptionsToBeAdded );
     for ( ContactOption addedElement : contactOptionsToBeAdded )
     {
@@ -100,7 +150,7 @@ public abstract class AbstractWorkerTest
   }
 
   /**
-   * User Story BM015 acceptance criteria 01 ("An employer has a name, address and contact options.").
+   * User Story BM002 acceptance criteria 04 ("A worker has got a set of contact options.").
    *
    * @throws Exception
    */
@@ -121,7 +171,7 @@ public abstract class AbstractWorkerTest
       contactOptionsToBeAdded[ i ] = new BasicContactOption();
     }
 
-    Employer objectUnderTest = newInstance();
+    Worker objectUnderTest = newInstance();
     objectUnderTest.addContactOptions( contactOptionsToBeAdded );
     objectUnderTest.addContactOptions( contactOptionsToBeDeleted );
     for ( ContactOption addedElement : contactOptionsToBeDeleted )
@@ -141,21 +191,5 @@ public abstract class AbstractWorkerTest
               .append( "' was found." );
       assertFalse( msg.toString(), objectUnderTest.getContactOptions().contains( checkedElement ) );
     }
-  }
-  
-  /**
-   * User Story BM015 acceptance criteria 02 ("May be part of a employer group.").
-   *
-   * @throws Exception
-   */
-  @Test
-  @Repeat( 25 )
-  public void testModifyEmployerGroup() throws Exception
-  {
-    Employer group = newInstance();
-
-    Employer objectUnderTest = newInstance();
-    objectUnderTest.setEmploymentGroup( group );
-    assertEquals( group, objectUnderTest.getEmploymentGroup() );
   }
 }
