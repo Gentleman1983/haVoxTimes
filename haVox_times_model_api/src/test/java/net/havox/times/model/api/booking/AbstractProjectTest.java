@@ -32,6 +32,7 @@ public abstract class AbstractProjectTest
 {
 
   public abstract Project newInstance() throws Exception;
+  public abstract Account newAccount() throws Exception;
 
   // *******************************************************************************************************************
   // Getter / Setter Tests
@@ -134,7 +135,7 @@ public abstract class AbstractProjectTest
     Account[] accountsToBeAdded = new Account[ elements ];
     for ( int i = 0; i < elements; i++ )
     {
-      accountsToBeAdded[ i ] = new BasicAccount();
+      accountsToBeAdded[ i ] = newAccount();
     }
 
     Project objectUnderTest = newInstance();
@@ -161,14 +162,14 @@ public abstract class AbstractProjectTest
     Account[] accountsToBeAdded = new Account[ 100 ];
     for ( int i = 0; i < 100; i++ )
     {
-      accountsToBeAdded[ i ] = new BasicAccount();
+      accountsToBeAdded[ i ] = newAccount();
     }
 
     int elements = ModelRandomGenerator.randomIntInRange( 1, 25 );
     Account[] accountsToBeDeleted = new Account[ elements ];
     for ( int i = 0; i < elements; i++ )
     {
-      accountsToBeAdded[ i ] = new BasicAccount();
+      accountsToBeAdded[ i ] = newAccount();
     }
 
     Project objectUnderTest = newInstance();
