@@ -21,7 +21,6 @@ import java.time.Month;
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
-import net.havox.times.model.api.model.BasicAccount;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
