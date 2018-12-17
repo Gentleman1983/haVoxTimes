@@ -16,9 +16,11 @@
  */
 package net.havox.times.model.api.user;
 
+import net.havox.times.model.api.model.BasicUser;
+
 /**
  * Simplest implementation for {@link AbstractUserTest}.
- * 
+ *
  * @author Christian Otto
  */
 public class BasicUserTest extends AbstractUserTest
@@ -27,50 +29,6 @@ public class BasicUserTest extends AbstractUserTest
   @Override
   public User newInstance() throws Exception
   {
-    return new User() {
-      private static final long serialVersionUID = -4006453292775312717L;
-      
-      private String email;
-      private final String credentials = "";
-      private long version;
-      private Long id;
-      
-      
-      @Override
-      public String getEmailAddress()
-      {
-        return email;
-      }
-
-      @Override
-      public void setEmailAddress( String emailAddress )
-      {
-        email = emailAddress;
-      }
-
-      @Override
-      public String getCredentials()
-      {
-        return credentials;
-      }
-
-      @Override
-      public long getVersion()
-      {
-        return version;
-      }
-
-      @Override
-      public long incrementVersion()
-      {
-        return ++version;
-      }
-
-      @Override
-      public Long getId()
-      {
-        return id;
-      }
-    };
+    return new BasicUser();
   }
 }

@@ -14,28 +14,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.havox.times.model.api.address;
+package net.havox.times.model.api.model;
 
-import net.havox.times.model.api.model.BasicCity;
-import net.havox.times.model.api.model.BasicCountry;
+import net.havox.times.model.api.address.Country;
 
 /**
- * Basic implementation of {@link AbstractCityTest}.
- *
+ * Basic implementation of {@link Country}.
+ * 
  * @author Christian Otto
  */
-public class BasicCityTest extends AbstractCityTest
+public class BasicCountry extends AbstractChangeAwareAndIdentifiableClass implements Country
 {
+  private static final long serialVersionUID = -1522491103810283288L;
+
+  private String name;
 
   @Override
-  public City newInstance() throws Exception
+  public String getName()
   {
-    return new BasicCity();
+    return name;
   }
 
   @Override
-  public Country newCountry() throws Exception
+  public void setName( String name )
   {
-    return new BasicCountry();
+    this.name = name;
   }
 }

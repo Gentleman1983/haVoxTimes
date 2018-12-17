@@ -14,28 +14,47 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.havox.times.model.api.address;
+package net.havox.times.model.api.model;
 
-import net.havox.times.model.api.model.BasicCity;
-import net.havox.times.model.api.model.BasicCountry;
+import net.havox.times.model.api.ChangeAware;
+import net.havox.times.model.api.Identifiable;
 
 /**
- * Basic implementation of {@link AbstractCityTest}.
- *
+ * Abstract basic class for change aware classes.
+ * 
  * @author Christian Otto
  */
-public class BasicCityTest extends AbstractCityTest
+public abstract class AbstractChangeAwareAndIdentifiableClass implements ChangeAware, Identifiable
 {
 
+  private Long id;
+  private long version = 1l;
+
   @Override
-  public City newInstance() throws Exception
+  public Long getId()
   {
-    return new BasicCity();
+    return id;
+  }
+
+  public void setId( Long id )
+  {
+    this.id = id;
   }
 
   @Override
-  public Country newCountry() throws Exception
+  public long getVersion()
   {
-    return new BasicCountry();
+    return this.version;
+  }
+
+  @Override
+  public long incrementVersion()
+  {
+    return ++version;
+  }
+
+  public void setVersion( long version )
+  {
+    this.version = version;
   }
 }

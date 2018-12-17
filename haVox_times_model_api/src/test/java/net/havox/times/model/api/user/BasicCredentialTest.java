@@ -16,9 +16,11 @@
  */
 package net.havox.times.model.api.user;
 
+import net.havox.times.model.api.model.BasicCredential;
+
 /**
  * Simplest implementation for {@link  AbstractCredentialTest}.
- * 
+ *
  * @author Christian Otto
  */
 public class BasicCredentialTest extends AbstractCredentialTest
@@ -27,56 +29,6 @@ public class BasicCredentialTest extends AbstractCredentialTest
   @Override
   public Credential newInstance() throws Exception
   {
-    return new Credential()
-    {
-      private static final long serialVersionUID = 691927537365216270L;
-      
-      private String username;
-      private String pass;
-      private long version;
-      private Long id;
-      
-      @Override
-      public String getUsername()
-      {
-        return username;
-      }
-
-      @Override
-      public void setUsername( String username )
-      {
-        this.username = username;
-      }
-
-      @Override
-      public String getPasswordHash()
-      {
-        return pass;
-      }
-
-      @Override
-      public void setPassword( String password )
-      {
-        this.pass = "foo_" + password + "_bar";
-      }
-
-      @Override
-      public long getVersion()
-      {
-        return version;
-      }
-
-      @Override
-      public long incrementVersion()
-      {
-        return ++version;
-      }
-
-      @Override
-      public Long getId()
-      {
-        return id;
-      }
-    };
+    return new BasicCredential();
   }
 }

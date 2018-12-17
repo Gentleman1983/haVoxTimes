@@ -16,6 +16,8 @@
  */
 package net.havox.times.model.api.contact;
 
+import net.havox.times.model.api.model.BasicContactOption;
+
 /**
  * Simplest implementation for {@link  AbstractContactOptionTest}.
  *
@@ -27,52 +29,6 @@ public class BasicContactOptionTest extends AbstractContactOptionTest
   @Override
   public ContactOption newInstance() throws Exception
   {
-    return new ContactOption()
-    {
-      private static final long serialVersionUID = -6805985062034526838L;
-
-      private ContactType type = null;
-      private String value = "leer";
-      private long version;
-      private Long id;
-
-      @Override
-      public ContactType getType()
-      {
-        return type;
-      }
-
-      @Override
-      public String getContactValue()
-      {
-        return value;
-      }
-
-      @Override
-      public void setValue( ContactType type, String value )
-      {
-        this.type = type;
-        this.value = value;
-      }
-
-      @Override
-      public long getVersion()
-      {
-        return version;
-      }
-
-      @Override
-      public long incrementVersion()
-      {
-        return ++version;
-      }
-
-      @Override
-      public Long getId()
-      {
-        return id;
-      }
-    };
+    return new BasicContactOption();
   }
-
 }

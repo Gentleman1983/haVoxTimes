@@ -16,9 +16,12 @@
  */
 package net.havox.times.model.api.address;
 
+import net.havox.times.model.api.model.BasicAddress;
+import net.havox.times.model.api.model.BasicCity;
+
 /**
  * Basic implementation od {@link AbstractAddressTest}.
- * 
+ *
  * @author Christian Otto
  */
 public class BasicAdressTest extends AbstractAddressTest
@@ -27,138 +30,12 @@ public class BasicAdressTest extends AbstractAddressTest
   @Override
   public Address newInstance() throws Exception
   {
-    return new Address()
-    {
-      private static final long serialVersionUID = 2020880992885345176L;
-      
-      private String street;
-      private String houseNumber;
-      private City city;
-      private long version;
-      private Long id;
-      
-      @Override
-      public String getStreet()
-      {
-        return street;
-      }
-
-      @Override
-      public void setStreet( String street )
-      {
-        this.street = street;
-      }
-
-      @Override
-      public String getHouseNumber()
-      {
-        return houseNumber;
-      }
-
-      @Override
-      public void setHouseNumber( String houseNumber )
-      {
-        this.houseNumber = houseNumber;
-      }
-
-      @Override
-      public City getCity()
-      {
-        return this.city;
-      }
-
-      @Override
-      public void setCity( City city )
-      {
-        this.city = city;
-      }
-
-      @Override
-      public long getVersion()
-      {
-        return version;
-      }
-
-      @Override
-      public long incrementVersion()
-      {
-        return ++version;
-      }
-
-      @Override
-      public Long getId()
-      {
-        return id;
-      }
-    };
+    return new BasicAddress();
   }
 
   @Override
   public City newCity() throws Exception
   {
-    return new City()
-    {
-      private static final long serialVersionUID = 6150184775108706277L;
-      
-      private String name;
-      private String zip;
-      private Country country;
-      private long version;
-      private Long id;
-      
-      @Override
-      public String getZipCode()
-      {
-        return zip;
-      }
-
-      @Override
-      public void setZipCode( String zipCode )
-      {
-        zip = zipCode;
-      }
-
-      @Override
-      public String getName()
-      {
-        return name;
-      }
-
-      @Override
-      public void setName( String name )
-      {
-        this.name = name;
-      }
-
-      @Override
-      public Country getCountry()
-      {
-        return country;
-      }
-
-      @Override
-      public void setCountry( Country country )
-      {
-        this.country = country;
-      }
-
-      @Override
-      public long getVersion()
-      {
-        return version;
-      }
-
-      @Override
-      public long incrementVersion()
-      {
-        return ++version;
-      }
-
-      @Override
-      public Long getId()
-      {
-        return id;
-      }
-    };
+    return new BasicCity();
   }
 }

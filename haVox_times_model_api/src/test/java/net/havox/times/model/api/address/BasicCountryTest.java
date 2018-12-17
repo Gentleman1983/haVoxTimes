@@ -16,9 +16,11 @@
  */
 package net.havox.times.model.api.address;
 
+import net.havox.times.model.api.model.BasicCountry;
+
 /**
  * Basic implementation of {@link AbstractCountryTest}.
- * 
+ *
  * @author Christian Otto
  */
 public class BasicCountryTest extends AbstractCountryTest
@@ -27,43 +29,6 @@ public class BasicCountryTest extends AbstractCountryTest
   @Override
   public Country newInstance() throws Exception
   {
-    return new Country()
-    {
-      private static final long serialVersionUID = -1745768422907059718L;
-      
-      private String name;
-      private long version;
-      private Long id;
-      
-      @Override
-      public String getName()
-      {
-        return name;
-      }
-
-      @Override
-      public void setName( String name )
-      {
-        this.name = name;
-      }
-
-      @Override
-      public long getVersion()
-      {
-        return version;
-      }
-
-      @Override
-      public long incrementVersion()
-      {
-        return ++version;
-      }
-
-      @Override
-      public Long getId()
-      {
-        return id;
-      }
-    };
+    return new BasicCountry();
   }
 }

@@ -14,28 +14,43 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.havox.times.model.api.address;
+package net.havox.times.model.api.model;
 
-import net.havox.times.model.api.model.BasicCity;
-import net.havox.times.model.api.model.BasicCountry;
+import net.havox.times.model.api.user.Credential;
 
 /**
- * Basic implementation of {@link AbstractCityTest}.
- *
+ * Basic implementation of {@link Credential}.
+ * 
  * @author Christian Otto
  */
-public class BasicCityTest extends AbstractCityTest
+public class BasicCredential extends AbstractChangeAwareAndIdentifiableClass implements Credential
 {
+  private static final long serialVersionUID = 1890677125873805742L;
+
+  private String username;
+  private String pass;
 
   @Override
-  public City newInstance() throws Exception
+  public String getUsername()
   {
-    return new BasicCity();
+    return username;
   }
 
   @Override
-  public Country newCountry() throws Exception
+  public void setUsername( String username )
   {
-    return new BasicCountry();
+    this.username = username;
+  }
+
+  @Override
+  public String getPasswordHash()
+  {
+    return pass;
+  }
+
+  @Override
+  public void setPassword( String password )
+  {
+    this.pass = "foo_" + password + "_bar";
   }
 }

@@ -14,28 +14,39 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.havox.times.model.api.address;
+package net.havox.times.model.api.model;
 
-import net.havox.times.model.api.model.BasicCity;
-import net.havox.times.model.api.model.BasicCountry;
+import net.havox.times.model.api.contact.ContactOption;
+import net.havox.times.model.api.contact.ContactType;
 
 /**
- * Basic implementation of {@link AbstractCityTest}.
- *
+ * Basic implementation of {@link ContactOption}.
+ * 
  * @author Christian Otto
  */
-public class BasicCityTest extends AbstractCityTest
+public class BasicContactOption extends AbstractChangeAwareAndIdentifiableClass implements ContactOption
 {
+  private static final long serialVersionUID = -8059472798279522275L;
+
+  private ContactType type = null;
+  private String value = "leer";
 
   @Override
-  public City newInstance() throws Exception
+  public ContactType getType()
   {
-    return new BasicCity();
+    return type;
   }
 
   @Override
-  public Country newCountry() throws Exception
+  public String getContactValue()
   {
-    return new BasicCountry();
+    return value;
+  }
+
+  @Override
+  public void setValue( ContactType type, String value )
+  {
+    this.type = type;
+    this.value = value;
   }
 }
