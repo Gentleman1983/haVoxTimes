@@ -21,8 +21,6 @@ import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
 import net.havox.times.model.api.contact.ContactOption;
-import net.havox.times.model.api.model.BasicAddress;
-import net.havox.times.model.api.model.BasicContactOption;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -33,6 +31,8 @@ public abstract class AbstractEmployerTest
 {
 
   public abstract Employer newInstance() throws Exception;
+  public abstract Address newAddress() throws Exception;
+  public abstract ContactOption newContactOption() throws Exception;
 
   // *******************************************************************************************************************
   // Getter / Setter Tests
@@ -63,7 +63,7 @@ public abstract class AbstractEmployerTest
   @Repeat( 25 )
   public void testModifyAddress() throws Exception
   {
-    Address address = new BasicAddress();
+    Address address = newAddress();
 
     Employer objectUnderTest = newInstance();
     objectUnderTest.setAddress( address );
@@ -83,7 +83,7 @@ public abstract class AbstractEmployerTest
     ContactOption[] contactOptionsToBeAdded = new ContactOption[ elements ];
     for ( int i = 0; i < elements; i++ )
     {
-      contactOptionsToBeAdded[ i ] = new BasicContactOption();
+      contactOptionsToBeAdded[ i ] = newContactOption();
     }
 
     Employer objectUnderTest = newInstance();
@@ -110,14 +110,14 @@ public abstract class AbstractEmployerTest
     ContactOption[] contactOptionsToBeAdded = new ContactOption[ 100 ];
     for ( int i = 0; i < 100; i++ )
     {
-      contactOptionsToBeAdded[ i ] = new BasicContactOption();
+      contactOptionsToBeAdded[ i ] = newContactOption();
     }
 
     int elements = ModelRandomGenerator.randomIntInRange( 1, 25 );
     ContactOption[] contactOptionsToBeDeleted = new ContactOption[ elements ];
     for ( int i = 0; i < elements; i++ )
     {
-      contactOptionsToBeAdded[ i ] = new BasicContactOption();
+      contactOptionsToBeAdded[ i ] = newContactOption();
     }
 
     Employer objectUnderTest = newInstance();
