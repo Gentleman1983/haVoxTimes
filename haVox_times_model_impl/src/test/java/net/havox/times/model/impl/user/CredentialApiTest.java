@@ -18,6 +18,8 @@ package net.havox.times.model.impl.user;
 
 import net.havox.times.model.api.user.AbstractCredentialTest;
 import net.havox.times.model.api.user.Credential;
+import net.havox.times.model.factory.UserModelFactory;
+import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link Credential}.
@@ -26,11 +28,17 @@ import net.havox.times.model.api.user.Credential;
  */
 public class CredentialApiTest extends AbstractCredentialTest
 {
+  private static UserModelFactory userFactory;
+
+  @BeforeClass
+  public static void setupClass()
+  {
+    userFactory = UserModelFactory.getInstance();
+  }
 
   @Override
   public Credential newInstance() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return userFactory.getNewCredential();
   }
-  
 }

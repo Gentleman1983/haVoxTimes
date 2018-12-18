@@ -19,6 +19,8 @@ package net.havox.times.model.impl.booking;
 import net.havox.times.model.api.booking.AbstractProjectTest;
 import net.havox.times.model.api.booking.Account;
 import net.havox.times.model.api.booking.Project;
+import net.havox.times.model.factory.BookingModelFactory;
+import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link Project}.
@@ -27,17 +29,23 @@ import net.havox.times.model.api.booking.Project;
  */
 public class ProjectApiTest extends AbstractProjectTest
 {
+  private static BookingModelFactory bookingFactory;
+
+  @BeforeClass
+  public static void setupClass()
+  {
+    bookingFactory = BookingModelFactory.getInstance();
+  }
 
   @Override
   public Project newInstance() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return bookingFactory.getNewProject();
   }
 
   @Override
   public Account newAccount() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return bookingFactory.getNewAccount();
   }
-  
 }

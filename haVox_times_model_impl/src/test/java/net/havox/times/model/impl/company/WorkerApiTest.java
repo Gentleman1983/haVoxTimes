@@ -20,6 +20,10 @@ import net.havox.times.model.api.address.Address;
 import net.havox.times.model.api.company.AbstractWorkerTest;
 import net.havox.times.model.api.company.Worker;
 import net.havox.times.model.api.contact.ContactOption;
+import net.havox.times.model.factory.AddressModelFactory;
+import net.havox.times.model.factory.CompanyModelFactory;
+import net.havox.times.model.factory.ContactModelFactory;
+import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link Worker}.
@@ -28,23 +32,33 @@ import net.havox.times.model.api.contact.ContactOption;
  */
 public class WorkerApiTest extends AbstractWorkerTest
 {
+  private static AddressModelFactory addressFactory;
+  private static CompanyModelFactory companyFactory;
+  private static ContactModelFactory contactFactory;
+
+  @BeforeClass
+  public static void setupClass()
+  {
+    addressFactory = AddressModelFactory.getInstance();
+    companyFactory = CompanyModelFactory.getInstance();
+    contactFactory = ContactModelFactory.getInstance();
+  }
 
   @Override
   public Worker newInstance() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return companyFactory.getNewWorker();
   }
 
   @Override
   public Address newAddress() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return addressFactory.getNewAddress();
   }
 
   @Override
   public ContactOption newContactOption() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return contactFactory.getNewContactOption();
   }
-  
 }

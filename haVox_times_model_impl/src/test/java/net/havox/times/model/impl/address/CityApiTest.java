@@ -19,6 +19,8 @@ package net.havox.times.model.impl.address;
 import net.havox.times.model.api.address.AbstractCityTest;
 import net.havox.times.model.api.address.City;
 import net.havox.times.model.api.address.Country;
+import net.havox.times.model.factory.AddressModelFactory;
+import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link City}.
@@ -27,17 +29,23 @@ import net.havox.times.model.api.address.Country;
  */
 public class CityApiTest extends AbstractCityTest
 {
+  private static AddressModelFactory addressFactory;
+
+  @BeforeClass
+  public static void setupClass()
+  {
+    addressFactory = AddressModelFactory.getInstance();
+  }
 
   @Override
   public City newInstance() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return addressFactory.getNewCity();
   }
 
   @Override
   public Country newCountry() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return addressFactory.getNewCountry();
   }
-  
 }

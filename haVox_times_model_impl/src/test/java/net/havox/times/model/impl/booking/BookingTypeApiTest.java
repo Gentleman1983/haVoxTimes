@@ -18,6 +18,8 @@ package net.havox.times.model.impl.booking;
 
 import net.havox.times.model.api.booking.AbstractBookingTypeTest;
 import net.havox.times.model.api.booking.BookingType;
+import net.havox.times.model.factory.BookingModelFactory;
+import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link BookingType}.
@@ -26,11 +28,17 @@ import net.havox.times.model.api.booking.BookingType;
  */
 public class BookingTypeApiTest extends AbstractBookingTypeTest
 {
+  private static BookingModelFactory bookingFactory;
+
+  @BeforeClass
+  public static void setupClass()
+  {
+    bookingFactory = BookingModelFactory.getInstance();
+  }
 
   @Override
   public BookingType newInstance() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return bookingFactory.getNewBookingType();
   }
-  
 }

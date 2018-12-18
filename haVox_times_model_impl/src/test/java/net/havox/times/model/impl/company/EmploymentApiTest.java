@@ -21,6 +21,9 @@ import net.havox.times.model.api.company.AbstractEmploymentTest;
 import net.havox.times.model.api.company.Employer;
 import net.havox.times.model.api.company.Employment;
 import net.havox.times.model.api.company.Worker;
+import net.havox.times.model.factory.BookingModelFactory;
+import net.havox.times.model.factory.CompanyModelFactory;
+import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link Employment}.
@@ -29,29 +32,37 @@ import net.havox.times.model.api.company.Worker;
  */
 public class EmploymentApiTest extends AbstractEmploymentTest
 {
+  private static BookingModelFactory bookingFactory;
+  private static CompanyModelFactory companyFactory;
+
+  @BeforeClass
+  public static void setupClass()
+  {
+    bookingFactory = BookingModelFactory.getInstance();
+    companyFactory = CompanyModelFactory.getInstance();
+  }
 
   @Override
   public Employment newInstance() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return companyFactory.getNewEmployment();
   }
 
   @Override
   public Employer newEmployer() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return companyFactory.getNewEmployer();
   }
 
   @Override
   public Worker newEmployee() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return companyFactory.getNewWorker();
   }
 
   @Override
   public Project newProject() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return bookingFactory.getNewProject();
   }
-  
 }

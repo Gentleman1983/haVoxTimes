@@ -20,6 +20,8 @@ import net.havox.times.model.api.booking.AbstractBookingTest;
 import net.havox.times.model.api.booking.Booking;
 import net.havox.times.model.api.booking.BookingReference;
 import net.havox.times.model.api.booking.BookingType;
+import net.havox.times.model.factory.BookingModelFactory;
+import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link Booking}.
@@ -28,23 +30,29 @@ import net.havox.times.model.api.booking.BookingType;
  */
 public class BookingApiTest extends AbstractBookingTest
 {
+  private static BookingModelFactory bookingFactory;
+
+  @BeforeClass
+  public static void setupClass()
+  {
+    bookingFactory = BookingModelFactory.getInstance();
+  }
 
   @Override
   public Booking newInstance() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return bookingFactory.getNewBooking();
   }
 
   @Override
   public BookingType newBookingType() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return bookingFactory.getNewBookingType();
   }
 
   @Override
   public BookingReference newBookingReference() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return bookingFactory.getNewBookingReference();
   }
-  
 }

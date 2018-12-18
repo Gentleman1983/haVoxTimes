@@ -19,6 +19,9 @@ package net.havox.times.model.impl.user;
 import net.havox.times.model.api.company.Worker;
 import net.havox.times.model.api.user.AbstractUserTest;
 import net.havox.times.model.api.user.User;
+import net.havox.times.model.factory.CompanyModelFactory;
+import net.havox.times.model.factory.UserModelFactory;
+import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link User}.
@@ -27,17 +30,25 @@ import net.havox.times.model.api.user.User;
  */
 public class UserApiTest extends AbstractUserTest
 {
+  private static CompanyModelFactory companyFactory;
+  private static UserModelFactory userFactory;
+
+  @BeforeClass
+  public static void setupClass()
+  {
+    companyFactory = CompanyModelFactory.getInstance();
+    userFactory = UserModelFactory.getInstance();
+  }
 
   @Override
   public User newInstance() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return userFactory.getNewUser();
   }
 
   @Override
   public Worker newWorker() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return companyFactory.getNewWorker();
   }
-  
 }

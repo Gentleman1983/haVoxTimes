@@ -18,6 +18,8 @@ package net.havox.times.model.impl.contact;
 
 import net.havox.times.model.api.contact.AbstractContactOptionTest;
 import net.havox.times.model.api.contact.ContactOption;
+import net.havox.times.model.factory.ContactModelFactory;
+import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link ContactOption}.
@@ -25,13 +27,18 @@ import net.havox.times.model.api.contact.ContactOption;
  * @author Christian Otto
  */
 public class ContactOptionApiTest extends AbstractContactOptionTest
-
 {
+  private static ContactModelFactory contactFactory;
+
+  @BeforeClass
+  public static void setupClass()
+  {
+    contactFactory = ContactModelFactory.getInstance();
+  }
 
   @Override
   public ContactOption newInstance() throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return contactFactory.getNewContactOption();
   }
-  
 }
