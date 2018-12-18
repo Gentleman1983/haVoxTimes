@@ -16,13 +16,13 @@
  */
 package net.havox.times.model.api.address;
 
+import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
 public abstract class AbstractCountryTest
@@ -33,10 +33,9 @@ public abstract class AbstractCountryTest
   // *******************************************************************************************************************
   // Getter / Setter Tests
   // *******************************************************************************************************************
-    
   /**
    * User Story BM005 acceptance criteria 01 ("It has a name.").
-   * 
+   *
    * @throws Exception
    */
   @Test

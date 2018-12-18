@@ -28,6 +28,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.address.Address;
@@ -37,7 +38,7 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 
 /**
  * Implementation of {@link Worker}.
- * 
+ *
  * @author Christian Otto
  */
 @Entity
@@ -53,7 +54,7 @@ public class WorkerImpl extends AbstractChangeAwareClass<WorkerImpl> implements 
   private String middleInitials;
   @Column( name = WORKER_DB_COLUMN_LAST_NAME )
   private String lastName;
-  @ManyToOne(fetch=FetchType.LAZY)
+  @ManyToOne( fetch = FetchType.LAZY )
   @JoinColumn( name = WORKER_DB_COLUMN_ADDRESS )
   private Address address;
   @Column( name = WORKER_DB_COLUMN_BIRTHDAY )

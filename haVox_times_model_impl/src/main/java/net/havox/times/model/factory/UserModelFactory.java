@@ -28,6 +28,7 @@ import net.havox.times.model.impl.user.UserImpl;
  */
 public class UserModelFactory
 {
+
   /**
    * The singleton model factory instance.
    */
@@ -50,22 +51,24 @@ public class UserModelFactory
   {
     return UserModelFactory.INSTANCE;
   }
-  
+
   /**
    * Returns a new {@link Credential}.
    *
    * @return a new credential entity.
    */
-  public Credential getNewCredential() {
+  public Credential getNewCredential()
+  {
     return new CredentialImpl();
   }
-  
+
   /**
    * Returns a new {@link User}.
    *
    * @return a new user entity.
    */
-  public User getNewUser() {
+  public User getNewUser()
+  {
     return new UserImpl();
   }
 }

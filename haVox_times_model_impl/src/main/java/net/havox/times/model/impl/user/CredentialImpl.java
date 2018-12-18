@@ -19,13 +19,14 @@ package net.havox.times.model.impl.user;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
 import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.user.Credential;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 
 /**
  * Implementation of {@link Credential}.
- * 
+ *
  * @author Christian Otto
  */
 @Entity

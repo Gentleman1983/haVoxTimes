@@ -20,13 +20,14 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
 import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.booking.BookingType;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 
 /**
  * Implementation of {@link BookingType}.
- * 
+ *
  * @author Christian Otto
  */
 @Entity
@@ -35,7 +36,7 @@ public class BookingTypeImpl extends AbstractChangeAwareClass<BookingTypeImpl> i
 {
 
   private static final long serialVersionUID = 5106400945569949499L;
-  
+
   @Column( name = BOOKING_TYPE_DB_COLUMN_NAME )
   private String name;
   @Column( name = BOOKING_TYPE_DB_COLUMN_MULTIPLIER )

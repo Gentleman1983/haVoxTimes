@@ -22,6 +22,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.booking.BookingReferenceType;
 import net.havox.times.model.api.booking.Project;
@@ -30,7 +31,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Implementation of {@link BookingReferenceType}.
- * 
+ *
  * @author Christian Otto
  */
 @Entity
@@ -39,10 +40,10 @@ public class BookingReferenceTypeImpl extends AbstractChangeAwareClass<BookingRe
 {
 
   private static final long serialVersionUID = -4838958141132600137L;
-  
+
   @Column( name = BOOKING_REFERENCE_TYPE_DB_COLUMN_NAME )
   private String name;
-  @ManyToOne(fetch=FetchType.LAZY)
+  @ManyToOne( fetch = FetchType.LAZY )
   @JoinColumn( name = BOOKING_REFERENCE_TYPE_DB_COLUMN_PROJECT )
   private Project project;
   @Column( name = BOOKING_REFERENCE_TYPE_DB_COLUMN_PREFIX )

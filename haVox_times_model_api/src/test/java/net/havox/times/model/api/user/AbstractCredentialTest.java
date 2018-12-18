@@ -16,13 +16,13 @@
  */
 package net.havox.times.model.api.user;
 
+import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
 public abstract class AbstractCredentialTest
@@ -33,10 +33,9 @@ public abstract class AbstractCredentialTest
   // *******************************************************************************************************************
   // Getter / Setter Tests
   // *******************************************************************************************************************
-    
   /**
    * User Story BM001 acceptance criteria 01 ("A user has credentials to log in.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -53,14 +52,14 @@ public abstract class AbstractCredentialTest
 
   /**
    * User Story BM001 acceptance criteria 01 ("A user has credentials to log in.").
-   * 
+   *
    * @throws Exception
    */
   @Test
   @Repeat( 25 )
   public void testModifyPassword() throws Exception
   {
-    String alphabet = ModelRandomGenerator.ALPHABETIC_STRING ;
+    String alphabet = ModelRandomGenerator.ALPHABETIC_STRING;
     String password = ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 1, 50 ), alphabet );
 
     Credential objectUnderTest = newInstance();
@@ -71,18 +70,18 @@ public abstract class AbstractCredentialTest
 
   /**
    * User Story BM001 acceptance criteria 02 ("The credential password is hashed and salted.").
-   * 
+   *
    * @throws Exception
    */
   @Test
   @Repeat( 25 )
   public void testPasswordDoesNotMatchHashedPassword() throws Exception
   {
-    String alphabet = ModelRandomGenerator.ALPHABETIC_STRING ;
+    String alphabet = ModelRandomGenerator.ALPHABETIC_STRING;
     String password = ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 1, 50 ), alphabet );
 
     Credential objectUnderTest = newInstance();
-    objectUnderTest.setPassword(password );
-    assertNotEquals(password, objectUnderTest.getPasswordHash() );
+    objectUnderTest.setPassword( password );
+    assertNotEquals( password, objectUnderTest.getPasswordHash() );
   }
 }

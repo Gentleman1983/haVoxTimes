@@ -16,30 +16,32 @@
  */
 package net.havox.times.model.api.booking;
 
+import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
 public abstract class AbstractBookingTest
 {
 
   public abstract Booking newInstance() throws Exception;
+
   public abstract Account newAccount() throws Exception;
+
   public abstract BookingType newBookingType() throws Exception;
+
   public abstract BookingReference newBookingReference() throws Exception;
 
   // *******************************************************************************************************************
   // Getter / Setter Tests
   // *******************************************************************************************************************
-    
   /**
    * User Story BM009 ({@link Account}) acceptance criteria 04 ("They hold a set of bookings.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -52,10 +54,10 @@ public abstract class AbstractBookingTest
     objectUnderTest.setAccount( account );
     assertEquals( account, objectUnderTest.getAccount() );
   }
-    
+
   /**
    * User Story BM010 acceptance criteria 01 ("They have a booking type.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -68,10 +70,10 @@ public abstract class AbstractBookingTest
     objectUnderTest.setType( type );
     assertEquals( type, objectUnderTest.getType() );
   }
-    
+
   /**
    * User Story BM010 acceptance criteria 02 ("They have a text.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -85,10 +87,10 @@ public abstract class AbstractBookingTest
     objectUnderTest.setText( text );
     assertEquals( text, objectUnderTest.getText() );
   }
-    
+
   /**
    * User Story BM010 acceptance criteria 03 ("They have a marker to be invoiced.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -153,8 +155,8 @@ public abstract class AbstractBookingTest
     }
 
     Booking objectUnderTest = newInstance();
-    objectUnderTest.addReferences(accountsToBeAdded );
-    objectUnderTest.addReferences(accountsToBeDeleted );
+    objectUnderTest.addReferences( accountsToBeAdded );
+    objectUnderTest.addReferences( accountsToBeDeleted );
     for ( BookingReference addedElement : accountsToBeDeleted )
     {
       StringBuilder msg = new StringBuilder();
@@ -163,7 +165,7 @@ public abstract class AbstractBookingTest
               .append( "' was not found." );
       assertTrue( msg.toString(), objectUnderTest.getReferences().contains( addedElement ) );
     }
-    objectUnderTest.removeReferences(accountsToBeDeleted );
+    objectUnderTest.removeReferences( accountsToBeDeleted );
     for ( BookingReference checkedElement : accountsToBeDeleted )
     {
       StringBuilder msg = new StringBuilder();

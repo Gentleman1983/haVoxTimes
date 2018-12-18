@@ -16,19 +16,21 @@
  */
 package net.havox.times.model.impl.address;
 
+import org.junit.BeforeClass;
+
 import net.havox.times.model.api.address.AbstractCityTest;
 import net.havox.times.model.api.address.City;
 import net.havox.times.model.api.address.Country;
 import net.havox.times.model.factory.AddressModelFactory;
-import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link City}.
- * 
+ *
  * @author Christian Otto
  */
 public class CityApiTest extends AbstractCityTest
 {
+
   private static AddressModelFactory addressFactory;
 
   @BeforeClass

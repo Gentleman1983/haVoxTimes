@@ -16,49 +16,54 @@
  */
 package net.havox.times.model.api.contact;
 
-import java.util.ArrayList;
-import static net.havox.times.model.api.contact.ContactType.*;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static net.havox.times.model.api.contact.ContactType.*;
 
 public class ContactTypeTest
 {
-  
+
   /**
    * User Story BM007 acceptance criteria 01 ("It has an unique type.").
    */
   @Test
-  public void testUniqueAlias() {
+  public void testUniqueAlias()
+  {
     Map<String, ContactType> discoveredAliases = new HashMap<>();
     List<String> findings = new ArrayList<>();
-    
+
     for ( ContactType type : ContactType.values() )
     {
-      if( discoveredAliases.keySet().contains( type.getAlias() ) ) {
+      if ( discoveredAliases.keySet().contains( type.getAlias() ) )
+      {
         ContactType discoveredType = discoveredAliases.get( type.getAlias() );
-        
+
         StringBuilder msg = new StringBuilder();
         msg.append( "Found duplicate alias '" ).append( type.getAlias() ).append( "'. The ContactTypes '" )
-                .append( discoveredType ).append( "' and '" ).append( type ).append( "' define this alias. ")
-                .append( "By definition the alias has to be unique.");
+                .append( discoveredType ).append( "' and '" ).append( type ).append( "' define this alias. " )
+                .append( "By definition the alias has to be unique." );
         findings.add( msg.toString() );
         continue;
       }
-      
-      discoveredAliases.put( type.getAlias(), type);
+
+      discoveredAliases.put( type.getAlias(), type );
     }
-    
-    if( !findings.isEmpty() ) {
+
+    if ( !findings.isEmpty() )
+    {
       boolean firstFinding = true;
       StringBuilder msg = new StringBuilder();
-      for( String finding : findings ) {
-        if(!firstFinding) {
+      for ( String finding : findings )
+      {
+        if ( !firstFinding )
+        {
           msg.append( "\n" );
         }
         msg.append( finding );
@@ -81,7 +86,7 @@ public class ContactTypeTest
       msgNullPattern.append( "[" ).append( type.getAlias() ).append( "]: " )
               .append( "There should be a validation pattern." );
       assertNotNull( msgNullPattern.toString(), type.getValidationRegEx() );
-      
+
       StringBuilder msgEmptyPattern = new StringBuilder();
       msgEmptyPattern.append( "[" ).append( type.getAlias() ).append( "]: " )
               .append( "The validation pattern should not be empty." );

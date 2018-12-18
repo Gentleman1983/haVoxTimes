@@ -16,21 +16,23 @@
  */
 package net.havox.times.model.impl.contact;
 
+import org.junit.BeforeClass;
+
 import net.havox.times.model.api.company.Employer;
 import net.havox.times.model.api.company.Worker;
 import net.havox.times.model.api.contact.AbstractContactOptionTest;
 import net.havox.times.model.api.contact.ContactOption;
 import net.havox.times.model.factory.CompanyModelFactory;
 import net.havox.times.model.factory.ContactModelFactory;
-import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link ContactOption}.
- * 
+ *
  * @author Christian Otto
  */
 public class ContactOptionApiTest extends AbstractContactOptionTest
 {
+
   private static CompanyModelFactory companyFactory;
   private static ContactModelFactory contactFactory;
 

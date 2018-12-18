@@ -17,6 +17,7 @@
 package net.havox.times.model.api.user;
 
 import java.io.Serializable;
+
 import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.times.model.api.ChangeAware;
 

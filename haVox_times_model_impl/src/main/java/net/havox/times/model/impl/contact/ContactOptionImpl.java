@@ -22,16 +22,17 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.company.Employer;
 import net.havox.times.model.api.company.Worker;
-import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.contact.ContactOption;
 import net.havox.times.model.api.contact.ContactType;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 
 /**
  * Implementation of {@link ContactOption}.
- * 
+ *
  * @author Christian Otto
  */
 @Entity
@@ -41,49 +42,56 @@ public class ContactOptionImpl extends AbstractChangeAwareClass<ContactOptionImp
 
   private static final long serialVersionUID = 8791837873292915594L;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = CONTACT_OPTION_DB_COLUMN_EMPLOYER)
+  @ManyToOne( fetch = FetchType.LAZY )
+  @JoinColumn( name = CONTACT_OPTION_DB_COLUMN_EMPLOYER )
   private Employer employer;
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = CONTACT_OPTION_DB_COLUMN_EMPLOYEE)
+  @ManyToOne( fetch = FetchType.LAZY )
+  @JoinColumn( name = CONTACT_OPTION_DB_COLUMN_EMPLOYEE )
   private Worker employee;
   @Column( name = CONTACT_OPTION_DB_COLUMN_TYPE )
   private ContactType type;
   @Column( name = CONTACT_OPTION_DB_COLUMN_VALUE )
   private String value;
-  
-  public ContactOptionImpl( ContactType type, String value ) {
+
+  public ContactOptionImpl( ContactType type, String value )
+  {
     super();
-    
+
     this.type = type;
     this.value = value;
   }
-  
-  public ContactOptionImpl( ContactType type ) {
+
+  public ContactOptionImpl( ContactType type )
+  {
     this( type, "" );
   }
-  
-  public ContactOptionImpl() {
+
+  public ContactOptionImpl()
+  {
     this( null );
   }
-  
+
   @Override
-  public Employer getEmployer() {
+  public Employer getEmployer()
+  {
     return employer;
   }
-  
+
   @Override
-  public void setEmployer( Employer employer ) {
+  public void setEmployer( Employer employer )
+  {
     this.employer = employer;
   }
-  
+
   @Override
-  public Worker getEmployee() {
+  public Worker getEmployee()
+  {
     return employee;
   }
-  
+
   @Override
-  public void setEmployee( Worker employee ) {
+  public void setEmployee( Worker employee )
+  {
     this.employee = employee;
   }
 

@@ -27,44 +27,45 @@ import net.havox.times.model.api.ChangeAware;
  */
 public interface BookingReference extends ChangeAware, Serializable
 {
+
   /**
    * Returns the booking.
-   * 
+   *
    * @return the booking.
    */
   Booking getBooking();
 
   /**
    * Sets the booking.
-   * 
+   *
    * @param booking the booking.
    */
   void setBooking( Booking booking );
-  
+
   /**
    * Returns the booking reference type.
-   * 
+   *
    * @return the type.
    */
   BookingReferenceType getType();
-  
+
   /**
    * Sets the booking reference type.
-   * 
+   *
    * @param type the type.
    */
   void setType( BookingReferenceType type );
-  
+
   /**
    * Returns the reference value.
-   * 
+   *
    * @return the value.
    */
   String getValue();
-  
+
   /**
    * Sets the reference value.
-   * 
+   *
    * @param value the value.
    */
   void setValue( String value );

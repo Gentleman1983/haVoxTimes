@@ -16,7 +16,12 @@
  */
 package net.havox.times.model.impl.contact;
 
+import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import java.lang.reflect.Field;
+
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.junit.Repeat;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
@@ -24,13 +29,10 @@ import net.havox.times.model.api.contact.ContactOption;
 import net.havox.times.model.api.contact.ContactType;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.impl.AbstractChangeAwareClassTest;
-import static org.junit.Assert.*;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * Implementation specific tests for {@link ContactOption}.
- * 
+ *
  * @author Christian Otto
  */
 @RunWith( ExtendedRunner.class )
@@ -53,10 +55,10 @@ public class ContactOptionImplTest extends AbstractChangeAwareClassTest
 
     return ( ContactOptionImpl ) instance;
   }
-  
+
   /**
    * This test tests the constructor without parameters.
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -64,21 +66,21 @@ public class ContactOptionImplTest extends AbstractChangeAwareClassTest
   {
     ContactType expectedType = null;
     String expectedValue = "";
-    
+
     ContactOption objectUnderTest = null;
-    
+
     assertNull( objectUnderTest );
-    
+
     objectUnderTest = new ContactOptionImpl();
-    
+
     assertNotNull( objectUnderTest );
     assertEquals( expectedType, objectUnderTest.getType() );
     assertEquals( expectedValue, objectUnderTest.getContactValue() );
   }
-  
+
   /**
    * This test tests the constructor with type parameter.
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -87,21 +89,21 @@ public class ContactOptionImplTest extends AbstractChangeAwareClassTest
   {
     ContactType type = ContactType.values()[ ModelRandomGenerator.randomIntInRange( 0, ContactType.values().length - 1 ) ];
     String expectedValue = "";
-    
+
     ContactOption objectUnderTest = null;
-    
+
     assertNull( objectUnderTest );
-    
+
     objectUnderTest = new ContactOptionImpl( type );
-    
+
     assertNotNull( objectUnderTest );
     assertEquals( type, objectUnderTest.getType() );
     assertEquals( expectedValue, objectUnderTest.getContactValue() );
   }
-  
+
   /**
    * This test tests the constructor with type and value parameters.
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -113,11 +115,11 @@ public class ContactOptionImplTest extends AbstractChangeAwareClassTest
     ContactType type = ContactType.values()[ ModelRandomGenerator.randomIntInRange( 0, ContactType.values().length - 1 ) ];
 
     ContactOption objectUnderTest = null;
-    
+
     assertNull( objectUnderTest );
-    
+
     objectUnderTest = new ContactOptionImpl( type, value );
-    
+
     assertNotNull( objectUnderTest );
     assertEquals( type, objectUnderTest.getType() );
     assertEquals( value, objectUnderTest.getContactValue() );

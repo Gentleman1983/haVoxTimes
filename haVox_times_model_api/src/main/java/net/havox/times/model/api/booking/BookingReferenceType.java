@@ -27,100 +27,101 @@ import net.havox.times.model.api.ChangeAware;
  */
 public interface BookingReferenceType extends ChangeAware, Serializable
 {
+
   /**
    * Returns the name of the booking reference type.
-   * 
+   *
    * @return the name.
    */
   String getType();
-  
+
   /**
    * Sets the name of the booking reference type.
-   * 
+   *
    * @param name the name.
    */
   void setType( String name );
-  
+
   /**
    * Returns the project.
-   * 
+   *
    * @return the project.
    */
   Project getProject();
-  
+
   /**
    * Sets the project.
-   * 
+   *
    * @param project the project.
    */
   void setProject( Project project );
-  
+
   /**
    * Checks if a prefix is set.
-   * 
+   *
    * @return is a prefix set?
    */
   boolean hasPrefix();
-  
+
   /**
    * Returns the prefix.
-   * 
+   *
    * @return the prefix.
    */
   String getPrefix();
-  
+
   /**
    * Sets the prefix.
-   * 
+   *
    * @param prefix the prefix.
    */
   void setPrefix( String prefix );
-  
+
   /**
    * Checks if a suffix is set.
-   * 
+   *
    * @return is a suffix set?
    */
   boolean hasSuffix();
-  
+
   /**
    * Returns the suffix.
-   * 
+   *
    * @return the suffix.
    */
   String getSuffix();
-  
+
   /**
    * Sets the suffix.
-   * 
+   *
    * @param suffix the suffix.
    */
   void setSuffix( String suffix );
-  
+
   /**
    * Returns the validation pattern.
-   * 
+   *
    * @return the validation pattern.
    */
   String getValidationPattern();
-  
+
   /**
    * Sets the validation pattern.
-   * 
+   *
    * @param pattern the validation pattern.
    */
   void setValidationPattern( String pattern );
-  
+
   /**
    * Returns the external reference.
-   * 
+   *
    * @return the external reference.
    */
   String getExternalReference();
-  
+
   /**
    * Sets the external reference.
-   * 
+   *
    * @param reference the external reference.
    */
   void setExternalReference( String reference );

@@ -28,6 +28,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Project;
@@ -38,7 +39,7 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 
 /**
  * Implementation of {@link Employment}.
- * 
+ *
  * @author Christian Otto
  */
 @Entity
@@ -48,10 +49,10 @@ public class EmploymentImpl extends AbstractChangeAwareClass<EmploymentImpl> imp
 
   private static final long serialVersionUID = -8268464434033991324L;
 
-  @ManyToOne(fetch=FetchType.LAZY)
+  @ManyToOne( fetch = FetchType.LAZY )
   @JoinColumn( name = EMPLOYMENT_DB_COLUMN_EMPLOYER )
   private Employer employer;
-  @ManyToOne(fetch=FetchType.LAZY)
+  @ManyToOne( fetch = FetchType.LAZY )
   @JoinColumn( name = EMPLOYMENT_DB_COLUMN_EMPLOYEE )
   private Worker employee;
   @Column( name = EMPLOYMENT_DB_COLUMN_START_DATE )
@@ -60,11 +61,11 @@ public class EmploymentImpl extends AbstractChangeAwareClass<EmploymentImpl> imp
   private LocalDate end;
   @OneToMany( mappedBy = EMPLOYMENT_DB_TABLE_NAME, cascade = CascadeType.ALL )
   private final Set<Project> projects;
-  
+
   public EmploymentImpl()
   {
     super();
-    
+
     projects = new CopyOnWriteArraySet<>();
   }
 
@@ -129,14 +130,14 @@ public class EmploymentImpl extends AbstractChangeAwareClass<EmploymentImpl> imp
 
     for ( Project project : projects )
     {
-      if ( this.projects.contains(project ) )
+      if ( this.projects.contains( project ) )
       {
-        status.addUnsuccessfulElements(project );
+        status.addUnsuccessfulElements( project );
       }
       else
       {
-        this.projects.add(project );
-        status.addSuccessfulElements(project );
+        this.projects.add( project );
+        status.addSuccessfulElements( project );
       }
     }
 
@@ -150,14 +151,14 @@ public class EmploymentImpl extends AbstractChangeAwareClass<EmploymentImpl> imp
 
     for ( Project project : projects )
     {
-      if ( this.projects.contains(project ) )
+      if ( this.projects.contains( project ) )
       {
-        this.projects.remove(project );
-        status.addSuccessfulElements(project );
+        this.projects.remove( project );
+        status.addSuccessfulElements( project );
       }
       else
       {
-        status.addUnsuccessfulElements(project );
+        status.addUnsuccessfulElements( project );
       }
     }
 

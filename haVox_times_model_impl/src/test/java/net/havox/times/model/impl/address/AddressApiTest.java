@@ -16,19 +16,21 @@
  */
 package net.havox.times.model.impl.address;
 
+import org.junit.BeforeClass;
+
 import net.havox.times.model.api.address.AbstractAddressTest;
 import net.havox.times.model.api.address.Address;
 import net.havox.times.model.api.address.City;
 import net.havox.times.model.factory.AddressModelFactory;
-import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link Address}.
- * 
+ *
  * @author Christian Otto
  */
 public class AddressApiTest extends AbstractAddressTest
 {
+
   private static AddressModelFactory addressFactory;
 
   @BeforeClass
@@ -36,7 +38,7 @@ public class AddressApiTest extends AbstractAddressTest
   {
     addressFactory = AddressModelFactory.getInstance();
   }
-  
+
   @Override
   public Address newInstance() throws Exception
   {

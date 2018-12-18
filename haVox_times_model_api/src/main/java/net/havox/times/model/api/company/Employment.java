@@ -31,83 +31,84 @@ import net.havox.times.model.api.booking.Project;
  */
 public interface Employment extends ChangeAware, Serializable
 {
+
   /**
    * Returns the employer.
-   * 
+   *
    * @return the employer.
    */
   Employer getEmployer();
-  
+
   /**
    * Sets the employer.
-   * 
+   *
    * @param employer the employer.
    */
   void setEmployer( Employer employer );
-  
+
   /**
    * Returns the employee.
-   * 
+   *
    * @return the employee.
    */
   Worker getEmployee();
-  
+
   /**
    * Sets the employee.
-   * 
+   *
    * @param employee the employee.
    */
   void setEmployee( Worker employee );
-  
+
   /**
    * Returns the employment start date.
-   * 
+   *
    * @return the start.
    */
   LocalDate getStartDate();
-  
+
   /**
    * Sets the employment start date.
-   * 
+   *
    * @param start the start.
    */
   void setStartDate( LocalDate start );
-  
+
   /**
    * Returns the employment end date.
-   * 
+   *
    * @return the end.
    */
   LocalDate getEndDate();
-  
+
   /**
    * Sets the employment end date.
-   * 
+   *
    * @param end the end.
    */
   void setEndDate( LocalDate end );
-  
+
   /**
    * Returns the projects corresponding to the employment.
-   * 
+   *
    * @return the projects.
    */
   Set<Project> getProjects();
-  
+
   /**
    * Adds projects.
-   * 
+   *
    * @param projects the projects.
-   * 
+   *
    * @return the status.
    */
   CollectionMassModificationStatus<Project> addProjects( Project... projects );
-  
+
   /**
    * Removes projects.
-   * 
+   *
    * @param projects the projects.
-   * 
+   *
    * @return the status.
    */
   CollectionMassModificationStatus<Project> removeProjects( Project... projects );

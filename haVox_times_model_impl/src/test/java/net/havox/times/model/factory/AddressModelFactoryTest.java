@@ -16,12 +16,6 @@
  */
 package net.havox.times.model.factory;
 
-import net.havox.times.model.api.address.Address;
-import net.havox.times.model.api.address.City;
-import net.havox.times.model.api.address.Country;
-import net.havox.times.model.impl.address.AddressImpl;
-import net.havox.times.model.impl.address.CityImpl;
-import net.havox.times.model.impl.address.CountryImpl;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -29,13 +23,21 @@ import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import net.havox.times.model.api.address.Address;
+import net.havox.times.model.api.address.City;
+import net.havox.times.model.api.address.Country;
+import net.havox.times.model.impl.address.AddressImpl;
+import net.havox.times.model.impl.address.CityImpl;
+import net.havox.times.model.impl.address.CountryImpl;
+
 /**
  * Factory test of {@link AddressModelFactory}.
- * 
+ *
  * @author Christian Otto
  */
 public class AddressModelFactoryTest
 {
+
   private static AddressModelFactory factory;
 
   @BeforeClass

@@ -84,17 +84,17 @@ public interface Employer extends ChangeAware, Serializable
    * @return true, if all could be removed.
    */
   CollectionMassModificationStatus<ContactOption> removeContactOptions( ContactOption... contactOptions );
-  
+
   /**
    * Gets the group this employer belongs to.
-   * 
+   *
    * @return the group.
    */
   Employer getEmploymentGroup();
-  
+
   /**
    * Sets the group this employer belongs to.
-   * 
+   *
    * @param group the group.
    */
   void setEmploymentGroup( Employer group );

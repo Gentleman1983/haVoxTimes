@@ -16,13 +16,13 @@
  */
 package net.havox.times.model.api.address;
 
+import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
 public abstract class AbstractAddressTest
@@ -35,10 +35,9 @@ public abstract class AbstractAddressTest
   // *******************************************************************************************************************
   // Getter / Setter Tests
   // *******************************************************************************************************************
-    
   /**
    * User Story BM003 acceptance criteria 01 ("It consists of a street, house number and city.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -55,7 +54,7 @@ public abstract class AbstractAddressTest
 
   /**
    * User Story BM003 acceptance criteria 01 ("It consists of a street, house number and city.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -73,7 +72,7 @@ public abstract class AbstractAddressTest
 
   /**
    * User Story BM003 acceptance criteria 01 ("It consists of a street, house number and city.").
-   * 
+   *
    * @throws Exception
    */
   @Test

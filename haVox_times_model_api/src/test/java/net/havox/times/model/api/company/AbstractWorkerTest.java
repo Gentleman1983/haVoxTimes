@@ -16,25 +16,27 @@
  */
 package net.havox.times.model.api.company;
 
+import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import java.time.LocalDate;
+
 import net.havox.times.model.api.address.*;
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
 import net.havox.times.model.api.contact.ContactOption;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
 public abstract class AbstractWorkerTest
 {
 
   public abstract Worker newInstance() throws Exception;
+
   public abstract Address newAddress() throws Exception;
+
   public abstract ContactOption newContactOption() throws Exception;
-  
 
   // *******************************************************************************************************************
   // Getter / Setter Tests

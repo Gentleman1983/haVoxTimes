@@ -16,20 +16,22 @@
  */
 package net.havox.times.model.impl.user;
 
+import org.junit.BeforeClass;
+
 import net.havox.times.model.api.company.Worker;
 import net.havox.times.model.api.user.AbstractUserTest;
 import net.havox.times.model.api.user.User;
 import net.havox.times.model.factory.CompanyModelFactory;
 import net.havox.times.model.factory.UserModelFactory;
-import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link User}.
- * 
+ *
  * @author Christian Otto
  */
 public class UserApiTest extends AbstractUserTest
 {
+
   private static CompanyModelFactory companyFactory;
   private static UserModelFactory userFactory;
 

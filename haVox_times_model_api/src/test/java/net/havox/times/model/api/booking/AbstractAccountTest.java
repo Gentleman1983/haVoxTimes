@@ -16,21 +16,23 @@
  */
 package net.havox.times.model.api.booking;
 
+import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import java.time.LocalDate;
 import java.time.Month;
+
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
 public abstract class AbstractAccountTest
 {
 
   public abstract Account newInstance() throws Exception;
+
   public abstract Project newProject() throws Exception;
 
   public abstract Booking newBooking() throws Exception;
@@ -38,7 +40,6 @@ public abstract class AbstractAccountTest
   // *******************************************************************************************************************
   // Getter / Setter Tests
   // *******************************************************************************************************************
-  
   /**
    * User Story BM008 ({@link Project}) acceptance criteria 05 ("Contains a set of accounts.").
    *
@@ -54,7 +55,7 @@ public abstract class AbstractAccountTest
     objectUnderTest.setProject( project );
     assertEquals( project, objectUnderTest.getProject() );
   }
-  
+
   /**
    * User Story BM009 acceptance criteria 01 ("An account has a name.").
    *

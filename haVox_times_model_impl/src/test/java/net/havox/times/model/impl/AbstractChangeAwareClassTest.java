@@ -16,15 +16,14 @@
  */
 package net.havox.times.model.impl;
 
+import static org.junit.Assert.*;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public abstract class AbstractChangeAwareClassTest
 {
@@ -151,7 +150,7 @@ public abstract class AbstractChangeAwareClassTest
     assertNotNull( instance );
 
     Object notEqualObject = new Object();
-    
+
     assertFalse( "Both objects should not be equal.", instance == notEqualObject );
     assertFalse( "The object should not be NULL.", notEqualObject == null );
     assertFalse( "Both objects should not be of the same class.", instance.getClass() == notEqualObject.getClass() );
@@ -347,7 +346,7 @@ public abstract class AbstractChangeAwareClassTest
 
     assertEquals( instance1, instance1 );
     assertTrue( "An instance should always be equal to itself.", instance1.compareTo( instance1 ) == 0 );
-    
+
     assertNotEquals( instance1, instance2 );
     assertTrue( "Instance 1 should have the lower ID.", instance1.compareTo( instance2 ) < 0 );
     assertTrue( "Instance 1 should have the lower ID.", instance2.compareTo( instance1 ) > 0 );

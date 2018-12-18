@@ -16,30 +16,32 @@
  */
 package net.havox.times.model.api.contact;
 
+import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
 import net.havox.times.model.api.company.Employer;
 import net.havox.times.model.api.company.Worker;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
 public abstract class AbstractContactOptionTest
 {
 
   public abstract ContactOption newInstance() throws Exception;
+
   public abstract Employer newEmployer() throws Exception;
+
   public abstract Worker newEmployee() throws Exception;
 
   // *******************************************************************************************************************
   // Getter / Setter Tests
   // *******************************************************************************************************************
-  
   /**
-   * User Story BM015 ({@link Employer}) acceptance criteria 01 ("An employer has a name, address and contact options.").
+   * User Story BM015 ({@link Employer}) acceptance criteria 01 ("An employer has a name, address and contact
+   * options.").
    *
    * @throws Exception
    */
@@ -53,7 +55,7 @@ public abstract class AbstractContactOptionTest
     objectUnderTest.setEmployer( employer );
     assertEquals( employer, objectUnderTest.getEmployer() );
   }
-  
+
   /**
    * User Story BM002 ({@link Worker}) acceptance criteria 04 ("A worker has got a set of contact options.").
    *
@@ -69,10 +71,10 @@ public abstract class AbstractContactOptionTest
     objectUnderTest.setEmployee( employee );
     assertEquals( employee, objectUnderTest.getEmployee() );
   }
-    
+
   /**
    * User Story BM006 acceptance criteria 01 ("It consists of a contact type and a value.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -80,17 +82,17 @@ public abstract class AbstractContactOptionTest
   public void testModifyType() throws Exception
   {
     ContactType type = ContactType.values()[ ModelRandomGenerator.randomIntInRange( 0, ContactType.values().length - 1 ) ];
-    
+
     ContactOption objectUnderTest = newInstance();
     String value = objectUnderTest.getContactValue();
-    objectUnderTest.setValue( type, value);
+    objectUnderTest.setValue( type, value );
     assertEquals( value, objectUnderTest.getContactValue() );
     assertEquals( type, objectUnderTest.getType() );
   }
-  
+
   /**
    * User Story BM006 acceptance criteria 01 ("It consists of a contact type and a value.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -102,14 +104,14 @@ public abstract class AbstractContactOptionTest
 
     ContactOption objectUnderTest = newInstance();
     ContactType type = objectUnderTest.getType();
-    objectUnderTest.setValue( type, value);
+    objectUnderTest.setValue( type, value );
     assertEquals( value, objectUnderTest.getContactValue() );
     assertEquals( type, objectUnderTest.getType() );
   }
-  
+
   /**
    * User Story BM006 acceptance criteria 01 ("It consists of a contact type and a value.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -121,7 +123,7 @@ public abstract class AbstractContactOptionTest
     ContactType type = ContactType.values()[ ModelRandomGenerator.randomIntInRange( 0, ContactType.values().length - 1 ) ];
 
     ContactOption objectUnderTest = newInstance();
-    objectUnderTest.setValue( type, value);
+    objectUnderTest.setValue( type, value );
     assertEquals( value, objectUnderTest.getContactValue() );
     assertEquals( type, objectUnderTest.getType() );
   }

@@ -24,7 +24,7 @@ import static net.havox.times.model.api.contact.ContactType.ValidationRegularExp
  * @author Christian Otto
  */
 public enum ContactType
-{ // TODO: Additional contact types  
+{
   BLOG( "Blog", URL_REGEX ),
   EMAIL( "Email", EMAIL_REGEX ),
   FAX( "Fax", PHONE_REGEX ),
@@ -90,9 +90,10 @@ public enum ContactType
    */
   protected static class ValidationRegularExpressions
   {
-/**
- * The Constructor.
- */
+
+    /**
+     * The Constructor.
+     */
     private ValidationRegularExpressions()
     {
       // Only contains regular expressions for better readability of the enum.

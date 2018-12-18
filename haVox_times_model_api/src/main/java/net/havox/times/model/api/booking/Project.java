@@ -31,83 +31,84 @@ import net.havox.times.model.api.company.Employment;
  */
 public interface Project extends ChangeAware, Serializable
 {
+
   /**
    * Returns the employment.
-   * 
+   *
    * @return the employment.
    */
   Employment getEmployment();
 
   /**
    * Sets the employment.
-   * 
-   * @param employment  the employment.
+   *
+   * @param employment the employment.
    */
   void setEmployment( Employment employment );
-  
+
   /**
    * Returns the name.
-   * 
+   *
    * @return the name.
    */
   String getName();
-  
+
   /**
    * Sets the name.
-   * 
+   *
    * @param name the name.
    */
   void setName( String name );
-  
+
   /**
    * Returns the start date.
-   * 
+   *
    * @return the start date.
    */
   LocalDate getStartDate();
-  
+
   /**
    * Sets the start date.
-   * 
+   *
    * @param start the start date.
    */
   void setStartDate( LocalDate start );
-  
+
   /**
    * Returns the end date.
-   * 
+   *
    * @return the end date.
    */
   LocalDate getEndDate();
-  
+
   /**
    * Sets the end date.
-   * 
+   *
    * @param end the end date.
    */
   void setEndDate( LocalDate end );
-  
+
   /**
    * Returns the project accounts.
-   * 
+   *
    * @return the accounts.
    */
   Set<Account> getAccounts();
-  
+
   /**
    * Adds accounts to the account set.
-   * 
+   *
    * @param accounts the accounts.
-   * 
+   *
    * @return the result.
    */
   CollectionMassModificationStatus<Account> addAccounts( Account... accounts );
-  
+
   /**
    * Removes accounts from the accounts set.
-   * 
+   *
    * @param accounts the accounts.
-   * 
+   *
    * @return the result.
    */
   CollectionMassModificationStatus<Account> removeAccounts( Account... accounts );

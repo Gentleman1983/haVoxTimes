@@ -21,7 +21,7 @@ import net.havox.times.model.api.Identifiable;
 
 /**
  * Abstract basic class for change aware classes.
- * 
+ *
  * @author Christian Otto
  */
 public abstract class AbstractChangeAwareAndIdentifiableClass implements ChangeAware, Identifiable

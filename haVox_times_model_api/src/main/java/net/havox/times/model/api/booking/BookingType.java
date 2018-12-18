@@ -28,44 +28,45 @@ import net.havox.times.model.api.ChangeAware;
  */
 public interface BookingType extends ChangeAware, Serializable
 {
+
   /**
    * Returns the unique name of the booking type.
-   * 
+   *
    * @return the unique name.
    */
   String getType();
-  
+
   /**
    * Sets the unique name of the booking type.
-   * 
+   *
    * @param name the unique name.
    */
   void setType( String name );
-  
+
   /**
    * Returns the multiplier. A multiplier of 1.5 means that every booked hour is worth 1.5 hours.
-   * 
+   *
    * @return the multiplier.
    */
   BigDecimal getMultiplier();
-  
+
   /**
    * Sets the multiplier.
-   * 
+   *
    * @param multiplier the multiplier.
    */
   void setMultiplier( BigDecimal multiplier );
-  
+
   /**
    * Is this type of booking invoicable?
-   * 
+   *
    * @return can this booking be invoiced.
    */
   boolean canBeInvoiced();
-  
+
   /**
    * Sets if this booking can be invoiced.
-   * 
+   *
    * @param canBeInvoiced can this booking be invoiced.
    */
   void setCanBeInvoiced( boolean canBeInvoiced );

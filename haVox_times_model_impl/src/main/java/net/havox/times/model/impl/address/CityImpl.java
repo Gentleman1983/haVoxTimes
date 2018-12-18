@@ -22,6 +22,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.address.City;
 import net.havox.times.model.api.address.Country;
@@ -29,7 +30,7 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 
 /**
  * Imlementation of {@link City}.
- * 
+ *
  * @author Christian Otto
  */
 @Entity
@@ -38,12 +39,12 @@ public class CityImpl extends AbstractChangeAwareClass<CityImpl> implements City
 {
 
   private static final long serialVersionUID = 6353902360183285609L;
-  
+
   @Column( name = CITY_DB_COLUMN_ZIP_CODE )
   private String zip;
   @Column( name = CITY_DB_COLUMN_NAME )
   private String name;
-  @ManyToOne(fetch=FetchType.LAZY)
+  @ManyToOne( fetch = FetchType.LAZY )
   @JoinColumn( name = CITY_DB_COLUMN_COUNTRY )
   private Country country;
 

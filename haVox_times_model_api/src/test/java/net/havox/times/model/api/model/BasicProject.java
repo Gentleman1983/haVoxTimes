@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Account;
 import net.havox.times.model.api.booking.Project;
@@ -27,24 +28,24 @@ import net.havox.times.model.api.company.Employment;
 
 /**
  * Basic implementation of {@link Project}.
- * 
+ *
  * @author Christian Otto
  */
 public class BasicProject extends AbstractChangeAwareAndIdentifiableClass implements Project
 {
 
   private static final long serialVersionUID = -7935715108821345744L;
-  
+
   private Employment employment;
   private String name;
   private LocalDate start;
   private LocalDate end;
   private final Set<Account> accounts;
-  
+
   public BasicProject()
   {
     super();
-    
+
     accounts = new HashSet<>();
   }
 
@@ -109,14 +110,14 @@ public class BasicProject extends AbstractChangeAwareAndIdentifiableClass implem
 
     for ( Account account : accounts )
     {
-      if ( this.accounts.contains(account ) )
+      if ( this.accounts.contains( account ) )
       {
-        status.addUnsuccessfulElements(account );
+        status.addUnsuccessfulElements( account );
       }
       else
       {
-        this.accounts.add(account );
-        status.addSuccessfulElements(account );
+        this.accounts.add( account );
+        status.addSuccessfulElements( account );
       }
     }
 
@@ -130,14 +131,14 @@ public class BasicProject extends AbstractChangeAwareAndIdentifiableClass implem
 
     for ( Account account : accounts )
     {
-      if ( this.accounts.contains(account ) )
+      if ( this.accounts.contains( account ) )
       {
-        this.accounts.remove(account );
-        status.addSuccessfulElements(account );
+        this.accounts.remove( account );
+        status.addSuccessfulElements( account );
       }
       else
       {
-        status.addUnsuccessfulElements(account );
+        status.addUnsuccessfulElements( account );
       }
     }
 

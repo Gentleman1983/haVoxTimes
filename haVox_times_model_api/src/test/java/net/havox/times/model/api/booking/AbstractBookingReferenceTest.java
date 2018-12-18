@@ -16,20 +16,20 @@
  */
 package net.havox.times.model.api.booking;
 
+import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
 public abstract class AbstractBookingReferenceTest
 {
 
   public abstract BookingReference newInstance() throws Exception;
-  
+
   public abstract Booking newBooking() throws Exception;
 
   public abstract BookingReferenceType newBookingReferenceType() throws Exception;
@@ -37,7 +37,6 @@ public abstract class AbstractBookingReferenceTest
   // *******************************************************************************************************************
   // Getter / Setter Tests
   // *******************************************************************************************************************
-  
   /**
    * User Story BM010 ({@link Booking}) acceptance criteria 04 ("They have a set of booking references.").
    *
@@ -53,7 +52,7 @@ public abstract class AbstractBookingReferenceTest
     objectUnderTest.setBooking( booking );
     assertEquals( booking, objectUnderTest.getBooking() );
   }
-  
+
   /**
    * User Story BM012 acceptance criteria 01 ("They have a project specific reference type and a value.").
    *

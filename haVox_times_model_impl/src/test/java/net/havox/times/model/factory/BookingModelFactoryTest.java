@@ -16,6 +16,13 @@
  */
 package net.havox.times.model.factory;
 
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import net.havox.times.model.api.booking.Account;
 import net.havox.times.model.api.booking.Booking;
 import net.havox.times.model.api.booking.BookingReference;
@@ -28,20 +35,15 @@ import net.havox.times.model.impl.booking.BookingReferenceImpl;
 import net.havox.times.model.impl.booking.BookingReferenceTypeImpl;
 import net.havox.times.model.impl.booking.BookingTypeImpl;
 import net.havox.times.model.impl.booking.ProjectImpl;
-import static org.hamcrest.Matchers.instanceOf;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 /**
  * Factory test of {@link BookingModelFactory}.
- * 
+ *
  * @author Christian Otto
  */
 public class BookingModelFactoryTest
 {
+
   private static BookingModelFactory factory;
 
   @BeforeClass

@@ -20,11 +20,12 @@ import net.havox.times.model.api.user.Credential;
 
 /**
  * Basic implementation of {@link Credential}.
- * 
+ *
  * @author Christian Otto
  */
 public class BasicCredential extends AbstractChangeAwareAndIdentifiableClass implements Credential
 {
+
   private static final long serialVersionUID = 1890677125873805742L;
 
   private String username;

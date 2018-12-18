@@ -22,6 +22,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.company.Worker;
 import net.havox.times.model.api.user.Credential;
@@ -30,7 +31,7 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 
 /**
  * Implementation of {@link User}.
- * 
+ *
  * @author Christian Otto
  */
 @Entity
@@ -42,17 +43,17 @@ public class UserImpl extends AbstractChangeAwareClass<UserImpl> implements User
 
   @Column( name = USER_DB_COLUMN_EMAIL, unique = true )
   private String email;
-  @ManyToOne(fetch=FetchType.LAZY)
+  @ManyToOne( fetch = FetchType.LAZY )
   @JoinColumn( name = USER_DB_COLUMN_CREDENTIAL )
   private final Credential credential;
-  @ManyToOne(fetch=FetchType.LAZY)
+  @ManyToOne( fetch = FetchType.LAZY )
   @JoinColumn( name = USER_DB_COLUMN_WORKER )
   private Worker worker;
-  
+
   public UserImpl()
   {
     super();
-    
+
     credential = new CredentialImpl();
   }
 

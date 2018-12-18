@@ -17,6 +17,7 @@
 package net.havox.times.model.api.model;
 
 import java.math.BigDecimal;
+
 import net.havox.times.model.api.booking.BookingType;
 
 /**

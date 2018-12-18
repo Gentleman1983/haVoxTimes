@@ -16,6 +16,8 @@
  */
 package net.havox.times.model.impl.company;
 
+import org.junit.BeforeClass;
+
 import net.havox.times.model.api.address.Address;
 import net.havox.times.model.api.company.AbstractWorkerTest;
 import net.havox.times.model.api.company.Worker;
@@ -23,15 +25,15 @@ import net.havox.times.model.api.contact.ContactOption;
 import net.havox.times.model.factory.AddressModelFactory;
 import net.havox.times.model.factory.CompanyModelFactory;
 import net.havox.times.model.factory.ContactModelFactory;
-import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link Worker}.
- * 
+ *
  * @author Christian Otto
  */
 public class WorkerApiTest extends AbstractWorkerTest
 {
+
   private static AddressModelFactory addressFactory;
   private static CompanyModelFactory companyFactory;
   private static ContactModelFactory contactFactory;

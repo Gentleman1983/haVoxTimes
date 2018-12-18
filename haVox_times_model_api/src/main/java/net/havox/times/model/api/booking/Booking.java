@@ -29,83 +29,84 @@ import net.havox.times.model.api.CollectionMassModificationStatus;
  */
 public interface Booking extends ChangeAware, Serializable
 {
+
   /**
    * Returns the account.
-   * 
+   *
    * @return the account.
    */
   Account getAccount();
-  
+
   /**
    * Sets the account.
-   * 
+   *
    * @param account the account.
    */
   void setAccount( Account account );
-  
+
   /**
    * Returns the booking type.
-   * 
+   *
    * @return the type.
    */
   BookingType getType();
-  
+
   /**
    * Sets the booking type.
-   * 
+   *
    * @param type the type.
    */
   void setType( BookingType type );
-  
+
   /**
    * Returns the booking text.
-   * 
+   *
    * @return the text.
    */
   String getText();
-  
+
   /**
    * Sets the booking text.
-   * 
+   *
    * @param text the text.
    */
   void setText( String text );
-  
+
   /**
    * Is this booking invoiced?
-   * 
+   *
    * @return true, if it is invoiced.
    */
   boolean isInvoiced();
-  
+
   /**
    * Sets the status if this booking is invoiced.
-   * 
+   *
    * @param isInvoiced true, if invoiced.
    */
   void setIsInvoiced( boolean isInvoiced );
-  
+
   /**
    * Returns the set of booking references.
-   * 
+   *
    * @return the references.
    */
   Set<BookingReference> getReferences();
-  
+
   /**
    * Adds booking references.
-   * 
+   *
    * @param references references.
-   * 
+   *
    * @return the status.
    */
   CollectionMassModificationStatus<BookingReference> addReferences( BookingReference... references );
-  
+
   /**
    * Removes booking references.
-   * 
+   *
    * @param references references.
-   * 
+   *
    * @return the status.
    */
   CollectionMassModificationStatus<BookingReference> removeReferences( BookingReference... references );

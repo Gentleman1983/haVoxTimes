@@ -16,21 +16,23 @@
  */
 package net.havox.times.model.impl.booking;
 
+import org.junit.BeforeClass;
+
 import net.havox.times.model.api.booking.AbstractProjectTest;
 import net.havox.times.model.api.booking.Account;
 import net.havox.times.model.api.booking.Project;
 import net.havox.times.model.api.company.Employment;
 import net.havox.times.model.factory.BookingModelFactory;
 import net.havox.times.model.factory.CompanyModelFactory;
-import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link Project}.
- * 
+ *
  * @author Christian Otto
  */
 public class ProjectApiTest extends AbstractProjectTest
 {
+
   private static BookingModelFactory bookingFactory;
   private static CompanyModelFactory companyFactory;
 

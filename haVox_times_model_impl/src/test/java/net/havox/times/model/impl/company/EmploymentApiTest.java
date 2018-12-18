@@ -16,6 +16,8 @@
  */
 package net.havox.times.model.impl.company;
 
+import org.junit.BeforeClass;
+
 import net.havox.times.model.api.booking.Project;
 import net.havox.times.model.api.company.AbstractEmploymentTest;
 import net.havox.times.model.api.company.Employer;
@@ -23,15 +25,15 @@ import net.havox.times.model.api.company.Employment;
 import net.havox.times.model.api.company.Worker;
 import net.havox.times.model.factory.BookingModelFactory;
 import net.havox.times.model.factory.CompanyModelFactory;
-import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link Employment}.
- * 
+ *
  * @author Christian Otto
  */
 public class EmploymentApiTest extends AbstractEmploymentTest
 {
+
   private static BookingModelFactory bookingFactory;
   private static CompanyModelFactory companyFactory;
 

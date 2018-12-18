@@ -27,6 +27,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Account;
@@ -37,7 +38,7 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 
 /**
  * Implementation of {@link Booking}.
- * 
+ *
  * @author Christian Otto
  */
 @Entity
@@ -46,11 +47,11 @@ public class BookingImpl extends AbstractChangeAwareClass<BookingImpl> implement
 {
 
   private static final long serialVersionUID = -3221948978182231002L;
-  
-  @ManyToOne(fetch=FetchType.LAZY)
+
+  @ManyToOne( fetch = FetchType.LAZY )
   @JoinColumn( name = BOOKING_DB_COLUMN_ACCOUNT )
   private Account account;
-  @ManyToOne(fetch=FetchType.LAZY)
+  @ManyToOne( fetch = FetchType.LAZY )
   @JoinColumn( name = BOOKING_DB_COLUMN_TYPE )
   private BookingType type;
   @Column( name = BOOKING_DB_COLUMN_TEXT )

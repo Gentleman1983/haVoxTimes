@@ -20,11 +20,12 @@ import net.havox.times.model.api.address.Country;
 
 /**
  * Basic implementation of {@link Country}.
- * 
+ *
  * @author Christian Otto
  */
 public class BasicCountry extends AbstractChangeAwareAndIdentifiableClass implements Country
 {
+
   private static final long serialVersionUID = -1522491103810283288L;
 
   private String name;

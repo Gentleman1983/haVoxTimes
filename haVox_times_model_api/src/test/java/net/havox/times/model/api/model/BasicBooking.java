@@ -19,6 +19,7 @@ package net.havox.times.model.api.model;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Account;
 import net.havox.times.model.api.booking.Booking;
@@ -47,7 +48,7 @@ public class BasicBooking extends AbstractChangeAwareAndIdentifiableClass implem
 
     this.references = new HashSet<>();
   }
-  
+
   @Override
   public Account getAccount()
   {

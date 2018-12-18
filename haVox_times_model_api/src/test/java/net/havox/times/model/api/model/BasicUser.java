@@ -22,7 +22,7 @@ import net.havox.times.model.api.user.User;
 
 /**
  * Basic implementation of {@link User].
- * 
+ *
  * @author Christian Otto
  */
 public class BasicUser extends AbstractChangeAwareAndIdentifiableClass implements User
@@ -33,11 +33,11 @@ public class BasicUser extends AbstractChangeAwareAndIdentifiableClass implement
   private String email;
   private final Credential credential;
   private Worker worker;
-  
+
   public BasicUser()
   {
     super();
-    
+
     credential = new BasicCredential();
   }
 

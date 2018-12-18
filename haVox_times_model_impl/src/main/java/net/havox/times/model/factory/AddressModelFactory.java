@@ -56,7 +56,7 @@ public class AddressModelFactory
 
   /**
    * Returns a new {@link Address}.
-   * 
+   *
    * @return a new address entity.
    */
   public Address getNewAddress()
@@ -66,7 +66,7 @@ public class AddressModelFactory
 
   /**
    * Returns a new {@link City}.
-   * 
+   *
    * @return a new city entity.
    */
   public City getNewCity()
@@ -76,7 +76,7 @@ public class AddressModelFactory
 
   /**
    * Returns a new {@link Country}.
-   * 
+   *
    * @return a new country entity.
    */
   public Country getNewCountry()

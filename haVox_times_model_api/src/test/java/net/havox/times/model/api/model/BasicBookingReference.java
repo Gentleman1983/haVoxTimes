@@ -22,14 +22,14 @@ import net.havox.times.model.api.booking.BookingReferenceType;
 
 /**
  * Basic implementation of {@link BookingReference}.
- * 
+ *
  * @author Christian Otto
  */
 public class BasicBookingReference extends AbstractChangeAwareAndIdentifiableClass implements BookingReference
 {
 
   private static final long serialVersionUID = 6640864206752335989L;
-  
+
   private Booking booking;
   private BookingReferenceType type;
   private String value;
@@ -69,5 +69,5 @@ public class BasicBookingReference extends AbstractChangeAwareAndIdentifiableCla
   {
     this.value = value;
   }
-  
+
 }

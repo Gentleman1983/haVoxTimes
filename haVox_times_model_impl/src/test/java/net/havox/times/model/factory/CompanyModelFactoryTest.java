@@ -16,12 +16,6 @@
  */
 package net.havox.times.model.factory;
 
-import net.havox.times.model.api.company.Employer;
-import net.havox.times.model.api.company.Employment;
-import net.havox.times.model.api.company.Worker;
-import net.havox.times.model.impl.company.EmployerImpl;
-import net.havox.times.model.impl.company.EmploymentImpl;
-import net.havox.times.model.impl.company.WorkerImpl;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -29,13 +23,21 @@ import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import net.havox.times.model.api.company.Employer;
+import net.havox.times.model.api.company.Employment;
+import net.havox.times.model.api.company.Worker;
+import net.havox.times.model.impl.company.EmployerImpl;
+import net.havox.times.model.impl.company.EmploymentImpl;
+import net.havox.times.model.impl.company.WorkerImpl;
+
 /**
  * Factory test of {@link CompanyModelFactory}.
- * 
+ *
  * @author Christian Otto
  */
 public class CompanyModelFactoryTest
 {
+
   private static CompanyModelFactory factory;
 
   @BeforeClass

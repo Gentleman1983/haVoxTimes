@@ -30,97 +30,98 @@ import net.havox.times.model.api.CollectionMassModificationStatus;
  */
 public interface Account extends ChangeAware, Serializable
 {
+
   /**
    * Returns the project.
-   * 
+   *
    * @return the project.
    */
   Project getProject();
 
   /**
    * Sets the project.
-   * 
+   *
    * @param project the project.
    */
   void setProject( Project project );
-  
+
   /**
    * Returns the account name.
-   * 
+   *
    * @return the name.
    */
   String getName();
-  
+
   /**
    * Sets the account name.
-   * 
+   *
    * @param name the name.
    */
   void setName( String name );
-  
+
   /**
    * Returns the start date.
-   * 
+   *
    * @return the start.
    */
   LocalDate getStartDate();
-  
+
   /**
    * Sets the start date.
-   * 
+   *
    * @param start the start.
    */
   void setStartDate( LocalDate start );
-  
+
   /**
    * Returns the end date.
-   * 
+   *
    * @return the end.
    */
   LocalDate getEndDate();
-  
+
   /**
    * Sets the end date.
-   * 
+   *
    * @param end the end.
    */
   void setEndDate( LocalDate end );
-  
+
   /**
    * Returns the account budget.
-   * 
+   *
    * @return the budget.
    */
   Long getBudget();
-  
+
   /**
    * Sets the account budget.
-   * 
+   *
    * @param budget the budget.
    */
   void setBudget( Long budget );
-  
+
   /**
    * Returns the account bookings.
-   * 
+   *
    * @return the bookings.
    */
   Set<Booking> getBookings();
-  
+
   /**
    * Adds bookings to the account.
-   * 
+   *
    * @param bookings the bookings.
-   * 
+   *
    * @return the status.
    */
   CollectionMassModificationStatus<Booking> addBookings( Booking... bookings );
-  
+
   /**
    * Removes bookings to the account.
-   * 
+   *
    * @param bookings the bookings.
-   * 
+   *
    * @return the status.
    */
   CollectionMassModificationStatus<Booking> removeBookings( Booking... bookings );

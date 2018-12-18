@@ -28,6 +28,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Account;
@@ -47,8 +48,8 @@ public class AccountImpl extends AbstractChangeAwareClass<AccountImpl> implement
 
   private static final long serialVersionUID = 8058132623183316967L;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = ACCOUNT_DB_COLUMN_PROJECT )
+  @ManyToOne( fetch = FetchType.LAZY )
+  @JoinColumn( name = ACCOUNT_DB_COLUMN_PROJECT )
   private Project project;
   @Column( name = ACCOUNT_DB_COLUMN_NAME )
   private String name;

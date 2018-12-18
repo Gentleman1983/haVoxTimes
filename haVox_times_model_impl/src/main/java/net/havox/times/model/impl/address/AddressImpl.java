@@ -22,6 +22,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.address.Address;
 import net.havox.times.model.api.address.City;
@@ -29,7 +30,7 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 
 /**
  * Implementation of {@link Address}.
- * 
+ *
  * @author Christian Otto
  */
 @Entity
@@ -38,12 +39,12 @@ public class AddressImpl extends AbstractChangeAwareClass<AddressImpl> implement
 {
 
   private static final long serialVersionUID = 8376031385090004308L;
-  
+
   @Column( name = ADDRESS_DB_COLUMN_STREET )
   private String street;
   @Column( name = ADDRESS_DB_COLUMN_HOUSE_NUMBER )
   private String houseNumber;
-  @ManyToOne(fetch=FetchType.LAZY)
+  @ManyToOne( fetch = FetchType.LAZY )
   @JoinColumn( name = ADDRESS_DB_COLUMN_CITY )
   private City city;
 

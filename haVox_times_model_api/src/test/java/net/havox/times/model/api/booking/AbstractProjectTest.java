@@ -16,31 +16,34 @@
  */
 package net.havox.times.model.api.booking;
 
+import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import java.time.LocalDate;
 import java.time.Month;
+
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
 import net.havox.times.model.api.company.Employment;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
 public abstract class AbstractProjectTest
 {
 
   public abstract Project newInstance() throws Exception;
+
   public abstract Employment newEmployment() throws Exception;
+
   public abstract Account newAccount() throws Exception;
 
   // *******************************************************************************************************************
   // Getter / Setter Tests
   // *******************************************************************************************************************
-  
   /**
-   * User Story BM014 ({@link Employment}) acceptance criteria 02 ("It has an employee, a start and end date and a set of projects.").
+   * User Story BM014 ({@link Employment}) acceptance criteria 02 ("It has an employee, a start and end date and a set
+   * of projects.").
    *
    * @throws Exception
    */
@@ -54,7 +57,7 @@ public abstract class AbstractProjectTest
     objectUnderTest.setEmployment( employment );
     assertEquals( employment, objectUnderTest.getEmployment() );
   }
-  
+
   /**
    * User Story BM008 acceptance criteria 01 ("A project has a name.").
    *
@@ -191,8 +194,8 @@ public abstract class AbstractProjectTest
     }
 
     Project objectUnderTest = newInstance();
-    objectUnderTest.addAccounts(accountsToBeAdded );
-    objectUnderTest.addAccounts(accountsToBeDeleted );
+    objectUnderTest.addAccounts( accountsToBeAdded );
+    objectUnderTest.addAccounts( accountsToBeDeleted );
     for ( Account addedElement : accountsToBeDeleted )
     {
       StringBuilder msg = new StringBuilder();
@@ -201,7 +204,7 @@ public abstract class AbstractProjectTest
               .append( "' was not found." );
       assertTrue( msg.toString(), objectUnderTest.getAccounts().contains( addedElement ) );
     }
-    objectUnderTest.removeAccounts(accountsToBeDeleted );
+    objectUnderTest.removeAccounts( accountsToBeDeleted );
     for ( Account checkedElement : accountsToBeDeleted )
     {
       StringBuilder msg = new StringBuilder();

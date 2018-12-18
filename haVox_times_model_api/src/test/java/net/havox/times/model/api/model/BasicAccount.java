@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.address.Country;
 import net.havox.times.model.api.booking.Account;
@@ -28,25 +29,25 @@ import net.havox.times.model.api.booking.Project;
 
 /**
  * Basic implementation of {@link Country}.
- * 
+ *
  * @author Christian Otto
  */
 public class BasicAccount extends AbstractChangeAwareAndIdentifiableClass implements Account
 {
 
   private static final long serialVersionUID = -7293617991333044884L;
-  
+
   private Project project;
   private String name;
   private LocalDate start;
   private LocalDate end;
   private Long budget;
   private final Set<Booking> bookings;
-  
+
   public BasicAccount()
   {
     super();
-    
+
     bookings = new HashSet<>();
   }
 
@@ -123,14 +124,14 @@ public class BasicAccount extends AbstractChangeAwareAndIdentifiableClass implem
 
     for ( Booking booking : bookings )
     {
-      if ( this.bookings.contains(booking ) )
+      if ( this.bookings.contains( booking ) )
       {
-        status.addUnsuccessfulElements(booking );
+        status.addUnsuccessfulElements( booking );
       }
       else
       {
-        this.bookings.add(booking );
-        status.addSuccessfulElements(booking );
+        this.bookings.add( booking );
+        status.addSuccessfulElements( booking );
       }
     }
 
@@ -144,14 +145,14 @@ public class BasicAccount extends AbstractChangeAwareAndIdentifiableClass implem
 
     for ( Booking booking : bookings )
     {
-      if ( this.bookings.contains(booking ) )
+      if ( this.bookings.contains( booking ) )
       {
-        this.bookings.remove(booking );
-        status.addSuccessfulElements(booking );
+        this.bookings.remove( booking );
+        status.addSuccessfulElements( booking );
       }
       else
       {
-        status.addUnsuccessfulElements(booking );
+        status.addUnsuccessfulElements( booking );
       }
     }
 

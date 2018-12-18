@@ -16,20 +16,22 @@
  */
 package net.havox.times.model.impl.booking;
 
+import org.junit.BeforeClass;
+
 import net.havox.times.model.api.booking.AbstractBookingReferenceTest;
 import net.havox.times.model.api.booking.Booking;
 import net.havox.times.model.api.booking.BookingReference;
 import net.havox.times.model.api.booking.BookingReferenceType;
 import net.havox.times.model.factory.BookingModelFactory;
-import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link BookingReference}.
- * 
+ *
  * @author Christian Otto
  */
 public class BookingReferenceApiTest extends AbstractBookingReferenceTest
 {
+
   private static BookingModelFactory bookingFactory;
 
   @BeforeClass

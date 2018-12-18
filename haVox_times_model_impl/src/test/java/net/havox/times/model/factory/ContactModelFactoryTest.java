@@ -16,8 +16,6 @@
  */
 package net.havox.times.model.factory;
 
-import net.havox.times.model.api.contact.ContactOption;
-import net.havox.times.model.impl.contact.ContactOptionImpl;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -25,13 +23,17 @@ import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import net.havox.times.model.api.contact.ContactOption;
+import net.havox.times.model.impl.contact.ContactOptionImpl;
+
 /**
  * Factory test of {@link ContactModelFactory}.
- * 
+ *
  * @author Christian Otto
  */
 public class ContactModelFactoryTest
 {
+
   private static ContactModelFactory factory;
 
   @BeforeClass

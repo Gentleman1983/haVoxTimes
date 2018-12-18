@@ -16,13 +16,13 @@
  */
 package net.havox.times.model.api.booking;
 
+import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
 public abstract class AbstractBookingReferenceTypeTest
@@ -78,8 +78,8 @@ public abstract class AbstractBookingReferenceTypeTest
   public void testHasPrefix() throws Exception
   {
     String alphabet = ModelRandomGenerator.ALPHABETIC_STRING + " -";
-    String prefix = ModelRandomGenerator.randomBoolean() ? "" : 
-            ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 1, 50 ), alphabet );
+    String prefix = ModelRandomGenerator.randomBoolean() ? ""
+            : ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 1, 50 ), alphabet );
 
     BookingReferenceType objectUnderTest = newInstance();
     objectUnderTest.setPrefix( prefix );
@@ -113,8 +113,8 @@ public abstract class AbstractBookingReferenceTypeTest
   public void testHasSuffix() throws Exception
   {
     String alphabet = ModelRandomGenerator.ALPHABETIC_STRING + " -";
-    String suffix = ModelRandomGenerator.randomBoolean() ? "" : 
-            ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 1, 50 ), alphabet );
+    String suffix = ModelRandomGenerator.randomBoolean() ? ""
+            : ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 1, 50 ), alphabet );
 
     BookingReferenceType objectUnderTest = newInstance();
     objectUnderTest.setSuffix( suffix );

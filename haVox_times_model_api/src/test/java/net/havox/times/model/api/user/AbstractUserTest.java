@@ -16,14 +16,14 @@
  */
 package net.havox.times.model.api.user;
 
+import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.junit.Test;
+
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
 import net.havox.times.model.api.company.Worker;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
 public abstract class AbstractUserTest

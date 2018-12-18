@@ -17,17 +17,16 @@
 package net.havox.exceptions;
 
 import static org.hamcrest.Matchers.*;
-
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
-
 /**
+ * Basic {@link GuruErrorCode} test.
  *
- * @author The_G
+ * @author Christian Otto
  */
 public class GuruErrorCodeTest
 {

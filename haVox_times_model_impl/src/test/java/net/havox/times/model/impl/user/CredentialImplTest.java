@@ -17,12 +17,13 @@
 package net.havox.times.model.impl.user;
 
 import java.lang.reflect.Field;
+
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.impl.AbstractChangeAwareClassTest;
 
 /**
  * Implementation specific tests for {@link Credential}.
- * 
+ *
  * @author Christian Otto
  */
 public class CredentialImplTest extends AbstractChangeAwareClassTest

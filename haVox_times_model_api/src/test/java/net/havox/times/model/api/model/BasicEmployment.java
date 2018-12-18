@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Project;
 import net.havox.times.model.api.company.Employer;
@@ -28,24 +29,24 @@ import net.havox.times.model.api.company.Worker;
 
 /**
  * Basic implementation of {@link Employment}.
- * 
+ *
  * @author Christian Otto
  */
 public class BasicEmployment extends AbstractChangeAwareAndIdentifiableClass implements Employment
 {
 
   private static final long serialVersionUID = 6735202581677222968L;
-  
+
   private Employer employer;
   private Worker employee;
   private LocalDate start;
   private LocalDate end;
   private final Set<Project> projects;
-  
+
   public BasicEmployment()
   {
     super();
-    
+
     projects = new HashSet<>();
   }
 
@@ -110,14 +111,14 @@ public class BasicEmployment extends AbstractChangeAwareAndIdentifiableClass imp
 
     for ( Project project : projects )
     {
-      if ( this.projects.contains(project ) )
+      if ( this.projects.contains( project ) )
       {
-        status.addUnsuccessfulElements(project );
+        status.addUnsuccessfulElements( project );
       }
       else
       {
-        this.projects.add(project );
-        status.addSuccessfulElements(project );
+        this.projects.add( project );
+        status.addSuccessfulElements( project );
       }
     }
 
@@ -131,14 +132,14 @@ public class BasicEmployment extends AbstractChangeAwareAndIdentifiableClass imp
 
     for ( Project project : projects )
     {
-      if ( this.projects.contains(project ) )
+      if ( this.projects.contains( project ) )
       {
-        this.projects.remove(project );
-        status.addSuccessfulElements(project );
+        this.projects.remove( project );
+        status.addSuccessfulElements( project );
       }
       else
       {
-        status.addUnsuccessfulElements(project );
+        status.addUnsuccessfulElements( project );
       }
     }
 

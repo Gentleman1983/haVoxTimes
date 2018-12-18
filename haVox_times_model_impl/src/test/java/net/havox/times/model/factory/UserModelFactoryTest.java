@@ -16,10 +16,6 @@
  */
 package net.havox.times.model.factory;
 
-import net.havox.times.model.api.user.Credential;
-import net.havox.times.model.api.user.User;
-import net.havox.times.model.impl.user.CredentialImpl;
-import net.havox.times.model.impl.user.UserImpl;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -27,13 +23,19 @@ import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import net.havox.times.model.api.user.Credential;
+import net.havox.times.model.api.user.User;
+import net.havox.times.model.impl.user.CredentialImpl;
+import net.havox.times.model.impl.user.UserImpl;
+
 /**
  * Factory test of {@link UserModelFactory}.
- * 
+ *
  * @author Christian Otto
  */
 public class UserModelFactoryTest
 {
+
   private static UserModelFactory factory;
 
   @BeforeClass

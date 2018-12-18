@@ -27,6 +27,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.address.Address;
@@ -36,7 +37,7 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 
 /**
  * Implementation of {@link Employer}.
- * 
+ *
  * @author Christian Otto
  */
 @Entity
@@ -45,13 +46,13 @@ public class EmployerImpl extends AbstractChangeAwareClass<EmployerImpl> impleme
 {
 
   private static final long serialVersionUID = -6794382971390618252L;
-  
+
   @Column( name = EMPLOYER_DB_COLUMN_NAME )
   private String name;
-  @ManyToOne(fetch=FetchType.LAZY)
+  @ManyToOne( fetch = FetchType.LAZY )
   @JoinColumn( name = EMPLOYER_DB_COLUMN_ADDRESS )
   private Address address;
-  @ManyToOne(fetch=FetchType.LAZY)
+  @ManyToOne( fetch = FetchType.LAZY )
   @JoinColumn( name = EMPLOYER_DB_COLUMN_EMPLOYER_GROUP )
   private Employer group;
   @OneToMany( mappedBy = EMPLOYER_DB_TABLE_NAME, cascade = CascadeType.ALL )

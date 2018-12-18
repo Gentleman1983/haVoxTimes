@@ -17,12 +17,13 @@
 package net.havox.times.model.impl.address;
 
 import java.lang.reflect.Field;
+
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.impl.AbstractChangeAwareClassTest;
 
 /**
  * Implementation specific tests for {@link City}.
- * 
+ *
  * @author Christian Otto
  */
 public class CityImplTest extends AbstractChangeAwareClassTest

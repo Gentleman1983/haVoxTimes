@@ -16,18 +16,20 @@
  */
 package net.havox.times.model.impl.user;
 
+import org.junit.BeforeClass;
+
 import net.havox.times.model.api.user.AbstractCredentialTest;
 import net.havox.times.model.api.user.Credential;
 import net.havox.times.model.factory.UserModelFactory;
-import org.junit.BeforeClass;
 
 /**
  * API specific tests for {@link Credential}.
- * 
+ *
  * @author Christian Otto
  */
 public class CredentialApiTest extends AbstractCredentialTest
 {
+
   private static UserModelFactory userFactory;
 
   @BeforeClass

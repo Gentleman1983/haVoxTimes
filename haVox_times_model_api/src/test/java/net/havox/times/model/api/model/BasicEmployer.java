@@ -19,6 +19,7 @@ package net.havox.times.model.api.model;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.address.Address;
 import net.havox.times.model.api.company.Employer;

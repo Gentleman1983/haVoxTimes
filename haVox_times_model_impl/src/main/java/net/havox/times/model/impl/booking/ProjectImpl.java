@@ -28,6 +28,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Account;
@@ -37,7 +38,7 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 
 /**
  * Implementation of {@link Project}.
- * 
+ *
  * @author Christian Otto
  */
 @Entity
@@ -47,8 +48,8 @@ public class ProjectImpl extends AbstractChangeAwareClass<ProjectImpl> implement
 
   private static final long serialVersionUID = 6402688587696621775L;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = PROJECT_DB_COLUMN_EMPLOYMENT )
+  @ManyToOne( fetch = FetchType.LAZY )
+  @JoinColumn( name = PROJECT_DB_COLUMN_EMPLOYMENT )
   private Employment employment;
   @Column( name = PROJECT_DB_COLUMN_NAME )
   private String name;
@@ -58,11 +59,11 @@ public class ProjectImpl extends AbstractChangeAwareClass<ProjectImpl> implement
   private LocalDate end;
   @OneToMany( mappedBy = PROJECT_DB_TABLE_NAME, cascade = CascadeType.ALL )
   private final Set<Account> accounts;
-  
+
   public ProjectImpl()
   {
     super();
-    
+
     accounts = new CopyOnWriteArraySet<>();
   }
 
@@ -127,14 +128,14 @@ public class ProjectImpl extends AbstractChangeAwareClass<ProjectImpl> implement
 
     for ( Account account : accounts )
     {
-      if ( this.accounts.contains(account ) )
+      if ( this.accounts.contains( account ) )
       {
-        status.addUnsuccessfulElements(account );
+        status.addUnsuccessfulElements( account );
       }
       else
       {
-        this.accounts.add(account );
-        status.addSuccessfulElements(account );
+        this.accounts.add( account );
+        status.addSuccessfulElements( account );
       }
     }
 
@@ -148,14 +149,14 @@ public class ProjectImpl extends AbstractChangeAwareClass<ProjectImpl> implement
 
     for ( Account account : accounts )
     {
-      if ( this.accounts.contains(account ) )
+      if ( this.accounts.contains( account ) )
       {
-        this.accounts.remove(account );
-        status.addSuccessfulElements(account );
+        this.accounts.remove( account );
+        status.addSuccessfulElements( account );
       }
       else
       {
-        status.addUnsuccessfulElements(account );
+        status.addUnsuccessfulElements( account );
       }
     }
 

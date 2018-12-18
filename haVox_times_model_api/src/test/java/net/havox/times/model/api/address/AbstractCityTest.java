@@ -17,13 +17,12 @@
 package net.havox.times.model.api.address;
 
 import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
 @RunWith( ExtendedRunner.class )
 public abstract class AbstractCityTest
@@ -36,17 +35,16 @@ public abstract class AbstractCityTest
   // *******************************************************************************************************************
   // Getter / Setter Tests
   // *******************************************************************************************************************
-    
   /**
    * User Story BM004 acceptance criteria 01 ("It has a name and a zip code.").
-   * 
+   *
    * @throws Exception
    */
   @Test
   @Repeat( 25 )
   public void testModifyZipCode() throws Exception
   {
-    String zipCode = ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 4, 8 ), 
+    String zipCode = ModelRandomGenerator.randomString( ModelRandomGenerator.randomIntInRange( 4, 8 ),
             ModelRandomGenerator.ALPHANUMERIC_STRING );
 
     City objectUnderTest = newInstance();
@@ -56,7 +54,7 @@ public abstract class AbstractCityTest
 
   /**
    * User Story BM004 acceptance criteria 01 ("It has a name and a zip code.").
-   * 
+   *
    * @throws Exception
    */
   @Test
@@ -73,7 +71,7 @@ public abstract class AbstractCityTest
 
   /**
    * User Story BM004 acceptance criteria 02 ("It belongs to a country.").
-   * 
+   *
    * @throws Exception
    */
   @Test

@@ -21,11 +21,12 @@ import net.havox.times.model.api.address.City;
 
 /**
  * Basic implementation of {@link Address}.
- * 
+ *
  * @author Christian Otto
  */
 public class BasicAddress extends AbstractChangeAwareAndIdentifiableClass implements Address
 {
+
   private static final long serialVersionUID = 3140881083299107369L;
 
   private String street;

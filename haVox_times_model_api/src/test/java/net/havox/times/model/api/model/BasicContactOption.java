@@ -23,35 +23,40 @@ import net.havox.times.model.api.contact.ContactType;
 
 /**
  * Basic implementation of {@link ContactOption}.
- * 
+ *
  * @author Christian Otto
  */
 public class BasicContactOption extends AbstractChangeAwareAndIdentifiableClass implements ContactOption
 {
+
   private static final long serialVersionUID = -8059472798279522275L;
 
   private Employer employer;
   private Worker employee;
   private ContactType type = null;
   private String value = "leer";
-  
+
   @Override
-  public Employer getEmployer() {
+  public Employer getEmployer()
+  {
     return employer;
   }
-  
+
   @Override
-  public void setEmployer( Employer employer ) {
+  public void setEmployer( Employer employer )
+  {
     this.employer = employer;
   }
-  
+
   @Override
-  public Worker getEmployee() {
+  public Worker getEmployee()
+  {
     return employee;
   }
-  
+
   @Override
-  public void setEmployee( Worker employee ) {
+  public void setEmployee( Worker employee )
+  {
     this.employee = employee;
   }
 

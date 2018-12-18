@@ -17,6 +17,7 @@
 package net.havox.times.model.api.contact;
 
 import java.io.Serializable;
+
 import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.times.model.api.ChangeAware;
 import net.havox.times.model.api.company.Employer;
@@ -29,53 +30,55 @@ import net.havox.times.model.api.company.Worker;
  */
 public interface ContactOption extends ChangeAware, Serializable
 {
+
   /**
    * Returns the employer.
-   * 
+   *
    * @return the employer.
    */
   Employer getEmployer();
-  
+
   /**
    * Sets the employer.
-   * 
+   *
    * @param employer the employer.
    */
   void setEmployer( Employer employer );
-  
+
   /**
    * Returns the employee.
-   * 
+   *
    * @return the employee.
    */
   Worker getEmployee();
-  
+
   /**
    * Sets the employee.
-   * 
+   *
    * @param employee the employee.
    */
   void setEmployee( Worker employee );
-  
+
   /**
    * Returns the contact type.
-   * 
+   *
    * @return the contact type.
    */
   ContactType getType();
 
   /**
-   * Sets the
-   * @return 
+   * Returns the contact value.
+   *
+   * @return the contact value.
    */
   String getContactValue();
-  
+
   /**
    * Sets the contact.
-   * 
+   *
    * @param type the contact type.
    * @param value the contact value.
-   * 
+   *
    * @throws GuruMeditationWarning if type or value is <code>null</code>.
    * @throws GuruMeditationWarning if value does not match to the validation rules.
    */
