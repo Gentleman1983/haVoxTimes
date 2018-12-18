@@ -16,10 +16,14 @@
  */
 package net.havox.times.model.impl.user;
 
+import java.util.Collections;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -27,6 +31,7 @@ import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.company.Worker;
 import net.havox.times.model.api.user.Credential;
 import net.havox.times.model.api.user.User;
+import net.havox.times.model.api.user.UserGroup;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 
 /**
@@ -49,12 +54,15 @@ public class UserImpl extends AbstractChangeAwareClass<UserImpl> implements User
   @ManyToOne( fetch = FetchType.LAZY )
   @JoinColumn( name = USER_DB_COLUMN_WORKER )
   private Worker worker;
+  @ManyToMany( mappedBy = "usersInUserGroup" )
+  private final Set<UserGroup> userGroupMemberships;
 
   public UserImpl()
   {
     super();
 
     credential = new CredentialImpl();
+    userGroupMemberships = new CopyOnWriteArraySet<>();
   }
 
   @Override
@@ -85,5 +93,11 @@ public class UserImpl extends AbstractChangeAwareClass<UserImpl> implements User
   public void setWorker( Worker worker )
   {
     this.worker = worker;
+  }
+
+  @Override
+  public Set<UserGroup> getMemberOfUserGroup()
+  {
+    return Collections.unmodifiableSet( userGroupMemberships );
   }
 }

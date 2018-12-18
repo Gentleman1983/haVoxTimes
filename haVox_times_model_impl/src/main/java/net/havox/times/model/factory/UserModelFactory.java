@@ -18,7 +18,9 @@ package net.havox.times.model.factory;
 
 import net.havox.times.model.api.user.Credential;
 import net.havox.times.model.api.user.User;
+import net.havox.times.model.api.user.UserGroup;
 import net.havox.times.model.impl.user.CredentialImpl;
+import net.havox.times.model.impl.user.UserGroupImpl;
 import net.havox.times.model.impl.user.UserImpl;
 
 /**
@@ -70,5 +72,15 @@ public class UserModelFactory
   public User getNewUser()
   {
     return new UserImpl();
+  }
+
+  /**
+   * Returns a new {@link UserGroup}.
+   *
+   * @return a new user entity.
+   */
+  public UserGroup getNewUserGroup()
+  {
+    return new UserGroupImpl();
   }
 }

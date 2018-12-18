@@ -16,9 +16,13 @@
  */
 package net.havox.times.model.api.model;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import net.havox.times.model.api.company.Worker;
 import net.havox.times.model.api.user.Credential;
 import net.havox.times.model.api.user.User;
+import net.havox.times.model.api.user.UserGroup;
 
 /**
  * Basic implementation of {@link User].
@@ -33,12 +37,14 @@ public class BasicUser extends AbstractChangeAwareAndIdentifiableClass implement
   private String email;
   private final Credential credential;
   private Worker worker;
+  private final Set<UserGroup> userGroupMemberships;
 
   public BasicUser()
   {
     super();
 
     credential = new BasicCredential();
+    userGroupMemberships = new HashSet<>();
   }
 
   @Override
@@ -69,5 +75,11 @@ public class BasicUser extends AbstractChangeAwareAndIdentifiableClass implement
   public void setWorker( Worker worker )
   {
     this.worker = worker;
+  }
+
+  @Override
+  public Set<UserGroup> getMemberOfUserGroup()
+  {
+    return Collections.unmodifiableSet( userGroupMemberships );
   }
 }

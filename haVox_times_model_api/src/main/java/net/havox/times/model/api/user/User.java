@@ -17,6 +17,7 @@
 package net.havox.times.model.api.user;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.times.model.api.ChangeAware;
@@ -67,4 +68,11 @@ public interface User extends ChangeAware, Serializable
    * @param worker the worker.
    */
   void setWorker( Worker worker );
+  
+  /**
+   * Returns the set of {@link UserGroup}s being member of.
+   * 
+   * @return the user groups.
+   */
+  Set<UserGroup> getMemberOfUserGroup();
 }
