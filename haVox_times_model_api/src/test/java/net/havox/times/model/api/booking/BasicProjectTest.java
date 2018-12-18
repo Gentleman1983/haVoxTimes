@@ -16,7 +16,9 @@
  */
 package net.havox.times.model.api.booking;
 
+import net.havox.times.model.api.company.Employment;
 import net.havox.times.model.api.model.BasicAccount;
+import net.havox.times.model.api.model.BasicEmployment;
 import net.havox.times.model.api.model.BasicProject;
 
 /**
@@ -31,6 +33,12 @@ public class BasicProjectTest extends AbstractProjectTest
   public Project newInstance() throws Exception
   {
     return new BasicProject();
+  }
+
+  @Override
+  public Employment newEmployment() throws Exception
+  {
+    return new BasicEmployment();
   }
 
   @Override

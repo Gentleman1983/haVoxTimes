@@ -20,6 +20,15 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Project;
 import net.havox.times.model.api.company.Employer;
@@ -32,15 +41,24 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
  * 
  * @author Christian Otto
  */
+@Entity
+@Table( name = EMPLOYMENT_DB_TABLE_NAME )
 public class EmploymentImpl extends AbstractChangeAwareClass<EmploymentImpl> implements Employment
 {
 
   private static final long serialVersionUID = -8268464434033991324L;
 
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = EMPLOYMENT_DB_COLUMN_EMPLOYER )
   private Employer employer;
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = EMPLOYMENT_DB_COLUMN_EMPLOYEE )
   private Worker employee;
+  @Column( name = EMPLOYMENT_DB_COLUMN_START_DATE )
   private LocalDate start;
+  @Column( name = EMPLOYMENT_DB_COLUMN_END_DATE )
   private LocalDate end;
+  @OneToMany( mappedBy = EMPLOYMENT_DB_TABLE_NAME, cascade = CascadeType.ALL )
   private final Set<Project> projects;
   
   public EmploymentImpl()

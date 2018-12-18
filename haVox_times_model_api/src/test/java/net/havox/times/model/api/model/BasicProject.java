@@ -23,6 +23,7 @@ import java.util.Set;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Account;
 import net.havox.times.model.api.booking.Project;
+import net.havox.times.model.api.company.Employment;
 
 /**
  * Basic implementation of {@link Project}.
@@ -34,6 +35,7 @@ public class BasicProject extends AbstractChangeAwareAndIdentifiableClass implem
 
   private static final long serialVersionUID = -7935715108821345744L;
   
+  private Employment employment;
   private String name;
   private LocalDate start;
   private LocalDate end;
@@ -44,6 +46,18 @@ public class BasicProject extends AbstractChangeAwareAndIdentifiableClass implem
     super();
     
     accounts = new HashSet<>();
+  }
+
+  @Override
+  public Employment getEmployment()
+  {
+    return employment;
+  }
+
+  @Override
+  public void setEmployment( Employment employment )
+  {
+    this.employment = employment;
   }
 
   @Override

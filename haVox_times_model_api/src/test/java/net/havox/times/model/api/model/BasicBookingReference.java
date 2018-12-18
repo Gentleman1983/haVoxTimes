@@ -16,6 +16,7 @@
  */
 package net.havox.times.model.api.model;
 
+import net.havox.times.model.api.booking.Booking;
 import net.havox.times.model.api.booking.BookingReference;
 import net.havox.times.model.api.booking.BookingReferenceType;
 
@@ -29,8 +30,21 @@ public class BasicBookingReference extends AbstractChangeAwareAndIdentifiableCla
 
   private static final long serialVersionUID = 6640864206752335989L;
   
+  private Booking booking;
   private BookingReferenceType type;
   private String value;
+
+  @Override
+  public Booking getBooking()
+  {
+    return booking;
+  }
+
+  @Override
+  public void setBooking( Booking booking )
+  {
+    this.booking = booking;
+  }
 
   @Override
   public BookingReferenceType getType()

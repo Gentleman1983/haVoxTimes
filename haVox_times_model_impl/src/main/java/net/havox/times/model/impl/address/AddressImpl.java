@@ -16,6 +16,13 @@
  */
 package net.havox.times.model.impl.address;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.address.Address;
 import net.havox.times.model.api.address.City;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
@@ -25,13 +32,19 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
  * 
  * @author Christian Otto
  */
+@Entity
+@Table( name = ADDRESS_DB_TABLE_NAME )
 public class AddressImpl extends AbstractChangeAwareClass<AddressImpl> implements Address
 {
 
   private static final long serialVersionUID = 8376031385090004308L;
   
+  @Column( name = ADDRESS_DB_COLUMN_STREET )
   private String street;
+  @Column( name = ADDRESS_DB_COLUMN_HOUSE_NUMBER )
   private String houseNumber;
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = ADDRESS_DB_COLUMN_CITY )
   private City city;
 
   @Override

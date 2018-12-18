@@ -16,8 +16,11 @@
  */
 package net.havox.times.model.impl.contact;
 
+import net.havox.times.model.api.company.Employer;
+import net.havox.times.model.api.company.Worker;
 import net.havox.times.model.api.contact.AbstractContactOptionTest;
 import net.havox.times.model.api.contact.ContactOption;
+import net.havox.times.model.factory.CompanyModelFactory;
 import net.havox.times.model.factory.ContactModelFactory;
 import org.junit.BeforeClass;
 
@@ -28,11 +31,13 @@ import org.junit.BeforeClass;
  */
 public class ContactOptionApiTest extends AbstractContactOptionTest
 {
+  private static CompanyModelFactory companyFactory;
   private static ContactModelFactory contactFactory;
 
   @BeforeClass
   public static void setupClass()
   {
+    companyFactory = CompanyModelFactory.getInstance();
     contactFactory = ContactModelFactory.getInstance();
   }
 
@@ -40,5 +45,17 @@ public class ContactOptionApiTest extends AbstractContactOptionTest
   public ContactOption newInstance() throws Exception
   {
     return contactFactory.getNewContactOption();
+  }
+
+  @Override
+  public Employer newEmployer() throws Exception
+  {
+    return companyFactory.getNewEmployer();
+  }
+
+  @Override
+  public Worker newEmployee() throws Exception
+  {
+    return companyFactory.getNewWorker();
   }
 }

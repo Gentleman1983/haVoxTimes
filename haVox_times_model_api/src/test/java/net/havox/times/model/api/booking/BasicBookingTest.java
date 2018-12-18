@@ -16,6 +16,7 @@
  */
 package net.havox.times.model.api.booking;
 
+import net.havox.times.model.api.model.BasicAccount;
 import net.havox.times.model.api.model.BasicBooking;
 import net.havox.times.model.api.model.BasicBookingReference;
 import net.havox.times.model.api.model.BasicBookingType;
@@ -32,6 +33,12 @@ public class BasicBookingTest extends AbstractBookingTest
   public Booking newInstance() throws Exception
   {
     return new BasicBooking();
+  }
+
+  @Override
+  public Account newAccount() throws Exception
+  {
+    return new BasicAccount();
   }
 
   @Override

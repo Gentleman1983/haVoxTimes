@@ -16,6 +16,8 @@
  */
 package net.havox.times.model.api.model;
 
+import net.havox.times.model.api.company.Employer;
+import net.havox.times.model.api.company.Worker;
 import net.havox.times.model.api.contact.ContactOption;
 import net.havox.times.model.api.contact.ContactType;
 
@@ -28,8 +30,30 @@ public class BasicContactOption extends AbstractChangeAwareAndIdentifiableClass 
 {
   private static final long serialVersionUID = -8059472798279522275L;
 
+  private Employer employer;
+  private Worker employee;
   private ContactType type = null;
   private String value = "leer";
+  
+  @Override
+  public Employer getEmployer() {
+    return employer;
+  }
+  
+  @Override
+  public void setEmployer( Employer employer ) {
+    this.employer = employer;
+  }
+  
+  @Override
+  public Worker getEmployee() {
+    return employee;
+  }
+  
+  @Override
+  public void setEmployee( Worker employee ) {
+    this.employee = employee;
+  }
 
   @Override
   public ContactType getType()

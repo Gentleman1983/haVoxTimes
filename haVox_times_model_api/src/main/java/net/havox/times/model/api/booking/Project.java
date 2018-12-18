@@ -22,6 +22,7 @@ import java.util.Set;
 
 import net.havox.times.model.api.ChangeAware;
 import net.havox.times.model.api.CollectionMassModificationStatus;
+import net.havox.times.model.api.company.Employment;
 
 /**
  * This interface represents a project.
@@ -30,6 +31,20 @@ import net.havox.times.model.api.CollectionMassModificationStatus;
  */
 public interface Project extends ChangeAware, Serializable
 {
+  /**
+   * Returns the employment.
+   * 
+   * @return the employment.
+   */
+  Employment getEmployment();
+
+  /**
+   * Sets the employment.
+   * 
+   * @param employment  the employment.
+   */
+  void setEmployment( Employment employment );
+  
   /**
    * Returns the name.
    * 

@@ -16,7 +16,11 @@
  */
 package net.havox.times.model.api.contact;
 
+import net.havox.times.model.api.company.Employer;
+import net.havox.times.model.api.company.Worker;
 import net.havox.times.model.api.model.BasicContactOption;
+import net.havox.times.model.api.model.BasicEmployer;
+import net.havox.times.model.api.model.BasicWorker;
 
 /**
  * Simplest implementation for {@link  AbstractContactOptionTest}.
@@ -30,5 +34,17 @@ public class BasicContactOptionTest extends AbstractContactOptionTest
   public ContactOption newInstance() throws Exception
   {
     return new BasicContactOption();
+  }
+
+  @Override
+  public Employer newEmployer() throws Exception
+  {
+    return new BasicEmployer();
+  }
+
+  @Override
+  public Worker newEmployee() throws Exception
+  {
+    return new BasicWorker();
   }
 }

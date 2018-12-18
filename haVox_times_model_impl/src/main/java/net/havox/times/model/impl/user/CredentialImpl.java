@@ -16,6 +16,10 @@
  */
 package net.havox.times.model.impl.user;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.user.Credential;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 
@@ -24,12 +28,16 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
  * 
  * @author Christian Otto
  */
+@Entity
+@Table( name = CREDENTIAL_DB_TABLE_NAME )
 public class CredentialImpl extends AbstractChangeAwareClass<CredentialImpl> implements Credential
 {
 
   private static final long serialVersionUID = 1079647780224317739L;
 
+  @Column( name = CREDENTIAL_DB_COLUMN_USERNAME, unique = true )
   private String username;
+  @Column( name = CREDENTIAL_DB_COLUMN_PASSWORD )
   private String pass;
 
   @Override

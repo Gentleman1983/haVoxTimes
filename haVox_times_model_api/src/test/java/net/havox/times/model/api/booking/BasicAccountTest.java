@@ -18,6 +18,7 @@ package net.havox.times.model.api.booking;
 
 import net.havox.times.model.api.model.BasicAccount;
 import net.havox.times.model.api.model.BasicBooking;
+import net.havox.times.model.api.model.BasicProject;
 
 /**
  * Basic implementation of {@link AbstractAccountTest}.
@@ -31,6 +32,12 @@ public class BasicAccountTest extends AbstractAccountTest
   public Account newInstance() throws Exception
   {
     return new BasicAccount();
+  }
+
+  @Override
+  public Project newProject() throws Exception
+  {
+    return new BasicProject();
   }
 
   @Override

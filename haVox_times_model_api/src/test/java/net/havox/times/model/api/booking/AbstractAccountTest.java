@@ -31,12 +31,30 @@ public abstract class AbstractAccountTest
 {
 
   public abstract Account newInstance() throws Exception;
+  public abstract Project newProject() throws Exception;
 
   public abstract Booking newBooking() throws Exception;
 
   // *******************************************************************************************************************
   // Getter / Setter Tests
   // *******************************************************************************************************************
+  
+  /**
+   * User Story BM008 ({@link Project}) acceptance criteria 05 ("Contains a set of accounts.").
+   *
+   * @throws Exception
+   */
+  @Test
+  @Repeat( 25 )
+  public void testModifyProject() throws Exception
+  {
+    Project project = newProject();
+
+    Account objectUnderTest = newInstance();
+    objectUnderTest.setProject( project );
+    assertEquals( project, objectUnderTest.getProject() );
+  }
+  
   /**
    * User Story BM009 acceptance criteria 01 ("An account has a name.").
    *

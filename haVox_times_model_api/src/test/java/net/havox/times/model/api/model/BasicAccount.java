@@ -24,6 +24,7 @@ import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.address.Country;
 import net.havox.times.model.api.booking.Account;
 import net.havox.times.model.api.booking.Booking;
+import net.havox.times.model.api.booking.Project;
 
 /**
  * Basic implementation of {@link Country}.
@@ -35,6 +36,7 @@ public class BasicAccount extends AbstractChangeAwareAndIdentifiableClass implem
 
   private static final long serialVersionUID = -7293617991333044884L;
   
+  private Project project;
   private String name;
   private LocalDate start;
   private LocalDate end;
@@ -46,6 +48,18 @@ public class BasicAccount extends AbstractChangeAwareAndIdentifiableClass implem
     super();
     
     bookings = new HashSet<>();
+  }
+
+  @Override
+  public Project getProject()
+  {
+    return project;
+  }
+
+  @Override
+  public void setProject( Project project )
+  {
+    this.project = project;
   }
 
   @Override

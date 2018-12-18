@@ -16,6 +16,13 @@
  */
 package net.havox.times.model.impl.user;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.company.Worker;
 import net.havox.times.model.api.user.Credential;
 import net.havox.times.model.api.user.User;
@@ -26,13 +33,20 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
  * 
  * @author Christian Otto
  */
+@Entity
+@Table( name = USER_DB_TABLE_NAME )
 public class UserImpl extends AbstractChangeAwareClass<UserImpl> implements User
 {
 
   private static final long serialVersionUID = -5909687147118246286L;
 
+  @Column( name = USER_DB_COLUMN_EMAIL, unique = true )
   private String email;
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = USER_DB_COLUMN_CREDENTIAL )
   private final Credential credential;
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = USER_DB_COLUMN_WORKER )
   private Worker worker;
   
   public UserImpl()

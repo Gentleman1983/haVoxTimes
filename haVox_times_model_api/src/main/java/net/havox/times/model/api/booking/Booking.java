@@ -30,6 +30,20 @@ import net.havox.times.model.api.CollectionMassModificationStatus;
 public interface Booking extends ChangeAware, Serializable
 {
   /**
+   * Returns the account.
+   * 
+   * @return the account.
+   */
+  Account getAccount();
+  
+  /**
+   * Sets the account.
+   * 
+   * @param account the account.
+   */
+  void setAccount( Account account );
+  
+  /**
    * Returns the booking type.
    * 
    * @return the type.

@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import net.havox.times.model.api.CollectionMassModificationStatus;
+import net.havox.times.model.api.booking.Account;
 import net.havox.times.model.api.booking.Booking;
 import net.havox.times.model.api.booking.BookingReference;
 import net.havox.times.model.api.booking.BookingType;
@@ -34,6 +35,7 @@ public class BasicBooking extends AbstractChangeAwareAndIdentifiableClass implem
 
   private static final long serialVersionUID = 6088845829981604482L;
 
+  private Account account;
   private BookingType type;
   private String text;
   private boolean invoiced;
@@ -44,6 +46,18 @@ public class BasicBooking extends AbstractChangeAwareAndIdentifiableClass implem
     super();
 
     this.references = new HashSet<>();
+  }
+  
+  @Override
+  public Account getAccount()
+  {
+    return account;
+  }
+
+  @Override
+  public void setAccount( Account account )
+  {
+    this.account = account;
   }
 
   @Override

@@ -19,6 +19,8 @@ package net.havox.times.model.api.contact;
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
+import net.havox.times.model.api.company.Employer;
+import net.havox.times.model.api.company.Worker;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -29,10 +31,44 @@ public abstract class AbstractContactOptionTest
 {
 
   public abstract ContactOption newInstance() throws Exception;
+  public abstract Employer newEmployer() throws Exception;
+  public abstract Worker newEmployee() throws Exception;
 
   // *******************************************************************************************************************
   // Getter / Setter Tests
   // *******************************************************************************************************************
+  
+  /**
+   * User Story BM015 ({@link Employer}) acceptance criteria 01 ("An employer has a name, address and contact options.").
+   *
+   * @throws Exception
+   */
+  @Test
+  @Repeat( 25 )
+  public void testModifyEmployer() throws Exception
+  {
+    Employer employer = newEmployer();
+
+    ContactOption objectUnderTest = newInstance();
+    objectUnderTest.setEmployer( employer );
+    assertEquals( employer, objectUnderTest.getEmployer() );
+  }
+  
+  /**
+   * User Story BM002 ({@link Worker}) acceptance criteria 04 ("A worker has got a set of contact options.").
+   *
+   * @throws Exception
+   */
+  @Test
+  @Repeat( 25 )
+  public void testModifyEmployee() throws Exception
+  {
+    Worker employee = newEmployee();
+
+    ContactOption objectUnderTest = newInstance();
+    objectUnderTest.setEmployee( employee );
+    assertEquals( employee, objectUnderTest.getEmployee() );
+  }
     
   /**
    * User Story BM006 acceptance criteria 01 ("It consists of a contact type and a value.").

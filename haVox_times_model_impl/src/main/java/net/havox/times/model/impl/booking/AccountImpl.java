@@ -20,9 +20,19 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Account;
 import net.havox.times.model.api.booking.Booking;
+import net.havox.times.model.api.booking.Project;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 
 /**
@@ -30,15 +40,25 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
  *
  * @author Christian Otto
  */
+@Entity
+@Table( name = ACCOUNT_DB_TABLE_NAME )
 public class AccountImpl extends AbstractChangeAwareClass<AccountImpl> implements Account
 {
 
   private static final long serialVersionUID = 8058132623183316967L;
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = ACCOUNT_DB_COLUMN_PROJECT )
+  private Project project;
+  @Column( name = ACCOUNT_DB_COLUMN_NAME )
   private String name;
+  @Column( name = ACCOUNT_DB_COLUMN_START_DATE )
   private LocalDate start;
+  @Column( name = ACCOUNT_DB_COLUMN_END_DATE )
   private LocalDate end;
+  @Column( name = ACCOUNT_DB_COLUMN_BUDGET )
   private Long budget;
+  @OneToMany( mappedBy = ACCOUNT_DB_TABLE_NAME, cascade = CascadeType.ALL )
   private final Set<Booking> bookings;
 
   public AccountImpl()
@@ -46,6 +66,18 @@ public class AccountImpl extends AbstractChangeAwareClass<AccountImpl> implement
     super();
 
     bookings = new CopyOnWriteArraySet<>();
+  }
+
+  @Override
+  public Project getProject()
+  {
+    return project;
+  }
+
+  @Override
+  public void setProject( Project project )
+  {
+    this.project = project;
   }
 
   @Override

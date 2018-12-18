@@ -19,7 +19,17 @@ package net.havox.times.model.impl.booking;
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.CollectionMassModificationStatus;
+import net.havox.times.model.api.booking.Account;
 import net.havox.times.model.api.booking.Booking;
 import net.havox.times.model.api.booking.BookingReference;
 import net.havox.times.model.api.booking.BookingType;
@@ -30,14 +40,24 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
  * 
  * @author Christian Otto
  */
+@Entity
+@Table( name = BOOKING_DB_TABLE_NAME )
 public class BookingImpl extends AbstractChangeAwareClass<BookingImpl> implements Booking
 {
 
   private static final long serialVersionUID = -3221948978182231002L;
   
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = BOOKING_DB_COLUMN_ACCOUNT )
+  private Account account;
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = BOOKING_DB_COLUMN_TYPE )
   private BookingType type;
+  @Column( name = BOOKING_DB_COLUMN_TEXT )
   private String text;
+  @Column( name = BOOKING_DB_COLUMN_IS_INVOICED )
   private boolean invoiced;
+  @OneToMany( mappedBy = BOOKING_DB_TABLE_NAME, cascade = CascadeType.ALL )
   private final Set<BookingReference> references;
 
   public BookingImpl()
@@ -45,6 +65,18 @@ public class BookingImpl extends AbstractChangeAwareClass<BookingImpl> implement
     super();
 
     this.references = new CopyOnWriteArraySet<>();
+  }
+
+  @Override
+  public Account getAccount()
+  {
+    return account;
+  }
+
+  @Override
+  public void setAccount( Account account )
+  {
+    this.account = account;
   }
 
   @Override

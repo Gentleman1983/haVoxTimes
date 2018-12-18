@@ -19,6 +19,15 @@ package net.havox.times.model.impl.company;
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.address.Address;
 import net.havox.times.model.api.company.Employer;
@@ -30,14 +39,22 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
  * 
  * @author Christian Otto
  */
+@Entity
+@Table( name = EMPLOYER_DB_TABLE_NAME )
 public class EmployerImpl extends AbstractChangeAwareClass<EmployerImpl> implements Employer
 {
 
   private static final long serialVersionUID = -6794382971390618252L;
   
+  @Column( name = EMPLOYER_DB_COLUMN_NAME )
   private String name;
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = EMPLOYER_DB_COLUMN_ADDRESS )
   private Address address;
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = EMPLOYER_DB_COLUMN_EMPLOYER_GROUP )
   private Employer group;
+  @OneToMany( mappedBy = EMPLOYER_DB_TABLE_NAME, cascade = CascadeType.ALL )
   private final Set<ContactOption> contactOptions;
 
   public EmployerImpl()

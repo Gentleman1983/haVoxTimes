@@ -21,6 +21,7 @@ import java.time.Month;
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
+import net.havox.times.model.api.company.Employment;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -31,11 +32,29 @@ public abstract class AbstractProjectTest
 {
 
   public abstract Project newInstance() throws Exception;
+  public abstract Employment newEmployment() throws Exception;
   public abstract Account newAccount() throws Exception;
 
   // *******************************************************************************************************************
   // Getter / Setter Tests
   // *******************************************************************************************************************
+  
+  /**
+   * User Story BM014 ({@link Employment}) acceptance criteria 02 ("It has an employee, a start and end date and a set of projects.").
+   *
+   * @throws Exception
+   */
+  @Test
+  @Repeat( 25 )
+  public void testModifyEmployment() throws Exception
+  {
+    Employment employment = newEmployment();
+
+    Project objectUnderTest = newInstance();
+    objectUnderTest.setEmployment( employment );
+    assertEquals( employment, objectUnderTest.getEmployment() );
+  }
+  
   /**
    * User Story BM008 acceptance criteria 01 ("A project has a name.").
    *

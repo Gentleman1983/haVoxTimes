@@ -16,6 +16,14 @@
  */
 package net.havox.times.model.impl.booking;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import net.havox.times.model.api.booking.Booking;
+import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.booking.BookingReference;
 import net.havox.times.model.api.booking.BookingReferenceType;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
@@ -25,13 +33,33 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
  * 
  * @author Christian Otto
  */
+@Entity
+@Table( name = BOOKING_REFERENCE_DB_TABLE_NAME )
 public class BookingReferenceImpl extends AbstractChangeAwareClass<BookingReferenceImpl> implements BookingReference
 {
 
   private static final long serialVersionUID = 6832193014541142884L;
   
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = BOOKING_REFERENCE_DB_COLUMN_BOOKING )
+  private Booking booking;
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = BOOKING_REFERENCE_DB_COLUMN_TYPE )
   private BookingReferenceType type;
+  @Column( name = BOOKING_REFERENCE_DB_COLUMN_VALUE )
   private String value;
+
+  @Override
+  public Booking getBooking()
+  {
+    return booking;
+  }
+
+  @Override
+  public void setBooking( Booking booking )
+  {
+    this.booking = booking;
+  }
 
   @Override
   public BookingReferenceType getType()

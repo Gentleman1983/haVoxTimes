@@ -20,6 +20,15 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.address.Address;
 import net.havox.times.model.api.company.Worker;
@@ -31,16 +40,25 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
  * 
  * @author Christian Otto
  */
+@Entity
+@Table( name = WORKER_DB_TABLE_NAME )
 public class WorkerImpl extends AbstractChangeAwareClass<WorkerImpl> implements Worker
 {
 
   private static final long serialVersionUID = -2803772130584844878L;
 
+  @Column( name = WORKER_DB_COLUMN_FIRST_NAME )
   private String firstName;
+  @Column( name = WORKER_DB_COLUMN_MIDDLE_INITIALS )
   private String middleInitials;
+  @Column( name = WORKER_DB_COLUMN_LAST_NAME )
   private String lastName;
+  @ManyToOne(fetch=FetchType.LAZY)
+  @JoinColumn( name = WORKER_DB_COLUMN_ADDRESS )
   private Address address;
+  @Column( name = WORKER_DB_COLUMN_BIRTHDAY )
   private LocalDate birthDate;
+  @OneToMany( mappedBy = WORKER_DB_TABLE_NAME, cascade = CascadeType.ALL )
   private final Set<ContactOption> contactOptions;
 
   public WorkerImpl()

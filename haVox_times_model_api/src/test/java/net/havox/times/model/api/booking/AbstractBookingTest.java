@@ -29,12 +29,29 @@ public abstract class AbstractBookingTest
 {
 
   public abstract Booking newInstance() throws Exception;
+  public abstract Account newAccount() throws Exception;
   public abstract BookingType newBookingType() throws Exception;
   public abstract BookingReference newBookingReference() throws Exception;
 
   // *******************************************************************************************************************
   // Getter / Setter Tests
   // *******************************************************************************************************************
+    
+  /**
+   * User Story BM009 ({@link Account}) acceptance criteria 04 ("They hold a set of bookings.").
+   * 
+   * @throws Exception
+   */
+  @Test
+  @Repeat( 25 )
+  public void testModifyAccount() throws Exception
+  {
+    Account account = newAccount();
+
+    Booking objectUnderTest = newInstance();
+    objectUnderTest.setAccount( account );
+    assertEquals( account, objectUnderTest.getAccount() );
+  }
     
   /**
    * User Story BM010 acceptance criteria 01 ("They have a booking type.").

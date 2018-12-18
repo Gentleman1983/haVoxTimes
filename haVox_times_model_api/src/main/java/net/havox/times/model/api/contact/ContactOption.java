@@ -19,6 +19,8 @@ package net.havox.times.model.api.contact;
 import java.io.Serializable;
 import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.times.model.api.ChangeAware;
+import net.havox.times.model.api.company.Employer;
+import net.havox.times.model.api.company.Worker;
 
 /**
  * This class defines a contact option.
@@ -27,6 +29,34 @@ import net.havox.times.model.api.ChangeAware;
  */
 public interface ContactOption extends ChangeAware, Serializable
 {
+  /**
+   * Returns the employer.
+   * 
+   * @return the employer.
+   */
+  Employer getEmployer();
+  
+  /**
+   * Sets the employer.
+   * 
+   * @param employer the employer.
+   */
+  void setEmployer( Employer employer );
+  
+  /**
+   * Returns the employee.
+   * 
+   * @return the employee.
+   */
+  Worker getEmployee();
+  
+  /**
+   * Sets the employee.
+   * 
+   * @param employee the employee.
+   */
+  void setEmployee( Worker employee );
+  
   /**
    * Returns the contact type.
    * 

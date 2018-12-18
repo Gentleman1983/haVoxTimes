@@ -16,6 +16,10 @@
  */
 package net.havox.times.model.impl.address;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.address.Country;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 
@@ -24,11 +28,14 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
  * 
  * @author Christian Otto
  */
+@Entity
+@Table( name = COUNTRY_DB_TABLE_NAME )
 public class CountryImpl extends AbstractChangeAwareClass<CountryImpl> implements Country
 {
 
   private static final long serialVersionUID = -1132698736918186421L;
   
+  @Column( name = COUNTRY_DB_COLUMN_NAME )
   private String name;
 
   @Override

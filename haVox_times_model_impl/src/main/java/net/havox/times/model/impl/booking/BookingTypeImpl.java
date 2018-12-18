@@ -17,6 +17,10 @@
 package net.havox.times.model.impl.booking;
 
 import java.math.BigDecimal;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.booking.BookingType;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 
@@ -25,13 +29,18 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
  * 
  * @author Christian Otto
  */
+@Entity
+@Table( name = BOOKING_TYPE_DB_TABLE_NAME )
 public class BookingTypeImpl extends AbstractChangeAwareClass<BookingTypeImpl> implements BookingType
 {
 
   private static final long serialVersionUID = 5106400945569949499L;
   
+  @Column( name = BOOKING_TYPE_DB_COLUMN_NAME )
   private String name;
+  @Column( name = BOOKING_TYPE_DB_COLUMN_MULTIPLIER )
   private BigDecimal multiplier;
+  @Column( name = BOOKING_TYPE_DB_COLUMN_CAN_BE_INVOICED )
   private boolean canBeInvoiced;
 
   @Override

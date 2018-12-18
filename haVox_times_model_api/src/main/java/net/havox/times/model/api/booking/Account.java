@@ -31,6 +31,20 @@ import net.havox.times.model.api.CollectionMassModificationStatus;
 public interface Account extends ChangeAware, Serializable
 {
   /**
+   * Returns the project.
+   * 
+   * @return the project.
+   */
+  Project getProject();
+
+  /**
+   * Sets the project.
+   * 
+   * @param project the project.
+   */
+  void setProject( Project project );
+  
+  /**
    * Returns the account name.
    * 
    * @return the name.

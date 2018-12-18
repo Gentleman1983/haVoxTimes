@@ -17,6 +17,7 @@
 package net.havox.times.model.impl.booking;
 
 import net.havox.times.model.api.booking.AbstractBookingReferenceTest;
+import net.havox.times.model.api.booking.Booking;
 import net.havox.times.model.api.booking.BookingReference;
 import net.havox.times.model.api.booking.BookingReferenceType;
 import net.havox.times.model.factory.BookingModelFactory;
@@ -41,6 +42,12 @@ public class BookingReferenceApiTest extends AbstractBookingReferenceTest
   public BookingReference newInstance() throws Exception
   {
     return bookingFactory.getNewBookingReference();
+  }
+
+  @Override
+  public Booking newBooking() throws Exception
+  {
+    return bookingFactory.getNewBooking();
   }
 
   @Override

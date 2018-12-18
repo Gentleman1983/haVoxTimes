@@ -29,12 +29,31 @@ public abstract class AbstractBookingReferenceTest
 {
 
   public abstract BookingReference newInstance() throws Exception;
+  
+  public abstract Booking newBooking() throws Exception;
 
   public abstract BookingReferenceType newBookingReferenceType() throws Exception;
 
   // *******************************************************************************************************************
   // Getter / Setter Tests
   // *******************************************************************************************************************
+  
+  /**
+   * User Story BM010 ({@link Booking}) acceptance criteria 04 ("They have a set of booking references.").
+   *
+   * @throws Exception
+   */
+  @Test
+  @Repeat( 25 )
+  public void testModifyBooking() throws Exception
+  {
+    Booking booking = newBooking();
+
+    BookingReference objectUnderTest = newInstance();
+    objectUnderTest.setBooking( booking );
+    assertEquals( booking, objectUnderTest.getBooking() );
+  }
+  
   /**
    * User Story BM012 acceptance criteria 01 ("They have a project specific reference type and a value.").
    *
