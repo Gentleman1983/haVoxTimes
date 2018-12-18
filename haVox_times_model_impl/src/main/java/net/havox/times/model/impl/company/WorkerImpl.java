@@ -17,7 +17,9 @@
 package net.havox.times.model.impl.company;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.address.Address;
 import net.havox.times.model.api.company.Worker;
@@ -32,82 +34,127 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 public class WorkerImpl extends AbstractChangeAwareClass<WorkerImpl> implements Worker
 {
 
+  private static final long serialVersionUID = -2803772130584844878L;
+
+  private String firstName;
+  private String middleInitials;
+  private String lastName;
+  private Address address;
+  private LocalDate birthDate;
+  private final Set<ContactOption> contactOptions;
+
+  public WorkerImpl()
+  {
+    super();
+
+    contactOptions = new ConcurrentSkipListSet<>();
+  }
+
   @Override
   public String getFirstName()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return firstName;
   }
 
   @Override
   public void setFirstName( String firstName )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.firstName = firstName;
   }
 
   @Override
   public String getMiddleInitials()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return middleInitials;
   }
 
   @Override
   public void setMiddleInitials( String initials )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    middleInitials = initials;
   }
 
   @Override
   public String getLastName()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return lastName;
   }
 
   @Override
   public void setLastName( String lastName )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.lastName = lastName;
   }
 
   @Override
   public Address getAddress()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return address;
   }
 
   @Override
   public void setAddress( Address address )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.address = address;
   }
 
   @Override
   public LocalDate getBirthDate()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return birthDate;
   }
 
   @Override
   public void setBirthDate( LocalDate birthDate )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.birthDate = birthDate;
   }
 
   @Override
   public Set<ContactOption> getContactOptions()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return Collections.unmodifiableSet( contactOptions );
   }
 
   @Override
   public CollectionMassModificationStatus<ContactOption> addContactOptions( ContactOption... contactOptions )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    CollectionMassModificationStatus<ContactOption> status = new CollectionMassModificationStatus<>();
+
+    for ( ContactOption option : contactOptions )
+    {
+      if ( this.contactOptions.contains( option ) )
+      {
+        status.addUnsuccessfulElements( option );
+      }
+      else
+      {
+        this.contactOptions.add( option );
+        status.addSuccessfulElements( option );
+      }
+    }
+
+    return status;
   }
 
   @Override
   public CollectionMassModificationStatus<ContactOption> removeContactOptions( ContactOption... contactOptions )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    CollectionMassModificationStatus<ContactOption> status = new CollectionMassModificationStatus<>();
+
+    for ( ContactOption option : contactOptions )
+    {
+      if ( this.contactOptions.contains( option ) )
+      {
+        this.contactOptions.remove( option );
+        status.addSuccessfulElements( option );
+      }
+      else
+      {
+        status.addUnsuccessfulElements( option );
+      }
+    }
+
+    return status;
   }
-  
 }

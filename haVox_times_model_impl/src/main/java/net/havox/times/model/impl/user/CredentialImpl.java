@@ -27,28 +27,32 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 public class CredentialImpl extends AbstractChangeAwareClass<CredentialImpl> implements Credential
 {
 
+  private static final long serialVersionUID = 1079647780224317739L;
+
+  private String username;
+  private String pass;
+
   @Override
   public String getUsername()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return username;
   }
 
   @Override
   public void setUsername( String username )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.username = username;
   }
 
   @Override
   public String getPasswordHash()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return pass;
   }
 
   @Override
   public void setPassword( String password )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.pass = "foo_" + password + "_bar";
   }
-  
 }

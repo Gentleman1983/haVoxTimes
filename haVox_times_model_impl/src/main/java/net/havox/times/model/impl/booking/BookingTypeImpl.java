@@ -28,40 +28,45 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 public class BookingTypeImpl extends AbstractChangeAwareClass<BookingTypeImpl> implements BookingType
 {
 
+  private static final long serialVersionUID = 5106400945569949499L;
+  
+  private String name;
+  private BigDecimal multiplier;
+  private boolean canBeInvoiced;
+
   @Override
   public String getType()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return name;
   }
 
   @Override
   public void setType( String name )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.name = name;
   }
 
   @Override
   public BigDecimal getMultiplier()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return multiplier;
   }
 
   @Override
   public void setMultiplier( BigDecimal multiplier )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.multiplier = multiplier;
   }
 
   @Override
   public boolean canBeInvoiced()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return canBeInvoiced;
   }
 
   @Override
   public void setCanBeInvoiced( boolean canBeInvoiced )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.canBeInvoiced = canBeInvoiced;
   }
-  
 }

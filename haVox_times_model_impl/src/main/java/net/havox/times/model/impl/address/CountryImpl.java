@@ -27,16 +27,19 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 public class CountryImpl extends AbstractChangeAwareClass<CountryImpl> implements Country
 {
 
+  private static final long serialVersionUID = -1132698736918186421L;
+  
+  private String name;
+
   @Override
   public String getName()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return name;
   }
 
   @Override
   public void setName( String name )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.name = name;
   }
-  
 }

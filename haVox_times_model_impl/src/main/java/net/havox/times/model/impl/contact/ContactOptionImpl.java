@@ -28,22 +28,42 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 public class ContactOptionImpl extends AbstractChangeAwareClass<ContactOptionImpl> implements ContactOption
 {
 
+  private static final long serialVersionUID = 8791837873292915594L;
+
+  private ContactType type;
+  private String value;
+  
+  public ContactOptionImpl( ContactType type, String value ) {
+    super();
+    
+    this.type = type;
+    this.value = value;
+  }
+  
+  public ContactOptionImpl( ContactType type ) {
+    this( type, "" );
+  }
+  
+  public ContactOptionImpl() {
+    this( null );
+  }
+
   @Override
   public ContactType getType()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return type;
   }
 
   @Override
   public String getContactValue()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return value;
   }
 
   @Override
   public void setValue( ContactType type, String value )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.type = type;
+    this.value = value;
   }
-  
 }

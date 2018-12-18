@@ -28,40 +28,45 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 public class CityImpl extends AbstractChangeAwareClass<CityImpl> implements City
 {
 
+  private static final long serialVersionUID = 6353902360183285609L;
+  
+  private String zip;
+  private String name;
+  private Country country;
+
   @Override
   public String getZipCode()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return zip;
   }
 
   @Override
   public void setZipCode( String zipCode )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    zip = zipCode;
   }
 
   @Override
   public String getName()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return name;
   }
 
   @Override
   public void setName( String name )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.name = name;
   }
 
   @Override
   public Country getCountry()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return country;
   }
 
   @Override
   public void setCountry( Country country )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.country = country;
   }
-  
 }

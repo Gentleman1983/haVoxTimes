@@ -28,28 +28,32 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 public class BookingReferenceImpl extends AbstractChangeAwareClass<BookingReferenceImpl> implements BookingReference
 {
 
+  private static final long serialVersionUID = 6832193014541142884L;
+  
+  private BookingReferenceType type;
+  private String value;
+
   @Override
   public BookingReferenceType getType()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return type;
   }
 
   @Override
   public void setType( BookingReferenceType type )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.type = type;
   }
 
   @Override
   public String getValue()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return value;
   }
 
   @Override
   public void setValue( String value )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.value = value;
   }
-  
 }

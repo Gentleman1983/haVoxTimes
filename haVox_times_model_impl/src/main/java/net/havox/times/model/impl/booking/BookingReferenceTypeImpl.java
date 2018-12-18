@@ -19,6 +19,7 @@ package net.havox.times.model.impl.booking;
 import net.havox.times.model.api.booking.BookingReferenceType;
 import net.havox.times.model.api.booking.Project;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Implementation of {@link BookingReferenceType}.
@@ -28,88 +29,96 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 public class BookingReferenceTypeImpl extends AbstractChangeAwareClass<BookingReferenceTypeImpl> implements BookingReferenceType
 {
 
+  private static final long serialVersionUID = -4838958141132600137L;
+  
+  private String name;
+  private Project project;
+  private String prefix;
+  private String suffix;
+  private String validationPattern;
+  private String externalReference;
+
   @Override
   public String getType()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return name;
   }
 
   @Override
   public void setType( String name )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.name = name;
   }
 
   @Override
   public Project getProject()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return project;
   }
 
   @Override
   public void setProject( Project project )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.project = project;
   }
 
   @Override
   public boolean hasPrefix()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return StringUtils.isNotBlank( prefix );
   }
 
   @Override
   public String getPrefix()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return prefix;
   }
 
   @Override
   public void setPrefix( String prefix )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.prefix = prefix;
   }
 
   @Override
   public boolean hasSuffix()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return StringUtils.isNotBlank( suffix );
   }
 
   @Override
   public String getSuffix()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return suffix;
   }
 
   @Override
   public void setSuffix( String suffix )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.suffix = suffix;
   }
 
   @Override
   public String getValidationPattern()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return validationPattern;
   }
 
   @Override
   public void setValidationPattern( String pattern )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    validationPattern = pattern;
   }
 
   @Override
   public String getExternalReference()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return externalReference;
   }
 
   @Override
   public void setExternalReference( String reference )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    externalReference = reference;
   }
-  
 }

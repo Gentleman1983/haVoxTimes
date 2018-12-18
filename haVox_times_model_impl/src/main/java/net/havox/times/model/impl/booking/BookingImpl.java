@@ -16,7 +16,9 @@
  */
 package net.havox.times.model.impl.booking;
 
+import java.util.Collections;
 import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Booking;
 import net.havox.times.model.api.booking.BookingReference;
@@ -31,58 +33,101 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 public class BookingImpl extends AbstractChangeAwareClass<BookingImpl> implements Booking
 {
 
+  private static final long serialVersionUID = -3221948978182231002L;
+  
+  private BookingType type;
+  private String text;
+  private boolean invoiced;
+  private final Set<BookingReference> references;
+
+  public BookingImpl()
+  {
+    super();
+
+    this.references = new ConcurrentSkipListSet<>();
+  }
+
   @Override
   public BookingType getType()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return type;
   }
 
   @Override
   public void setType( BookingType type )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.type = type;
   }
 
   @Override
   public String getText()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return text;
   }
 
   @Override
   public void setText( String text )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.text = text;
   }
 
   @Override
   public boolean isInvoiced()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return invoiced;
   }
 
   @Override
   public void setIsInvoiced( boolean isInvoiced )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    invoiced = isInvoiced;
   }
 
   @Override
   public Set<BookingReference> getReferences()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return Collections.unmodifiableSet( references );
   }
 
   @Override
   public CollectionMassModificationStatus<BookingReference> addReferences( BookingReference... references )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    CollectionMassModificationStatus<BookingReference> status = new CollectionMassModificationStatus<>();
+
+    for ( BookingReference reference : references )
+    {
+      if ( this.references.contains( reference ) )
+      {
+        status.addUnsuccessfulElements( reference );
+      }
+      else
+      {
+        this.references.add( reference );
+        status.addSuccessfulElements( reference );
+      }
+    }
+
+    return status;
   }
 
   @Override
   public CollectionMassModificationStatus<BookingReference> removeReferences( BookingReference... references )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    CollectionMassModificationStatus<BookingReference> status = new CollectionMassModificationStatus<>();
+
+    for ( BookingReference reference : references )
+    {
+      if ( this.references.contains( reference ) )
+      {
+        this.references.remove( reference );
+        status.addSuccessfulElements( reference );
+      }
+      else
+      {
+        status.addUnsuccessfulElements( reference );
+      }
+    }
+
+    return status;
   }
-  
 }

@@ -17,7 +17,9 @@
 package net.havox.times.model.impl.booking;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Account;
 import net.havox.times.model.api.booking.Booking;
@@ -31,70 +33,113 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 public class AccountImpl extends AbstractChangeAwareClass<AccountImpl> implements Account
 {
 
+  private static final long serialVersionUID = 8058132623183316967L;
+  
+  private String name;
+  private LocalDate start;
+  private LocalDate end;
+  private Long budget;
+  private final Set<Booking> bookings;
+  
+  public AccountImpl() {
+    super();
+    
+    bookings = new ConcurrentSkipListSet<>();
+  }
+
   @Override
   public String getName()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return name;
   }
 
   @Override
   public void setName( String name )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.name = name;
   }
 
   @Override
   public LocalDate getStartDate()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return start;
   }
 
   @Override
   public void setStartDate( LocalDate start )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.start = start == null ? LocalDate.MIN : start;
   }
 
   @Override
   public LocalDate getEndDate()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return end;
   }
 
   @Override
   public void setEndDate( LocalDate end )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.end = end == null ? LocalDate.MAX : end;
   }
 
   @Override
   public Long getBudget()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return budget;
   }
 
   @Override
   public void setBudget( Long budget )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.budget = budget;
   }
 
   @Override
   public Set<Booking> getBookings()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return Collections.unmodifiableSet( bookings );
   }
 
   @Override
   public CollectionMassModificationStatus<Booking> addBookings( Booking... bookings )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    CollectionMassModificationStatus<Booking> status = new CollectionMassModificationStatus<>();
+
+    for ( Booking booking : bookings )
+    {
+      if ( this.bookings.contains(booking ) )
+      {
+        status.addUnsuccessfulElements(booking );
+      }
+      else
+      {
+        this.bookings.add(booking );
+        status.addSuccessfulElements(booking );
+      }
+    }
+
+    return status;
   }
 
   @Override
   public CollectionMassModificationStatus<Booking> removeBookings( Booking... bookings )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    CollectionMassModificationStatus<Booking> status = new CollectionMassModificationStatus<>();
+
+    for ( Booking booking : bookings )
+    {
+      if ( this.bookings.contains(booking ) )
+      {
+        this.bookings.remove(booking );
+        status.addSuccessfulElements(booking );
+      }
+      else
+      {
+        status.addUnsuccessfulElements(booking );
+      }
+    }
+
+    return status;
   }
-  
 }

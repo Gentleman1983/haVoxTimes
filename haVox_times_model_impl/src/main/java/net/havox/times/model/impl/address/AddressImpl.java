@@ -28,40 +28,45 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 public class AddressImpl extends AbstractChangeAwareClass<AddressImpl> implements Address
 {
 
+  private static final long serialVersionUID = 8376031385090004308L;
+  
+  private String street;
+  private String houseNumber;
+  private City city;
+
   @Override
   public String getStreet()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return street;
   }
 
   @Override
   public void setStreet( String street )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.street = street;
   }
 
   @Override
   public String getHouseNumber()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return houseNumber;
   }
 
   @Override
   public void setHouseNumber( String houseNumber )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.houseNumber = houseNumber;
   }
 
   @Override
   public City getCity()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return city;
   }
 
   @Override
   public void setCity( City city )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.city = city;
   }
-  
 }

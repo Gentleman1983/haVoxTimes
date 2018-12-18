@@ -17,7 +17,9 @@
 package net.havox.times.model.impl.company;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Project;
 import net.havox.times.model.api.company.Employer;
@@ -33,70 +35,114 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 public class EmploymentImpl extends AbstractChangeAwareClass<EmploymentImpl> implements Employment
 {
 
+  private static final long serialVersionUID = -8268464434033991324L;
+
+  private Employer employer;
+  private Worker employee;
+  private LocalDate start;
+  private LocalDate end;
+  private final Set<Project> projects;
+  
+  public EmploymentImpl()
+  {
+    super();
+    
+    projects = new ConcurrentSkipListSet<>();
+  }
+
   @Override
   public Employer getEmployer()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return employer;
   }
 
   @Override
   public void setEmployer( Employer employer )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.employer = employer;
   }
 
   @Override
   public Worker getEmployee()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return employee;
   }
 
   @Override
   public void setEmployee( Worker employee )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.employee = employee;
   }
 
   @Override
   public LocalDate getStartDate()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return start;
   }
 
   @Override
   public void setStartDate( LocalDate start )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.start = start == null ? LocalDate.MIN : start;
   }
 
   @Override
   public LocalDate getEndDate()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return end;
   }
 
   @Override
   public void setEndDate( LocalDate end )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.end = end == null ? LocalDate.MAX : end;
   }
 
   @Override
   public Set<Project> getProjects()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return Collections.unmodifiableSet( projects );
   }
 
   @Override
   public CollectionMassModificationStatus<Project> addProjects( Project... projects )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    CollectionMassModificationStatus<Project> status = new CollectionMassModificationStatus<>();
+
+    for ( Project project : projects )
+    {
+      if ( this.projects.contains(project ) )
+      {
+        status.addUnsuccessfulElements(project );
+      }
+      else
+      {
+        this.projects.add(project );
+        status.addSuccessfulElements(project );
+      }
+    }
+
+    return status;
   }
 
   @Override
   public CollectionMassModificationStatus<Project> removeProjects( Project... projects )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    CollectionMassModificationStatus<Project> status = new CollectionMassModificationStatus<>();
+
+    for ( Project project : projects )
+    {
+      if ( this.projects.contains(project ) )
+      {
+        this.projects.remove(project );
+        status.addSuccessfulElements(project );
+      }
+      else
+      {
+        status.addUnsuccessfulElements(project );
+      }
+    }
+
+    return status;
   }
-  
 }

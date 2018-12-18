@@ -17,7 +17,9 @@
 package net.havox.times.model.impl.booking;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Account;
 import net.havox.times.model.api.booking.Project;
@@ -31,58 +33,101 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 public class ProjectImpl extends AbstractChangeAwareClass<ProjectImpl> implements Project
 {
 
+  private static final long serialVersionUID = 6402688587696621775L;
+
+  private String name;
+  private LocalDate start;
+  private LocalDate end;
+  private final Set<Account> accounts;
+  
+  public ProjectImpl()
+  {
+    super();
+    
+    accounts = new ConcurrentSkipListSet<>();
+  }
+
   @Override
   public String getName()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return name;
   }
 
   @Override
   public void setName( String name )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.name = name;
   }
 
   @Override
   public LocalDate getStartDate()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return start;
   }
 
   @Override
   public void setStartDate( LocalDate start )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.start = start == null ? LocalDate.MIN : start;
   }
 
   @Override
   public LocalDate getEndDate()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return end;
   }
 
   @Override
   public void setEndDate( LocalDate end )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.end = end == null ? LocalDate.MAX : end;
   }
 
   @Override
   public Set<Account> getAccounts()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return Collections.unmodifiableSet( accounts );
   }
 
   @Override
   public CollectionMassModificationStatus<Account> addAccounts( Account... accounts )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    CollectionMassModificationStatus<Account> status = new CollectionMassModificationStatus<>();
+
+    for ( Account account : accounts )
+    {
+      if ( this.accounts.contains(account ) )
+      {
+        status.addUnsuccessfulElements(account );
+      }
+      else
+      {
+        this.accounts.add(account );
+        status.addSuccessfulElements(account );
+      }
+    }
+
+    return status;
   }
 
   @Override
   public CollectionMassModificationStatus<Account> removeAccounts( Account... accounts )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    CollectionMassModificationStatus<Account> status = new CollectionMassModificationStatus<>();
+
+    for ( Account account : accounts )
+    {
+      if ( this.accounts.contains(account ) )
+      {
+        this.accounts.remove(account );
+        status.addSuccessfulElements(account );
+      }
+      else
+      {
+        status.addUnsuccessfulElements(account );
+      }
+    }
+
+    return status;
   }
-  
 }

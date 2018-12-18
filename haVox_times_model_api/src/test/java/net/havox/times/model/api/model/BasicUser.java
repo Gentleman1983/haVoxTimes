@@ -17,6 +17,7 @@
 package net.havox.times.model.api.model;
 
 import net.havox.times.model.api.company.Worker;
+import net.havox.times.model.api.user.Credential;
 import net.havox.times.model.api.user.User;
 
 /**
@@ -30,8 +31,15 @@ public class BasicUser extends AbstractChangeAwareAndIdentifiableClass implement
   private static final long serialVersionUID = 7844031746824163564L;
 
   private String email;
-  private final String credentials = "";
+  private final Credential credential;
   private Worker worker;
+  
+  public BasicUser()
+  {
+    super();
+    
+    credential = new BasicCredential();
+  }
 
   @Override
   public String getEmailAddress()
@@ -46,9 +54,9 @@ public class BasicUser extends AbstractChangeAwareAndIdentifiableClass implement
   }
 
   @Override
-  public String getCredentials()
+  public Credential getCredentials()
   {
-    return credentials;
+    return credential;
   }
 
   @Override

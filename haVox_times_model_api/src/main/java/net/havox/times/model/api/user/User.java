@@ -51,7 +51,7 @@ public interface User extends ChangeAware, Serializable
    *
    * @return the user credentials.
    */
-  String getCredentials();
+  Credential getCredentials();
   
   /**
    * Returns the corresponding worker.

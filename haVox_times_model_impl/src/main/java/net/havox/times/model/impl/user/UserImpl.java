@@ -17,6 +17,7 @@
 package net.havox.times.model.impl.user;
 
 import net.havox.times.model.api.company.Worker;
+import net.havox.times.model.api.user.Credential;
 import net.havox.times.model.api.user.User;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 
@@ -28,34 +29,46 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 public class UserImpl extends AbstractChangeAwareClass<UserImpl> implements User
 {
 
+  private static final long serialVersionUID = -5909687147118246286L;
+
+  private String email;
+  private final Credential credential;
+  private Worker worker;
+  
+  public UserImpl()
+  {
+    super();
+    
+    credential = new CredentialImpl();
+  }
+
   @Override
   public String getEmailAddress()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return email;
   }
 
   @Override
   public void setEmailAddress( String emailAddress )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    email = emailAddress;
   }
 
   @Override
-  public String getCredentials()
+  public Credential getCredentials()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return credential;
   }
 
   @Override
   public Worker getWorker()
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    return worker;
   }
 
   @Override
   public void setWorker( Worker worker )
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    this.worker = worker;
   }
-  
 }
