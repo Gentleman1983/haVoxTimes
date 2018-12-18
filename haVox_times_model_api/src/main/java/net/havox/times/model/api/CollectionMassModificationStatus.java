@@ -87,10 +87,7 @@ public class CollectionMassModificationStatus<T>
    */
   public void addSuccessfulElements( Collection<T> elements )
   {
-    elements.forEach( ( element ) ->
-    {
-      successfulElements.add( element );
-    } );
+    elements.forEach( successfulElements::add );
   }
 
   /**
@@ -110,10 +107,7 @@ public class CollectionMassModificationStatus<T>
    */
   public void addUnsuccessfulElements( Collection<T> elements )
   {
-    elements.forEach( ( element ) ->
-    {
-      unsuccessfulElements.add( element );
-    } );
+    elements.forEach( unsuccessfulElements::add );
   }
 
   /**
