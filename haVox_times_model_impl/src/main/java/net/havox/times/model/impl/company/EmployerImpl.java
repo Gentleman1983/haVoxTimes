@@ -18,7 +18,7 @@ package net.havox.times.model.impl.company;
 
 import java.util.Collections;
 import java.util.Set;
-import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.concurrent.CopyOnWriteArraySet;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.address.Address;
 import net.havox.times.model.api.company.Employer;
@@ -44,7 +44,7 @@ public class EmployerImpl extends AbstractChangeAwareClass<EmployerImpl> impleme
   {
     super();
 
-    contactOptions = new ConcurrentSkipListSet<>();
+    contactOptions = new CopyOnWriteArraySet<>();
   }
 
   @Override

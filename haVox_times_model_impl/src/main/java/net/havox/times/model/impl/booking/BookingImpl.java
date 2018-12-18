@@ -18,7 +18,7 @@ package net.havox.times.model.impl.booking;
 
 import java.util.Collections;
 import java.util.Set;
-import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.concurrent.CopyOnWriteArraySet;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Booking;
 import net.havox.times.model.api.booking.BookingReference;
@@ -44,7 +44,7 @@ public class BookingImpl extends AbstractChangeAwareClass<BookingImpl> implement
   {
     super();
 
-    this.references = new ConcurrentSkipListSet<>();
+    this.references = new CopyOnWriteArraySet<>();
   }
 
   @Override

@@ -19,7 +19,7 @@ package net.havox.times.model.impl.booking;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Set;
-import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.concurrent.CopyOnWriteArraySet;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Account;
 import net.havox.times.model.api.booking.Booking;
@@ -27,24 +27,25 @@ import net.havox.times.model.impl.AbstractChangeAwareClass;
 
 /**
  * Implementation of {@link Account}.
- * 
+ *
  * @author Christian Otto
  */
 public class AccountImpl extends AbstractChangeAwareClass<AccountImpl> implements Account
 {
 
   private static final long serialVersionUID = 8058132623183316967L;
-  
+
   private String name;
   private LocalDate start;
   private LocalDate end;
   private Long budget;
   private final Set<Booking> bookings;
-  
-  public AccountImpl() {
+
+  public AccountImpl()
+  {
     super();
-    
-    bookings = new ConcurrentSkipListSet<>();
+
+    bookings = new CopyOnWriteArraySet<>();
   }
 
   @Override
@@ -108,14 +109,14 @@ public class AccountImpl extends AbstractChangeAwareClass<AccountImpl> implement
 
     for ( Booking booking : bookings )
     {
-      if ( this.bookings.contains(booking ) )
+      if ( this.bookings.contains( booking ) )
       {
-        status.addUnsuccessfulElements(booking );
+        status.addUnsuccessfulElements( booking );
       }
       else
       {
-        this.bookings.add(booking );
-        status.addSuccessfulElements(booking );
+        this.bookings.add( booking );
+        status.addSuccessfulElements( booking );
       }
     }
 
@@ -129,14 +130,14 @@ public class AccountImpl extends AbstractChangeAwareClass<AccountImpl> implement
 
     for ( Booking booking : bookings )
     {
-      if ( this.bookings.contains(booking ) )
+      if ( this.bookings.contains( booking ) )
       {
-        this.bookings.remove(booking );
-        status.addSuccessfulElements(booking );
+        this.bookings.remove( booking );
+        status.addSuccessfulElements( booking );
       }
       else
       {
-        status.addUnsuccessfulElements(booking );
+        status.addUnsuccessfulElements( booking );
       }
     }
 

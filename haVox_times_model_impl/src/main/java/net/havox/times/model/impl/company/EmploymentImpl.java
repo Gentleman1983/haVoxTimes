@@ -19,7 +19,7 @@ package net.havox.times.model.impl.company;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Set;
-import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.concurrent.CopyOnWriteArraySet;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Project;
 import net.havox.times.model.api.company.Employer;
@@ -47,7 +47,7 @@ public class EmploymentImpl extends AbstractChangeAwareClass<EmploymentImpl> imp
   {
     super();
     
-    projects = new ConcurrentSkipListSet<>();
+    projects = new CopyOnWriteArraySet<>();
   }
 
   @Override
