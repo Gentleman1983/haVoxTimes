@@ -117,6 +117,10 @@ public class DefaultDatabaseMapping
   public static final String CONTACT_OPTION_DB_COLUMN_EMPLOYEE = "employee_id";
   public static final String CONTACT_OPTION_DB_COLUMN_TYPE = "type";
   public static final String CONTACT_OPTION_DB_COLUMN_VALUE = "value";
+  
+  // Permission.
+  public static final String PERMISSION_DB_TABLE_NAME = DB_TABLE_PREFIX + "permission";
+  public static final String PERMISSION_DB_COLUMN_NAME = "name";
 
   // Credential.
   public static final String CREDENTIAL_DB_TABLE_NAME = DB_TABLE_PREFIX + "credential";
