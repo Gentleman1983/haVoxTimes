@@ -21,6 +21,7 @@ import org.junit.BeforeClass;
 import net.havox.times.model.api.permissions.AbstractPermissionTest;
 import net.havox.times.model.api.permissions.Permission;
 import net.havox.times.model.api.user.User;
+import net.havox.times.model.api.user.UserGroup;
 import net.havox.times.model.factory.PermissionsModelFactory;
 import net.havox.times.model.factory.UserModelFactory;
 
@@ -52,5 +53,11 @@ public class PermissionApiTest extends AbstractPermissionTest
   public User newUser() throws Exception
   {
     return userFactory.getNewUser();
+  }
+
+  @Override
+  public UserGroup newUserGroup() throws Exception
+  {
+    return userFactory.getNewUserGroup();
   }
 }

@@ -23,6 +23,7 @@ import java.util.Set;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.permissions.Permission;
 import net.havox.times.model.api.user.User;
+import net.havox.times.model.api.user.UserGroup;
 
 /**
  * Basic implementation of {@link Permission].
@@ -36,12 +37,14 @@ public class BasicPermission extends AbstractChangeAwareAndIdentifiableClass imp
 
   private String name;
   private final Set<User> users;
+  private final Set<UserGroup> userGroups;
 
   public BasicPermission()
   {
     super();
 
     users = new HashSet<>();
+    userGroups = new HashSet<>();
   }
 
   @Override
@@ -98,6 +101,54 @@ public class BasicPermission extends AbstractChangeAwareAndIdentifiableClass imp
       else
       {
         status.addUnsuccessfulElements( user );
+      }
+    }
+
+    return status;
+  }
+
+  @Override
+  public Set<UserGroup> getUserGroups()
+  {
+    return Collections.unmodifiableSet( userGroups );
+  }
+
+  @Override
+  public CollectionMassModificationStatus<UserGroup> addUserGroups( UserGroup... userGroups )
+  {
+    CollectionMassModificationStatus<UserGroup> status = new CollectionMassModificationStatus<>();
+
+    for ( UserGroup userGroup : userGroups )
+    {
+      if ( this.userGroups.contains( userGroup ) )
+      {
+        status.addUnsuccessfulElements( userGroup );
+      }
+      else
+      {
+        this.userGroups.add( userGroup );
+        status.addSuccessfulElements( userGroup );
+      }
+    }
+
+    return status;
+  }
+
+  @Override
+  public CollectionMassModificationStatus<UserGroup> removeUserGroups( UserGroup... userGroups )
+  {
+    CollectionMassModificationStatus<UserGroup> status = new CollectionMassModificationStatus<>();
+
+    for ( UserGroup userGroup : userGroups )
+    {
+      if ( this.userGroups.contains( userGroup ) )
+      {
+        this.userGroups.remove( userGroup );
+        status.addSuccessfulElements( userGroup );
+      }
+      else
+      {
+        status.addUnsuccessfulElements( userGroup );
       }
     }
 

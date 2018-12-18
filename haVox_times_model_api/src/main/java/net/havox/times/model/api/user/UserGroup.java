@@ -21,6 +21,7 @@ import java.util.Set;
 
 import net.havox.times.model.api.ChangeAware;
 import net.havox.times.model.api.CollectionMassModificationStatus;
+import net.havox.times.model.api.permissions.Permission;
 
 /**
  * This interface represents an user group.
@@ -68,4 +69,11 @@ public interface UserGroup extends ChangeAware, Serializable
    * @return the status.
    */
   CollectionMassModificationStatus<User> removeUsers( User... users );
+  
+  /**
+   * Returns the user group permissions.
+   * 
+   * @return the user group permissions.
+   */
+  Set<Permission> getUserGroupPermissions();
 }

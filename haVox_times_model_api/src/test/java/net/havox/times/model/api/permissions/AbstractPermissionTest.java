@@ -24,6 +24,7 @@ import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
 import net.havox.times.model.api.user.User;
+import net.havox.times.model.api.user.UserGroup;
 
 @RunWith( ExtendedRunner.class )
 public abstract class AbstractPermissionTest
@@ -32,6 +33,8 @@ public abstract class AbstractPermissionTest
   public abstract Permission newInstance() throws Exception;
 
   public abstract User newUser() throws Exception;
+
+  public abstract UserGroup newUserGroup() throws Exception;
 
   // *******************************************************************************************************************
   // Getter / Setter Tests
@@ -124,6 +127,80 @@ public abstract class AbstractPermissionTest
               .append( "' to contain none of the deleted elements. The value '" ).append( checkedElement )
               .append( "' was found." );
       assertFalse( msg.toString(), objectUnderTest.getUsers().contains( checkedElement ) );
+    }
+  }
+
+  /**
+   * User Story BM019 (User Permission) acceptance criteria 01 ("It is the unique mapping between an user and a
+   * permission.").
+   *
+   * @throws Exception
+   */
+  @Test
+  @Repeat( 25 )
+  public void testModifyAddUserGroups() throws Exception
+  {
+    int elements = ModelRandomGenerator.randomIntInRange( 1, 25 );
+    UserGroup[] userGroupsToBeAdded = new UserGroup[ elements ];
+    for ( int i = 0; i < elements; i++ )
+    {
+      userGroupsToBeAdded[ i ] = newUserGroup();
+    }
+
+    Permission objectUnderTest = newInstance();
+    objectUnderTest.addUserGroups( userGroupsToBeAdded );
+    for ( UserGroup addedElement : userGroupsToBeAdded )
+    {
+      StringBuilder msg = new StringBuilder();
+      msg.append( "Expected List of user groups '" ).append( objectUnderTest.getUserGroups() )
+              .append( "' to contain all added elements. The value '" ).append( addedElement )
+              .append( "' was not found." );
+      assertTrue( msg.toString(), objectUnderTest.getUserGroups().contains( addedElement ) );
+    }
+  }
+
+  /**
+   * User Story BM019 (User Permission) acceptance criteria 01 ("It is the unique mapping between an user and a
+   * permission.").
+   *
+   * @throws Exception
+   */
+  @Test
+  @Repeat( 25 )
+  public void testModifyRemoveUserGroups() throws Exception
+  {
+    UserGroup[] userGroupsToBeAdded = new UserGroup[ 100 ];
+    for ( int i = 0; i < 100; i++ )
+    {
+      userGroupsToBeAdded[ i ] = newUserGroup();
+    }
+
+    int elements = ModelRandomGenerator.randomIntInRange( 1, 25 );
+    UserGroup[] userGroupsToBeDeleted = new UserGroup[ elements ];
+    for ( int i = 0; i < elements; i++ )
+    {
+      userGroupsToBeAdded[ i ] = newUserGroup();
+    }
+
+    Permission objectUnderTest = newInstance();
+    objectUnderTest.addUserGroups( userGroupsToBeAdded );
+    objectUnderTest.addUserGroups( userGroupsToBeDeleted );
+    for ( UserGroup addedElement : userGroupsToBeDeleted )
+    {
+      StringBuilder msg = new StringBuilder();
+      msg.append( "Expected List of user groups '" ).append( objectUnderTest.getUserGroups() )
+              .append( "' to contain all added elements. The value '" ).append( addedElement )
+              .append( "' was not found." );
+      assertTrue( msg.toString(), objectUnderTest.getUserGroups().contains( addedElement ) );
+    }
+    objectUnderTest.removeUserGroups( userGroupsToBeDeleted );
+    for ( UserGroup checkedElement : userGroupsToBeDeleted )
+    {
+      StringBuilder msg = new StringBuilder();
+      msg.append( "Expected List of user groups '" ).append( objectUnderTest.getUserGroups() )
+              .append( "' to contain none of the deleted elements. The value '" ).append( checkedElement )
+              .append( "' was found." );
+      assertFalse( msg.toString(), objectUnderTest.getUserGroups().contains( checkedElement ) );
     }
   }
 }

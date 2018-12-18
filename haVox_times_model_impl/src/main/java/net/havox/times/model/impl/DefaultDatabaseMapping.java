@@ -142,6 +142,11 @@ public class DefaultDatabaseMapping
   public static final String USER_PERMISSION_MAPPING_DB_COLUMN_PERMISSION = "permission_id";
   public static final String USER_PERMISSION_MAPPING_DB_COLUMN_USER = "user_id";
   
+  // User Group - Permission Mapping.
+  public static final String USER_GROUP_PERMISSION_MAPPING_DB_TABLE_NAME = DB_TABLE_PREFIX + "user_groups_with_permission";
+  public static final String USER_GROUP_PERMISSION_MAPPING_DB_COLUMN_PERMISSION = "permission_id";
+  public static final String USER_GROUP_PERMISSION_MAPPING_DB_COLUMN_USER_GROUP = "user_group_id";
+  
   // User - User Group Mapping.
   public static final String USER_USER_GROUP_MAPPING_DB_TABLE_NAME = DB_TABLE_PREFIX + "users_in_user_group";
   public static final String USER_USER_GROUP_MAPPING_DB_COLUMN_USER_GROUP = "user_group_id";

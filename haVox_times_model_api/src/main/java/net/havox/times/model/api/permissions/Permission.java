@@ -22,6 +22,7 @@ import java.util.Set;
 import net.havox.times.model.api.ChangeAware;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.user.User;
+import net.havox.times.model.api.user.UserGroup;
 
 /**
  * This interface represents a permission.
@@ -44,29 +45,54 @@ public interface Permission extends ChangeAware, Serializable
    * @param name the permission name
    */
   void setName( String name );
-  
+
   /**
    * Returns the users having this permission.
-   * 
+   *
    * @return the users.
    */
   Set<User> getUsers();
-  
+
   /**
    * Adds users having this permission.
-   * 
+   *
    * @param users the users.
-   * 
+   *
    * @return the status.
    */
   CollectionMassModificationStatus<User> addUsers( User... users );
-  
+
   /**
    * Removes users having this permission.
-   * 
+   *
    * @param users the users.
-   * 
+   *
    * @return the status.
    */
   CollectionMassModificationStatus<User> removeUsers( User... users );
+
+  /**
+   * Returns the user groups having this permission.
+   *
+   * @return the user groups.
+   */
+  Set<UserGroup> getUserGroups();
+
+  /**
+   * Adds user groups having this permission.
+   *
+   * @param userGroups the user groups.
+   *
+   * @return the status.
+   */
+  CollectionMassModificationStatus<UserGroup> addUserGroups( UserGroup... userGroups );
+
+  /**
+   * Removes user groups having this permission.
+   *
+   * @param userGroups the user groups.
+   *
+   * @return the status.
+   */
+  CollectionMassModificationStatus<UserGroup> removeUserGroups( UserGroup... userGroups );
 }

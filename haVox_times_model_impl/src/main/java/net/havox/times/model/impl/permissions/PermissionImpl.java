@@ -31,6 +31,7 @@ import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.permissions.Permission;
 import net.havox.times.model.api.user.User;
+import net.havox.times.model.api.user.UserGroup;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 
 /**
@@ -59,12 +60,25 @@ public class PermissionImpl extends AbstractChangeAwareClass<PermissionImpl> imp
            inverseJoinColumns = @JoinColumn( name = USER_PERMISSION_MAPPING_DB_COLUMN_USER )
   )
   private final Set<User> usersWithPermission;
+  @ManyToMany(
+           cascade =
+          {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+          } )
+  @JoinTable(
+           name = USER_GROUP_PERMISSION_MAPPING_DB_TABLE_NAME,
+           joinColumns = @JoinColumn( name = USER_GROUP_PERMISSION_MAPPING_DB_COLUMN_PERMISSION ),
+           inverseJoinColumns = @JoinColumn( name = USER_GROUP_PERMISSION_MAPPING_DB_COLUMN_USER_GROUP )
+  )
+  private final Set<UserGroup> userGroupsWithPermission;
 
   public PermissionImpl()
   {
     super();
 
     usersWithPermission = new CopyOnWriteArraySet<>();
+    userGroupsWithPermission = new CopyOnWriteArraySet<>();
   }
 
   @Override
@@ -121,6 +135,54 @@ public class PermissionImpl extends AbstractChangeAwareClass<PermissionImpl> imp
       else
       {
         status.addUnsuccessfulElements( user );
+      }
+    }
+
+    return status;
+  }
+
+  @Override
+  public Set<UserGroup> getUserGroups()
+  {
+    return Collections.unmodifiableSet( userGroupsWithPermission );
+  }
+
+  @Override
+  public CollectionMassModificationStatus<UserGroup> addUserGroups( UserGroup... userGroups )
+  {
+    CollectionMassModificationStatus<UserGroup> status = new CollectionMassModificationStatus<>();
+
+    for ( UserGroup userGroup : userGroups )
+    {
+      if ( this.userGroupsWithPermission.contains( userGroup ) )
+      {
+        status.addUnsuccessfulElements( userGroup );
+      }
+      else
+      {
+        this.userGroupsWithPermission.add( userGroup );
+        status.addSuccessfulElements( userGroup );
+      }
+    }
+
+    return status;
+  }
+
+  @Override
+  public CollectionMassModificationStatus<UserGroup> removeUserGroups( UserGroup... userGroups )
+  {
+    CollectionMassModificationStatus<UserGroup> status = new CollectionMassModificationStatus<>();
+
+    for ( UserGroup userGroup : userGroups )
+    {
+      if ( this.userGroupsWithPermission.contains( userGroup ) )
+      {
+        this.userGroupsWithPermission.remove( userGroup );
+        status.addSuccessfulElements( userGroup );
+      }
+      else
+      {
+        status.addUnsuccessfulElements( userGroup );
       }
     }
 

@@ -29,6 +29,7 @@ import javax.persistence.Table;
 
 import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.CollectionMassModificationStatus;
+import net.havox.times.model.api.permissions.Permission;
 import net.havox.times.model.api.user.User;
 import net.havox.times.model.api.user.UserGroup;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
@@ -59,12 +60,15 @@ public class UserGroupImpl extends AbstractChangeAwareClass<UserGroupImpl> imple
            inverseJoinColumns = @JoinColumn( name = USER_USER_GROUP_MAPPING_DB_COLUMN_USER )
   )
   private final Set<User> usersInUserGroup;
+  @ManyToMany( mappedBy = "userGroupsWithPermission" )
+  private final Set<Permission> userGroupPermissions;
 
   public UserGroupImpl()
   {
     super();
 
     usersInUserGroup = new CopyOnWriteArraySet<>();
+    userGroupPermissions = new CopyOnWriteArraySet<>();
   }
 
   @Override
@@ -125,5 +129,11 @@ public class UserGroupImpl extends AbstractChangeAwareClass<UserGroupImpl> imple
     }
 
     return status;
+  }
+
+  @Override
+  public Set<Permission> getUserGroupPermissions()
+  {
+    return Collections.unmodifiableSet( userGroupPermissions );
   }
 }

@@ -19,7 +19,9 @@ package net.havox.times.model.api.model;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
 import net.havox.times.model.api.CollectionMassModificationStatus;
+import net.havox.times.model.api.permissions.Permission;
 import net.havox.times.model.api.user.User;
 import net.havox.times.model.api.user.UserGroup;
 
@@ -35,12 +37,14 @@ public class BasicUserGroup extends AbstractChangeAwareAndIdentifiableClass impl
 
   private String name;
   private final Set<User> users;
+  private final Set<Permission> userGroupPermissions;
 
   public BasicUserGroup()
   {
     super();
 
     users = new HashSet<>();
+    userGroupPermissions = new HashSet<>();
   }
 
   @Override
@@ -101,5 +105,11 @@ public class BasicUserGroup extends AbstractChangeAwareAndIdentifiableClass impl
     }
 
     return status;
+  }
+
+  @Override
+  public Set<Permission> getUserGroupPermissions()
+  {
+    return Collections.unmodifiableSet( userGroupPermissions );
   }
 }
