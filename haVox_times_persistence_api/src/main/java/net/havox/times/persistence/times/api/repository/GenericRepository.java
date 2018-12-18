@@ -22,16 +22,38 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
 import net.havox.times.model.api.ChangeAware;
 
+/**
+ * This represents a generic entity repository.
+ *
+ * @param <T> the entity type.
+ *
+ * @author Christian Otto
+ */
 public interface GenericRepository<T extends ChangeAware>
 {
 
   // ******************************************************************************************************************
   // Get entities from database. **************************************************************************************
   // ******************************************************************************************************************
+  /**
+   * Returns an entity by id.
+   *
+   * @param id the id.
+   *
+   * @return the entity.
+   */
   Optional<T> get( Long id );
 
+  /**
+   * Returns a set of entities by predicate.
+   *
+   * @param predicate the predicate.
+   *
+   * @return the set of entities.
+   */
   default Set<T> get( Predicate<T> predicate )
   {
     return get()
@@ -40,18 +62,38 @@ public interface GenericRepository<T extends ChangeAware>
             .collect( Collectors.toSet() );
   }
 
+  /**
+   * Returns all entities.
+   *
+   * @return all entities.
+   */
   Set<T> get();
 
   // ******************************************************************************************************************
   // Update entities on database. *************************************************************************************
   // ******************************************************************************************************************
+  /**
+   * Persists a given entity.
+   *
+   * @param entity the entity.
+   */
   void persist( T entity );
 
+  /**
+   * Persists several entities.
+   *
+   * @param entities the entities.
+   */
   default void persist( T... entities )
   {
     persist( Arrays.asList( entities ) );
   }
 
+  /**
+   * Persists several entities.
+   *
+   * @param entities the entities.
+   */
   default void persist( Collection<T> entities )
   {
     entities.forEach( this::persist );
@@ -60,32 +102,58 @@ public interface GenericRepository<T extends ChangeAware>
   // ******************************************************************************************************************
   // Remove entities from database. ***********************************************************************************
   // ******************************************************************************************************************
-  
-  // Remove objects by IDs.
+  /**
+   * Removes an entity by id.
+   *
+   * @param id the id.
+   */
   default void remove( Long id )
   {
     remove( entity -> entity.getId().equals( id ) ); // predicate to match the id
   }
 
+  /**
+   * Removes several entities by id.
+   *
+   * @param ids the ids.
+   */
   default void remove( Long... ids )
   {
     Arrays.asList( ids ).forEach( this::remove );
   }
 
-  // Remove using the entities.
+  /**
+   * Removes an entity.
+   *
+   * @param entity the entity.
+   */
   void remove( T entity );
 
+  /**
+   * Removes several entites.
+   *
+   * @param entities the entities.
+   */
   default void remove( T... entities )
   {
     remove( Arrays.asList( entities ) );
   }
 
+  /**
+   * Removes several entities.
+   *
+   * @param entities the entities.
+   */
   default void remove( Collection<T> entities )
   {
     entities.forEach( this::remove );
   }
-  
-  // Remove using predicate.
+
+  /**
+   * Removes entities using a predicate.
+   *
+   * @param predicate the predicate.
+   */
   default void remove( Predicate<T> predicate )
   {
     get( predicate ).forEach( this::remove );
