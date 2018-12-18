@@ -20,7 +20,9 @@ import org.junit.BeforeClass;
 
 import net.havox.times.model.api.permissions.AbstractPermissionTest;
 import net.havox.times.model.api.permissions.Permission;
+import net.havox.times.model.api.user.User;
 import net.havox.times.model.factory.PermissionsModelFactory;
+import net.havox.times.model.factory.UserModelFactory;
 
 /**
  * API specific tests for {@link Permission}.
@@ -31,16 +33,24 @@ public class PermissionApiTest extends AbstractPermissionTest
 {
 
   private static PermissionsModelFactory permissionsFactory;
+  private static UserModelFactory userFactory;
 
   @BeforeClass
   public static void setupClass()
   {
     permissionsFactory = PermissionsModelFactory.getInstance();
+    userFactory = UserModelFactory.getInstance();
   }
 
   @Override
   public Permission newInstance() throws Exception
   {
     return permissionsFactory.getNewPermission();
+  }
+
+  @Override
+  public User newUser() throws Exception
+  {
+    return userFactory.getNewUser();
   }
 }

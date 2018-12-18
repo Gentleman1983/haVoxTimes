@@ -29,6 +29,7 @@ import javax.persistence.Table;
 
 import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
 import net.havox.times.model.api.company.Worker;
+import net.havox.times.model.api.permissions.Permission;
 import net.havox.times.model.api.user.Credential;
 import net.havox.times.model.api.user.User;
 import net.havox.times.model.api.user.UserGroup;
@@ -56,6 +57,8 @@ public class UserImpl extends AbstractChangeAwareClass<UserImpl> implements User
   private Worker worker;
   @ManyToMany( mappedBy = "usersInUserGroup" )
   private final Set<UserGroup> userGroupMemberships;
+  @ManyToMany( mappedBy = "usersWithPermission" )
+  private final Set<Permission> userPermissions;
 
   public UserImpl()
   {
@@ -63,6 +66,7 @@ public class UserImpl extends AbstractChangeAwareClass<UserImpl> implements User
 
     credential = new CredentialImpl();
     userGroupMemberships = new CopyOnWriteArraySet<>();
+    userPermissions = new CopyOnWriteArraySet<>();
   }
 
   @Override
@@ -99,5 +103,11 @@ public class UserImpl extends AbstractChangeAwareClass<UserImpl> implements User
   public Set<UserGroup> getMemberOfUserGroup()
   {
     return Collections.unmodifiableSet( userGroupMemberships );
+  }
+
+  @Override
+  public Set<Permission> getUserPermissions()
+  {
+    return Collections.unmodifiableSet( userPermissions );
   }
 }

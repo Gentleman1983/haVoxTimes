@@ -19,7 +19,9 @@ package net.havox.times.model.api.model;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
 import net.havox.times.model.api.company.Worker;
+import net.havox.times.model.api.permissions.Permission;
 import net.havox.times.model.api.user.Credential;
 import net.havox.times.model.api.user.User;
 import net.havox.times.model.api.user.UserGroup;
@@ -38,6 +40,7 @@ public class BasicUser extends AbstractChangeAwareAndIdentifiableClass implement
   private final Credential credential;
   private Worker worker;
   private final Set<UserGroup> userGroupMemberships;
+  private final Set<Permission> userPermissions;
 
   public BasicUser()
   {
@@ -45,6 +48,7 @@ public class BasicUser extends AbstractChangeAwareAndIdentifiableClass implement
 
     credential = new BasicCredential();
     userGroupMemberships = new HashSet<>();
+    userPermissions = new HashSet<>();
   }
 
   @Override
@@ -81,5 +85,11 @@ public class BasicUser extends AbstractChangeAwareAndIdentifiableClass implement
   public Set<UserGroup> getMemberOfUserGroup()
   {
     return Collections.unmodifiableSet( userGroupMemberships );
+  }
+
+  @Override
+  public Set<Permission> getUserPermissions()
+  {
+    return Collections.unmodifiableSet( userPermissions );
   }
 }

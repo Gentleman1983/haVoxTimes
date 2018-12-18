@@ -23,12 +23,15 @@ import org.junit.Test;
 import net.havox.javatools.test.utils.junit.ExtendedRunner;
 import net.havox.javatools.test.utils.random.ModelRandomGenerator;
 import net.havox.javatools.test.utils.junit.Repeat;
+import net.havox.times.model.api.user.User;
 
 @RunWith( ExtendedRunner.class )
 public abstract class AbstractPermissionTest
 {
 
   public abstract Permission newInstance() throws Exception;
+
+  public abstract User newUser() throws Exception;
 
   // *******************************************************************************************************************
   // Getter / Setter Tests
@@ -48,5 +51,79 @@ public abstract class AbstractPermissionTest
     Permission objectUnderTest = newInstance();
     objectUnderTest.setName( name );
     assertEquals( name, objectUnderTest.getName() );
+  }
+
+  /**
+   * User Story BM019 (User Permission) acceptance criteria 01 ("It is the unique mapping between an user and a
+   * permission.").
+   *
+   * @throws Exception
+   */
+  @Test
+  @Repeat( 25 )
+  public void testModifyAddUsers() throws Exception
+  {
+    int elements = ModelRandomGenerator.randomIntInRange( 1, 25 );
+    User[] usersToBeAdded = new User[ elements ];
+    for ( int i = 0; i < elements; i++ )
+    {
+      usersToBeAdded[ i ] = newUser();
+    }
+
+    Permission objectUnderTest = newInstance();
+    objectUnderTest.addUsers( usersToBeAdded );
+    for ( User addedElement : usersToBeAdded )
+    {
+      StringBuilder msg = new StringBuilder();
+      msg.append( "Expected List of users '" ).append( objectUnderTest.getUsers() )
+              .append( "' to contain all added elements. The value '" ).append( addedElement )
+              .append( "' was not found." );
+      assertTrue( msg.toString(), objectUnderTest.getUsers().contains( addedElement ) );
+    }
+  }
+
+  /**
+   * User Story BM019 (User Permission) acceptance criteria 01 ("It is the unique mapping between an user and a
+   * permission.").
+   *
+   * @throws Exception
+   */
+  @Test
+  @Repeat( 25 )
+  public void testModifyRemoveUsers() throws Exception
+  {
+    User[] usersToBeAdded = new User[ 100 ];
+    for ( int i = 0; i < 100; i++ )
+    {
+      usersToBeAdded[ i ] = newUser();
+    }
+
+    int elements = ModelRandomGenerator.randomIntInRange( 1, 25 );
+    User[] usersToBeDeleted = new User[ elements ];
+    for ( int i = 0; i < elements; i++ )
+    {
+      usersToBeAdded[ i ] = newUser();
+    }
+
+    Permission objectUnderTest = newInstance();
+    objectUnderTest.addUsers( usersToBeAdded );
+    objectUnderTest.addUsers( usersToBeDeleted );
+    for ( User addedElement : usersToBeDeleted )
+    {
+      StringBuilder msg = new StringBuilder();
+      msg.append( "Expected List of users '" ).append( objectUnderTest.getUsers() )
+              .append( "' to contain all added elements. The value '" ).append( addedElement )
+              .append( "' was not found." );
+      assertTrue( msg.toString(), objectUnderTest.getUsers().contains( addedElement ) );
+    }
+    objectUnderTest.removeUsers( usersToBeDeleted );
+    for ( User checkedElement : usersToBeDeleted )
+    {
+      StringBuilder msg = new StringBuilder();
+      msg.append( "Expected List of users '" ).append( objectUnderTest.getUsers() )
+              .append( "' to contain none of the deleted elements. The value '" ).append( checkedElement )
+              .append( "' was found." );
+      assertFalse( msg.toString(), objectUnderTest.getUsers().contains( checkedElement ) );
+    }
   }
 }

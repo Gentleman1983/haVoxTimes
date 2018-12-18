@@ -22,6 +22,7 @@ import java.util.Set;
 import net.havox.exceptions.GuruMeditationWarning;
 import net.havox.times.model.api.ChangeAware;
 import net.havox.times.model.api.company.Worker;
+import net.havox.times.model.api.permissions.Permission;
 
 /**
  * This class defines an application user.
@@ -75,4 +76,11 @@ public interface User extends ChangeAware, Serializable
    * @return the user groups.
    */
   Set<UserGroup> getMemberOfUserGroup();
+  
+  /**
+   * Returns the user permissions.
+   * 
+   * @return the user permissions.
+   */
+  Set<Permission> getUserPermissions();
 }

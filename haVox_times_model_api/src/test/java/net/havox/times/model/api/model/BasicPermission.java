@@ -16,7 +16,13 @@
  */
 package net.havox.times.model.api.model;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
+import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.permissions.Permission;
+import net.havox.times.model.api.user.User;
 
 /**
  * Basic implementation of {@link Permission].
@@ -27,8 +33,16 @@ public class BasicPermission extends AbstractChangeAwareAndIdentifiableClass imp
 {
 
   private static final long serialVersionUID = 1424337745566683237L;
-  
+
   private String name;
+  private final Set<User> users;
+
+  public BasicPermission()
+  {
+    super();
+
+    users = new HashSet<>();
+  }
 
   @Override
   public String getName()
@@ -40,5 +54,53 @@ public class BasicPermission extends AbstractChangeAwareAndIdentifiableClass imp
   public void setName( String name )
   {
     this.name = name;
+  }
+
+  @Override
+  public Set<User> getUsers()
+  {
+    return Collections.unmodifiableSet( users );
+  }
+
+  @Override
+  public CollectionMassModificationStatus<User> addUsers( User... users )
+  {
+    CollectionMassModificationStatus<User> status = new CollectionMassModificationStatus<>();
+
+    for ( User user : users )
+    {
+      if ( this.users.contains( user ) )
+      {
+        status.addUnsuccessfulElements( user );
+      }
+      else
+      {
+        this.users.add( user );
+        status.addSuccessfulElements( user );
+      }
+    }
+
+    return status;
+  }
+
+  @Override
+  public CollectionMassModificationStatus<User> removeUsers( User... users )
+  {
+    CollectionMassModificationStatus<User> status = new CollectionMassModificationStatus<>();
+
+    for ( User user : users )
+    {
+      if ( this.users.contains( user ) )
+      {
+        this.users.remove( user );
+        status.addSuccessfulElements( user );
+      }
+      else
+      {
+        status.addUnsuccessfulElements( user );
+      }
+    }
+
+    return status;
   }
 }

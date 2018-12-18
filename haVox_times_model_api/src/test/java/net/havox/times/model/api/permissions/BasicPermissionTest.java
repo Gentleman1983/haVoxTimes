@@ -17,6 +17,8 @@
 package net.havox.times.model.api.permissions;
 
 import net.havox.times.model.api.model.BasicPermission;
+import net.havox.times.model.api.model.BasicUser;
+import net.havox.times.model.api.user.User;
 
 /**
  * Simplest implementation for {@link AbstractPermissionTest}.
@@ -30,5 +32,11 @@ public class BasicPermissionTest extends AbstractPermissionTest
   public Permission newInstance() throws Exception
   {
     return new BasicPermission();
+  }
+
+  @Override
+  public User newUser() throws Exception
+  {
+    return new BasicUser();
   }
 }

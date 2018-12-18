@@ -16,12 +16,21 @@
  */
 package net.havox.times.model.impl.permissions;
 
+import java.util.Collections;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import static net.havox.times.model.impl.DefaultDatabaseMapping.*;
+import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.permissions.Permission;
+import net.havox.times.model.api.user.User;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 
 /**
@@ -38,6 +47,25 @@ public class PermissionImpl extends AbstractChangeAwareClass<PermissionImpl> imp
 
   @Column( name = PERMISSION_DB_COLUMN_NAME )
   private String name;
+  @ManyToMany(
+           cascade =
+          {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+          } )
+  @JoinTable(
+           name = USER_PERMISSION_MAPPING_DB_TABLE_NAME,
+           joinColumns = @JoinColumn( name = USER_PERMISSION_MAPPING_DB_COLUMN_PERMISSION ),
+           inverseJoinColumns = @JoinColumn( name = USER_PERMISSION_MAPPING_DB_COLUMN_USER )
+  )
+  private final Set<User> usersWithPermission;
+
+  public PermissionImpl()
+  {
+    super();
+
+    usersWithPermission = new CopyOnWriteArraySet<>();
+  }
 
   @Override
   public String getName()
@@ -49,5 +77,53 @@ public class PermissionImpl extends AbstractChangeAwareClass<PermissionImpl> imp
   public void setName( String name )
   {
     this.name = name;
+  }
+
+  @Override
+  public Set<User> getUsers()
+  {
+    return Collections.unmodifiableSet( usersWithPermission );
+  }
+
+  @Override
+  public CollectionMassModificationStatus<User> addUsers( User... users )
+  {
+    CollectionMassModificationStatus<User> status = new CollectionMassModificationStatus<>();
+
+    for ( User user : users )
+    {
+      if ( this.usersWithPermission.contains( user ) )
+      {
+        status.addUnsuccessfulElements( user );
+      }
+      else
+      {
+        this.usersWithPermission.add( user );
+        status.addSuccessfulElements( user );
+      }
+    }
+
+    return status;
+  }
+
+  @Override
+  public CollectionMassModificationStatus<User> removeUsers( User... users )
+  {
+    CollectionMassModificationStatus<User> status = new CollectionMassModificationStatus<>();
+
+    for ( User user : users )
+    {
+      if ( this.usersWithPermission.contains( user ) )
+      {
+        this.usersWithPermission.remove( user );
+        status.addSuccessfulElements( user );
+      }
+      else
+      {
+        status.addUnsuccessfulElements( user );
+      }
+    }
+
+    return status;
   }
 }
