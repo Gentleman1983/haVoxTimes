@@ -16,6 +16,7 @@
  */
 package net.havox.times.model.impl.address;
 
+import java.lang.reflect.Field;
 import net.havox.times.model.impl.AbstractChangeAwareClass;
 import net.havox.times.model.impl.AbstractChangeAwareClassTest;
 
@@ -30,7 +31,17 @@ public class CityImplTest extends AbstractChangeAwareClassTest
   @Override
   public AbstractChangeAwareClass createNewInstance( Long id, long version ) throws Exception
   {
-    throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    Class<?> clazz = CityImpl.class;
+    Object instance = clazz.newInstance();
+
+    Field idField = instance.getClass().getSuperclass().getDeclaredField( "id" );
+    idField.setAccessible( true );
+    idField.set( instance, id );
+
+    Field versionField = instance.getClass().getSuperclass().getDeclaredField( "version" );
+    versionField.setAccessible( true );
+    versionField.set( instance, version );
+
+    return ( CityImpl ) instance;
   }
-  
 }
