@@ -12,6 +12,14 @@ apply plugin: 'org.liquibase.gradle'
   }
 }*/
 
+sourceSets {
+   liquibase {
+     resources {
+       srcDir 'src/liquibase/resources'
+     }
+   }
+ }
+
 dependencies {
     implementation project( ':haVox_times_model_impl' )
     api project( ':haVox_times_persistence_api' )
