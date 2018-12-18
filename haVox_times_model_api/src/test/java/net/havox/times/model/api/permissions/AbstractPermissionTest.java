@@ -35,7 +35,7 @@ public abstract class AbstractPermissionTest
   // Getter / Setter Tests
   // *******************************************************************************************************************
   /**
-   * User Story BM005 acceptance criteria 01 ("It has a name.").
+   * User Story BM018 acceptance criteria 01 ("It has a name.").
    *
    * @throws Exception
    */
