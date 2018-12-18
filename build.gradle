@@ -94,7 +94,7 @@ jacocoAllProjectsTestReport.dependsOn {
 tasks.sonarqube.dependsOn jacocoAllProjectsTestReport
 
 wrapper {
-    gradleVersion = '4.10.2'
+    gradleVersion = '4.10.3'
 }
 
 sonarqube {
