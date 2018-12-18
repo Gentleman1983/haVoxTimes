@@ -16,7 +16,6 @@
  */
 package net.havox.times.model.api.permissions;
 
-import net.havox.times.model.api.user.*;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.junit.Test;
