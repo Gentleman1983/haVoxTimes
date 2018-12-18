@@ -32,7 +32,7 @@ import org.junit.Test;
  */
 public class ContactModelFactoryTest
 {
-  public static ContactModelFactory factory;
+  private static ContactModelFactory factory;
 
   @BeforeClass
   public static void setupClass()

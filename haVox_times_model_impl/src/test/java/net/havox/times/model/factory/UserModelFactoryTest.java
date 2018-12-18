@@ -34,7 +34,7 @@ import org.junit.Test;
  */
 public class UserModelFactoryTest
 {
-  public static UserModelFactory factory;
+  private static UserModelFactory factory;
 
   @BeforeClass
   public static void setupClass()

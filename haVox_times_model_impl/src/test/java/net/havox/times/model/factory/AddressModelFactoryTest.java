@@ -36,7 +36,7 @@ import org.junit.Test;
  */
 public class AddressModelFactoryTest
 {
-  public static AddressModelFactory factory;
+  private static AddressModelFactory factory;
 
   @BeforeClass
   public static void setupClass()

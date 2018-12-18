@@ -42,7 +42,7 @@ import org.junit.Test;
  */
 public class BookingModelFactoryTest
 {
-  public static BookingModelFactory factory;
+  private static BookingModelFactory factory;
 
   @BeforeClass
   public static void setupClass()
