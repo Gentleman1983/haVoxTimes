@@ -18,13 +18,15 @@ package net.havox.times.model.api.model;
 
 import net.havox.times.model.api.ChangeAware;
 import net.havox.times.model.api.Identifiable;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Abstract basic class for change aware classes.
  *
  * @author Christian Otto
  */
-public abstract class AbstractChangeAwareAndIdentifiableClass implements ChangeAware, Identifiable
+public abstract class AbstractChangeAwareAndIdentifiableClass implements ChangeAware, Identifiable, Comparable<AbstractChangeAwareAndIdentifiableClass>
 {
 
   private Long id;
@@ -57,5 +59,68 @@ public abstract class AbstractChangeAwareAndIdentifiableClass implements ChangeA
   public void setVersion( long version )
   {
     this.version = version;
+  }
+
+  @Override
+  public int hashCode()
+  {
+    int hashCode;
+
+    if ( this.getId() == null )
+    {
+      hashCode = super.hashCode();
+    }
+    else
+    {
+      HashCodeBuilder builder = new HashCodeBuilder();
+
+      builder.append( this.getId() );
+
+      hashCode = builder.toHashCode();
+    }
+
+    return hashCode;
+  }
+
+  @Override
+  public boolean equals( Object object )
+  {
+    if ( this == object )
+    {
+      return true;
+    }
+    else if ( object == null )
+    {
+      return false;
+    }
+    else if ( this.getClass() == object.getClass() )
+    {
+      AbstractChangeAwareAndIdentifiableClass typedObject = ( AbstractChangeAwareAndIdentifiableClass ) object;
+
+      if ( this.getId() == null )
+      {
+        return ( this == typedObject );
+      }
+      else
+      {
+        EqualsBuilder builder = new EqualsBuilder();
+
+        builder.append( this.getId(), typedObject.getId() );
+
+        return builder.isEquals();
+      }
+    }
+
+    return false;
+  }
+
+  @Override
+  public int compareTo( AbstractChangeAwareAndIdentifiableClass other )
+  {
+    if ( null == this.getId() || null == other.getId() )
+    {
+      return super.hashCode() - ( ( Object ) other ).hashCode();
+    }
+    return ( int ) ( this.getId() - other.getId() );
   }
 }
