@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -76,27 +77,35 @@ public interface GenericRepository<T extends ChangeAware>
    * Persists a given entity.
    *
    * @param entity the entity.
+   *
+   * @return the persisted entity.
    */
-  void persist( T entity );
+  T persist( T entity );
 
   /**
    * Persists several entities.
    *
    * @param entities the entities.
+   *
+   * @return the persisted entities.
    */
-  default void persist( T... entities )
+  default Set<T> persist( T... entities )
   {
-    persist( Arrays.asList( entities ) );
+    return persist( Arrays.asList( entities ) );
   }
 
   /**
    * Persists several entities.
    *
    * @param entities the entities.
+   *
+   * @return the persisted entities.
    */
-  default void persist( Collection<T> entities )
+  default Set<T> persist( Collection<T> entities )
   {
-    entities.forEach( this::persist );
+    Set<T> result = new CopyOnWriteArraySet<>();
+    entities.forEach( entity -> result.add( persist( entity ) ) );
+    return result;
   }
 
   // ******************************************************************************************************************
@@ -106,56 +115,85 @@ public interface GenericRepository<T extends ChangeAware>
    * Removes an entity by id.
    *
    * @param id the id.
+   * 
+   * @return the removed entity.
    */
-  default void remove( Long id )
+  default Optional<T> remove( Long id )
   {
-    remove( entity -> entity.getId().equals( id ) ); // predicate to match the id
+    Optional<T> element = get( id );
+
+    if ( element.isPresent() )
+    {
+      remove( element.get() );
+    }
+
+    return element;
   }
 
   /**
    * Removes several entities by id.
    *
    * @param ids the ids.
+   * 
+   * @return the removed entities.
    */
-  default void remove( Long... ids )
+  default Set<T> remove( Long... ids )
   {
-    Arrays.asList( ids ).forEach( this::remove );
+    return remove(
+            entity -> Arrays.asList( ids ).contains( entity.getId() ) // Predicate to match the given ids.
+    );
   }
 
   /**
    * Removes an entity.
    *
    * @param entity the entity.
+   * 
+   * @return the removed entity.
    */
-  void remove( T entity );
+  Optional<T> remove( T entity );
 
   /**
    * Removes several entites.
    *
    * @param entities the entities.
+   * 
+   * @return the removed entities.
    */
-  default void remove( T... entities )
+  default Set<T> remove( T... entities )
   {
-    remove( Arrays.asList( entities ) );
+    return remove( Arrays.asList( entities ) );
   }
 
   /**
    * Removes several entities.
    *
    * @param entities the entities.
+   * 
+   * @return the removed entities.
    */
-  default void remove( Collection<T> entities )
+  default Set<T> remove( Collection<T> entities )
   {
-    entities.forEach( this::remove );
+    return remove(
+            entity -> entities.contains( entity ) // Predicate to select any entity in entities.
+    );
   }
 
   /**
    * Removes entities using a predicate.
    *
    * @param predicate the predicate.
+   * 
+   * @return the removed entities.
    */
-  default void remove( Predicate<T> predicate )
+  default Set<T> remove( Predicate<T> predicate )
   {
-    get( predicate ).forEach( this::remove );
+    Set<T> result = new CopyOnWriteArraySet<>();
+    get( predicate ).forEach( entity ->
+    {
+      result.add( entity );
+      remove( entity );
+    } );
+    return result;
   }
 }
