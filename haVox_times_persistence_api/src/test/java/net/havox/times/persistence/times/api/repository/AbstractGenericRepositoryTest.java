@@ -16,15 +16,16 @@
  */
 package net.havox.times.persistence.times.api.repository;
 
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
-import static org.junit.Assert.*;
-import org.junit.Test;
 
 import net.havox.times.model.api.ChangeAware;
-import static org.hamcrest.Matchers.*;
-import org.junit.Before;
 
 /**
  * This is a abstract generic test for a DB repository.
@@ -36,14 +37,16 @@ import org.junit.Before;
  */
 public abstract class AbstractGenericRepositoryTest<T extends ChangeAware, R extends GenericRepository<T>>
 {
+
   private R repository;
 
   public abstract T newEntity() throws Exception;
 
   public abstract R getRepository() throws Exception;
-  
+
   @Before
-  public void setUp() throws Exception {
+  public void setUp() throws Exception
+  {
     repository = getRepository();
   }
 
@@ -174,7 +177,7 @@ public abstract class AbstractGenericRepositoryTest<T extends ChangeAware, R ext
     T entityToPersist2 = newEntity();
     T entityToPersist3 = newEntity();
     assertThat( entities, not( hasItems( entityToPersist1, entityToPersist2, entityToPersist3 ) ) );
-    
+
     // After persisting the elements, all should be found.
     repository.persist( entityToPersist1, entityToPersist2, entityToPersist3 );
     entities = repository.get();
@@ -190,7 +193,7 @@ public abstract class AbstractGenericRepositoryTest<T extends ChangeAware, R ext
     T entityToPersist2 = newEntity();
     T entityToPersist3 = newEntity();
     assertThat( entities, not( hasItems( entityToPersist1, entityToPersist2, entityToPersist3 ) ) );
-    
+
     // After persisting the elements, all should be found.
     repository.persist( Arrays.asList( entityToPersist1, entityToPersist2, entityToPersist3 ) );
     entities = repository.get();
@@ -204,23 +207,23 @@ public abstract class AbstractGenericRepositoryTest<T extends ChangeAware, R ext
     T entityToPersist2 = newEntity();
     T entityToPersist3 = newEntity();
     repository.persist( Arrays.asList( entityToPersist1, entityToPersist2, entityToPersist3 ) );
-    
+
     // Before deleting any entity all should be present.
     Set<T> entities = repository.get();
     assertThat( entities, hasItems( entityToPersist1, entityToPersist2, entityToPersist3 ) );
-    
+
     // The deleted item should not be found.
     repository.remove( entityToPersist1.getId() );
     entities = repository.get();
     assertThat( entities, not( hasItem( entityToPersist1 ) ) );
     assertThat( entities, hasItems( entityToPersist2, entityToPersist3 ) );
-    
+
     // The deleted item should not be found.
     repository.remove( entityToPersist2.getId() );
     entities = repository.get();
     assertThat( entities, not( hasItems( entityToPersist1, entityToPersist2 ) ) );
     assertThat( entities, hasItem( entityToPersist3 ) );
-    
+
     // The deleted item should not be found.
     repository.remove( entityToPersist3.getId() );
     entities = repository.get();
@@ -236,17 +239,17 @@ public abstract class AbstractGenericRepositoryTest<T extends ChangeAware, R ext
     T entityToPersist4 = newEntity();
     T entityToPersist5 = newEntity();
     repository.persist( Arrays.asList( entityToPersist1, entityToPersist2, entityToPersist3, entityToPersist4, entityToPersist5 ) );
-    
+
     // Before deleting any entity all should be present.
     Set<T> entities = repository.get();
     assertThat( entities, hasItems( entityToPersist1, entityToPersist2, entityToPersist3 ) );
-    
+
     // The deleted items should not be found.
     repository.remove( entityToPersist1.getId(), entityToPersist2.getId() );
     entities = repository.get();
     assertThat( entities, not( hasItems( entityToPersist1, entityToPersist2 ) ) );
     assertThat( entities, hasItems( entityToPersist3, entityToPersist4, entityToPersist5 ) );
-    
+
     // The deleted items should not be found.
     repository.remove( entityToPersist3.getId(), entityToPersist4.getId(), entityToPersist5.getId() );
     entities = repository.get();
@@ -260,23 +263,23 @@ public abstract class AbstractGenericRepositoryTest<T extends ChangeAware, R ext
     T entityToPersist2 = newEntity();
     T entityToPersist3 = newEntity();
     repository.persist( Arrays.asList( entityToPersist1, entityToPersist2, entityToPersist3 ) );
-    
+
     // Before deleting any entity all should be present.
     Set<T> entities = repository.get();
     assertThat( entities, hasItems( entityToPersist1, entityToPersist2, entityToPersist3 ) );
-    
+
     // The deleted item should not be found.
     repository.remove( entityToPersist1 );
     entities = repository.get();
     assertThat( entities, not( hasItem( entityToPersist1 ) ) );
     assertThat( entities, hasItems( entityToPersist2, entityToPersist3 ) );
-    
+
     // The deleted item should not be found.
     repository.remove( entityToPersist2 );
     entities = repository.get();
     assertThat( entities, not( hasItems( entityToPersist1, entityToPersist2 ) ) );
     assertThat( entities, hasItem( entityToPersist3 ) );
-    
+
     // The deleted item should not be found.
     repository.remove( entityToPersist3 );
     entities = repository.get();
@@ -292,17 +295,17 @@ public abstract class AbstractGenericRepositoryTest<T extends ChangeAware, R ext
     T entityToPersist4 = newEntity();
     T entityToPersist5 = newEntity();
     repository.persist( Arrays.asList( entityToPersist1, entityToPersist2, entityToPersist3, entityToPersist4, entityToPersist5 ) );
-    
+
     // Before deleting any entity all should be present.
     Set<T> entities = repository.get();
     assertThat( entities, hasItems( entityToPersist1, entityToPersist2, entityToPersist3 ) );
-    
+
     // The deleted items should not be found.
     repository.remove( entityToPersist1, entityToPersist2 );
     entities = repository.get();
     assertThat( entities, not( hasItems( entityToPersist1, entityToPersist2 ) ) );
     assertThat( entities, hasItems( entityToPersist3, entityToPersist4, entityToPersist5 ) );
-    
+
     // The deleted items should not be found.
     repository.remove( entityToPersist3, entityToPersist4, entityToPersist5 );
     entities = repository.get();
@@ -318,17 +321,17 @@ public abstract class AbstractGenericRepositoryTest<T extends ChangeAware, R ext
     T entityToPersist4 = newEntity();
     T entityToPersist5 = newEntity();
     repository.persist( Arrays.asList( entityToPersist1, entityToPersist2, entityToPersist3, entityToPersist4, entityToPersist5 ) );
-    
+
     // Before deleting any entity all should be present.
     Set<T> entities = repository.get();
     assertThat( entities, hasItems( entityToPersist1, entityToPersist2, entityToPersist3 ) );
-    
+
     // The deleted items should not be found.
     repository.remove( Arrays.asList( entityToPersist1, entityToPersist2 ) );
     entities = repository.get();
     assertThat( entities, not( hasItems( entityToPersist1, entityToPersist2 ) ) );
     assertThat( entities, hasItems( entityToPersist3, entityToPersist4, entityToPersist5 ) );
-    
+
     // The deleted items should not be found.
     repository.remove( Arrays.asList( entityToPersist3, entityToPersist4, entityToPersist5 ) );
     entities = repository.get();
@@ -344,23 +347,23 @@ public abstract class AbstractGenericRepositoryTest<T extends ChangeAware, R ext
     T entityToPersist4 = newEntity();
     T entityToPersist5 = newEntity();
     repository.persist( Arrays.asList( entityToPersist1, entityToPersist2, entityToPersist3, entityToPersist4, entityToPersist5 ) );
-    
+
     // Before deleting any entity all should be present.
     Set<T> entities = repository.get();
     assertThat( entities, hasItems( entityToPersist1, entityToPersist2, entityToPersist3 ) );
-    
+
     // The deleted items should not be found.
     repository.remove( entity -> entity.equals( entityToPersist1 ) );
     entities = repository.get();
     assertThat( entities, not( hasItem( entityToPersist1 ) ) );
     assertThat( entities, hasItems( entityToPersist2, entityToPersist3, entityToPersist4, entityToPersist5 ) );
-    
+
     // The deleted items should not be found.
     repository.remove( entity -> Arrays.asList( entityToPersist2, entityToPersist3, entityToPersist5 ).contains( entity ) );
     entities = repository.get();
     assertThat( entities, not( hasItems( entityToPersist1, entityToPersist2, entityToPersist3, entityToPersist5 ) ) );
     assertThat( entities, hasItem( entityToPersist4 ) );
-    
+
     // The deleted items should not be found.
     repository.remove( entity -> entity.equals( entityToPersist4 ) );
     entities = repository.get();
