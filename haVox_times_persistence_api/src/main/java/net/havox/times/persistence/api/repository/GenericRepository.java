@@ -115,7 +115,7 @@ public interface GenericRepository<T extends ChangeAware>
    * Removes an entity by id.
    *
    * @param id the id.
-   * 
+   *
    * @return the removed entity.
    */
   default Optional<T> remove( Long id )
@@ -134,7 +134,7 @@ public interface GenericRepository<T extends ChangeAware>
    * Removes several entities by id.
    *
    * @param ids the ids.
-   * 
+   *
    * @return the removed entities.
    */
   default Set<T> remove( Long... ids )
@@ -148,7 +148,7 @@ public interface GenericRepository<T extends ChangeAware>
    * Removes an entity.
    *
    * @param entity the entity.
-   * 
+   *
    * @return the removed entity.
    */
   Optional<T> remove( T entity );
@@ -157,7 +157,7 @@ public interface GenericRepository<T extends ChangeAware>
    * Removes several entites.
    *
    * @param entities the entities.
-   * 
+   *
    * @return the removed entities.
    */
   default Set<T> remove( T... entities )
@@ -169,13 +169,13 @@ public interface GenericRepository<T extends ChangeAware>
    * Removes several entities.
    *
    * @param entities the entities.
-   * 
+   *
    * @return the removed entities.
    */
   default Set<T> remove( Collection<T> entities )
   {
     return remove(
-            entity -> entities.contains( entity ) // Predicate to select any entity in entities.
+            entities::contains // Predicate to select any entity in entities.
     );
   }
 
@@ -183,7 +183,7 @@ public interface GenericRepository<T extends ChangeAware>
    * Removes entities using a predicate.
    *
    * @param predicate the predicate.
-   * 
+   *
    * @return the removed entities.
    */
   default Set<T> remove( Predicate<T> predicate )
