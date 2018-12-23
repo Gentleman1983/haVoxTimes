@@ -1,5 +1,5 @@
 # haVoxTimes
-Eine Zeitverwaltungssoftware
+This is a time management software for personal issues.
 
 ## Wiki
 The utilities and usage are described in the [GitHub Wiki](https://github.com/Gentleman1983/haVoxTimes/wiki). State of the wiki is the latest release.
