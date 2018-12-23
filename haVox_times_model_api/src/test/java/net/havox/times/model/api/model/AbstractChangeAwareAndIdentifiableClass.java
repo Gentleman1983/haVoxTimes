@@ -36,6 +36,7 @@ public abstract class AbstractChangeAwareAndIdentifiableClass implements ChangeA
     return id;
   }
 
+  @Override
   public void setId( Long id )
   {
     this.id = id;

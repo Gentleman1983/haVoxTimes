@@ -49,6 +49,12 @@ public abstract class AbstractChangeAwareClass<T extends AbstractChangeAwareClas
   {
     return this.id;
   }
+  
+  @Override
+  public void setId( Long id )
+  {
+    this.id = id;
+  }
 
   @Override
   public long getVersion()

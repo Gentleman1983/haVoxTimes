@@ -30,4 +30,11 @@ public interface Identifiable
    * @return the identifier
    */
   Long getId();
+  
+  /**
+   * Sets the instance identifier.
+   * 
+   * @param id the identifier.
+   */
+  void setId( Long id );
 }

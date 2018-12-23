@@ -19,12 +19,18 @@ package net.havox.times.model.impl;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import net.havox.javatools.test.utils.junit.ExtendedRunner;
+import net.havox.javatools.test.utils.junit.Repeat;
+import net.havox.javatools.test.utils.random.ModelRandomGenerator;
+
+@RunWith( ExtendedRunner.class )
 public abstract class AbstractChangeAwareClassTest
 {
 
@@ -37,6 +43,18 @@ public abstract class AbstractChangeAwareClassTest
   }
 
   public abstract AbstractChangeAwareClass createNewInstance( Long id, long version ) throws Exception;
+  
+  
+  @Test
+  @Repeat( 25 )
+  public void testModifyName() throws Exception
+  {
+    Long newId = ModelRandomGenerator.randomBoolean() ? ModelRandomGenerator.randomLong() : null;
+
+    AbstractChangeAwareClass objectUnderTest = createNewInstance( null, 1l );
+    objectUnderTest.setId( newId );
+    assertEquals( newId, objectUnderTest.getId() );
+  }
 
   @Test
   public void testEqualsReflexive() throws Exception
