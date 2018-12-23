@@ -16,15 +16,15 @@
  */
 package net.havox.times.persistence.times.api.repository.generic;
 
-import net.havox.times.persistence.times.api.repository.AbstractGenericRepositoryTest;
+import net.havox.times.model.api.user.Credential;
+import net.havox.times.persistence.times.api.repository.user.CredentialRepository;
 
 /**
- * Basic implementation of a repository simulating the functionality of a database for usage in basic implementation of
- * {@link AbstractGenericRepositoryTest}.
+ * Basic implementation of {@link CredentialRepository}.
  *
  * @author Christian Otto
  */
-public class BasicTestRepository extends AbstractBasicRepository<BasicTestClass>
+public class BasicCredentialRepository extends AbstractBasicRepository<Credential> implements CredentialRepository
 {
 
 }

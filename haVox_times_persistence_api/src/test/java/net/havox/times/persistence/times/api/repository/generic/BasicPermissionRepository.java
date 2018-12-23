@@ -16,15 +16,15 @@
  */
 package net.havox.times.persistence.times.api.repository.generic;
 
-import net.havox.times.persistence.times.api.repository.AbstractGenericRepositoryTest;
+import net.havox.times.model.api.permissions.Permission;
+import net.havox.times.persistence.times.api.repository.permissions.PermissionRepository;
 
 /**
- * Basic implementation of a repository simulating the functionality of a database for usage in basic implementation of
- * {@link AbstractGenericRepositoryTest}.
+ * Basic implementation of {@link PermissionRepository}.
  *
  * @author Christian Otto
  */
-public class BasicTestRepository extends AbstractBasicRepository<BasicTestClass>
+public class BasicPermissionRepository extends AbstractBasicRepository<Permission> implements PermissionRepository
 {
 
 }

@@ -16,15 +16,15 @@
  */
 package net.havox.times.persistence.times.api.repository.generic;
 
-import net.havox.times.persistence.times.api.repository.AbstractGenericRepositoryTest;
+import net.havox.times.model.api.booking.BookingType;
+import net.havox.times.persistence.times.api.repository.booking.BookingTypeRepository;
 
 /**
- * Basic implementation of a repository simulating the functionality of a database for usage in basic implementation of
- * {@link AbstractGenericRepositoryTest}.
+ * Basic implementation of {@link BookingTypeRepository}.
  *
  * @author Christian Otto
  */
-public class BasicTestRepository extends AbstractBasicRepository<BasicTestClass>
+public class BasicBookingTypeRepository extends AbstractBasicRepository<BookingType> implements BookingTypeRepository
 {
 
 }

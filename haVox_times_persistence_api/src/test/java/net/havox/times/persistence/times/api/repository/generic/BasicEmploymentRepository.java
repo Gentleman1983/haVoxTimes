@@ -16,15 +16,15 @@
  */
 package net.havox.times.persistence.times.api.repository.generic;
 
-import net.havox.times.persistence.times.api.repository.AbstractGenericRepositoryTest;
+import net.havox.times.model.api.company.Employment;
+import net.havox.times.persistence.times.api.repository.company.EmploymentRepository;
 
 /**
- * Basic implementation of a repository simulating the functionality of a database for usage in basic implementation of
- * {@link AbstractGenericRepositoryTest}.
+ * Basic implementation of {@link EmploymentRepository}.
  *
  * @author Christian Otto
  */
-public class BasicTestRepository extends AbstractBasicRepository<BasicTestClass>
+public class BasicEmploymentRepository extends AbstractBasicRepository<Employment> implements EmploymentRepository
 {
 
 }

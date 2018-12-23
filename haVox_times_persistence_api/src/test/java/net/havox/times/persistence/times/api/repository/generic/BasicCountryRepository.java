@@ -16,15 +16,15 @@
  */
 package net.havox.times.persistence.times.api.repository.generic;
 
-import net.havox.times.persistence.times.api.repository.AbstractGenericRepositoryTest;
+import net.havox.times.model.api.address.Country;
+import net.havox.times.persistence.times.api.repository.address.CountryRepository;
 
 /**
- * Basic implementation of a repository simulating the functionality of a database for usage in basic implementation of
- * {@link AbstractGenericRepositoryTest}.
+ * Basic implementation of {@link CountryRepository}.
  *
  * @author Christian Otto
  */
-public class BasicTestRepository extends AbstractBasicRepository<BasicTestClass>
+public class BasicCountryRepository extends AbstractBasicRepository<Country> implements CountryRepository
 {
 
 }
