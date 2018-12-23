@@ -20,6 +20,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.address.Address;
 import net.havox.times.model.api.company.Employer;
@@ -129,5 +132,20 @@ public class BasicEmployer extends AbstractChangeAwareAndIdentifiableClass imple
   public void setEmploymentGroup( Employer group )
   {
     this.group = group;
+  }
+
+  @Override
+  public String toString()
+  {
+    ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE );
+
+    builder.append( "id", getId() );
+    builder.append( "name", getName() );
+    builder.append( "address", getAddress() );
+    builder.append( "employmentGroup", getEmploymentGroup() );
+    builder.append( "contactOptions", getContactOptions() );
+    builder.append( "version", getVersion() );
+
+    return builder.build();
   }
 }

@@ -16,6 +16,9 @@
  */
 package net.havox.times.model.api.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import net.havox.times.model.api.user.Credential;
 
 /**
@@ -53,5 +56,18 @@ public class BasicCredential extends AbstractChangeAwareAndIdentifiableClass imp
   public void setPassword( String password )
   {
     this.pass = "foo_" + password + "_bar";
+  }
+
+  @Override
+  public String toString()
+  {
+    ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE );
+
+    builder.append( "id", getId() );
+    builder.append( "user", getUsername() );
+    builder.append( "pass", getPasswordHash() );
+    builder.append( "version", getVersion() );
+
+    return builder.build();
   }
 }

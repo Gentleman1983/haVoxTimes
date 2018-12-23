@@ -16,6 +16,9 @@
  */
 package net.havox.times.model.api.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import net.havox.times.model.api.booking.BookingReferenceType;
 import net.havox.times.model.api.booking.Project;
 
@@ -126,5 +129,22 @@ public class BasicBookingReferenceType extends AbstractChangeAwareAndIdentifiabl
   public void setExternalReference( String reference )
   {
     externalReference = reference;
+  }
+
+  @Override
+  public String toString()
+  {
+    ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE );
+
+    builder.append( "id", getId() );
+    builder.append( "type", getType() );
+    builder.append( "project", getProject() );
+    builder.append( "prefix", getPrefix() );
+    builder.append( "suffix", getSuffix() );
+    builder.append( "validationPattern", getValidationPattern() );
+    builder.append( "externalReference", getExternalReference() );
+    builder.append( "version", getVersion() );
+
+    return builder.build();
   }
 }

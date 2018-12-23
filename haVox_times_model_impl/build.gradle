@@ -1,7 +1,6 @@
 dependencies {
     api project( ':haVox_times_model_api' )
     
-    api group: 'org.apache.commons', name: 'commons-lang3', version: project.ext.'libraryVersion.apache.commons-lang3'
     api group: 'javax.persistence', name: 'persistence-api', version: project.ext.'libraryVersion.javax.persistence-api'
     
     testImplementation project( path:':haVox_times_model_api', configuration:'testArtifacts')

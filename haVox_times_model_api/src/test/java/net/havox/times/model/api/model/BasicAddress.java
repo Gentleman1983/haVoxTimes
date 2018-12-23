@@ -16,6 +16,9 @@
  */
 package net.havox.times.model.api.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import net.havox.times.model.api.address.Address;
 import net.havox.times.model.api.address.City;
 
@@ -67,5 +70,19 @@ public class BasicAddress extends AbstractChangeAwareAndIdentifiableClass implem
   public void setCity( City city )
   {
     this.city = city;
+  }
+
+  @Override
+  public String toString()
+  {
+    ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE );
+
+    builder.append( "id", getId() );
+    builder.append( "street", getStreet() );
+    builder.append( "houseNumber", getHouseNumber() );
+    builder.append( "city", getCity() );
+    builder.append( "version", getVersion() );
+
+    return builder.build();
   }
 }

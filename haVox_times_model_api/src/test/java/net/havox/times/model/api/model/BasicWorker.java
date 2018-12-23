@@ -21,6 +21,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.address.Address;
 import net.havox.times.model.api.address.Country;
@@ -157,5 +160,22 @@ public class BasicWorker extends AbstractChangeAwareAndIdentifiableClass impleme
     }
 
     return status;
+  }
+
+  @Override
+  public String toString()
+  {
+    ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE );
+
+    builder.append( "id", getId() );
+    builder.append( "firstName", getFirstName() );
+    builder.append( "middleInitials", getMiddleInitials() );
+    builder.append( "lastName", getLastName() );
+    builder.append( "address", getAddress() );
+    builder.append( "birthDate", getBirthDate() );
+    builder.append( "contactOptions", getContactOptions() );
+    builder.append( "version", getVersion() );
+
+    return builder.build();
   }
 }

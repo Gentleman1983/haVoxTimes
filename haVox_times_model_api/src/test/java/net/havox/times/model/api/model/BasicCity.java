@@ -16,6 +16,9 @@
  */
 package net.havox.times.model.api.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import net.havox.times.model.api.address.City;
 import net.havox.times.model.api.address.Country;
 
@@ -67,5 +70,19 @@ public class BasicCity extends AbstractChangeAwareAndIdentifiableClass implement
   public void setCountry( Country country )
   {
     this.country = country;
+  }
+
+  @Override
+  public String toString()
+  {
+    ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE );
+
+    builder.append( "id", getId() );
+    builder.append( "name", getName() );
+    builder.append( "zip", getZipCode() );
+    builder.append( "country", getCountry() );
+    builder.append( "version", getVersion() );
+
+    return builder.build();
   }
 }

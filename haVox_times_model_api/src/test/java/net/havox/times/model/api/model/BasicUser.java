@@ -20,6 +20,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import net.havox.times.model.api.company.Worker;
 import net.havox.times.model.api.permissions.Permission;
 import net.havox.times.model.api.user.Credential;
@@ -91,5 +94,21 @@ public class BasicUser extends AbstractChangeAwareAndIdentifiableClass implement
   public Set<Permission> getUserPermissions()
   {
     return Collections.unmodifiableSet( userPermissions );
+  }
+
+  @Override
+  public String toString()
+  {
+    ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE );
+
+    builder.append( "id", getId() );
+    builder.append( "email", getEmailAddress() );
+    builder.append( "credentials", getCredentials() );
+    builder.append( "worker", getWorker() );
+    builder.append( "userGroups", getMemberOfUserGroup() );
+    builder.append( "permissions", getUserPermissions() );
+    builder.append( "version", getVersion() );
+
+    return builder.build();
   }
 }

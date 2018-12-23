@@ -18,6 +18,9 @@ package net.havox.times.model.api.model;
 
 import java.math.BigDecimal;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import net.havox.times.model.api.booking.BookingType;
 
 /**
@@ -68,5 +71,19 @@ public class BasicBookingType extends AbstractChangeAwareAndIdentifiableClass im
   public void setCanBeInvoiced( boolean canBeInvoiced )
   {
     this.canBeInvoiced = canBeInvoiced;
+  }
+
+  @Override
+  public String toString()
+  {
+    ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE );
+
+    builder.append( "id", getId() );
+    builder.append( "type", getType() );
+    builder.append( "multiplier", getMultiplier() );
+    builder.append( "canBeInvoiced", canBeInvoiced() );
+    builder.append( "version", getVersion() );
+
+    return builder.build();
   }
 }

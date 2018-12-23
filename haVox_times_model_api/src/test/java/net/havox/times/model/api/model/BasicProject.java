@@ -21,6 +21,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import net.havox.times.model.api.CollectionMassModificationStatus;
 import net.havox.times.model.api.booking.Account;
 import net.havox.times.model.api.booking.Project;
@@ -143,5 +146,21 @@ public class BasicProject extends AbstractChangeAwareAndIdentifiableClass implem
     }
 
     return status;
+  }
+
+  @Override
+  public String toString()
+  {
+    ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE );
+
+    builder.append( "id", getId() );
+    builder.append( "employment", getEmployment() );
+    builder.append( "name", getName() );
+    builder.append( "start", getStartDate() );
+    builder.append( "end", getEndDate() );
+    builder.append( "accounts", getAccounts() );
+    builder.append( "version", getVersion() );
+
+    return builder.build();
   }
 }

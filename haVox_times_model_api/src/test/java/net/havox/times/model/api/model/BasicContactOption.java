@@ -16,6 +16,9 @@
  */
 package net.havox.times.model.api.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import net.havox.times.model.api.company.Employer;
 import net.havox.times.model.api.company.Worker;
 import net.havox.times.model.api.contact.ContactOption;
@@ -77,5 +80,20 @@ public class BasicContactOption extends AbstractChangeAwareAndIdentifiableClass 
   {
     this.type = type;
     this.value = value;
+  }
+
+  @Override
+  public String toString()
+  {
+    ToStringBuilder builder = new ToStringBuilder( this, ToStringStyle.SHORT_PREFIX_STYLE );
+
+    builder.append( "id", getId() );
+    builder.append( "employer", getEmployer() );
+    builder.append( "employee", getEmployee() );
+    builder.append( "type", getType() );
+    builder.append( "value", getContactValue() );
+    builder.append( "version", getVersion() );
+
+    return builder.build();
   }
 }
