@@ -91,7 +91,7 @@ task jacocoAllProjectsTestReport(type: JacocoReport) {
 jacocoAllProjectsTestReport.dependsOn {
     subprojects*.check
 }
-tasks.sonarqube.dependsOn jacocoAllProjectsTestReport
+//tasks.sonarqube.dependsOn jacocoAllProjectsTestReport
 
 wrapper {
     gradleVersion = '5.2.1'
@@ -99,6 +99,6 @@ wrapper {
 
 sonarqube {
     properties {
-        property "sonar.jacoco.reportPath", "${buildDir}/jacoco/*.exec"
+//        property "sonar.jacoco.reportPath", "${buildDir}/jacoco/*.exec"
     }
 }
