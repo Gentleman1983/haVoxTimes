@@ -27,6 +27,8 @@ configBuilder.setPort(3306); // OR, default: setPort(0); => autom. detect free p
 configBuilder.setBaseDir("${escapeBackslashes( project.buildDir.toString() )}/embeddedMariaDb")
 configBuilder.setDataDir("${escapeBackslashes( project.buildDir.toString() )}/embeddedMariaDb/data/dbTestEmbeddedMariaDb")
 DB db = DB.newEmbeddedDB(configBuilder.build())
+db.start()
+db.stop()
 
 configurations {
     dbTestEmbeddedMariaDb
