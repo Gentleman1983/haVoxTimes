@@ -89,7 +89,7 @@ task jacocoAllProjectsTestReport(type: JacocoReport) {
 }
 // always run the tests before generating the report
 jacocoAllProjectsTestReport.dependsOn {
-    subprojects*.test
+    subprojects*.check
 }
 tasks.sonarqube.dependsOn jacocoAllProjectsTestReport
 

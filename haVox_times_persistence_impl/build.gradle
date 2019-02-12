@@ -1,24 +1,95 @@
+buildscript {
+    repositories {
+        maven {
+            url "${reporitory_url}/${repository_public}"
+            credentials {
+                username = "${repository_user}"
+                password = "${repository_password}"
+        
+            }
+        }
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath group: 'ch.vorburger.mariaDB4j', name: 'mariaDB4j', version: '2.3.0'
+    }
+}
+
+import ch.vorburger.mariadb4j.*
+
+def String escapeBackslashes( String path ) {
+    return path.replace("\\", "\\\\" );
+}
+
+DBConfigurationBuilder configBuilder = DBConfigurationBuilder.newBuilder()
+configBuilder.setPort(3306); // OR, default: setPort(0); => autom. detect free port
+configBuilder.setBaseDir("${escapeBackslashes( project.buildDir.toString() )}/embeddedMariaDb")
+configBuilder.setDataDir("${escapeBackslashes( project.buildDir.toString() )}/embeddedMariaDb/data/dbTestEmbeddedMariaDb")
+DB db = DB.newEmbeddedDB(configBuilder.build())
+db.start()
+db.stop()
+
+configurations {
+    dbTestEmbeddedMariaDb
+    dbTestEmbeddedMariaDbApi.extendsFrom testApi
+    dbTestEmbeddedMariaDbImplementation.extendsFrom testImplementation
+}
+
 // Activate liquibase on this implementation.
 apply plugin: 'org.liquibase.gradle'
 
-/*liquibase {
-  activities {
-    main {
-      changeLogFile 'src/main/db/changelogs.groovy'
-      url 'jdbc:mysql://localhost:3306/my_db'
-	  username 'myusername'
-	  password 'mypassword'
+liquibase {
+    activities {
+        //    main {
+        //      changeLogFile 'src/main/db/changelogs.groovy'
+        //      url 'jdbc:mysql://localhost:3306/my_db'
+        //	  username 'myusername'
+        //	  password 'mypassword'
+        //    }
+        dbTestEmbeddedMariaDbMain {
+            changeLogFile 'src/liquibase/resources/changelogs.groovy'
+            url 'jdbc:mysql://localhost:3306/my_db'
+            username 'myusername'
+            password 'mypassword'
+        }
     }
-  }
-}*/
+}
+
+task startEmbeddedMariaDb() {
+    println(db);
+    //db.stop()
+    //db.start()
+}
+
+task prepareDbTestEmbeddedMariaDb(dependsOn:[startEmbeddedMariaDb]) {
+    
+}
+
+task dbTestEmbeddedMariaDb(type:Test, dependsOn:[prepareDbTestEmbeddedMariaDb]){
+    mustRunAfter([prepareDbTestEmbeddedMariaDb])
+     
+}
+
+task shutdownEmbeddedMariaDb() {
+    mustRunAfter([dbTestEmbeddedMariaDb])
+    
+    //db.stop()
+}
+ 
+task finalizeDbTestEmbeddedMariaDb(dependsOn:[dbTestEmbeddedMariaDb, shutdownEmbeddedMariaDb]) {
+    check.dependsOn(this)
+}
 
 sourceSets {
-   liquibase {
-     resources {
-       srcDir 'src/liquibase/resources'
-     }
-   }
- }
+    dbTestEmbeddedMariaDb {
+        java.srcDir 'src/dbTestEmbeddedMariaDb/java'
+        resources.srcDir 'src/dbTestEmbeddedMariaDb/resources'
+    }
+    liquibase {
+        resources.srcDir 'src/liquibase/resources'
+    }
+}
 
 dependencies {
     implementation project( ':haVox_times_model_impl' )
@@ -28,4 +99,6 @@ dependencies {
     
     testImplementation project( path:':haVox_times_persistence_api', configuration:'testArtifacts')
     testImplementation project( ':test-utils' )
+    
+    dbTestEmbeddedMariaDbImplementation group: 'ch.vorburger.mariaDB4j', name: 'mariaDB4j', version: '2.3.0'
 }
