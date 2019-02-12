@@ -27,8 +27,6 @@ configBuilder.setPort(3306); // OR, default: setPort(0); => autom. detect free p
 configBuilder.setBaseDir("${escapeBackslashes( project.buildDir.toString() )}/embeddedMariaDb")
 configBuilder.setDataDir("${escapeBackslashes( project.buildDir.toString() )}/embeddedMariaDb/data/dbTestEmbeddedMariaDb")
 DB db = DB.newEmbeddedDB(configBuilder.build())
-db.start()
-db.stop()
 
 configurations {
     dbTestEmbeddedMariaDb
@@ -57,9 +55,8 @@ liquibase {
 }
 
 task startEmbeddedMariaDb() {
-    println(db);
-    //db.stop()
-    //db.start()
+    db.stop()
+    db.start()
 }
 
 task prepareDbTestEmbeddedMariaDb(dependsOn:[startEmbeddedMariaDb]) {
@@ -74,11 +71,11 @@ task dbTestEmbeddedMariaDb(type:Test, dependsOn:[prepareDbTestEmbeddedMariaDb]){
 task shutdownEmbeddedMariaDb() {
     mustRunAfter([dbTestEmbeddedMariaDb])
     
-    //db.stop()
+    db.stop()
 }
  
 task finalizeDbTestEmbeddedMariaDb(dependsOn:[dbTestEmbeddedMariaDb, shutdownEmbeddedMariaDb]) {
-    check.dependsOn(this)
+    check.dependsOn(finalizeDbTestEmbeddedMariaDb)
 }
 
 sourceSets {
@@ -100,5 +97,5 @@ dependencies {
     testImplementation project( path:':haVox_times_persistence_api', configuration:'testArtifacts')
     testImplementation project( ':test-utils' )
     
-    dbTestEmbeddedMariaDbImplementation group: 'ch.vorburger.mariaDB4j', name: 'mariaDB4j', version: '2.3.0'
+    dbTestEmbeddedMariaDbImplementation group: 'ch.vorburger.mariaDB4j', name: 'mariaDB4j', version: '2.4.0'
 }
