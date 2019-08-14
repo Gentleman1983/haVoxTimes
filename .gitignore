@@ -19,3 +19,17 @@
 /haVox_times_persistence_impl/build/
 /haVox_times_service_api/build/
 /haVox_times_service_impl/build/
+/.clover/
+/haVox_times_model_api/.clover/
+/haVox_times_model_api/.gradle/
+/haVox_times_model_impl/.gradle/
+/haVox_times_model_impl/.clover/
+/haVox_times_persistence_api/.clover/
+/haVox_times_persistence_api/.gradle/
+/haVox_times_persistence_impl/.clover/
+/haVox_times_persistence_impl/.gradle/
+/haVox_times_service_api/.clover/
+/haVox_times_service_api/.gradle/
+/haVox_times_service_impl/.clover/
+/haVox_times_service_impl/.gradle/
+/test-utils/.clover/

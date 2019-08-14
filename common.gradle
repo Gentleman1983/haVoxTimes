@@ -29,7 +29,7 @@ repositories {
 dependencies {
     // Adding dependencies here will add the dependencies to each subproject.
     testImplementation group: 'junit', name: 'junit', version: project.ext.'libraryVersion.junit.junit'
-    testImplementation group: 'org.hamcrest', name: 'hamcrest-junit', version: project.ext.'libraryVersion.hamcrest.hamcrest'
+    testImplementation group: 'org.hamcrest', name: 'hamcrest-library', version: project.ext.'libraryVersion.hamcrest.hamcrest'
     testImplementation group: 'org.mockito', name: 'mockito-core', version: project.ext.'libraryVersion.mockito.mockito'
 }
 

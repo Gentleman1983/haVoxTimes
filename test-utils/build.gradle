@@ -1,5 +1,6 @@
 dependencies {
     api group: 'junit', name: 'junit', version: project.ext.'libraryVersion.junit.junit'
-    api group: 'org.hamcrest', name: 'hamcrest-junit', version: project.ext.'libraryVersion.hamcrest.hamcrest'
+    api group: 'org.hamcrest', name: 'hamcrest-library', version: project.ext.'libraryVersion.hamcrest.hamcrest'
     api group: 'org.mockito', name: 'mockito-core', version: project.ext.'libraryVersion.mockito.mockito'
+    api group: 'org.reflections', name: 'reflections', version: project.ext.'libraryVersion.reflections.reflections'
 }
