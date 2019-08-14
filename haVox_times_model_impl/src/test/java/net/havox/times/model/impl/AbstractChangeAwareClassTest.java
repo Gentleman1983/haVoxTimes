@@ -354,6 +354,8 @@ public abstract class AbstractChangeAwareClassTest
     instance1.toString();
     instance2.toString();
     instance3.toString();
+    
+    assertTrue("If it has run to this moment, pass test.", true);
   }
 
   @Test
